@@ -36,19 +36,17 @@ class MyFTP:
 
     def downloadFile(self):
         pass
-    def uploadFiles(self, localpath, remotepath):
+    def uploadFiles(self, localpath, remotepath, targetname=''):
+        self.ftp.cwd('/')
         self.changewd(remotepath)
         #url
         if re.match(r'^http://', localpath):
-            pattern = re.findall(r'([^/]*\.jpg)', localpath)
-            if pattern:
-                print pattern[0]
             r = requests.get(localpath)
             try:
-                self.ftp.storbinary('STOR ' + pattern[0], r.content)
+                self.ftp.storbinary('STOR ' + targetname, r.content)
             except:
                 print "upload failed. check your permission."
-        #directory
+        #local directory
         elif os.path.isdir(localpath):
             for file in os.listdir(localpath):
                 src = os.path.join(localpath, file)
@@ -58,7 +56,7 @@ class MyFTP:
                         self.ftp.storbinary('STOR ' + file, open(src, 'rb'))
                     except:
                         print "upload failed. check your permission."
-        #file
+        #local file
         else:
             filename = localpath[localpath.rfind(os.sep)+1:]
             print filename

@@ -35,7 +35,7 @@ def upload_qiniu(img_url, target_name):
     assert ret['hash'] == etag(localfile)
 
 
-def upload_comics(id):
+def update_comics(id):
     login_url = 'http://www.icartoons.cn/index.php?m=member&c=index&a=login'
     # login
     s = requests.Session()
@@ -56,7 +56,8 @@ def upload_comics(id):
         if state == u'已完结':
             print id, state
             #return
-
+    myftp = MyFTP('202.102.41.224', 21, 'admin', 'admin123', '.')
+    myftp.login()
     soup = BeautifulSoup(r.text, 'html.parser')
     for a_tag in soup.find_all('a'):
         content = a_tag.get_text()
@@ -75,14 +76,9 @@ def upload_comics(id):
                         continue
                     target_name = '_'.join((id, episode, img_tag['id'][3:])) + '.jpg'
                     target_dir = id + os.sep + episode
-                    if not os.path.exists(target_dir):
-                        os.makedirs(target_dir)
                     # download pics
-                    target_path = target_dir + os.sep + img_tag['id'][3:] + '.jpg'
-                    myftp = MyFTP('202.102.41.224', 21, 'admin', 'admin123', '.')
-                    myftp.login()
                     # myftp.changewd('comic/20082903/123')
-                    myftp.uploadFiles(img_tag['src'], 'comic/1/3434343')
+                    myftp.uploadFiles(img_tag['src'], 'comic/'+id+'/'+episode, img_tag['id'][3:]+'.jpg')
                     #with open(target_path, 'wb') as handle:
                     #    response = requests.get(img_tag['src'], stream=True)
                     #    for block in response.iter_content(1024):
@@ -90,5 +86,4 @@ def upload_comics(id):
                     #            break
                     #        handle.write(block)
                     #upload_qiniu(target_path, target_name)
-
-upload_comics('200084970')
+update_comics('200084970')
