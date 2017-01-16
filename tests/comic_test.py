@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 import config
+from app.utils.ftp import MyFTP
 
 def upload_qiniu(img_url, target_name):
     from qiniu import Auth, put_file, etag, urlsafe_base64_encode
@@ -54,7 +55,7 @@ def upload_comics(id):
         state = match.group(2)
         if state == u'已完结':
             print id, state
-            return
+            #return
 
     soup = BeautifulSoup(r.text, 'html.parser')
     for a_tag in soup.find_all('a'):
@@ -78,12 +79,16 @@ def upload_comics(id):
                         os.makedirs(target_dir)
                     # download pics
                     target_path = target_dir + os.sep + img_tag['id'][3:] + '.jpg'
-                    with open(target_path, 'wb') as handle:
-                        response = requests.get(img_tag['src'], stream=True)
-                        for block in response.iter_content(1024):
-                            if not block:
-                                break
-                            handle.write(block)
-                    upload_qiniu(target_path, target_name)
+                    myftp = MyFTP('202.102.41.224', 21, 'admin', 'admin123', '.')
+                    myftp.login()
+                    # myftp.changewd('comic/20082903/123')
+                    myftp.uploadFiles(img_tag['src'], 'comic/1/3434343')
+                    #with open(target_path, 'wb') as handle:
+                    #    response = requests.get(img_tag['src'], stream=True)
+                    #    for block in response.iter_content(1024):
+                    #        if not block:
+                    #            break
+                    #        handle.write(block)
+                    #upload_qiniu(target_path, target_name)
 
 upload_comics('200084970')

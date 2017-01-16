@@ -2,6 +2,8 @@ from app import config
 import ftplib
 import os
 import socket
+import re
+import requests
 
 class MyFTP:
     def __init__(self,hostaddr,port,username,passwd,remotedir):
@@ -17,7 +19,7 @@ class MyFTP:
     def login(self):
         ftp = self.ftp
         try:
-            timeout = 300
+            timeout = 30
             socket.setdefaulttimeout(timeout)
             ftp.set_pasv(True)
             ftp.connect(self.hostaddr, self.port)
@@ -36,7 +38,18 @@ class MyFTP:
         pass
     def uploadFiles(self, localpath, remotepath):
         self.changewd(remotepath)
-        if os.path.isdir(localpath):
+        #url
+        if re.match(r'^http://', localpath):
+            pattern = re.findall(r'([^/]*\.jpg)', localpath)
+            if pattern:
+                print pattern[0]
+            r = requests.get(localpath)
+            try:
+                self.ftp.storbinary('STOR ' + pattern[0], r.content)
+            except:
+                print "upload failed. check your permission."
+        #directory
+        elif os.path.isdir(localpath):
             for file in os.listdir(localpath):
                 src = os.path.join(localpath, file)
                 print src
@@ -45,6 +58,7 @@ class MyFTP:
                         self.ftp.storbinary('STOR ' + file, open(src, 'rb'))
                     except:
                         print "upload failed. check your permission."
+        #file
         else:
             filename = localpath[localpath.rfind(os.sep)+1:]
             print filename
