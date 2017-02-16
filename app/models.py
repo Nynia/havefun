@@ -1,19 +1,25 @@
 from app import db
-
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from werkzeug.security import generate_password_hash, check_password_hash
+from . import login_manager
+from flask import current_app, request, url_for
+from flask.ext.login import UserMixin
 class Package(db.Model):
-    __tablename__ = 'packageinfo'
-    packageid = db.Column(db.String(255), primary_key=True)
-    packagename = db.Column(db.String(255))
+    __tablename__ = 'package'
+    id = db.Column(db.Integer,primary_key=True)
+    productid = db.Column(db.String(255))
+    productname = db.Column(db.String(255))
     type = db.Column(db.String(1))
     price = db.Column(db.Integer)
     description = db.Column(db.String(255))
-    createtime = db.Column(db.DateTime)
-    modifiedtime = db.Column(db.DateTime)
+    createtime = db.Column(db.String(14))
+    modifiedtime = db.Column(db.String(14))
 
     def to_json(self):
         json_post = {
-            'packageid': self.packageid,
-            'packagename': self.packagename,
+            'id':self.id,
+            'productid': self.packageid,
+            'productname': self.packagename,
             'type': self.type,
             'price':self.price,
             'description': self.description,
@@ -30,9 +36,9 @@ class Package(db.Model):
         return '<Package %r>' % self.packagename
 
 class Comic(db.Model):
-    __tablename__ = 'comicinfo'
-    comicid = db.Column(db.String(15), primary_key=True)
-    packageid = db.Column(db.String(15))
+    __tablename__ = 'comic'
+    id = db.Column(db.Integer, primary_key=True)
+    packageid = db.Column(db.Integer)
     comicname = db.Column(db.String(50))
     brief = db.Column(db.String(255))
     author = db.Column(db.String(50))
@@ -48,7 +54,7 @@ class Comic(db.Model):
 
     def to_json(self):
         json_post = {
-            'comicid':self.comicid,
+            'id':self.id,
             'packageid':self.packageid,
             'comicname':self.comicname,
             'brief':self.brief,
@@ -64,28 +70,123 @@ class Comic(db.Model):
             'recentupdatetime':self.recentupdatetime
         }
         return json_post
+
     def __repr__(self):
         return '<Comic %r>' % self.comicname
 
 class User(db.Model):
-    __tablename__ = 'userinfo'
-    userid = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
     phonenum = db.Column(db.String(20))
     nickname = db.Column(db.String(200))
-    createtime = db.Column(db.DateTime)
-    password = db.Column(db.String(50))
+    createtime = db.Column(db.String(14))
+    password_hash = db.Column(db.String(128))
     integral = db.Column(db.Integer)
 
     def to_json(self):
         json_post = {
-            'userid':self.userid,
+            'id':self.id,
             'phonenum':self.phonenum,
             'nickname':self.nickname,
             'createtime':self.createtime,
-            'password':self.password,
             'integral':self.integral
         }
         return json_post
 
     def __repr__(self):
         return '<User %r>' % self.phonenum
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.id
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class Test(db.Model):
+    __tablename__ = 'test'
+    id = db.Column(db.Integer, primary_key=True)
+    column1 = db.Column(db.String(10))
+    column2 = db.Column(db.DateTime)
+
+
+class Game(db.Model):
+    __tablename__ = 'game'
+    id = db.Column(db.Integer, primary_key=True)
+    packageid = db.Column(db.Integer)
+    name = db.Column(db.String(255))
+    img_small = db.Column(db.String(255))
+    img_middle = db.Column(db.String(255))
+    img_big = db.Column(db.String(255))
+    type = db.Column(db.String(1))
+    url = db.Column(db.String(255))
+    category = db.Column(db.String(20))
+    star = db.Column(db.Integer)
+    brief = db.Column(db.String(255))
+    size = db.Column(db.String(20))
+    createtime = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<Game %r>' % self.name
+
+    def to_json(self):
+        json_post = {
+            'id':self.id,
+            'packageid':self.packageid,
+            'name':self.name,
+            'img_samll':self.img_small,
+            'img_middle':self.img_middle,
+            'img_big':self.img_big,
+            'type':self.type,
+            'url':self.url,
+            'category':self.category,
+            'star':self.star,
+            'brief':self.brief,
+            'size':self.size,
+            'createtime':self.createtime
+
+        }
+        return json_post
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

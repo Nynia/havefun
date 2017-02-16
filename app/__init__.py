@@ -3,15 +3,33 @@ from flask_apscheduler import APScheduler
 from flask_bootstrap import Bootstrap
 from config import config
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+bootstrap = Bootstrap()
+db = SQLAlchemy()
 
-app = Flask(__name__)
-bootstrap=Bootstrap(app)
-db = SQLAlchemy(app)
-
-app.config.from_object(config['testing'])
+login_manager = LoginManager()
+login_manager.session_protection = 'normal'
+login_manager.login_view = 'auth.login'
 
 #scheduler = APScheduler()
-#scheduler.init_app(app)
-#scheduler.start()
 
-import views,api_1_0.package,api_1_0.comic,api_1_0.user
+def create_app(config_name):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
+
+    bootstrap.init_app(app)
+    db.init_app(app)
+    login_manager.init_app(app)
+    #scheduler.init_app(app)
+    #scheduler.start()
+
+    from .api_1_0 import api as api_1_0_blueprint
+    app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1.0')
+
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+    return app

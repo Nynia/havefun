@@ -1,6 +1,6 @@
 import requests
 
-base_url = 'http://127.0.0.1:5000/api/v1/users'
+base_url = 'http://127.0.0.1:5000/api/v1.0/users'
 
 def test_1():
     url = base_url
@@ -15,9 +15,9 @@ def test_1():
 def test_2():
     url = base_url
     data = {
-        'phonenum':'18118999631',
-        'password':'12345',
-        'nickname':'sk'
+        'phonenum':'18118999613',
+        'password':'123456',
+        'nickname':'snk'
     }
     r = requests.post(url, data=data)
     print r.text
@@ -35,6 +35,6 @@ def test_4():
     r = requests.delete(url)
     print r.text
 #test_1()
-#test_2()
-test_3()
-test_4()
+test_2()
+#test_3()
+#test_4()

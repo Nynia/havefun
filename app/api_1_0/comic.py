@@ -1,9 +1,10 @@
-from app import app,db
+from . import api
+from app import db
 from flask import request,jsonify
 from app.models import Comic
-import datetime
+from datetime import datetime
 
-@app.route('/api/v1/comics', methods=['GET'])
+@api.route('/comics', methods=['GET'])
 def get_all_comics():
    comics = Comic.query.all()
    return jsonify({
@@ -12,35 +13,30 @@ def get_all_comics():
         'data':[c.to_json() for c in comics]
    })
 
-@app.route('/api/v1/comics/<id>', methods=['GET'])
+@api.route('/comics/<id>', methods=['GET'])
 def get_comic_by_id(id):
-    comic = Comic.query.get(id)
+    comic = Comic.query.get(int(id))
     return jsonify({
         'code':'0',
         'message':'success',
         'data':comic.to_json() if comic else comic
     })
 
-@app.route('/api/v1/comics', methods=['POST'])
+@api.route('/comics', methods=['POST'])
 def add_comic():
     comicid = request.form['comicid']
     comic = Comic.query.get(comicid)
     if comic == None:
         comic = Comic()
-        comic.comicid = comicid
-        comic.comicname = request.form['comicname']
-        comic.packageid = request.form['packageid']
-        comic.brief = request.form['brief']
-        comic.author = request.form['author']
-        comic.category = request.form['category']
-        comic.hits = request.form['hits']
-        comic.state = request.form['state']
-        comic.cover = request.form['cover']
-        comic.curchapter = request.form['curchapter']
-        comic.freechapter = request.form['freechapter']
-        comic.createtime = datetime.datetime.now()
-        comic.recentupdatetime = datetime.datetime.now()
-        comic.modifiedtime = datetime.datetime.now()
+        comic.id = comicid
+        for key, value in request.form.items():
+            if hasattr(comic, key):
+                setattr(comic, key, value)
+
+        comic.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+        comic.recentupdatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+        comic.modifiedtime = datetime.now().strftime('%Y%m%d%H%M%S')
+
         db.session.add(comic)
         db.session.commit()
         return jsonify({
@@ -55,31 +51,13 @@ def add_comic():
             'data':comic.to_json()
         })
 
-@app.route('/api/v1/comics/<id>', methods=['PUT'])
+@api.route('/comics/<id>', methods=['PUT'])
 def update_comic_by_id(id):
-    comic = Comic.query.get(id)
+    comic = Comic.query.get(int(id))
     if comic:
-        if request.form.has_key('comicname'):
-            comic.comicname = request.form['comicname']
-        if request.form.has_key('packageid'):
-            comic.packageid = request.form['packageid']
-        if request.form.has_key('brief'):
-            comic.brief = request.form['brief']
-        if request.form.has_key('author'):
-            comic.author = request.form['author']
-        if request.form.has_key('category'):
-            comic.category = request.form['category']
-        if request.form.has_key('hits'):
-            comic.hits = request.form['hits']
-        if request.form.has_key('state'):
-            comic.state = request.form['state']
-        if request.form.has_key('cover'):
-            comic.cover = request.form['cover']
-        if request.form.has_key('freechapter'):
-            comic.freechapter = request.form['freechapter']
-        if request.form.has_key('curchapter'):
-            comic.curchapter = request.form['curchapter']
-            comic.recentupdatetime = datetime.datetime.now()
+        for key,value in request.form.items():
+            if hasattr(comic, key):
+                setattr(comic, key, value)
         comic.modifiedtime = datetime.datetime.now()
         db.session.add(comic)
         db.session.commit()
@@ -94,9 +72,9 @@ def update_comic_by_id(id):
             'msssage':'not exist',
             'data':None
         })
-@app.route('/api/v1/comics/<id>', methods=['DELETE'])
+@api.route('/comics/<id>', methods=['DELETE'])
 def delete_comic_by_id(id):
-    comic = Comic.query.get(id)
+    comic = Comic.query.get(int(id))
     if comic:
         db.session.delete(comic)
         db.session.commit()
@@ -112,6 +90,6 @@ def delete_comic_by_id(id):
             'data':None
         })
 
-@app.route('/api/v1/comics/chapters/<id>', methods=['GET'])
+@api.route('/comics/chapters/<id>', methods=['GET'])
 def get_chapter_by_id(id):
     pass

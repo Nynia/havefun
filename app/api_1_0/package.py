@@ -1,40 +1,41 @@
-from app import app
+from . import api
 from flask import request,jsonify
 from app.models import Package
 from app import db
-import datetime
+from datetime import datetime
 
-@app.route('/api/v1/packages/<id>', methods=['GET'])
+@api.route('/packages/<id>', methods=['GET'])
 def get_package_by_id(id):
-    package = Package.query.get(id)
+    package = Package.query.get(int(id))
     return jsonify({
         'code': '0',
         'messge': 'success',
         'data': package.to_json() if package else package
     })
 
-@app.route('/api/v1/packages', methods=['GET'])
+@api.route('/packages', methods=['GET'])
 def get_packages_by_type():
     type = request.args.get('type')
-    packages = Package.query.filter_by(type=type).all()
+    if type:
+        packages = Package.query.filter_by(type=type).all()
+    else:
+        packages = Package.query.all()
     return jsonify({
         'code': '0',
         'messge': 'success',
         'data': [p.to_json() for p in packages]
     })
 
-@app.route('/api/v1/packages', methods=['POST'])
+@api.route('/packages', methods=['POST'])
 def add_package():
-    packageid = request.form['packageid']
-    package = Package.query.get(packageid)
+    productid = request.form.get('productid')
+    package = Package.query.filter_by(productid=productid).first()
     if package == None:
         package = Package()
-        package.packageid = packageid
-        package.packagename = request.form['packagename']
-        package.type = request.form['type']
-        package.price = request.form['price']
-        package.description = request.form['description']
-        package.createtime = datetime.datetime.now()
+        package.productid = productid
+        for key, value in request.form.items():
+            if hasattr(package, key):
+                setattr(package, key, value)
         db.session.add(package)
         db.session.commit()
         return jsonify({
@@ -49,19 +50,14 @@ def add_package():
             'data': package.to_json()
         })
 
-@app.route('/api/v1/packages/<id>', methods=['PUT'])
+@api.route('/packages/<id>', methods=['PUT'])
 def update_package_by_id(id):
     package = Package.query.get(id)
     if package:
-        if request.form.has_key('packagename'):
-            package.packagename = request.form['packagename']
-        if request.form.has_key('type'):
-            package.type = request.form['type']
-        if request.form.has_key('price'):
-            package.price = request.form['price']
-        if request.form.has_key('description'):
-            package.description = request.form['description']
-        package.modifiedtime = datetime.datetime.now()
+        for key,value in request.form.items():
+            if hasattr(package, key):
+                setattr(package, key, value)
+        package.modifiedtime = datetime.now().strftime('%Y%m%d%H%M%S')
         db.session.add(package)
         db.session.commit()
         return jsonify({
@@ -76,7 +72,7 @@ def update_package_by_id(id):
             'data': None
         })
 
-@app.route('/api/v1/packages/<id>', methods=['DELETE'])
+@api.route('/packages/<id>', methods=['DELETE'])
 def delete_package_by_id(id):
     package = Package.query.get(id)
     if package:

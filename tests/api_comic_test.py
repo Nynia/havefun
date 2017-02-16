@@ -1,7 +1,7 @@
 #-*-coding:utf-8-*-
 import requests
 
-base_url = 'http://127.0.0.1:5000/api/v1/comics'
+base_url = 'http://127.0.0.1:5000/api/v1.0/comics'
 
 
 def add_test():
@@ -22,7 +22,7 @@ def add_test():
     r = requests.post(url, data=payload)
     print r.text
 def query_test():
-    url = base_url + '/1001'
+    url = base_url + '/200099420'
     r = requests.get(url)
     print r.text
 
@@ -39,7 +39,7 @@ def delete_test():
     url = base_url + '/1001'
     r = requests.delete(url)
     print r.text
-add_test()
+#add_test()
 query_test()
 #modify_test()
 #delete_test()

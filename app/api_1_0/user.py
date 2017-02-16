@@ -1,10 +1,12 @@
-from app import app
+from . import api
 from flask import request, jsonify
 from app.models import User
 from app import db
-import datetime
+from datetime import datetime
+from decorators import jsonp
 
-@app.route('/api/v1/users/<id>', methods=['GET'])
+@api.route('/users/<id>', methods=['GET'])
+@jsonp
 def get_user_by_id(id):
     user = User.query.get(id)
     return jsonify({
@@ -13,7 +15,8 @@ def get_user_by_id(id):
         'data': user.to_json() if user else user
     })
 
-@app.route('/api/v1/users', methods=['GET'])
+@api.route('/users', methods=['GET'])
+@jsonp
 def get_users_by_page():
     limit = request.args.get('limit', type=int)
     offset = request.args.get('offset', type=int)
@@ -28,18 +31,18 @@ def get_users_by_page():
         'data': [u.to_json() for u in users]
     })
 
-@app.route('/api/v1/users', methods=['POST'])
+@api.route('/users', methods=['POST'])
+@jsonp
 def add_user():
-    phonenum = request.form['phonenum']
-    print phonenum
+    phonenum = request.form.get('phonenum')
     user = User.query.filter_by(phonenum=phonenum).first()
     if not user:
         user = User()
         user.phonenum = phonenum
-        user.password = request.form['password']
-        user.nickname = request.form['nickname']
+        user.password = request.form.get('password')
+        user.nickname = request.form.get('nickname')
         user.integral = 0
-        user.createtime = datetime.datetime.now()
+        user.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
         db.session.add(user)
         db.session.commit()
         return jsonify({
@@ -54,16 +57,14 @@ def add_user():
             'data': user.to_json()
         })
 
-@app.route('/api/v1/users/<id>', methods=['PUT'])
+@api.route('/users/<id>', methods=['PUT'])
+@jsonp
 def update_user_by_id(id):
     user = User.query.get(id)
     if user:
-        if request.form.has_key('nickname'):
-            user.nickname = request.form['nickname']
-        if request.form.has_key('password'):
-            user.password = request.form['password']
-        if request.form.has_key('phonenum'):
-            user.phonenum = request.form['phonenum']
+        for key,value in request.form.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
         db.session.add(user)
         db.session.commit()
         return jsonify({
@@ -78,7 +79,8 @@ def update_user_by_id(id):
             'data': None
         })
 
-@app.route('/api/v1/users/<id>', methods=['DELETE'])
+@api.route('/users/<id>', methods=['DELETE'])
+@jsonp
 def delete_user_by_id(id):
     user = User.query.get(id)
     if user:

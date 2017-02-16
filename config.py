@@ -31,9 +31,11 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql://root:admin@127.0.0.1/havefun'
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-                              'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    pass
+
 config = {
     'testing': TestingConfig,
     'production': ProductionConfig,
+
+    'default':TestingConfig,
 }

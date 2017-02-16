@@ -1,14 +1,10 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-{% block title %}Flasky{% endblock %}
-{% block content %}
-    <div class="page-header">
-        <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
-    </div>
-    <form method="post">
-    {{ form.hidden_tag() }}
-    {{ form.name }}
-    {{ form.passwd }}
-    {{ form.submit }}
-    </form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello, {% if not current_user.is_anonymous %}{{ current_user.phonenum}}{% else %}Stranger{% endif %}!</h1>
+</body>
+</html>
