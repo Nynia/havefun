@@ -44,8 +44,6 @@ def delete_test():
     r = requests.delete(url)
     print r.text
 
-#add_test()
-#get_test()
-#update_test()
-#get_all_test()
-delete_test()
+
+if __name__ == "__main__":
+    pass

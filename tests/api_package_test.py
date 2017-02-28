@@ -1,3 +1,4 @@
+#-*-coding:utf-8-*-
 import requests
 
 base_url = 'http://127.0.0.1:5000/api/v1.0/packages'
@@ -7,11 +8,10 @@ def test_1():
     print r.text
 def test_2():
     payload = {
-        'packageid':'11111000021325',
-        'packagename':'test3',
+        'productid':'135000000000000242339',
+        'productname':'超凡游戏包',
         'type':'2',
         'price': 10,
-        'description':'this is a test'
     }
     r = requests.post(base_url, data=payload)
     print r.text
@@ -35,6 +35,6 @@ def test_5():
     r = requests.put(url, data=payload)
     print r.text
 #test_1()
-#test_2()
-test_5()
+test_2()
+#test_5()
 #test_5()

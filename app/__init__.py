@@ -4,6 +4,8 @@ from flask_bootstrap import Bootstrap
 from config import config
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import requests
+
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 
@@ -33,3 +35,27 @@ def create_app(config_name):
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
     return app
+
+def get_readings_session():
+    url = 'http://wap.tyread.com/user/registAndLogin.action?is_ctwap=0'
+    s = requests.Session()
+    data = {
+        'phoneNum_input': '18118999630',
+        'randomCode': '147976',
+        'pic_code': '5kne',
+        'autoLogin': '1',
+        'from': 'login',
+    }
+    headers = {
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
+    }
+    _cookies = {
+        'JSESSIONID': '13E024599E8CBA4712192FD820FCC585'
+    }
+    r = s.post(url, headers=headers, data=data, cookies=_cookies)
+    r.encoding = 'utf-8'
+    print r.text
+    return s
+
+reading_session = get_readings_session()

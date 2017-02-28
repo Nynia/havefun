@@ -18,8 +18,8 @@ class Package(db.Model):
     def to_json(self):
         json_post = {
             'id':self.id,
-            'productid': self.packageid,
-            'productname': self.packagename,
+            'productid': self.productid,
+            'productname': self.productname,
             'type': self.type,
             'price':self.price,
             'description': self.description,
@@ -138,9 +138,7 @@ class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     packageid = db.Column(db.Integer)
     name = db.Column(db.String(255))
-    img_small = db.Column(db.String(255))
-    img_middle = db.Column(db.String(255))
-    img_big = db.Column(db.String(255))
+    img_icon = db.Column(db.String(255))
     type = db.Column(db.String(1))
     url = db.Column(db.String(255))
     category = db.Column(db.String(20))
@@ -148,6 +146,13 @@ class Game(db.Model):
     brief = db.Column(db.String(255))
     size = db.Column(db.String(20))
     createtime = db.Column(db.String(14))
+
+    img_screenshot_1 = db.Column.String(255)
+    img_screenshot_2 = db.Column.String(255)
+    img_screenshot_3 = db.Column.String(255)
+    img_screenshot_4 = db.Column.String(255)
+    img_screenshot_5 = db.Column.String(255)
+    img_screenshot_6 = db.Column.String(255)
 
     def __repr__(self):
         return '<Game %r>' % self.name
@@ -157,17 +162,20 @@ class Game(db.Model):
             'id':self.id,
             'packageid':self.packageid,
             'name':self.name,
-            'img_samll':self.img_small,
-            'img_middle':self.img_middle,
-            'img_big':self.img_big,
+            'img_icon':self.img_icon,
             'type':self.type,
             'url':self.url,
             'category':self.category,
             'star':self.star,
             'brief':self.brief,
             'size':self.size,
-            'createtime':self.createtime
-
+            'createtime':self.createtime,
+            'img_screenshot_1':self.img_screenshot_1,
+            'img_screenshot_2': self.img_screenshot_2,
+            'img_screenshot_3': self.img_screenshot_3,
+            'img_screenshot_4': self.img_screenshot_4,
+            'img_screenshot_5': self.img_screenshot_5,
+            'img_screenshot_6': self.img_screenshot_6,
         }
         return json_post
 

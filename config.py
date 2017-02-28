@@ -31,7 +31,7 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql://root:admin@127.0.0.1/havefun'
 
 class ProductionConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:admin@192.168.114.139/havefun'
 
 config = {
     'testing': TestingConfig,

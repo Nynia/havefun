@@ -3,37 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import os
-import config
 from app.utils.ftp import MyFTP
-
-def upload_qiniu(img_url, target_name):
-    from qiniu import Auth, put_file, etag, urlsafe_base64_encode
-    import qiniu.config
-
-    # 需要填写你的 Access Key 和 Secret Key
-    access_key = config.QINIU_ACCESS_KEY
-    secret_key = config.QINIU_SECRET_KEY
-
-    # 构建鉴权对象
-    q = Auth(access_key, secret_key)
-
-    # 要上传的空间
-    bucket_name = 'comic'
-
-    # 上传到七牛后保存的文件名
-    key = target_name;
-
-    # 生成上传 Token，可以指定过期时间等
-    token = q.upload_token(bucket_name, key, 3600)
-
-    # 要上传文件的本地路径
-    localfile = img_url
-
-    ret, info = put_file(token, key, localfile)
-    print(info)
-    assert ret['key'] == key
-    assert ret['hash'] == etag(localfile)
-
 
 def update_comics(id):
     login_url = 'http://www.icartoons.cn/index.php?m=member&c=index&a=login'

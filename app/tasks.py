@@ -3,6 +3,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from app.utils.ftp import MyFTP
+from app import reading_session
 
 def comic_job():
     #get all comics from database
@@ -80,4 +81,15 @@ def comic_job():
                 r = requests.put(url, data=payload)
                 print r.text
 
-comic_job()
+#comic_job()
+def readings_job():
+    url = 'http://wap.tyread.com/bookdetail/10000002288111110/gobookinfo.html'
+    headers = {
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
+    }
+    r = reading_session.get(url,headers=headers)
+    r.encoding = 'utf-8'
+    print r.text
+
+readings_job()

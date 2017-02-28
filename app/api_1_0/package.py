@@ -7,12 +7,18 @@ from datetime import datetime
 @api.route('/packages/<id>', methods=['GET'])
 def get_package_by_id(id):
     package = Package.query.get(int(id))
-    return jsonify({
-        'code': '0',
-        'messge': 'success',
-        'data': package.to_json() if package else package
-    })
-
+    if package:
+        return jsonify({
+            'code': '0',
+            'messge': 'success',
+            'data': package.to_json()
+        })
+    else:
+        return jsonify({
+            'code': '102',
+            'messge': 'not exist',
+            'data': None
+        })
 @api.route('/packages', methods=['GET'])
 def get_packages_by_type():
     type = request.args.get('type')
@@ -36,6 +42,8 @@ def add_package():
         for key, value in request.form.items():
             if hasattr(package, key):
                 setattr(package, key, value)
+        package.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+        package.modifiedtime = datetime.now().strftime('%Y%m%d%H%M%S')
         db.session.add(package)
         db.session.commit()
         return jsonify({

@@ -4,7 +4,6 @@ from flask import request,jsonify
 from app.models import Game
 from datetime import datetime
 
-
 @api.route('/games',methods=['GET'])
 def get_games_by_type():
     type = request.args.get('type')
@@ -21,11 +20,18 @@ def get_games_by_type():
 @api.route('/games/<id>',methods=['GET'])
 def get_game_by_id(id):
     game = Game.query.get(int(id))
-    return jsonify({
-        'code': '0',
-        'message': 'success',
-        'data': game.to_json() if game else game
-    })
+    if game:
+        return jsonify({
+            'code': '0',
+            'message': 'success',
+            'data': game.to_json()
+        })
+    else:
+        return jsonify({
+            'code': '102',
+            'messge': 'not exist',
+            'data': None
+        })
 
 @api.route('/games',methods=['POST'])
 def add_new_game():
@@ -51,6 +57,12 @@ def update_game_by_id(id):
         for key,value in request.form.items():
             if hasattr(game, key):
                 setattr(game, key, value)
+            else:
+                return jsonify({
+                    'code': '103',
+                    'message': 'params error',
+                    'data': None
+                })
         db.session.add(game)
         db.session.commit()
         return jsonify({
