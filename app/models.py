@@ -3,7 +3,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import login_manager
 from flask import current_app, request, url_for
-from flask.ext.login import UserMixin
+from flask_login import UserMixin
 class Package(db.Model):
     __tablename__ = 'package'
     id = db.Column(db.Integer,primary_key=True)
@@ -147,12 +147,12 @@ class Game(db.Model):
     size = db.Column(db.String(20))
     createtime = db.Column(db.String(14))
 
-    img_screenshot_1 = db.Column.String(255)
-    img_screenshot_2 = db.Column.String(255)
-    img_screenshot_3 = db.Column.String(255)
-    img_screenshot_4 = db.Column.String(255)
-    img_screenshot_5 = db.Column.String(255)
-    img_screenshot_6 = db.Column.String(255)
+    img_screenshot_1 = db.Column(db.String(255))
+    img_screenshot_2 = db.Column(db.String(255))
+    img_screenshot_3 = db.Column(db.String(255))
+    img_screenshot_4 = db.Column(db.String(255))
+    img_screenshot_5 = db.Column(db.String(255))
+    img_screenshot_6 = db.Column(db.String(255))
 
     def __repr__(self):
         return '<Game %r>' % self.name
