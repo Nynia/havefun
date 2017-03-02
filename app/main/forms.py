@@ -9,6 +9,7 @@ class GameForm(Form):
     category = StringField('category')
     star = IntegerField('star')
     size = StringField('size(M)')
+    url = StringField('url')
     apk = FileField('apk')
     icon = FileField('icon')
     screenshot = FileField('screenshot')
