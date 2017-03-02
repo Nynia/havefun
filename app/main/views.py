@@ -29,7 +29,7 @@ def index():
             filename = generate_name(filename)
             print filename
             file.save(os.path.join('./res/', filename))
-            myftp.uploadFiles('/res/games/', os.path.join('./res/', filename))
+            myftp.uploadFiles('/games/', os.path.join('./res/', filename))
             game.img_icon = prefix + 'games/' + filename
         if form.data['type'] == '1':
             file = request.files['apk']
@@ -38,13 +38,13 @@ def index():
                 filename = generate_name(filename)
                 print filename
                 file.save(os.path.join('./res/', filename))
-                myftp.uploadFiles('/res/games/', os.path.join('./res/', filename))
+                myftp.uploadFiles('/games/', os.path.join('./res/', filename))
                 game.url = prefix + 'games/' + filename
             for index,filename in enumerate(request.files.getlist('screenshot')):
                 filename = generate_name(secure_filename(filename))
                 print filename
                 file.save(os.path.join('./res/', filename))
-                myftp.uploadFiles('/res/games/', os.path.join('./res/', filename))
+                myftp.uploadFiles('/games/', os.path.join('./res/', filename))
                 setattr(game, 'img_screenshot_'+str(index+1), prefix + 'games/' + filename)
         game.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
         db.session.add(game)
