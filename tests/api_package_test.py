@@ -8,8 +8,8 @@ def test_1():
     print r.text
 def test_2():
     payload = {
-        'productid':'135000000000000242339',
-        'productname':'超凡游戏包',
+        'productid':'135000000000000242330',
+        'productname':'全民游戏包',
         'type':'2',
         'price': 10,
     }
