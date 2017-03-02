@@ -18,6 +18,7 @@ def index():
     if request.method == 'POST':
         game = Game()
         myftp = MyFTP(config.FTP_ADDR,config.FTP_PORT,config.FTP_USER,config.FTP_PWD, '/')
+        myftp.login()
         prefix = config.STATIC_URL_PREFIX
         for key, value in form.data.items():
             if hasattr(game, key):
