@@ -41,7 +41,7 @@ def index():
                 myftp.uploadFiles('/res/games/', os.path.join('./res/', filename))
                 game.url = prefix + 'games/' + filename
             for index,filename in enumerate(request.files.getlist('screenshot')):
-                filename = generate_name(secure_filename(file.filename))
+                filename = generate_name(secure_filename(filename))
                 print filename
                 file.save(os.path.join('./res/', filename))
                 myftp.uploadFiles('/res/games/', os.path.join('./res/', filename))
