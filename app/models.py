@@ -179,6 +179,49 @@ class Game(db.Model):
         }
         return json_post
 
+class OrderRelation(db.Model):
+    __tablename__ = 'orderrelation'
+    id = db.Column(db.Integer,primary_key=True)
+    productid = db.Column(db.String(21))
+    phonenum = db.Column(db.String(11))
+    status = db.Column(db.String(1))
+    starttime = db.Column(db.String(14))
+    endtime = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<OrderRelation %r>' % self.productid
+
+    def to_json(self):
+        json_post = {
+            'id':self.id,
+            'productnid':self.productid,
+            'phonenum':self.phonenum,
+            'status':self.status,
+            'starttime':self.starttime,
+            'endtime':self.endtime
+        }
+        return json_post
+
+class OrderHistroy(db.Model):
+    __tablename__ = 'orderrecord'
+    id = db.Column(db.Integer, primary_key=True)
+    productid = db.Column(db.String(21))
+    phonenum = db.Column(db.String(11))
+    action = db.Column(db.String(1))
+    createtime = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<OrderHistroy %r>' % self.phonenum
+
+    def to_json(self):
+        json_post = {
+            'id':self.id,
+            'productid':self.productid,
+            'phonenum':self.phonenum,
+            'action':self.action,
+            'createtime':self.createtime
+        }
+        return json_post
 
 
 

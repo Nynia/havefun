@@ -9,7 +9,7 @@ FTP_PORT = 21
 FTP_USER = 'jsgx'
 FTP_PWD = 'jsgx2017'
 STATIC_URL_PREFIX = 'http://221.228.17.87/res/'
-
+ORDER_REQUEST_URL = 'http://61.160.185.51:9250/ismp/serviceOrder'
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'skks'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True

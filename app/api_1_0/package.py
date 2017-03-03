@@ -10,13 +10,13 @@ def get_package_by_id(id):
     if package:
         return jsonify({
             'code': '0',
-            'messge': 'success',
+            'message': 'success',
             'data': package.to_json()
         })
     else:
         return jsonify({
             'code': '102',
-            'messge': 'not exist',
+            'message': 'not exist',
             'data': None
         })
 @api.route('/packages', methods=['GET'])
@@ -28,7 +28,7 @@ def get_packages_by_type():
         packages = Package.query.all()
     return jsonify({
         'code': '0',
-        'messge': 'success',
+        'message': 'success',
         'data': [p.to_json() for p in packages]
     })
 

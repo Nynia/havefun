@@ -4,5 +4,6 @@ resultmap = {
     '100':'not found',
     '101':'exist',
     '102':'not exist',
-    '103':'param error'
+    '103':'param error',
+    '104':'fail'
 }
