@@ -1,6 +1,6 @@
 from . import auth
 from flask_login import login_user, logout_user, login_required
-from flask import render_template, redirect, request, url_for, flash,session,request,g
+from flask import render_template, redirect, request, url_for, flash,session,request
 from ..models import User
 from .forms import LoginForm
 
@@ -11,7 +11,8 @@ def login():
         user = User.query.filter_by(phonenum=form.phonenum.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, True)
-            return redirect(request.args.get('next') or url_for('main.index'))
+            next = request.args.get('next')
+            return redirect(next or url_for('main.index'))
         flash('Invalid username or password.')
     return render_template('login.html', form=form)
 

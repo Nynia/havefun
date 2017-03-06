@@ -1,0 +1,153 @@
+*{padding: 0;margin: 0;box-sizing: border-box;}
+a{text-decoration: none;color: #333333;}
+ul,li{list-style: none;}
+.clear{clear: both;}
+/*body{font-size: 1rem;}*/
+header{background: #f7d631;width: 100%;height: 50px;text-align: center;}
+header img{margin: 8px auto;}
+nav ul li{float: left;width: calc(100vw / 6);line-height: 50px;text-align: center;}
+nav ul li a{width: calc(100vw / 6);display: inline-block;font-size: 1rem;}
+nav ul li a:hover{color: #8dbeef;font-weight: bold;font-size: 1.25rem;}
+nav li a img{vertical-align: middle;}
+.banner{width: 100%;}
+.banner img{width: 100%;}
+.banner{position: relative;overflow: hidden;}
+.icon{position: absolute;bottom: 10px;left: calc(50% - 20px);}
+.icon span{text-align: center;display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color:#c4c3c9;}
+.icon .circle{background: #fff;}
+
+
+.play{width: 100%;margin: 20px auto 0 ;}
+.recommend{width: 100%;margin: 0 auto;}
+.play_top{line-height: 35px;padding: 0 15px;}
+.play_top img{vertical-align: middle;}
+.play_top a{float: right;}
+.play_top a img{padding: 5px;}
+.play_bottom{margin-top: 10px;}
+.play_bottom ul li{float: left;width:calc(100vw / 4);text-align: center;}
+/*.play_bottom ul li img{max-width: 4.8rem;height: 5.5rem;}*/
+.line img{margin-top: 10px;}
+.recommend_top ul li{width: calc(100vw / 4);text-align: center;float: left;line-height: 40px;}
+.recommend_top ul li a{width: calc(100vw / 4);font-size: 1rem;} 
+/*.recommend_top ul li a:hover{color: #eba241;}*/
+.recommend_bottom ul li{float: left;text-align: center;height:129px;margin:10px 0 20px 0;position: relative;}
+.recommend_bottom ul .index{background: #feeebb;color: #eba64b;width: 115px;height:129px;margin-left: 3vw;position: relative;}
+.recommend_bottom ul .games{width: calc((100vw - 115px - 3vw)/2);}
+.recommend_bottom ul .indexs{background: #eeffb8;color: #cad981;}
+.recommend_bottom ul li span{font-size: 1rem;line-height: 20px;}
+.recommend_bottom ul li p{font-size: 0.725rem;}
+.more{position: absolute;left: calc(50% - 39px);}
+.more a{display: inline-block;position: absolute;bottom: 10px;font-size: 0.75rem;left: 10px;color: #fff;}
+.mores{background: url(../img/green.png) no-repeat;}
+/*.recommend_bottom ul .games img{width: 5rem;}*/
+/*.games>p{line-height: 20px;}*/
+.recommend_bottom ul .games a p{line-height: 30px;background: #2d6efc;border-radius: 10px;width: 5rem;display: inline-block;color: #fff;margin-top: 5px;}
+/*底部*/
+footer{position:fixed;bottom:0;height:60px;background-color: #fefefe;border-top: 1px solid #e2e2e2;display: block;width: 100vw;}
+footer ul li{width: 25vw;float: left;text-align: center;}
+footer ul li div{margin-top:5px;width: 30px;height: 30px;display: inline-block;}
+footer ul li:nth-child(1) div{background: url(../img/sy.png) no-repeat;background-size: contain;}
+footer ul li:nth-child(2) div{background: url(../img/discover.png) no-repeat;background-size: contain;}
+footer ul li:nth-child(3) div{background: url(../img/focus.png) no-repeat;background-size: contain;}
+footer ul li:nth-child(4) div{background: url(../img/my.png) no-repeat;background-size: contain;}
+footer ul p{font-size: 0.8em;}
+footer ul li:nth-child(1):active div{background:url(../img/sya.png);background-size:contain;}
+/*footer ul li:nth-child(1):active p{color: #00bf9d;}*/
+footer ul li:nth-child(2):active div{background:url(../img/discovera.png);background-size:contain;}
+/*footer ul li:nth-child(2):active p{color: #00bf9d;}*/
+footer ul li:nth-child(3):active div{background:url(../img/focusa.png);background-size:contain;}
+/*footer ul li:nth-child(3):active p{color: #00bf9d;}*/
+footer ul li:nth-child(4):active div{background:url(../img/mys.png);background-size:contain;}
+/*footer ul li:nth-child(4):active p{color: #00bf9d;}*/
+
+/*我的页面*/
+.header{background: url(../img/yellow.png) no-repeat;width: 100%;height: 150px;position: relative;}
+.news{float: right;padding: 10px;}
+.news img{width: 2rem;height: 1.5rem;}
+.header section{position: absolute;top: calc(50% - 21px);left: calc(50% - 115px);}
+.header section a{padding:8px 34px;border: 1px solid #fff;margin: 0 10px;border-radius: 5px;color: #fff;}
+main{margin: 10px auto 0;}
+.main a{display: inline-block;width: 100%;padding: 2vw;line-height: 30px;}
+.main a div{width: 6vw;height: 6vw;float: left;margin: 0 2vw;}
+.main section{float: right;}
+.main section img{vertical-align: middle;padding: 2px 10px;}
+.main a:nth-child(1) div{background: url(../img/integral.png);background-size: contain;}
+.main a:nth-child(2) div{background: url(../img/collection.png);background-size: contain;}
+.main a:nth-child(3) div{background: url(../img/order.png);background-size: contain;}
+.main a:nth-child(4) div{background: url(../img/phone.png);background-size: contain;}
+.main a:nth-child(5) div{background: url(../img/feedback.png);background-size: contain;}
+.main a:nth-child(6) div{background: url(../img/help.png);background-size: contain;}
+/*.watchs ul li img{height: 4rem;width: 6.25rem;}*/
+.watchs{margin-top: 10px;}
+.watchs ul{margin-left: 2vw;}
+.watchs ul li{float: left;width:calc(100vw / 4);text-align: center;margin: 0 2px;}
+.watchs ul li:nth-child(4){width: 77px;margin-right: 0;}
+
+.watchs .column{margin-top: 20px;}
+/*控制基准html的大小*/
+html{font-size:90% ;}
+@media (min-width: 360px) and (max-width: 400px) {
+     html{font-size: 90%;}
+}
+@media (min-width: 401px){
+     html{font-size: 110%;}
+}
+
+/*登录页面*/
+.logins{background: #f4f4f4;}
+#login{background: #f7d631;height: 55px;width: 100%;text-align: center;line-height: 55px;position: relative;}
+#login img{float: left;padding: 20px;}
+#login span{left: calc(50% - 17px);position: absolute;}
+.show{font-size: 1rem;position: relative;text-align: center;}
+.show label{margin: 6px 0;vertical-align: middle; display: inline-block;width: 10vw;height: 50px;background-color: #fff;line-height: 50px;}
+.show input{height: 50px;font-size: 16px;width: 80vw;outline: none;padding-left: 0px;border: 1px solid #fff;}
+.show label:nth-of-type(2){background-position: 57% 0%;}
+.show em{background: url(../img/delete.png) no-repeat;width:2rem;height: 2rem;}
+.show em:nth-of-type(1){position: absolute;top: 20px;right: 50px;}
+.show em:nth-of-type(2){position: absolute;top: 80px;right: 50px;}
+.show input[type="submit"]{outline: none; margin: 19px 0;width: 68vw;line-height: 45px;font-weight: bold;background-color: #f7d631;color: #fff;border: 1px solid #f7d631;font-size: 18px;border-radius: 10px;}
+.show_top{width: 90vw;margin: 20px auto 0;}
+.show_top img{width: 18px;height: 20px;margin: 12px 0;}
+/*.tick{}*/
+
+/*注册页面*/
+#login .account{position: absolute;left: calc(50% - 35px);}
+.registers label:nth-child(1){width: 90vw;height: 50px;background: #fff;text-align: left;padding-left: 20px;}
+.registers label:nth-of-type(2),.registers label:nth-of-type(3){width: 18vw;}
+.registers input:nth-of-type(1),.registers input:nth-of-type(2){width: 72vw;}
+.registers a{display: inline-block;}
+.registers{position: relative;}
+.registers a{position: absolute;top: 80px;right: 20px;color: #80ccdd;}
+
+/*热门推荐特惠礼包*/
+.parts ul{width: 93%;margin: 0 auto;}
+.parts ul li{margin: 10px 0;}
+.recommend_bottom .part{display: none;}
+.recommend_bottom .part:nth-child(1){display: block;}
+
+/*热门推荐游戏分类*/
+.role_play ul li{width: 50%;text-align: center;position: relative;}
+.role_play ul li p{position: absolute;left: 10%;top: 10%;}
+.role_play ul li img{vertical-align: middle;position: absolute;right: 10%;}
+.role_play ul li a p:nth-child(1){font-size: 0.9rem;font-weight: bold;}
+.role_play ul li a p:nth-child(3){top: 60px;font-size: 0.73rem;}
+
+/*超凡游戏包*/
+.package{background: url(../img/package.png)  center center;background-size: 100% 736px;height: 736px;}
+.bar_top{height: 50px;padding: 17px;}
+.super{width: 90%;margin: 0 auto;position: relative;}
+.super_left{float: left;}
+.super_right{display: inline-block;color: #fff;line-height: 35px;position: absolute;right: 5%;}
+.super_right li:nth-child(1){font-size: 1.5rem;}
+.super a{padding: 4px 10px;background: #fde000;border-radius: 10px;position: absolute;bottom: 0;right: 0;}
+.summary{margin-top: 20px;color: #fff;padding: 17px;}
+.summary p:nth-child(1){font-size: 1.2rem;}
+.summary p:nth-child(2){margin-top: 20px;}
+.style{margin-top: 0;}
+.style ul li{margin-top: 10px;text-align: center;}
+.style ul li:nth-last-child(1){margin-bottom: 20px;}
+.style ul li a{width: 22.5%;margin: 0 5px;}
+@media (min-width: 320px) and (max-width: 360px){.super_left img{width: 80%;height: 80%;}}
+@media (min-width: 320px) and (max-width: 375px){.style li a img{width:20%;height: 20%;}}
+@media (min-width: 320px) and (max-width: 375px){.summary p:nth-child(2){font-size: 1.2rem;}}
+

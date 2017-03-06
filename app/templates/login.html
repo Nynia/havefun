@@ -1,15 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>登录</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <script src="../static/libs/jquery-3.1.0.js"></script>
+    <script src="../static/js/login.js"></script>
+    <script src="../static/js/vue.min.js"></script>
+    <style>
+        .show em {
+        }
+
+    </style>
 </head>
-<body>
-    <form method="POST">
+
+<body class="logins">
+<div id="login">
+    <a href="my.html"><img src="../static/img/cha.png" alt="叉号"/></a>
+    <span>登录</span>
+</div>
+<div class="show">
+    <form class="show_top" method="post">
         {{ form.hidden_tag() }}
-        {{ form.phonenum.label }}{{ form.phonenum() }}
-        {{ form.password.label }}{{ form.password() }}
-        {{ form.submit() }}
-</form>
+        <label for="phonenum"><img src="../static/img/person.png"
+                                   alt=""/></label>{{ form.phonenum(placeholder="请输入手机号码") }}
+        <label for="password"><img src="../static/img/password.png"
+                                   alt=""/></label>{{ form.password(placeholder="请输入密码") }}
+        {{ form.submit(value="登   录") }}
+    </form>
+
+</div>
 </body>
+<script>
+    var demo = new Vue({
+        el: '.show',
+        data: {
+            username: '',
+            password: '',
+            showFlag: ''
+        }
+    })
+    //      alert(demo.username)
+</script>
 </html>

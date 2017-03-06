@@ -8,7 +8,7 @@ from datetime import datetime
 def get_games_by_type():
     type = request.args.get('type')
     if type:
-        games = Game.query.filter_by(type=type).all()
+        games = Game.query.filter_by(type=type).order_by(Game.star).all()
     else:
         games = Game.query.all()
     return jsonify({

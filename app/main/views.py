@@ -10,6 +10,7 @@ from app.utils.func import generate_name
 import config
 from app import db
 from datetime import datetime
+from flask_login import current_user
 
 @main.route('/',methods=['GET', 'POST'])
 def index():

@@ -3,6 +3,9 @@
 {% block content %}
     <div class="container">
         <p>游戏资源配置</p>
+        {% if current_user %}
+            Hi {{ current_user }}!
+        {% endif %}
         <form action="/" method="post" enctype=multipart/form-data>
             {{ form.hidden_tag() }}
             <div class="form-group">
