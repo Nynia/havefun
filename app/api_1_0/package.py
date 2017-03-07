@@ -3,8 +3,10 @@ from flask import request,jsonify
 from app.models import Package
 from app import db
 from datetime import datetime
+from decorators import jsonp
 
 @api.route('/packages/<id>', methods=['GET'])
+@jsonp
 def get_package_by_id(id):
     package = Package.query.get(int(id))
     if package:
@@ -20,6 +22,7 @@ def get_package_by_id(id):
             'data': None
         })
 @api.route('/packages', methods=['GET'])
+@jsonp
 def get_packages_by_type():
     type = request.args.get('type')
     if type:
@@ -33,6 +36,7 @@ def get_packages_by_type():
     })
 
 @api.route('/packages', methods=['POST'])
+@jsonp
 def add_package():
     productid = request.form.get('productid')
     package = Package.query.filter_by(productid=productid).first()
@@ -59,6 +63,7 @@ def add_package():
         })
 
 @api.route('/packages/<id>', methods=['PUT'])
+@jsonp
 def update_package_by_id(id):
     package = Package.query.get(id)
     if package:
@@ -81,6 +86,7 @@ def update_package_by_id(id):
         })
 
 @api.route('/packages/<id>', methods=['DELETE'])
+@jsonp
 def delete_package_by_id(id):
     package = Package.query.get(id)
     if package:

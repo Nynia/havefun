@@ -3,8 +3,10 @@ from app import db
 from flask import request,jsonify
 from app.models import Game
 from datetime import datetime
+from decorators import jsonp
 
 @api.route('/games',methods=['GET'])
+@jsonp
 def get_games_by_type():
     type = request.args.get('type')
     if type:
@@ -18,6 +20,7 @@ def get_games_by_type():
     })
 
 @api.route('/games/<id>',methods=['GET'])
+@jsonp
 def get_game_by_id(id):
     game = Game.query.get(int(id))
     if game:
@@ -34,6 +37,7 @@ def get_game_by_id(id):
         })
 
 @api.route('/games',methods=['POST'])
+@jsonp
 def add_new_game():
     game = Game()
     for key, value in request.form.items():
@@ -50,6 +54,7 @@ def add_new_game():
     })
 
 @api.route('/games/<id>',methods=['PUT'])
+@jsonp
 def update_game_by_id(id):
     game = Game.query.get(int(id))
     if game:
@@ -79,6 +84,7 @@ def update_game_by_id(id):
         })
 
 @api.route('/games/<id>', methods=['DELETE'])
+@jsonp
 def delete_by_id(id):
     game = Game.query.get(int(id))
     if game:
