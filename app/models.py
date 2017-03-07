@@ -14,6 +14,11 @@ class Package(db.Model):
     description = db.Column(db.String(255))
     createtime = db.Column(db.String(14))
     modifiedtime = db.Column(db.String(14))
+    img = db.Column(db.String(255))
+    spid = db.Column(db.String(15))
+    chargeid = db.Column(db.String(10))
+    secret = db.Column(db.String(30))
+
 
     def to_json(self):
         json_post = {
@@ -24,7 +29,11 @@ class Package(db.Model):
             'price':self.price,
             'description': self.description,
             'createtime': self.createtime,
-            'modifiedtime': self.modifiedtime
+            'modifiedtime': self.modifiedtime,
+            'img':self.img,
+            'spid':self.spid,
+            'chargeid':self.chargeid,
+            'secret':self.secret
         }
         return json_post
 
