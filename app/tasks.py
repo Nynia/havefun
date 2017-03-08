@@ -69,7 +69,7 @@ def comic_job():
                                     print img_tag['id'], img_tag['src']
                                     if len(img_tag['src']) < 30:
                                         continue
-                                    myftp.uploadFiles(img_tag['src'], 'comic/' + id + '/' + episode,
+                                    myftp.uploadFiles(img_tag['src'], 'comics/' + id + '/' + episode,
                                                       img_tag['id'][3:] + '.jpg')
             #update database
             if remote_chapter > local_chapter:
@@ -92,4 +92,4 @@ def readings_job():
     r.encoding = 'utf-8'
     print r.text
 
-readings_job()
+#readings_job()

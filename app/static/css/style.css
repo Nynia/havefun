@@ -7,40 +7,37 @@ header{background: #f7d631;width: 100%;height: 50px;text-align: center;}
 header img{margin: 8px auto;}
 nav ul li{float: left;width: calc(100vw / 6);line-height: 50px;text-align: center;}
 nav ul li a{width: calc(100vw / 6);display: inline-block;font-size: 1rem;}
-nav ul li a:hover{color: #8dbeef;font-weight: bold;font-size: 1.25rem;}
+.game ul li:nth-child(3) a{color: #8dbeef;font-weight: bold;font-size: 1.25rem;}
 nav li a img{vertical-align: middle;}
 .banner{width: 100%;}
-.banner img{width: 100%;}
+.banner img{width: 100%;display: none;}
+.banner ul li:nth-child(1) img{display: block;}
 .banner{position: relative;overflow: hidden;}
 .icon{position: absolute;bottom: 10px;left: calc(50% - 20px);}
 .icon span{text-align: center;display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color:#c4c3c9;}
 .icon .circle{background: #fff;}
-
-
 .play{width: 100%;margin: 20px auto 0 ;}
-.recommend{width: 100%;margin: 0 auto;}
+.recommend{width: 100%;margin: 0 auto 49px;}
 .play_top{line-height: 35px;padding: 0 15px;}
-.play_top img{vertical-align: middle;}
-.play_top a{float: right;}
-.play_top a img{padding: 5px;}
+.play_top ul li:nth-child(1){float: left;}
+.play_top ul li:nth-last-child(1){float: right;}
+.play_top img{vertical-align: middle;padding: 5px;}
+/*.play_top a{float: right;}*/
+/*.play_top a img{}*/
 .play_bottom{margin-top: 10px;}
 .play_bottom ul li{float: left;width:calc(100vw / 4);text-align: center;}
-/*.play_bottom ul li img{max-width: 4.8rem;height: 5.5rem;}*/
 .line img{margin-top: 10px;}
 .recommend_top ul li{width: calc(100vw / 4);text-align: center;float: left;line-height: 40px;}
 .recommend_top ul li a{width: calc(100vw / 4);font-size: 1rem;} 
-/*.recommend_top ul li a:hover{color: #eba241;}*/
 .recommend_bottom ul li{float: left;text-align: center;height:129px;margin:10px 0 20px 0;position: relative;}
 .recommend_bottom ul .index{background: #feeebb;color: #eba64b;width: 115px;height:129px;margin-left: 3vw;position: relative;}
 .recommend_bottom ul .games{width: calc((100vw - 115px - 3vw)/2);}
+.games img{width:79px;height:79px;}
 .recommend_bottom ul .indexs{background: #eeffb8;color: #cad981;}
-.recommend_bottom ul li span{font-size: 1rem;line-height: 20px;}
+.recommend_bottom ul li span{font-size: 1rem;line-height: 30px;}
 .recommend_bottom ul li p{font-size: 0.725rem;}
-.more{position: absolute;left: calc(50% - 39px);}
+.more{position: absolute;left: calc(50% - 39px);margin: 10px 0;}
 .more a{display: inline-block;position: absolute;bottom: 10px;font-size: 0.75rem;left: 10px;color: #fff;}
-.mores{background: url(../img/green.png) no-repeat;}
-/*.recommend_bottom ul .games img{width: 5rem;}*/
-/*.games>p{line-height: 20px;}*/
 .recommend_bottom ul .games a p{line-height: 30px;background: #2d6efc;border-radius: 10px;width: 5rem;display: inline-block;color: #fff;margin-top: 5px;}
 /*底部*/
 footer{position:fixed;bottom:0;height:60px;background-color: #fefefe;border-top: 1px solid #e2e2e2;display: block;width: 100vw;}
@@ -51,14 +48,17 @@ footer ul li:nth-child(2) div{background: url(../img/discover.png) no-repeat;bac
 footer ul li:nth-child(3) div{background: url(../img/focus.png) no-repeat;background-size: contain;}
 footer ul li:nth-child(4) div{background: url(../img/my.png) no-repeat;background-size: contain;}
 footer ul p{font-size: 0.8em;}
-footer ul li:nth-child(1):active div{background:url(../img/sya.png);background-size:contain;}
+/*footer ul li:nth-child(1):active div{background:url(../img/sya.png);background-size:contain;}*/
 /*footer ul li:nth-child(1):active p{color: #00bf9d;}*/
-footer ul li:nth-child(2):active div{background:url(../img/discovera.png);background-size:contain;}
+/*footer ul li:nth-child(2):active div{background:url(../img/discovera.png);background-size:contain;}*/
 /*footer ul li:nth-child(2):active p{color: #00bf9d;}*/
-footer ul li:nth-child(3):active div{background:url(../img/focusa.png);background-size:contain;}
+/*footer ul li:nth-child(3):active div{background:url(../img/focusa.png);background-size:contain;}*/
 /*footer ul li:nth-child(3):active p{color: #00bf9d;}*/
-footer ul li:nth-child(4):active div{background:url(../img/mys.png);background-size:contain;}
+/*footer ul li:nth-child(4):active div{background:url(../img/mys.png);background-size:contain;}*/
 /*footer ul li:nth-child(4):active p{color: #00bf9d;}*/
+@media (min-width: 320px) and (max-width: 360px) {.recommend_bottom ul li span,.recommend_top ul li a{font-size: 1.2rem;}}
+
+
 
 /*我的页面*/
 .header{background: url(../img/yellow.png) no-repeat;width: 100%;height: 150px;position: relative;}
@@ -85,15 +85,19 @@ main{margin: 10px auto 0;}
 
 .watchs .column{margin-top: 20px;}
 /*控制基准html的大小*/
-html{font-size:90% ;}
+
+html{font-size:62.5%;}
 @media (min-width: 360px) and (max-width: 400px) {
      html{font-size: 90%;}
 }
 @media (min-width: 401px){
      html{font-size: 110%;}
 }
+#my li:nth-child(1) div{background: url(../img/sya.png) no-repeat;} 
+#my li:nth-last-child(1) div{background: url(../img/mys.png) no-repeat;}
 
-/*登录页面*/
+.watchs ul li a p{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+/*登录页面*/ 
 .logins{background: #f4f4f4;}
 #login{background: #f7d631;height: 55px;width: 100%;text-align: center;line-height: 55px;position: relative;}
 #login img{float: left;padding: 20px;}
@@ -124,12 +128,15 @@ html{font-size:90% ;}
 .parts ul li{margin: 10px 0;}
 .recommend_bottom .part{display: none;}
 .recommend_bottom .part:nth-child(1){display: block;}
-
+.parts ul li{position: relative;}
+.parts ul li img{width: 386px;height: 128px;}
+.parts ul li a  div{position: absolute;bottom: 10px;right: 10px;color: #fff;}
+@media (min-width: 320px) and (max-width: 375px){.parts ul li img{width: 95%;height: 95%;}}
 /*热门推荐游戏分类*/
 .role_play ul li{width: 50%;text-align: center;position: relative;}
 .role_play ul li p{position: absolute;left: 10%;top: 10%;}
-.role_play ul li img{vertical-align: middle;position: absolute;right: 10%;}
-.role_play ul li a p:nth-child(1){font-size: 0.9rem;font-weight: bold;}
+.role_play ul li img{vertical-align: middle;position: absolute;right: 10%;width: 78px;height: 78px;}
+.role_play ul li a p:nth-child(1){font-size: 0.9rem;font-weight: bold;margin-top: 4%;}
 .role_play ul li a p:nth-child(3){top: 60px;font-size: 0.73rem;}
 
 /*超凡游戏包*/
@@ -137,17 +144,129 @@ html{font-size:90% ;}
 .bar_top{height: 50px;padding: 17px;}
 .super{width: 90%;margin: 0 auto;position: relative;}
 .super_left{float: left;}
-.super_right{display: inline-block;color: #fff;line-height: 35px;position: absolute;right: 5%;}
+.super_right{display: inline-block;color: #fff;line-height: 35px;position: absolute;right: 5%;height: 134px;}
 .super_right li:nth-child(1){font-size: 1.5rem;}
-.super a{padding: 4px 10px;background: #fde000;border-radius: 10px;position: absolute;bottom: 0;right: 0;}
+.super a{padding: 0 10px;background: #fde000;border-radius: 10px;position: absolute;bottom: 0;right: 0;}
 .summary{margin-top: 20px;color: #fff;padding: 17px;}
 .summary p:nth-child(1){font-size: 1.2rem;}
 .summary p:nth-child(2){margin-top: 20px;}
 .style{margin-top: 0;}
-.style ul li{margin-top: 10px;text-align: center;}
-.style ul li:nth-last-child(1){margin-bottom: 20px;}
-.style ul li a{width: 22.5%;margin: 0 5px;}
-@media (min-width: 320px) and (max-width: 360px){.super_left img{width: 80%;height: 80%;}}
-@media (min-width: 320px) and (max-width: 375px){.style li a img{width:20%;height: 20%;}}
+.style ul li{margin-top: 10px;text-align: center;float: left;width: 22.5%;}
+.style{margin-top: 0;}
+.style ul li{margin-top: 10px;text-align: center;float: left;width: 22.5%;}
+.style ul{margin-top: 10px;}
+.style ul li {margin: 5px 2px;}
+@media (min-width: 320px) and (max-width: 375px){.super_left img{width: 80%;height: 80%;}.super_right{height: 90%;}}
+@media (min-width: 320px) and (max-width: 375px){.style li a img{width:90%;height: 90%;}}
 @media (min-width: 320px) and (max-width: 375px){.summary p:nth-child(2){font-size: 1.2rem;}}
 
+
+/*极地雪球冒险*/
+.supers a{margin-top: 10px;right: auto;}
+.screenshots{margin-top: 20px;}
+.picture{padding: 17px 0 0 17px;}
+@media (min-width: 320px) and (max-width: 375px){.screenshots .snow{width: 90%;height: 90%;}}
+
+
+/*动漫页面*/
+.cartoon ul li:nth-child(1) a{color: #e9766f;font-weight: bold;font-size: 1.25rem;}
+.world{margin-top: 20px;}
+.world ul li{float: left;width: 46%;margin: 0 2%;}
+@media (min-width: 320px) and (max-width: 375px){.world ul li .pictures{width: 95%;height: 95%;}}
+.world ul li{position: relative;}
+.world ul li div{position: absolute;bottom: 0;top:10px;color: #fff;text-align: center;width: 100%;line-height: 30px;}
+.world ul li div span:nth-child(1){border-bottom: 1px solid #fff;font-size: 0.96rem;padding: 5px;}
+.world ul li div p{font-size: 0.96rem;line-height: 30px;}
+.world ul li div span:nth-child(3){font-size: 0.69rem;float: left;margin-left: 20px;}
+.world ul li div span:nth-child(3) img{margin-right: 5px;}
+.world ul li div span:nth-last-child(1){background: url(../img/detail.png) no-repeat center center;float: right;font-size: 0.69rem;color: #000;margin:1px 20px 0 0;line-height: 25px;}
+.defeat{position: relative;margin: 20px auto 49px auto;}
+.defeat .thumb{position: absolute;right: 10px;top: 10px;padding:6px 2px;background: #5e6364;opacity: 0.8;border-radius: 15px;color: #fff;font-size: 0.69rem;}
+.thumb span{margin-left: 5px;}
+.thumb img{vertical-align: middle;margin: 0 5px 5px;}
+.defeat .update{position: absolute;bottom: 0;height: 39px;width:100%;line-height: 39px;background: #5e6364;color: #fff;opacity: 0.8;padding: 0 10px;}
+.update span:nth-child(1){font-size: 1rem;margin-right: 10px;}
+.update span:nth-child(2){font-size: 0.68rem;}
+.update span:nth-child(3){float: right;font-size: 0.68rem;}
+.update span img {vertical-align: middle;margin:0 5px 5px 0;}
+/*媒体查询*/
+@media (min-width: 320px) and (max-width: 360px){.world ul li div{top: 5px;}}
+@media (min-width: 320px) and (max-width: 375px){.world ul li div span:nth-last-child(1){margin: -8px 20px 0 0;}.world ul li div span:nth-child(3){margin-top: -10px;}}
+
+/*漫漫世界精品包*/
+#cartoon{background: url(../img/bg.png) no-repeat;}
+.detail{margin: 90px auto 0 auto;background: url(../img/white_bg.png) no-repeat;width: 92%;height: 662px;}
+.detail_page{position: absolute;top: 70px;left:30px;width: 88%;}
+.detail_left{float: left;}
+.detail_right{margin-left: 180px;font-size: 0.86rem;}
+.detail_right h3{line-height: 70px;color: #fff;display: inline-block;}
+.detail_right a{padding: 4px 55px;background: #f7d631;border-radius: 10px;margin-top: 5px;display: inline-block;}
+.detail .list{width: 88%; position: absolute;top: 290px;margin: 0 1% 0;}
+.list ul li{float: left;margin: 0 1% ;position: relative;width: 48%;}
+.list li div{position: absolute;bottom: 30px;color: #fff;padding: 5px 10px;font-size: 0.69rem;}
+.list li div img{padding: 0 5px 0 0;}
+.summer{font-size: 0.9rem;line-height: 30px;}
+
+/*媒体查询*/
+@media (min-width: 320px) and (max-width: 375px){.detail_left img{width: 90%;height: 90%;}}
+@media (min-width: 320px) and (max-width: 375px){.detail_right{margin-left: 150px;}}
+@media (min-width: 320px) and (max-width: 360px){.detail_right a{padding: 4px 35px;}}
+@media (min-width: 360px) and (max-width: 375px){.detail_right a{padding: 4px 55px;}}
+
+@media (min-width: 340px) and (max-width: 375px){.list ul li .big{width: 95%;height: 95%;}}
+@media (min-width: 320px) and (max-width: 340px){.list ul li .big{width: 92%;height: 92%;}}
+
+
+/*阅读*/
+.read ul li:nth-child(4) a{color:#e87b36;font-weight: bold;font-size: 1.25rem;}
+.classify{margin: 20px auto;width: 90%;}
+.classify_left{float: left;}
+.classify_left img{margin-right: 5px;}
+.classify_right{float: right;background: url(../img/on.png) no-repeat;background-size: contain;width: 75px;height: 26px;margin-top:-7px;}
+.classify_right span{font-size: 0.76rem;line-height: 26px;display: inline-block;text-align: center;width: 33px;}
+.on{background: url(../img/off.png) no-repeat;background-size: contain;}
+.classify_right span:nth-child(1){color: #fff;}
+.classify_right span:nth-child(2){color: #e9766f;}
+.classify_bottom{margin-top:20px;}
+.classify_bottom ul li{float: left;margin: 10px 20px 0 0;border-radius: 10px;padding: 0 14px;}
+.classify_bottom ul li span{font-size: 1rem;color: #f00;line-height: 30px;display: inline-block;text-align: center;}
+.lists .open{background: #f00;}
+.lists .open span{color: #fff!important;}
+.lists li{border: 1px solid #f6b709;}
+.lists .all{background: #c64bf6;border: 1px solid #c64bf6;}
+.lists .all span{color: #fff;}
+.lists li:nth-child(2){border: 1px solid #f6b709;}
+.lists li:nth-child(2) span{color: #f6b709;}
+.lists li:nth-child(3){border: 1px solid #59bdfb;}
+.lists li:nth-child(3) span{color: #59bdfb;}
+.lists li:nth-child(4){border: 1px solid #ef8985;}
+.lists li:nth-child(4) span{color: #ef8985;}
+.lists li:nth-child(5){border: 1px solid #7ec51f;}
+.lists li:nth-child(5) span{color: #7ec51f;}
+.lists li:nth-child(6){border: 1px solid #ea3838;}
+.lists li:nth-child(6) span{color: #ea3838;}
+.lists li:nth-child(7){border: 1px solid #e0c500;}
+.lists li:nth-child(7) span{color: #e0c500;}
+
+
+/*.classify_bottom ul li:nth-child(1){background: #c948ff;color: #fff;}
+.classify_bottom ul li:nth-child(2) span{background: url(../img/close.png) no-repeat; background-size:contain;color: #f6b709;}
+.close{background: url(../img/open.png) no-repeat;background-size: contain;}*/
+
+#book{margin-top: 20px;}
+#book ul li{width: 30%;text-align: center;float: left;}
+#book ul li p{line-height: 30px;font-size: 0.9rem;color: #000;}
+@media (min-width:320px) and (max-width:375px){#book ul li img{width: 90%;height: 90%;}}
+
+/*阅读详情*/
+#read{background: url(../img/bga.png) no-repeat;color: #fff;}
+.books{text-align:left;position: absolute;right: 0;}
+.books ul li:nth-child(1){margin-left: -10px;line-height: 20px;}
+@media (min-width:320px) and (max-width:375px){.books_left img{width: 95%;height: 95%;}}
+.directory{width: 90%;margin: 0 auto;}
+.directory ul li{float: left;width: 15%;text-align: center;}
+.directory ul li:nth-child(2),.directory ul li:nth-child(3){border-right: 1px solid #fff;}
+.directory ul li img{padding: 0 5px;}
+table{width: 90%;border: 1px solid #fff;text-align: center;margin-top: 10px;border-collapse: collapse;}
+tr{height: 22px;}
+td{border: 1px solid #fff;height: 20px;}

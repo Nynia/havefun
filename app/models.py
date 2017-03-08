@@ -42,7 +42,7 @@ class Package(db.Model):
         pass
 
     def __repr__(self):
-        return '<Package %r>' % self.packagename
+        return '<Package %r>' % self.productname
 
 class Comic(db.Model):
     __tablename__ = 'comic'

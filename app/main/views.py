@@ -1,5 +1,5 @@
 from . import main
-from flask import render_template
+from flask import render_template,session
 from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
@@ -11,6 +11,7 @@ import config
 from app import db
 from datetime import datetime
 from flask_login import current_user
+from app.models import Package
 
 @main.route('/',methods=['GET', 'POST'])
 def index():
@@ -52,3 +53,23 @@ def index():
         db.session.commit()
         print game.to_json()
     return render_template('admin.html', form=form)
+
+@main.route('/game',methods=['GET'])
+def game():
+    packages = Package.query.filter_by(type=2).all()
+    h5 = Game.query.filter_by(type=2).limit(4).all()
+    print h5
+    return  render_template('game.html',packages=packages,h5=h5)
+
+@main.route('/package',methods=['GET'])
+def package():
+    id = request.args.get('id')
+    package = Package.query.get(int(id))
+    games = Game.query.filter_by(packageid=id).all()
+    return  render_template('package.html',package=package,games=games)
+
+@main.route('/gamedetail',methods=['GET'])
+def gamedetail():
+    id = request.args.get('id')
+    game = Game.query.get(int(id))
+    return render_template('gamedetail.html',game=game)

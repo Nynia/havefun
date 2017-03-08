@@ -14,7 +14,6 @@ def orderaction():
     chargeid = request.form.get('chargeid')
     secret = request.form.get('secret')
     productid = request.form.get('productid')
-    #phonenum = session['phonenum']
     phonenum = request.form.get('phonenum')
     if action:
         if spid and chargeid and secret and phonenum:

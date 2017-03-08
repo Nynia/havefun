@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 from app.utils.ftp import MyFTP
-
+import config
 def update_comics(id):
     login_url = 'http://www.icartoons.cn/index.php?m=member&c=index&a=login'
     # login
@@ -15,7 +15,7 @@ def update_comics(id):
         'dosubmit': '1'
     }
     r = s.post(login_url, data=payload)
-
+    print r.text
     # requests
     request_url = 'http://www.icartoons.cn/index.php?m=content&c=index&a=show&catid=25&id=%s' % id
     r = s.get(request_url)
@@ -26,7 +26,8 @@ def update_comics(id):
         if state == u'已完结':
             print id, state
             #return
-    myftp = MyFTP('202.102.41.224', 21, 'admin', 'admin123', '.')
+    myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
+    #myftp = MyFTP('61.160.185.51', 11145, 'jsgx', 'jsgx2017', '.')
     myftp.login()
     soup = BeautifulSoup(r.text, 'html.parser')
     for a_tag in soup.find_all('a'):
@@ -48,7 +49,7 @@ def update_comics(id):
                     target_dir = id + os.sep + episode
                     # download pics
                     # myftp.changewd('comic/20082903/123')
-                    myftp.uploadFiles(img_tag['src'], 'comic/'+id+'/'+episode, img_tag['id'][3:]+'.jpg')
+                    myftp.uploadFiles(img_tag['src'], 'comics/'+id+'/'+episode, img_tag['id'][3:]+'.jpg')
                     #with open(target_path, 'wb') as handle:
                     #    response = requests.get(img_tag['src'], stream=True)
                     #    for block in response.iter_content(1024):
