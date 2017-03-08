@@ -10,6 +10,8 @@ from decorators import jsonp
 def get_games_by_type():
     type = request.args.get('type')
     packageid = request.args.get('packageid')
+    category = request.args.get('category')
+
     if type and packageid:
         return jsonify({
             'code': '103',
@@ -17,7 +19,10 @@ def get_games_by_type():
             'data': None
         })
     elif type:
-        games = Game.query.filter_by(type=type).order_by(Game.star).all()
+        games = Game.query.filter_by(type=type)
+        if type == '2' and category:
+            games = games.filter_by(category=category).all()
+        games = games.order_by(Game.star).all()
     elif packageid:
         games = Game.query.filter_by(packageid=packageid).all()
     else:
@@ -27,6 +32,7 @@ def get_games_by_type():
         'message': 'success',
         'data': [g.to_json() for g in games]
     })
+
 
 @api.route('/games/<id>',methods=['GET'])
 @jsonp
