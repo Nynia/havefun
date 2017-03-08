@@ -9,8 +9,17 @@ from decorators import jsonp
 @jsonp
 def get_games_by_type():
     type = request.args.get('type')
-    if type:
+    packageid = request.args.get('packageid')
+    if type and packageid:
+        return jsonify({
+            'code': '103',
+            'message': 'params error',
+            'data': None
+        })
+    elif type:
         games = Game.query.filter_by(type=type).order_by(Game.star).all()
+    elif packageid:
+        games = Game.query.filter_by(packageid=packageid).all()
     else:
         games = Game.query.all()
     return jsonify({
