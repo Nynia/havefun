@@ -84,7 +84,6 @@ def package():
         #reading
         pass
 
-
 @main.route('/gamedetail',methods=['GET'])
 def gamedetail():
     id = request.args.get('id')
@@ -98,7 +97,7 @@ def comic():
     return render_template('cartoon.html',packages=packages)
 
 @main.route('/comicdetail',methods=['GET'])
-def comic():
+def comicdetail():
     pass
     #id = request.args.get('id')
     #return render_template('cartoon.html',packages=packages)
