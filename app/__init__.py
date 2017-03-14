@@ -43,7 +43,7 @@ def get_readings_session():
     data = {
         'phoneNum_input': '18118999630',
         'randomCode': '147976',
-        'pic_code': '5kne',
+        'pic_code': 'bgbg',
         'autoLogin': '1',
         'from': 'login',
     }
@@ -52,11 +52,11 @@ def get_readings_session():
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
     }
     _cookies = {
-        'JSESSIONID': '13E024599E8CBA4712192FD820FCC585'
+        'JSESSIONID': 'C9E5BBC28106F2AEC0B67F4988C6BFFF'
     }
     r = s.post(url, headers=headers, data=data, cookies=_cookies)
     r.encoding = 'utf-8'
     print r.text
     return s
 
-reading_session = get_readings_session()
+#reading_session = get_readings_session()

@@ -2,9 +2,10 @@
 a{text-decoration: none;color: #333333;}
 ul,li{list-style: none;}
 .clear{clear: both;}
-/*body{font-size: 1rem;}*/
-header{background: #f7d631;width: 100%;height: 50px;text-align: center;}
+body{width: 100%;overflow-x: hidden;}
+header{background: #f7d631;width: 100%;height: 50px;text-align: center;position: fixed;top: 0;display: block;z-index: 100;}
 header img{margin: 8px auto;}
+nav{margin-top: 50px;}
 nav ul li{float: left;width: calc(100vw / 6);line-height: 50px;text-align: center;}
 nav ul li a{width: calc(100vw / 6);display: inline-block;font-size: 1rem;}
 .game ul li:nth-child(3) a{color: #8dbeef;font-weight: bold;font-size: 1.25rem;}
@@ -26,7 +27,7 @@ nav li a img{vertical-align: middle;}
 /*.play_top a img{}*/
 .play_bottom{margin-top: 10px;}
 .play_bottom ul li{float: left;width:calc(100vw / 4);text-align: center;}
-.line img{margin-top: 10px;}
+.line{width: 100%;height: 14px;background: #eeeeee;}
 .recommend_top ul li{width: calc(100vw / 4);text-align: center;float: left;line-height: 40px;}
 .recommend_top ul li a{width: calc(100vw / 4);font-size: 1rem;} 
 .recommend_bottom ul li{float: left;text-align: center;height:129px;margin:10px 0 20px 0;position: relative;}
@@ -80,10 +81,10 @@ main{margin: 10px auto 0;}
 /*.watchs ul li img{height: 4rem;width: 6.25rem;}*/
 .watchs{margin-top: 10px;}
 .watchs ul{margin-left: 2vw;}
-.watchs ul li{float: left;width:calc(100vw / 4);text-align: center;margin: 0 2px;}
+.watchs ul li{float: left;width:23%;text-align: center;margin: 0 2px;}
 .watchs ul li:nth-child(4){width: 77px;margin-right: 0;}
-
 .watchs .column{margin-top: 20px;}
+@media  (min-width: 320px) and (max-width: 3750px){.watchs ul li img{width: 90%;height: 80%;}.watchs ul li:nth-last-child(1) img{height: 51px;}}
 /*控制基准html的大小*/
 
 html{font-size:62.5%;}
@@ -140,33 +141,37 @@ html{font-size:62.5%;}
 .role_play ul li a p:nth-child(3){top: 60px;font-size: 0.73rem;}
 
 /*超凡游戏包*/
-.package{background: url(../img/package.png)  center center;background-size: 100% 736px;height: 736px;}
-.bar_top{height: 50px;padding: 17px;}
-.super{width: 90%;margin: 0 auto;position: relative;}
+.package{background: url(../img/package.png) no-repeat center center;background-size: 100% 900px;}
+.bar_top{padding: 17px;position: fixed;top: 0;height: 50px;display: block;width: 100%;}
+.super{width: 90%;margin: 50px auto 0;position: relative;}
 .super_left{float: left;}
 .super_right{display: inline-block;color: #fff;line-height: 35px;position: absolute;right: 5%;height: 134px;}
-.super_right li:nth-child(1){font-size: 1.5rem;}
-.super a{padding: 0 10px;background: #fde000;border-radius: 10px;position: absolute;bottom: 0;right: 0;}
+.super_right li:nth-child(1){font-size: 1.38rem;}
+.super button{background: #fde000;border:1px solid #fde000;border-radius: 10px;width:72px;height:31px;position: absolute;bottom: 0;right: 0;margin: 0;}
 .summary{margin-top: 20px;color: #fff;padding: 17px;}
-.summary p:nth-child(1){font-size: 1.2rem;}
+/*详细收起*/
+#intro_short  p{text-overflow: -o-ellipsis-lastline;  overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-line-clamp: 2;  -webkit-box-orient: vertical; }
+.fly{font-size: 0.85rem!important;}
+dd a{color: #F7D631;}
+.summary p:nth-child(1){font-size: 1rem;}
 .summary p:nth-child(2){margin-top: 20px;}
 .style{margin-top: 0;}
-.style ul li{margin-top: 10px;text-align: center;float: left;width: 22.5%;}
-.style{margin-top: 0;}
-.style ul li{margin-top: 10px;text-align: center;float: left;width: 22.5%;}
-.style ul{margin-top: 10px;}
-.style ul li {margin: 5px 2px;}
+.style ul li{margin-top: 10px;text-align: center;float: left;width: 23.8%;}
+
+.style ul{margin: 10px 5px;text-align: center;}
+.style ul li {margin: 5px 2px;text-align: center;}
+.style ul li img{width: 79px;height: 78px;}
 @media (min-width: 320px) and (max-width: 375px){.super_left img{width: 80%;height: 80%;}.super_right{height: 90%;}}
 @media (min-width: 320px) and (max-width: 375px){.style li a img{width:90%;height: 90%;}}
 @media (min-width: 320px) and (max-width: 375px){.summary p:nth-child(2){font-size: 1.2rem;}}
-
-
+@media (min-width: 320px) and (max-width: 375px){.style ul li{width: 23.5%;height: 23.5%;}}
 /*极地雪球冒险*/
-.supers a{margin-top: 10px;right: auto;}
+.supers .download{margin-top: 10px;right: auto;color: #000;}
 .screenshots{margin-top: 20px;}
+.snow img{width: 365px;height: 219px;}
 .picture{padding: 17px 0 0 17px;}
-@media (min-width: 320px) and (max-width: 375px){.screenshots .snow{width: 90%;height: 90%;}}
-
+@media (min-width: 360px) and (max-width: 375px){.swiper-slide img{width: 310px;height: 200px;}}
+@media (min-width: 320px) and (max-width: 360px){.swiper-slide img{width: 280px;height: 200px;}}
 
 /*动漫页面*/
 .cartoon ul li:nth-child(1) a{color: #e9766f;font-weight: bold;font-size: 1.25rem;}
@@ -195,7 +200,7 @@ html{font-size:62.5%;}
 
 /*漫漫世界精品包*/
 #cartoon{background: url(../img/bg.png) no-repeat;}
-.detail{margin: 90px auto 0 auto;background: url(../img/white_bg.png) no-repeat;width: 92%;height: 662px;}
+.detail{margin: 140px auto 0 auto;background: url(../img/white_bg.png) no-repeat;width: 92%;height: 662px;}
 .detail_page{position: absolute;top: 70px;left:30px;width: 88%;}
 .detail_left{float: left;}
 .detail_right{margin-left: 180px;font-size: 0.86rem;}
@@ -233,8 +238,9 @@ html{font-size:62.5%;}
 .lists .open{background: #f00;}
 .lists .open span{color: #fff!important;}
 .lists li{border: 1px solid #f6b709;}
-.lists .all{background: #c64bf6;border: 1px solid #c64bf6;}
-.lists .all span{color: #fff;}
+.lists .ons{background: #c64bf6;border: 1px solid #c64bf6;}
+.lists .ons span{color: #fff;}
+.lists em{margin-left:5px;}
 .lists li:nth-child(2){border: 1px solid #f6b709;}
 .lists li:nth-child(2) span{color: #f6b709;}
 .lists li:nth-child(3){border: 1px solid #59bdfb;}
@@ -254,19 +260,56 @@ html{font-size:62.5%;}
 .close{background: url(../img/open.png) no-repeat;background-size: contain;}*/
 
 #book{margin-top: 20px;}
-#book ul li{width: 30%;text-align: center;float: left;}
+#book ul li{width: 33%;text-align: center;float: left;}
 #book ul li p{line-height: 30px;font-size: 0.9rem;color: #000;}
 @media (min-width:320px) and (max-width:375px){#book ul li img{width: 90%;height: 90%;}}
 
 /*阅读详情*/
 #read{background: url(../img/bga.png) no-repeat;color: #fff;}
-.books{text-align:left;position: absolute;right: 0;}
+.books{text-align:left;position: absolute;right: 5%;}
 .books ul li:nth-child(1){margin-left: -10px;line-height: 20px;}
 @media (min-width:320px) and (max-width:375px){.books_left img{width: 95%;height: 95%;}}
 .directory{width: 90%;margin: 0 auto;}
-.directory ul li{float: left;width: 15%;text-align: center;}
+.directory ul li{float: left;width: 19%;text-align: center;}
 .directory ul li:nth-child(2),.directory ul li:nth-child(3){border-right: 1px solid #fff;}
 .directory ul li img{padding: 0 5px;}
-table{width: 90%;border: 1px solid #fff;text-align: center;margin-top: 10px;border-collapse: collapse;}
+table{width: 95%;border: 1px solid #fff;text-align: center;margin: 10px auto;border-collapse: collapse;}
 tr{height: 22px;}
-td{border: 1px solid #fff;height: 20px;}
+td{border: 1px solid #fff;height: 50px;}
+
+
+/*订购*/
+#main,#mains{position: absolute;left: 0;top: 0;height: 100%;width: 100%;background: rgba(10,10,10,0.6);display: none;text-align: left;}
+
+.order{width: 300px;height: 200px;text-align: center;background: #fff;position: absolute;left: calc(50% - 150px);top: calc(50% - 100px);}
+.order_top{color: #2d6efc;line-height: 50px;border-bottom: 1px solid #2d6efc;}
+.order_bottom{margin-top: 20px;}
+button{width: 100px;height: 40px;margin: 30px 30px 0 10px;background: #2d6efc;border: 1px solid #2d6efc;border-radius: 10px;color: #fff;}
+.order img{margin-top: 50px;}
+
+
+/*动漫详情页*/
+.super_right a{padding: 0 40px;background: #ffe000;border-radius: 10px;}
+.directory ul li:nth-child(4){padding-left: 5px;}
+.directory ul li:nth-child(1),.directory ul li:nth-child(2){width: 12%;}
+.directory ul li:nth-child(2){color: #ffe000;}
+.directory ul li img{vertical-align: middle;}
+.chapter{color: #fff;width: 90%;margin:20px auto;}
+.chapter ul li{width: 23%;height: 10%;line-height:35px;text-align: center;float: left;border: 1px solid #fff;margin:5% 5% ;}
+.chapter li a{color: #fff;}
+
+
+/*动漫漫画*/
+.cartoon_detail{border-bottom: 1px solid #e2e2e2;background: #fefefe;}
+.cartoon_detail span{text-align: center;position: absolute;left: calc(50% - 33px);}
+.comic{margin: 50px 0;text-align: center;}
+.foot{position: fixed;bottom: 0;height: 50px;background: #FEFEFE;border-top: 1px solid #E2E2E2;display: block;width: 100%;}
+.foot ul:nth-child(1) li{float: left;width: 50%;line-height: 50px;text-align: center;}
+.foot ul li:nth-child(1) a{border-right: 1px solid #d3d3d3;padding: 0 50px;}
+.foot ul li a{color: #989898;}
+#chapter{position: absolute;display:none;color: #000;bottom: 50px;left: 40px;background: #ffe739;text-align: center;}
+#chapter  li{line-height: 40px;width: 100px;}
+.say img{width: 17px;height: 17px;margin-left: 10px;}
+@media (min-width:320px) and (max-width:375px){.comic img{width: 90%;height: 90%;}}
+/*已订购样式*/
+.super  .ordered{background: #fff;color: #000;border:1px solid #fff;}

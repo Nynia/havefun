@@ -52,7 +52,7 @@ class Comic(db.Model):
     brief = db.Column(db.String(255))
     author = db.Column(db.String(50))
     category = db.Column(db.String(30))
-    hits = db.Column(db.Integer)
+    hits = db.Column(db.String(10))
     state = db.Column(db.String(1))
     cover = db.Column(db.String(255))
     curchapter = db.Column(db.Integer)
@@ -220,8 +220,67 @@ class OrderHistroy(db.Model):
         }
         return json_post
 
+class Reading(db.Model):
+    __tablename__ = 'reading'
+    id = db.Column(db.Integer,primary_key=True)
+    bookid = db.Column(db.String(30))
+    packageid = db.Column(db.String(30))
+    name = db.Column(db.String(50))
+    author = db.Column(db.String(50))
+    state = db.Column(db.String(1))
+    hits = db.Column(db.Integer)
+    brief = db.Column(db.String(255))
+    cover = db.Column(db.String(255))
+    curchapter = db.Column(db.Integer)
+    freechapter = db.Column(db.Integer)
+    createtime = db.Column(db.String(14))
+    recentupdatetime = db.Column(db.String(14))
+    modifiedtime = db.Column(db.String(14))
 
+    def __repr__(self):
+        return '<Reading %r>' % self.name
 
+    def to_json(self):
+        json_post = {
+            'id':self.id,
+            'bookid':self.bookid,
+            'packageid':self.packageid,
+            'name':self.name,
+            'author':self.author,
+            'state':self.state,
+            'hits':self.hits,
+            'brief':self.brief,
+            'cover':self.cover,
+            'curchapter':self.curchapter,
+            'freechapter':self.freechapter,
+            'createtime':self.createtime,
+            'recentupdatetime':self.recentupdatetime,
+            'modifiedtime':self.modifiedtime
+        }
+        return json_post
+
+class Chapter(db.Model):
+    __tablename__ = 'chapter'
+    id = db.Column(db.Integer, primary_key=True)
+    chapterid = db.Column(db.Integer)
+    chaptername = db.Column(db.String(255))
+    bookid = db.Column(db.String(30))
+    content = db.Column(db.TEXT)
+    createtime = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<Chapter %r>' % self.chapterid
+
+    def to_json(self):
+        json_post = {
+            'id':self.id,
+            'chapterid':self.chapterid,
+            'chaptername':self.chaptername,
+            'bookid':self.bookid,
+            'content':self.bookid,
+            'createtime':self.createtime
+        }
+        return json_post
 
 
 

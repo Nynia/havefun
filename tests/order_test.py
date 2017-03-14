@@ -25,7 +25,7 @@ def fun1():
     print json_result
 
 def func2():
-    url = 'http://127.0.0.1:5000/api/v1.0/orders?action=subscribe'
+    url = 'http://221.228.17.87/api/v1.0/orders?action=subscribe'
     data = {
         'spid':'35101296',
         'chargeid':'1971',

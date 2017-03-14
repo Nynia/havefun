@@ -3,10 +3,13 @@ from app import db
 from flask import request,jsonify
 from app.models import Comic
 from datetime import datetime
+from decorators import jsonp
 
 @api.route('/comics', methods=['GET'])
-def get_all_comics():
-   comics = Comic.query.all()
+@jsonp
+def get_comics_by_package():
+   packageid = request.args.get('packageid')
+   comics = Comic.query.filter_by(packageid=packageid).all()
    return jsonify({
         'code':'0',
         'message':'success',
@@ -14,6 +17,7 @@ def get_all_comics():
    })
 
 @api.route('/comics/<id>', methods=['GET'])
+@jsonp
 def get_comic_by_id(id):
     comic = Comic.query.get(int(id))
     return jsonify({
@@ -23,12 +27,13 @@ def get_comic_by_id(id):
     })
 
 @api.route('/comics', methods=['POST'])
+@jsonp
 def add_comic():
-    comicid = request.form['comicid']
-    comic = Comic.query.get(comicid)
+    id = request.form['id']
+    comic = Comic.query.get(id)
     if comic == None:
         comic = Comic()
-        comic.id = comicid
+        comic.id = id
         for key, value in request.form.items():
             if hasattr(comic, key):
                 setattr(comic, key, value)
@@ -52,6 +57,7 @@ def add_comic():
         })
 
 @api.route('/comics/<id>', methods=['PUT'])
+@jsonp
 def update_comic_by_id(id):
     comic = Comic.query.get(int(id))
     if comic:
@@ -73,6 +79,7 @@ def update_comic_by_id(id):
             'data':None
         })
 @api.route('/comics/<id>', methods=['DELETE'])
+@jsonp
 def delete_comic_by_id(id):
     comic = Comic.query.get(int(id))
     if comic:

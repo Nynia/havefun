@@ -11,7 +11,7 @@ import config
 from app import db
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package
+from app.models import Package,OrderRelation
 
 @main.route('/',methods=['GET', 'POST'])
 def index():
@@ -66,10 +66,20 @@ def package():
     id = request.args.get('id')
     package = Package.query.get(int(id))
     games = Game.query.filter_by(packageid=id).all()
-    return  render_template('package.html',package=package,games=games)
+    ordered = False
+    if not current_user.is_anonymous:
+        if package.productid in session['ordered']:
+            ordered = True
+    return  render_template('package.html',package=package,games=games,flag=ordered)
 
 @main.route('/gamedetail',methods=['GET'])
 def gamedetail():
     id = request.args.get('id')
     game = Game.query.get(int(id))
     return render_template('gamedetail.html',game=game)
+
+@main.route('/comic',methods=['GET'])
+def comic():
+    packages = Package.query.filter_by(type=1).all()
+    print packages
+    return render_template('cartoon.html',packages=packages)
