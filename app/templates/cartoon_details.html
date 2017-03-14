@@ -2,34 +2,68 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>动漫</title>
+		<title>动漫详情</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="css/style.css" />
 		<script src="libs/jquery-3.1.0.js"></script>
 	</head>
-	<body>
-		<div class="bar_top cartoon_detail">
-			<a href="cartoon_description.html"><img src="img/right.png" alt="" /></a>
-			<span>第146话</span>
+	<body id="read">
+		<div class="bar_top">
+			<a href="package_comic.html"><img src="img/back.png" alt="" /></a>
 		</div>
-		<div class="comic">
-			<img src="img/comic.jpg" alt="" />
-			<img src="img/comic.jpg" alt="" />
+		<div class="super">
+			<div class="super_left books_left">
+				<img src="img/pages.jpg" alt="五月潮汐" />
+			</div>
+			<div class="super_right books">
+				<ul>
+					<li>《舞动乾坤》</li>
+					<li>作者：<span>xxxx</span></li>
+					<li>状态：<span>更新至154集</span></li>
+					<li>题材：<span>热血</span></li>
+					<li>人气: <span>2699万</span></li>
+					<li><a href="#">开始阅读</a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>  
+        <div class="summary">
+			<p>内容概括：</p>
+			<dd id="intro_short">
+			    <p class="fly">&#x3000《飞翔的喵》是一款史上最虐心的游戏，清新可爱Q版风格的，集多种萌系元素汇集一起，水天交接的浩瀚蔚蓝。各种搞怪风景让你乐在其中。独特的玩法，新颖的创意，玩家需要操作小猫进行飞翔遨游，比拼谁能够飞的更远，在控制适当飞行高度的同时，还要躲避前方迎面而来的各种阻碍。飞翔的小鸟升级版哦！</p>
+			    <a href="javascript:void(0)" onclick="$('#intro_short').hide();$('#intro_long').show();return false;" class="data_more">详细</a>
+			</dd>
+            <dd id="intro_long" style="display:none">
+			    <p class="fly">&#x3000《飞翔的喵》是一款史上最虐心的游戏，清新可爱Q版风格的，集多种萌系元素汇集一起，水天交接的浩瀚蔚蓝。各种搞怪风景让你乐在其中。独特的玩法，新颖的创意，玩家需要操作小猫进行飞翔遨游，比拼谁能够飞的更远，在控制适当飞行高度的同时，还要躲避前方迎面而来的各种阻碍。飞翔的小鸟升级版哦！<a href="javascript:void(0)" onclick="$('#intro_short').show();$('#intro_long').hide();return false;">收起</a></p>    
+            </dd>
+        </div>    
+		<div class="directory">
+			<ul>
+				<li>目录</li>
+				<li>1-18</li>
+				<li>19-37</li>
+				<li>38-55<img src="img/a.png" alt=" "></li>
+				<li><img src="img/s.png" alt="" />升序</li>
+				<li><img src="img/j.png" alt="" />降序</li>
+			</ul>
+			<div class="clear"></div>
+			
 		</div>
-		
-	    <div class="foot">
-	    	<ul>
-	    		<li class="say" onclick="ss()"><a href="#">第146话<img src="img/arrows.png" class="photo" alt="" /></a></li>
-	    		<li><a href="#">下一页</a></li>
-	    	</ul>
-	    	<ul id="chapter">
-	    		<li>第151话</li>
-	    		<li>第150话</li>
-	    		<li>第149话</li>
-	    		<li>第148话</li>
-	    		<li>第147话</li>
-	    	</ul>
-	    </div>
+		<div class="chapter">
+				<ul>
+					<li><a href="cartoon_browse.html">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+					<li><a href="#">第1章</a></li>
+				</ul>
+			</div>
 	</body>
 </html>
-<script src="js/cartoon_details.js"></script>

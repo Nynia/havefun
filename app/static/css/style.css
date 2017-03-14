@@ -179,6 +179,7 @@ dd a{color: #F7D631;}
 .world ul li{float: left;width: 46%;margin: 0 2%;}
 @media (min-width: 320px) and (max-width: 375px){.world ul li .pictures{width: 95%;height: 95%;}}
 .world ul li{position: relative;}
+.world ul li a>img{width: 100%;}
 .world ul li div{position: absolute;bottom: 0;top:10px;color: #fff;text-align: center;width: 100%;line-height: 30px;}
 .world ul li div span:nth-child(1){border-bottom: 1px solid #fff;font-size: 0.96rem;padding: 5px;}
 .world ul li div p{font-size: 0.96rem;line-height: 30px;}
