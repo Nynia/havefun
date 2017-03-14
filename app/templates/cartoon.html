@@ -1,71 +1,82 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>动漫</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" href="../static/css/style.css" />
-	</head>
-	<body>
-		<header>
-			<img src="../static/img/logo.png" alt="" />
-		</header>
-		<nav class="cartoon">
-			<ul>
-				<li><a href="cartoon.html">动漫</a></li>
-				<li><a href="#">视频</a></li>
-				<li><a href="game.html">游戏</a></li>
-				<li><a href="reading.html">阅读</a></li>
-				<li><a href="#">音乐</a></li>
-				<li><a href="#"><img src="../static/img/sing.png" alt="" /></a></li>
-			</ul>
-			<div class="clear"></div>
-		</nav>
-		 <div class="banner slide">
-	    	<ul>
-			    <li><img src="../static/img/cartoon.png" alt="" /></li>
-			    <!--<li><img src="img/banner2.png" alt="" /></li>
-			    <li><img src="img/banner3.png" alt="" /></li>-->
-			</ul>
-			<!--<section class="icon">
-				<span class="circle"></span>
-				<span></span>
-				<span></span>
-			</section>-->
-	    </div>
-	    <div class="world">
-	    	<ul>
-                {% for p in packages %}
-                   <a href="cartoon_detail.html">
-	    				<img src="{{ p.img }}" alt="" class="pictures" />
-		    			<div>
-		    				 <span>{{ p.productname }}</span>
-		    				 <p>￥{{ p.price }}/月</p>
-		    				 <span><img src="../static/img/subscribe.png" alt="" />2020人</span>
-		    				 <span>查看详情</span>
-		    			</div>
-	    			</a>
-                {% endfor %}
-	    	</ul>
-	    	<div class="clear"></div>
-	    </div>
-	    <div class="defeat">
-	    	<img src="../static/img/defeat.png" alt="" />
-	    	<div class="thumb"><span>1569</span><img src="../static/img/starts.png" alt="" /></div>
-	    	<div class="update">
-	    		<span>斗破苍穹</span>
-	    		<span>更新至193话</span>
-	    		<span><img src="../static/img/play.png" alt="" />17万</span>
-	    	</div>
-	    </div>
-	    <footer>
-	    	<ul>
-	    		<li><a href=""><div></div><p>首页</p></a></li>
-	    		<li><a href=""><div></div><p>发现</p></a></li>
-	    		<li><a href=""><div></div><p>关注</p></a></li>
-	    		<li><a href="my.html"><div></div><p>我的</p></a></li>
-	    	</ul>
-	    	<div class="clear"></div>
-	    </footer>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <title>动漫</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+</head>
+<body>
+<header>
+    <img src="../static/img/logo.png" alt=""/>
+</header>
+<nav class="cartoon">
+    <ul>
+        <li><a href="cartoon.html">动漫</a></li>
+        <li><a href="#">视频</a></li>
+        <li><a href="game.html">游戏</a></li>
+        <li><a href="reading.html">阅读</a></li>
+        <li><a href="#">音乐</a></li>
+        <li><a href="#"><img src="../static/img/sing.png" alt=""/></a></li>
+    </ul>
+    <div class="clear"></div>
+</nav>
+<div class="banner slide">
+    <ul>
+        <li><img src="../static/img/cartoon.png" alt=""/></li>
+        <!--<li><img src="img/banner2.png" alt="" /></li>
+        <li><img src="img/banner3.png" alt="" /></li>-->
+    </ul>
+    <!--<section class="icon">
+        <span class="circle"></span>
+        <span></span>
+        <span></span>
+    </section>-->
+</div>
+<div class="world">
+    <ul>
+        {% for p in packages %}
+            <li>
+                <a href="cartoon_detail.html">
+                    <img src="{{ p.img }}" alt="" class="pictures"/>
+                    <div>
+                        <span>{{ p.productname }}</span>
+                        <p>￥{{ p.price }}/月</p>
+                        <span><img src="../static/img/subscribe.png" alt=""/>2020人</span>
+                        <span>查看详情</span>
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="clear"></div>
+</div>
+<div class="defeat">
+    <img src="../static/img/defeat.png" alt=""/>
+    <div class="thumb"><span>1569</span><img src="../static/img/starts.png" alt=""/></div>
+    <div class="update">
+        <span>斗破苍穹</span>
+        <span>更新至193话</span>
+        <span><img src="../static/img/play.png" alt=""/>17万</span>
+    </div>
+</div>
+<footer>
+    <ul>
+        <li><a href="">
+            <div></div>
+            <p>首页</p></a></li>
+        <li><a href="">
+            <div></div>
+            <p>发现</p></a></li>
+        <li><a href="">
+            <div></div>
+            <p>关注</p></a></li>
+        <li><a href="my.html">
+            <div></div>
+            <p>我的</p></a></li>
+    </ul>
+    <div class="clear"></div>
+</footer>
+</body>
 </html>
