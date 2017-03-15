@@ -87,12 +87,16 @@ def orderaction():
 @api.route('/orders/<phonenum>', methods=['GET'])
 def checkstatus(phonenum):
     productid = request.args.get('productid')
-    relation = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(productid=productid).first()
-    if relation:
+    relations = OrderRelation.query.filter_by(phonenum=phonenum)
+    if productid:
+        relations = relations.filter_by(productid=productid).all()
+    else:
+        relations = relations.all()
+    if relations:
         return jsonify({
             'code': '0',
             'message': 'success',
-            'data': relation.to_json()
+            'data': [r.to_json() for r in relations]
         })
     else:
         return jsonify({
@@ -101,12 +105,4 @@ def checkstatus(phonenum):
             'data': None
         })
 
-@api.route('/orders/records/<phonenum>', methods=['GET'])
-def getrecordbyphone(phonenum):
-    records = OrderHistroy.query.filter_by(phonenum=phonenum).order_by(OrderHistroy.createtime).all()
-    return jsonify({
-        'code': '0',
-        'message': 'success',
-        'data': [r.to_json() for r in records]
-    })
 

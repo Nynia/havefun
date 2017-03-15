@@ -314,3 +314,6 @@ button{width: 100px;height: 40px;margin: 30px 30px 0 10px;background: #2d6efc;bo
 @media (min-width:320px) and (max-width:375px){.comic img{width: 90%;height: 90%;}}
 /*已订购样式*/
 .super  .ordered{background: #fff;color: #000;border:1px solid #fff;}
+
+.list ul li a>img{width: 100%;background-color: rgba(0,0,0,0.8);}
+.list ul li a>img{width: 100%;}

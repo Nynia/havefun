@@ -33,7 +33,10 @@ class MyFTP:
             print 'change dir to %s' % self.remotedir
         except Exception:
             print 'change dir error'
-
+    def cwd(self,dir):
+        self.ftp.cwd(dir)
+    def dir(self):
+        self.ftp.dir()
     def downloadFile(self):
         pass
     def uploadFiles(self, localpath, remotepath, targetname=''):

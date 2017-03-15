@@ -244,4 +244,4 @@ def readings_job():
 
 
 # readings_job()
-comic_init()
+#comic_init()

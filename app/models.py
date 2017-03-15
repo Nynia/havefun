@@ -182,8 +182,8 @@ class OrderRelation(db.Model):
     productid = db.Column(db.String(21))
     phonenum = db.Column(db.String(11))
     status = db.Column(db.String(1))
-    starttime = db.Column(db.String(14))
-    endtime = db.Column(db.String(14))
+    ordertime = db.Column(db.String(14))
+    canceltime = db.Column(db.String(14))
 
     def __repr__(self):
         return '<OrderRelation %r>' % self.productid
@@ -194,8 +194,8 @@ class OrderRelation(db.Model):
             'productnid':self.productid,
             'phonenum':self.phonenum,
             'status':self.status,
-            'starttime':self.starttime,
-            'endtime':self.endtime
+            'ordertime':self.ordertime,
+            'canceltime':self.canceltime
         }
         return json_post
 

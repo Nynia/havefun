@@ -65,17 +65,17 @@ def game():
 def package():
     id = request.args.get('id')
     package = Package.query.get(int(id))
+    ordered = False
     if not current_user.is_anonymous:
         if package.productid in session['ordered']:
             ordered = True
     if package.type == '1':
         #comic
-        comics = Comic.query.filger_by(packageid=id).all()
+        comics = Comic.query.filter_by(packageid=id).all()
         return render_template('package_comic.html', package=package, comics=comics, flag=ordered)
     elif package.type == '2':
         #game
         games = Game.query.filter_by(packageid=id).all()
-        ordered = False
         return render_template('package_game.html', package=package, games=games, flag=ordered)
     elif package.type == '3':
         #music
@@ -88,7 +88,7 @@ def package():
 def gamedetail():
     id = request.args.get('id')
     game = Game.query.get(int(id))
-    return render_template('gamedetail.html',game=game)
+    return render_template('game_detail.html',game=game)
 
 @main.route('/comic',methods=['GET'])
 def comic():
@@ -98,7 +98,14 @@ def comic():
 
 @main.route('/comicdetail',methods=['GET'])
 def comicdetail():
-    pass
+    id = request.args.get('id')
+    comic = Comic.query.get(int(id))
     #id = request.args.get('id')
-    #return render_template('cartoon.html',packages=packages)
+    return render_template('cartoon_detail.html',comic=comic)
+
+@main.route('/comicbrowse/<id>',methods=['GET'])
+def comicbrowse(id):
+    chapter = request.args.get('chapter')
+    myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
+    myftp.login()
 
