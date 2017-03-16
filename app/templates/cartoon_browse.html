@@ -48,36 +48,47 @@
     console.log(bookid);
     if (cur + 2 <= sum) {
         var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur + 2).toString() + '话');
-        liNode.appendChild(textNode);
-        liNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur + 2).toString();
+        aNode.appendChild(textNode);
+        aNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur + 2).toString();
+        liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
     if (cur + 1 <= sum) {
         var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur + 1).toString() + '话');
-        liNode.appendChild(textNode);
-        liNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur + 1).toString();
+        aNode.appendChild(textNode);
+        aNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur + 1).toString();
+        liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
 
     var liNode = document.createElement('li');
+    var aNode = document.createElement('a');
     var textNode = document.createTextNode('第' + cur.toString() + '话');
-    liNode.appendChild(textNode);
+    aNode.appendChild(textNode);
+    aNode.href = '#';
+    liNode.appendChild(aNode);
     ulNode.appendChild(liNode);
 
-    if (cur - 1 >= 0) {
+    if (cur - 1 > 0) {
         var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur - 1).toString() + '话');
-        liNode.appendChild(textNode);
-        liNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur - 1).toString();
+        aNode.appendChild(textNode);
+        aNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur - 1).toString();
+        liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
-    if (cur - 2 >= 0) {
+    if (cur - 2 > 0) {
         var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur - 2).toString() + '话');
-        liNode.appendChild(textNode);
-        liNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur - 2).toString();
+        aNode.appendChild(textNode);
+        aNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur - 2).toString();
+        liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
 </script>
