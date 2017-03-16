@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="robots" content="index,follow">
-	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
-	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-	    <meta name="msapplication-tap-highlight" content="no">
-		<title>动漫</title>
-		<meta name="keywords" content="">
-        <meta name="description" content="">
-		<link rel="stylesheet" href="../static/css/style.css" />
-		<script src="../static/libs/jquery-3.1.0.js"></script>
-	</head>
-	<body>
-		<div class="bar_top cartoon_detail">
-			<a href="cartoon_description.html"><img src="../static/img/right.png" alt="" /></a>
-			<span>第146话</span>
-		</div>
-		<div class="comic">
-            {% for m in imgs %}
-			<img src="http://221.228.17.87/res/+{{ m }}" alt="" />
-            {% endfor %}
-		</div>
-		
-	    <div class="foot">
-	    	<ul>
-	    		<li class="say" onclick="ss()"><a href="#">第146话<img src="../static/img/arrows.png" class="photo" alt="" /></a></li>
-	    		<li><a href="#">下一页</a></li>
-	    	</ul>
-	    	<ul id="chapter">
-	    		<li>第151话</li>
-	    		<li>第150话</li>
-	    		<li>第149话</li>
-	    		<li>第148话</li>
-	    		<li>第147话</li>
-	    	</ul>
-	    </div>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>动漫</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <script src="../static/libs/jquery-3.1.0.js"></script>
+</head>
+<body>
+<div class="bar_top cartoon_detail">
+    <a href="cartoon_description.html"><img src="../static/img/right.png" alt=""/></a>
+    <span>第146话</span>
+</div>
+<div class="comic">
+    {% for u in imglist %}
+        <img src="http://221.228.17.87/res+{{ u }}" alt=""/>
+    {% endfor %}
+</div>
+
+<div class="foot">
+    <ul>
+        <li class="say" onclick="ss()"><a href="#">第146话<img src="../static/img/arrows.png" class="photo" alt=""/></a>
+        </li>
+        <li><a href="#">下一页</a></li>
+    </ul>
+    <ul id="chapter">
+        <li>第151话</li>
+        <li>第150话</li>
+        <li>第149话</li>
+        <li>第148话</li>
+        <li>第147话</li>
+    </ul>
+</div>
+</body>
 </html>
 <script src="../static/js/cartoon_details.js"></script>
 <script src="../static/js/font.js"></script>
