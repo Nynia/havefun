@@ -44,13 +44,7 @@
 <script src="../static/js/cartoon_details.js"></script>
 <script src="../static/js/font.js"></script>
 <script>
-    function GetQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null)return unescape(r[2]);
-        return null;
-    }
-    var cur = GetQueryString('chapter');
+    var cur = {{ cur }};
     var sum = {{ len }};
     console(cur);
     console(sum);

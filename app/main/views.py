@@ -110,5 +110,5 @@ def comicbrowse(id):
     filelist = myftp.listfiles('/comics'+'/'+id+'/'+chapter)
     filelist = ['/comics'+'/'+id+'/'+chapter+'/'+str(i+1)+'.jpg' for i in range(len(filelist))]
     print filelist
-    return render_template('cartoon_browse.html',imglist=filelist,len=len(filelist))
+    return render_template('cartoon_browse.html',imglist=filelist,cur=chapter,len=len(filelist))
 
