@@ -32,11 +32,6 @@
         <li><a href="#">下一页</a></li>
     </ul>
     <ul id="chapter">
-        <li>第151话</li>
-        <li>第150话</li>
-        <li>第149话</li>
-        <li>第148话</li>
-        <li>第147话</li>
     </ul>
 </div>
 </body>
@@ -48,5 +43,25 @@
     var sum = {{ len }};
     console(cur);
     console(sum);
+    var ulNode = document.querySelector('#chapter ul');
+    var url = window.location.href;
+    var loc = url.substring(url.lastIndexOf('/')+1, url.length);
+    console.log(loc);
+    console.log(url);
+    if (cur+2 <= sum) {
+        var liNode = document.createElement('li');
+        var textNode = document.createTextNode('');
+        liNode.appendChild(textNode);
+        //liNode.href = 'comicdescription?id=200103364';
+        ulNode.appendChild(liNode);
+    }
+    if (cur+1 <= sum) {
 
+    }
+    if (cur-1 >= 0) {
+
+    }
+    if (cur-2 >= 0) {
+
+    }
 </script>
