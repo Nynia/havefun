@@ -12,6 +12,7 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="../static/css/style.css"/>
     <script src="../static/libs/jquery-3.1.0.js"></script>
+
 </head>
 <body>
 <div class="bar_top cartoon_detail">
@@ -42,3 +43,16 @@
 </html>
 <script src="../static/js/cartoon_details.js"></script>
 <script src="../static/js/font.js"></script>
+<script>
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)return unescape(r[2]);
+        return null;
+    }
+    var cur = GetQueryString('chapter');
+    var sum = {{ imglist.length }};
+    console(cur);
+    console(sum);
+
+</script>
