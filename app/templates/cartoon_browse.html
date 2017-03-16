@@ -44,8 +44,7 @@
     var ulNode = document.querySelector('#chapter ul');
     var url = window.location.href;
     var bookid = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
-    console.log(loc);
-    console.log(url);
+    console.log(bookid);
     if (cur + 2 <= sum) {
         var liNode = document.createElement('li');
         var textNode = document.createTextNode('第' + (cur + 2).toString() + '话');
