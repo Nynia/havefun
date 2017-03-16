@@ -107,8 +107,8 @@ def comicbrowse(id):
     chapter = request.args.get('chapter')
     myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
     myftp.login()
-    filelist = myftp.listfiles('/comics'+id)
-    filelist = ['/comics'+id+'/'+item for item in filelist]
+    filelist = myftp.listfiles('/comics'+'/'+id)
+    filelist = ['/comics'+'/'+id+'/'+item for item in filelist]
     print filelist
     return render_template('cartoon_browse.html',imgs=filelist)
 
