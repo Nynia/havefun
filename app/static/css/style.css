@@ -308,9 +308,10 @@ button{width: 100px;height: 40px;margin: 30px 30px 0 10px;background: #2d6efc;bo
 .comic{margin: 50px auto;text-align: center;width: 90%;}
 .comic img{width: 100%;}
 .foot{position: fixed;bottom: 0;height: 50px;background: #FEFEFE;border-top: 1px solid #E2E2E2;display: block;width: 100%;}
-.foot ul:nth-child(1) li{float: left;width: 50%;line-height: 50px;text-align: center;}
+.foot #chapters:nth-child(1) li{float: left;width: 50%;line-height: 50px;text-align: center;}
 .foot ul li:nth-child(1) a{border-right: 1px solid #d3d3d3;padding: 0 50px;}
 .foot ul li a{color: #989898;}
+#chapter a{color: #000;}
 #chapter{position: absolute;display:none;color: #000;bottom: 50px;left: 40px;background: #ffe739;text-align: center;}
 #chapter  li{line-height: 40px;width: 100px;}
 .say img{width: 17px;height: 17px;margin-left: 10px;}
