@@ -17,7 +17,7 @@
 <body>
 <div class="bar_top cartoon_detail">
     <a href="cartoon_description.html"><img src="../static/img/right.png" alt=""/></a>
-    <span>第146话</span>
+    <span>第{{ cur }}话</span>
 </div>
 <div class="comic">
     {% for u in imglist %}
@@ -27,7 +27,7 @@
 
 <div class="foot">
     <ul id="chapters">
-        <li class="say" onclick="ss()"><a href="#">第146话<img src="../static/img/arrows.png" class="photo" alt=""/></a>
+        <li class="say" onclick="ss()"><a href="#">第{{ cur }}话<img src="../static/img/arrows.png" class="photo" alt=""/></a>
         </li>
         <li><a href="#">下一页</a></li>
     </ul>
@@ -93,7 +93,7 @@
         ulNode.appendChild(liNode);
     }
     if (cur < sum) {
-        var nexta = $('.foot a').eq(2);
+        var nexta = $('.foot a').eq(1);
         nexta.attr('href','/comicbrowse/' + bookid + '?chapter=' + (cur + 1).toString());
     }
 </script>
