@@ -43,23 +43,41 @@
     var sum = {{ len }};
     var ulNode = document.querySelector('#chapter ul');
     var url = window.location.href;
-    var loc = url.substring(url.lastIndexOf('/')+1, url.length);
+    var bookid = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
     console.log(loc);
     console.log(url);
-    if (cur+2 <= sum) {
+    if (cur + 2 <= sum) {
         var liNode = document.createElement('li');
-        var textNode = document.createTextNode('');
+        var textNode = document.createTextNode('第' + (cur + 2).toString() + '话');
         liNode.appendChild(textNode);
-        //liNode.href = 'comicdescription?id=200103364';
+        liNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur + 2).toString();
         ulNode.appendChild(liNode);
     }
-    if (cur+1 <= sum) {
-
+    if (cur + 1 <= sum) {
+        var liNode = document.createElement('li');
+        var textNode = document.createTextNode('第' + (cur + 1).toString() + '话');
+        liNode.appendChild(textNode);
+        liNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur + 1).toString();
+        ulNode.appendChild(liNode);
     }
-    if (cur-1 >= 0) {
 
+    var liNode = document.createElement('li');
+    var textNode = document.createTextNode('第' + cur.toString() + '话');
+    liNode.appendChild(textNode);
+    ulNode.appendChild(liNode);
+
+    if (cur - 1 >= 0) {
+        var liNode = document.createElement('li');
+        var textNode = document.createTextNode('第' + (cur - 1).toString() + '话');
+        liNode.appendChild(textNode);
+        liNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur - 1).toString();
+        ulNode.appendChild(liNode);
     }
-    if (cur-2 >= 0) {
-
+    if (cur - 2 >= 0) {
+        var liNode = document.createElement('li');
+        var textNode = document.createTextNode('第' + (cur - 2).toString() + '话');
+        liNode.appendChild(textNode);
+        liNode.href = '/comicdescription/' + bookid + '?chapter=' + (cur - 2).toString();
+        ulNode.appendChild(liNode);
     }
 </script>
