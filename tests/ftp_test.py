@@ -29,7 +29,8 @@ class MyFTP:
             print 'change dir to %s' % self.remotedir
         except Exception:
             print 'change dir error'
-
+    def dir(self, dirname):
+        return self.ftp.nlst(dirname)
     def downloadFile(self):
         pass
     def uploadFiles(self, localpath, remotepath):
@@ -52,5 +53,6 @@ class MyFTP:
                 self.ftp.cwd(dir)
 
 if __name__ == "__main__":
-    myftp = MyFTP('127.0.0.1',21,'jsgx','jsgx@2017','/')
-    myftp.uploadFiles('/root/install.log','install.log')
+    myftp = MyFTP('61.160.185.51',11145,'jsgx','jsgx2017','/')
+    myftp.login()
+    print myftp.dir('/111')

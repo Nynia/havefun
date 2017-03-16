@@ -96,16 +96,19 @@ def comic():
     print packages
     return render_template('cartoon.html',packages=packages)
 
-@main.route('/comicdetail',methods=['GET'])
+@main.route('/comicdescription',methods=['GET'])
 def comicdetail():
     id = request.args.get('id')
     comic = Comic.query.get(int(id))
-    #id = request.args.get('id')
-    return render_template('cartoon_detail.html',comic=comic)
+    return render_template('cartoon_description.html',comic=comic)
 
 @main.route('/comicbrowse/<id>',methods=['GET'])
 def comicbrowse(id):
     chapter = request.args.get('chapter')
     myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
     myftp.login()
+    filelist = myftp.listfiles('/comics'+id+'/'+chapter)
+    filelist = ['/comics'+id+'/'+item for item in filelist]
+    print filelist
+    return render_template('cartoon_browse.html',imgs=filelist)
 

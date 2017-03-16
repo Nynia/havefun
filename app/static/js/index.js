@@ -57,7 +57,7 @@ $.ajax({
 		for(var postId = 0;postId<data.data.length;postId++){
 			$("#package ul li")[postId].onclick = function(){
 				var id=$(this).attr("id")
-				location.href="package_game.html/#"+id
+				location.href="package.html/#"+id	
 		
 			}
 		}

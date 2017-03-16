@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
 	<head>
 		<meta charset="UTF-8">
-		<title>{{ package.name }}</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="robots" content="index,follow">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+	    <meta name="msapplication-tap-highlight" content="no">
+		<title>{{ package.packagename }}</title>
+		<meta name="keywords" content="">
+        <meta name="description" content="">
 		<link rel="stylesheet" href="../static/css/style.css" />
 	</head>
 	<body id="cartoon">
 		  <div class="bar_top">
-			<a href="cartoon"><img src="../static/img/back.png" alt="" /></a>
+			<a href="cartoon.html"><img src="../static/img/back.png" alt="" /></a>
 		  </div>
 		  <div class="detail">
 				<div class="detail_page">
 					<div class="detail_left">
-						<img src="../static/img/page.png" alt="{{ package.name }}" />
+						<img src="../static/img/page.png" alt="{{ package.packagename }}" />
 					</div>
 					<div class="detail_right">
-						<h3>{{ package.productname }}</h3>
+						<p>{{ package.productname }}</p>
 						<p>&#x3000;{{ package.description }}</p>
 					    <a href="">点击订购</a>
 					</div>
@@ -24,10 +29,11 @@
 				<div class="list">
 					<ul>
                         {% for c in comics %}
-                            <li><a href="comicdetail?id={{ c.id }}"><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
+                            <li><a href="comicdescription?id={{ c.id }}"><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
                         {% endfor %}
 					</ul>
 				</div>
 		  </div>
 	</body>
 </html>
+<script src="../static/js/font.js"></script>

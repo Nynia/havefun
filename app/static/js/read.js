@@ -1,7 +1,4 @@
  $(function(){
-//        $(".box span").click(function(){
-//            $(this).addClass("on").siblings().removeClass("on")
-//        });
         var off = true;
         $(".classify_right").click(function(){
             if(off){
@@ -24,25 +21,31 @@
         	$(this).css('color','#fff')
         	for(var i = 0;i<$('.lis').length;i++){
         		$('.lis').css('border','1px solid #f00')
-        	}
+        	} 
         })
-//
-//      
-        for(var i = 0;i<$('.lis').length;i++){
-        	console.log($('.lis').length)
-        	console.log(2)
-        	$('.lis').click(function(){
-        		$(this).css('background','orangered')
-        		$('.all').css('background','#fff')
-        		$('.all span').css('color','#c64bf6')
-        	})
-        }
-        $('.lists li').click(function(){
-        	console.log(1)
-        	$(this).addClass("ons").siblings().removeClass("ons")
-        })
-
-        
-        
+        var len =$('.lis').length
+		for(var i = 0;i<len;i++){
+			$(".lis").eq(i).click(function(){
+			if(!$(this).hasClass("ones")){
+				$(this).toggleClass("ones");
+			} else {
+				$(".all").css("background-color","none");
+				$(this).toggleClass("ones");
+			}
+			}) 
+			var a = 0;
+			if($(".lis").eq(i).hasClass("ones")){
+    		a++;
+    		if(a == 6) {
+    			$(".all").css("background-color","orange");
+    		}  else {
+	    		$(".all").css("background-color",'none');
+	    	}
+	    	} else {
+	    		$(".all").css("background-color",'none');
+	    	}
+     }
+		
+     
         
     });
