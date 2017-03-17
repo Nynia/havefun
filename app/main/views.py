@@ -11,7 +11,7 @@ import config
 from app import db
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package,OrderRelation,Comic
+from app.models import Package,Comic,Reading,Chapter
 
 @main.route('/',methods=['GET', 'POST'])
 def index():
@@ -112,3 +112,17 @@ def comicbrowse(id):
     print filelist
     return render_template('cartoon_browse.html',imglist=filelist,cur=chapter,len=len(filelist))
 
+@main.route('/reading',methods=['GET'])
+def reading():
+    packages = Package.query.filter_by(type=4).all()
+    print packages
+    return render_template('reading.html',packages=packages)
+
+@main.route('/readinginfo',methods=['GET'])
+def readinginfo():
+    id = request.args.get('id')
+    reading = Reading.query.get(int(id))
+    bookid = reading.bookid
+    chapters = Chapter.query.filter_by(bookid=bookid).order_by(Chapter.id).all()
+    print chapters
+    return render_template('read_description.html',book=reading,chapters=chapters)

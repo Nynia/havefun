@@ -1,11 +1,8 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# qiniu
-QINIU_ACCESS_KEY = 'jJnJu4_d7YH8hhhB-J4J8Jr537T_-yk9BIsin75M'
-QINIU_SECRET_KEY = 'WpidgDmScl866DLV22LT2Qon19oDkiLmRbxhDrGq'
 FTP_ADDR = '192.168.114.138'
-FTP_PORT = 21
+FTP_PORT = 12345
 FTP_USER = 'jsgx'
 FTP_PWD = 'jsgx2017'
 STATIC_URL_PREFIX = 'http://221.228.17.87/res/'

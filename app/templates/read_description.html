@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+	    <meta name="msapplication-tap-highlight" content="no">
 		<title>阅读详情</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" href="css/style.css" />
-		<script src="libs/jquery-3.1.0.js"></script>
+		<meta name="keywords" content="">
+        <meta name="description" content="">
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<script src="../static/libs/jquery-3.1.0.js"></script>
 	</head>
 	<body id="read">
 		<div class="bar_top">
-			<a href="reading.html"><img src="img/back.png" alt="" /></a>
+			<a href="reading.html"><img src="../static/img/back.png" alt="" /></a>
 		</div>
 		<div class="super">
 			<div class="super_left books_left">
-				<img src="img/cover.png" alt="五月潮汐" />
+				<img src="../static/img/cover.png" alt="五月潮汐" />
 			</div>
-			<div class="super_right books">
+			<div class="super_right books tides">
 				<ul>
-					<li>《五月潮汐》</li>
-					<li>作者：<span>xxxx</span></li>
-					<li>状态：<span>共112章 （已完结）</span></li>
-					<li>题材：<span>都市言情</span></li>
+					<li>《{{ book.name }}》</li>
+					<li>作者：<span>{{ book.author }}</span></li>
+					<li>状态：<span>共{{ book.curchapter }}章 （{% if book.state=='1'%}已完结{% else %}未完结{% endif %}）</span></li>
 					<li>打分
-					<img src="img/ysolid.png" alt="" />
-					<img src="img/ysolid.png" alt="" />
-					<img src="img/ysolid.png" alt="" />
-					<img src="img/yempty.png" alt="" />
-					<img src="img/yempty.png" alt="" />
+					<img src="../static/img/ysolid.png" alt="" />
+					<img src="../static/img/ysolid.png" alt="" />
+					<img src="../static/img/ysolid.png" alt="" />
+					<img src="../static/img/yempty.png" alt="" />
+					<img src="../static/img/yempty.png" alt="" />
 					</li>
-					<li><img src="img/progress.png" alt="进度条" /></li>
+					<li><img src="../static/img/progress.png" alt="进度条" /></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -36,24 +40,27 @@
 		<div class="summary">
 			<p>内容概括：</p>
             <dd id="intro_short">
-			    <p class="fly">&#x3000《飞翔的喵》是一款史上最虐心的游戏，清新可爱Q版风格的，集多种萌系元素汇集一起，水天交接的浩瀚蔚蓝。各种搞怪风景让你乐在其中。独特的玩法，新颖的创意，玩家需要操作小猫进行飞翔遨游，比拼谁能够飞的更远，在控制适当飞行高度的同时，还要躲避前方迎面而来的各种阻碍。飞翔的小鸟升级版哦！</p>
+			    <p class="fly">&#x3000{{ book.brief }}</p>
 			    <a href="javascript:void(0)" onclick="$('#intro_short').hide();$('#intro_long').show();return false;" class="data_more">详细</a>
 			</dd>
             <dd id="intro_long" style="display:none">
-			    <p class="fly">&#x3000《飞翔的喵》是一款史上最虐心的游戏，清新可爱Q版风格的，集多种萌系元素汇集一起，水天交接的浩瀚蔚蓝。各种搞怪风景让你乐在其中。独特的玩法，新颖的创意，玩家需要操作小猫进行飞翔遨游，比拼谁能够飞的更远，在控制适当飞行高度的同时，还要躲避前方迎面而来的各种阻碍。飞翔的小鸟升级版哦！<a href="javascript:void(0)" onclick="$('#intro_short').show();$('#intro_long').hide();return false;">收起</a></p>    
+			    <p class="fly">&#x3000{{ book.brief }}<a href="javascript:void(0)" onclick="$('#intro_short').show();$('#intro_long').hide();return false;">收起</a></p>
             </dd>
 		</div>
 		<div class="directory">
 			<ul>
 				<li>目录</li>
-				<li>1-20</li>
-				<li>20-40</li>
-				<li>40-80</li>
-				<li><img src="img/s.png" alt="" />升序</li>
-				<li><img src="img/j.png" alt="" />降序</li>
+				<li><img src="../static/img/s.png" alt="" />升序</li>
+				<li><img src="../static/img/j.png" alt="" />降序</li>
 			</ul>
 			<div class="clear"></div>
 			<table>
+                {% for c in chapters %}
+                    <tr>
+					    <td>第2章</td>
+					<td>仿佛“三年不鸣，一鸣惊人”的神鸟</td>
+				</tr>
+                {% endfor %}
 				<tr>
 					<td onclick="location.href='read_details.html'">第1章</td>
 					<td>其实是被爹坑...</td>
@@ -86,3 +93,5 @@
 		</div>
 	</body>
 </html>
+<script src="../static/js/cartoon_description.js"></script>
+<script src="../static/js/font.js"></script>
