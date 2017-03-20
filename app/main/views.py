@@ -132,7 +132,7 @@ def readinginfo():
         chaptername = c.chaptername.split(' ')
         dict = {}
         dict['a'] = chaptername[0].split('-')[0]
-        dict['b'] = chaptername[1] if len(chaptername)>1 else chaptername = c.chaptername.split(' ')
+        dict['b'] = chaptername[1] if len(chaptername)>1 else u'前言'
         dict['id'] = c.chapterid
         chapter_dict_list.append(dict)
     return render_template('read_description.html',book=reading,chapters=chapter_dict_list)
