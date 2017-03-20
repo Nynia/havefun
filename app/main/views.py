@@ -84,6 +84,7 @@ def package():
     else:
         #reading
         books = Reading.query.filter_by(packageid=id).all()
+        print books
         return render_template('package_reading.html', package=package, books=books, flag=ordered)
 
 @main.route('/gamedetail',methods=['GET'])
