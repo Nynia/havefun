@@ -155,7 +155,7 @@ def comic_init():
 def readings_job():
     base_url = 'http://127.0.0.1:5000/api/v1.0/readings'
     host = 'http://wap.tyread.com'
-    url = 'http://wap.tyread.com/baoyueInfoListAction.action?is_ctwap=0&monthProductId=169124282&pageNo=2'
+    url = 'http://wap.tyread.com/baoyueInfoListAction.action?is_ctwap=0&monthProductId=169124282'
     headers = {
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
@@ -168,7 +168,7 @@ def readings_job():
     s = requests.Session()
     r = s.get(url, headers=headers, cookies=_cookies)
     r.encoding = 'utf-8'
-    # print r.text
+    print r.text
     soup = BeautifulSoup(r.text, 'html.parser')
     book_url_tags = soup.find_all(href=lambda href: href and re.compile("^/bookdetail/").search(href))
 
@@ -229,11 +229,12 @@ def readings_job():
             chapter_url = host + tag['href']
             r = requests.get(chapter_url, headers=headers, cookies=_cookies)
             m = re.search(r'<div style=\"overflow:hidden;\">(.*?)</div>', r.text, re.S)
+            print chapter_name
             if m:
                 chapter_content = '<p>    ' + m.group(1).strip()
                 # print chapter_content
                 data = {
-                    'chapterid': i,
+                    'chapterid': i-1,
                     'chaptername': chapter_name,
                     'content': chapter_content,
                     'bookid': bookid
@@ -243,5 +244,5 @@ def readings_job():
             i = i + 1
 
 
-# readings_job()
+readings_job()
 #comic_init()

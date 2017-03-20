@@ -58,7 +58,7 @@
                 {% for c in chapters %}
                     <tr>
 					    <td>{{ c.get('a') }}</td>
-					    <td onclick="location.href='readbrowse/{{ c.id }}'">{{ c.get('b') }}</td>
+					    <td onclick="location.href='readbrowse/{{ book.bookid }}?chapter={{ c.id}}'">{{ c.get('b') }}</td>
 				    </tr>
                 {% endfor %}
 			</table>
