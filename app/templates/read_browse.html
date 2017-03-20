@@ -13,17 +13,17 @@
 		<script src="../static/libs/jquery-3.1.0.js"></script>
 	</head>
 	<body>
-		<div class="bar_top cartoon_detail">
-			<a href="read_description.html"><img src="../static/img/right.png" alt="" /></a>
+		<div class="bar_top cartoon_detail" style="padding-bottom: 2.56rem;">
+			<a href="javascript:history.go(-1)"><img src="../static/img/right.png" alt="" /></a>
 			<span>{{ name }}</span>
 		</div>
 		<div class="comic">
-            {% for ptag in ptaglist %}
+			{% for ptag in ptaglist %}
                 <p style="text-align:left">{{ ptag }}</p>
             {% endfor %}
 		</div>
-		
-	    <div class="foot">
+
+	   <div class="foot">
 	    	<ul>
 	    		<li><a href="#">上一章</a></li>
 	    		<li><a href="#">下一章</a></li>

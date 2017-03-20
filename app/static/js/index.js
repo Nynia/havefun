@@ -8,7 +8,8 @@
 	    if(a ==0){index =0};
 	    if(index==$('.slide ul li').length) index=0;
 	    $('.slide ul li').eq(index).fadeIn(800).siblings().hide();
-	    $('.slide ul li img').eq(index).css('display','block').siblings().css('display','none');
+//	    $('.slide ul li img').eq(index).css('display','block').siblings().css('display','none');
+	    $('.slide ul li img').eq(index).css('display','block').siblings().find('div').css('display','block')
 	    $('.icon span').eq(index).css('background-color','#fff').siblings().css('background-color','#c4c3c9');
 	}
 	function play(){

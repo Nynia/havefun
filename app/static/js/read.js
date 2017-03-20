@@ -46,6 +46,36 @@
 	    	}
      }
 		
-     
-        
+//   轮播图
+     //轮播图
+
+//  var index = 0;
+//	var timer;
+//	function show(a){
+//	    index = a || index;
+//	    if(index<0) index = $('.slide ul li').length-1;
+//	    if(a ==0){index =0};
+//	    if(index==$('.slide ul li').length) index=0;
+//	    $('.slide ul li').eq(index).fadeIn(800).siblings().hide();
+//	    $('.slide ul li img').eq(index).css('display','block').siblings().css('display','none')
+//	    $('.icon span').eq(index).css('background-color','#fff').siblings().css('background-color','#c4c3c9');
+//	}
+//	function play(){
+//	    timer = setInterval(function(){
+//	        index++;
+//	        show(index);
+//	    },2500)
+//	}
+//	play();
+//	$('.slide').hover(function(){
+//	    clearInterval(timer);
+//	    $('.slide div').show();
+//	},function(){
+//	    play();
+//	    $('.slide div').hide();
+//	})
+//	$('.icon span').hover(function(){
+//	    var $index = $(this).index();
+//	    show($index);
+//	})
     });

@@ -11,35 +11,40 @@
 		<meta name="keywords" content="">
         <meta name="description" content="">
 		<link rel="stylesheet" href="../static/css/style.css" />
-		<script src="../static/libs/jquery-3.1.0.js"></script>
+		<link rel="stylesheet" href="../static/css/main.css" />
+		<link rel="stylesheet" href="../static/css/index.css" />
+		<link rel="stylesheet" href="../static/css/common.css" />
+		<script src="libs/jquery-3.1.0.js"></script>
 	</head>
-	<body>
-		<header>
-			<img src="../static/img/logo.png" alt="" />
-		</header>
-		<nav class="read">
-			<ul>
-				<li><a href="cartoon.html">动漫</a></li>
-				<li><a href="#">视频</a></li>
-				<li><a href="game.html">游戏</a></li>
-				<li><a href="#">阅读</a></li>
-				<li><a href="#">音乐</a></li>
-			</ul>
-			<li><a href="#"><img src="../static/img/sing.png" alt="" /></a></li>
-			<div class="clear"></div>
-		</nav>
-		<div class="banner slide">
+	<body style="padding-bottom: 2.56rem;">
+		<!-- header -->
+	    <header id="header" class="">
+	        <div class="header-logo-container">
+	            <img src="../static/img/logo.png" alt="">
+	        </div>
+	        <div class="header-menu-container">
+	            <a href="cartoon.html">动漫</a>
+	            <a href="javascript:;">视频</a>
+	            <a href="index.html">游戏</a>
+	            <a href="javascript:;" class="currents">阅读</a>
+	            <a href="javascript:;">音乐</a>
+	        </div>
+	    </header>
+       <!-- header end -->
+       <!-- slide-banner -->
+		<div class="banners slide">
 	    	<ul>
-                {% for p in packages %}
-                    <li><img src="{{ p.img }}" alt="" /><div><a href="package?id={{ p.id }}">了解详情></a></div></li>
+			    {% for p in packages %}
+			    <li><img src="{{ p.img }}" alt="" /><div><a href="package?id={{ p.id }}">了解详情></a></div></li>
                 {% endfor %}
 			</ul>
-			<!--<section class="icon">
+			<section class="icon">
 				<span class="circle"></span>
 				<span></span>
 				<span></span>
-			</section>-->
+			</section>
 	    </div>
+	    <!-- slide-banner end -->
 	    <div class="classify">
 	    	<div class="classify_left">
 	    		<img src="../static/img/classify.png" alt="" />分类
@@ -48,7 +53,7 @@
 	    		<span>更新</span>
 	    		<span>人气</span>
 	    	</div>
-	    	<div class="clear"></div>	
+	    	<div class="clear"></div>
 	    	<div class="classify_bottom">
 	    		<ul class="lists">
 	    			<li class="all ons"><span>全部</span><em>x</em></li>
@@ -72,16 +77,18 @@
 		    	</ul>
 		    </div>
 	    </div>
-	    <footer>
-	    	<ul>
-	    		<li><a href=""><div></div><p>首页</p></a></li>
-	    		<li><a href=""><div></div><p>发现</p></a></li>
-	    		<li><a href=""><div></div><p>关注</p></a></li>
-	    		<li><a href="my.html"><div></div><p>我的</p></a></li>
-	    	</ul>
-	    	<div class="clear"></div>
-	    </footer>
+	    <!-- footer-nav -->
+        <nav class="footer-nav">
+            <ul>
+                <li><a href="###" class="homepage">首页</a></li>
+                <li><a href="###" class="find">发现</a></li>
+                <li><a href="###" class="follow">关注</a></li>
+                <li><a href="my.html" class="mine">我的</a></li>
+            </ul>
+        </nav>
+    <!-- footer-nav end -->
 	</body>
 </html>
 <script src="../static/js/read.js"></script>
 <script src="../static/js/font.js"></script>
+<script src="../static/js/index.js"></script>
