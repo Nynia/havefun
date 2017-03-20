@@ -132,7 +132,7 @@ def readinginfo():
         chaptername = c.chaptername.split(' ')
         dict = {}
         dict['a'] = chaptername[0].split('-')[0]
-        dict['b'] = chaptername[1] if len(chaptername)>1 else u'前言'
+        dict['b'] = chaptername[1] if len(chaptername)>1 else chaptername = c.chaptername.split(' ')
         dict['id'] = c.chapterid
         chapter_dict_list.append(dict)
     return render_template('read_description.html',book=reading,chapters=chapter_dict_list)
@@ -142,6 +142,12 @@ def readbrowse(id):
     chapterid = request.args.get('chapter')
     chapters = Chapter.query.filter_by(bookid=id).order_by(Chapter.chapterid).all()
     chapter = chapters[int(chapterid)-1]
+    chaptername = chapter.chaptername.split(' ')
+    if len(chaptername) > 1:
+        chapter.chaptername = chaptername[0][3:]
+    else:
+        chapter.chaptername = chaptername[0][:2]
+    print chapter
     ptaglist = re.findall(r'\<p\>(.*?)\<\/p\>',chapter.content)
     print ptaglist
     return render_template('read_browse.html',ptaglist=ptaglist,cur=chapter,len=len(chapters))
