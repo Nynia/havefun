@@ -31,7 +31,7 @@
 		<div class="banner slide">
 	    	<ul>
                 {% for p in packages %}
-                    <li><img src="../static/img/read.jpg" alt="" /><div><a href="package?id={{ p.id }}">了解详情></a></div></li>
+                    <li><img src="{{ p.img }}" alt="" /><div><a href="package?id={{ p.id }}">了解详情></a></div></li>
                 {% endfor %}
 			</ul>
 			<!--<section class="icon">
