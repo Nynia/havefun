@@ -191,7 +191,7 @@ class OrderRelation(db.Model):
     def to_json(self):
         json_post = {
             'id':self.id,
-            'productnid':self.productid,
+            'productid':self.productid,
             'phonenum':self.phonenum,
             'status':self.status,
             'ordertime':self.ordertime,
@@ -224,7 +224,7 @@ class Reading(db.Model):
     __tablename__ = 'reading'
     id = db.Column(db.Integer,primary_key=True)
     bookid = db.Column(db.String(30))
-    packageid = db.Column(db.String(30))
+    packageid = db.Column(db.Integer)
     name = db.Column(db.String(50))
     author = db.Column(db.String(50))
     state = db.Column(db.String(1))

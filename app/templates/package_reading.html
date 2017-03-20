@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+	    <meta name="msapplication-tap-highlight" content="no">
+		<title>阅读详情</title>
+		<meta name="keywords" content="">
+        <meta name="description" content="">
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<script src="../static/libs/jquery-3.1.0.js"></script>
+	</head>
+	<body id="books">
+		<div class="bar_top">
+			<a href="###" class="return-back"><img src="../static/img/back.png" alt="" /></a>
+		</div>
+		<div class="perfect">
+			<p>阅精彩包月专区</p>
+			<p>包月价格：{{ package.price }}元/月</p>
+		</div>
+		<div class="monthly"><a href="#">订购包月</a></div>
+		<div class="items">
+			<ul>
+                {% for b in books %}
+                    <li><a href="readinfo?id={{ b.id }}">{{ loop.index }}.&nbsp;{{ b.name }}</a></li>
+                {% endfor %}
+			</ul>
+		</div>
+	</body>
+</html>
+<script src="../static/js/font.js"></script>
+<script>
+	$('.return-back').click(function(){
+		history.go(-1);
+	})
+</script>

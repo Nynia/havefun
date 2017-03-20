@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+	    <meta name="msapplication-tap-highlight" content="no">
+		<title>阅读</title>
+		<meta name="keywords" content="">
+        <meta name="description" content="">
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<script src="../static/libs/jquery-3.1.0.js"></script>
+	</head>
+	<body>
+		<div class="bar_top cartoon_detail">
+			<a href="read_description.html"><img src="../static/img/right.png" alt="" /></a>
+			<span>{{ chapter.chaptername }}</span>
+		</div>
+		<div class="comic">
+            {% for ptag in ptaglist %}
+                <p style="text-align:left">{{ ptag }}</p>
+            {% endfor %}
+		</div>
+		
+	    <div class="foot">
+	    	<ul>
+	    		<li class="say" onclick="ss()"><a href="#">第146章<img src="../static/img/arrows.png" class="photo" alt="" /></a></li>
+	    		<li><a href="#">下一页</a></li>
+	    	</ul>
+	    	<ul id="chapter">
+	    	</ul>
+	    </div>
+	</body>
+</html>
+<script src="../static/js/cartoon_details.js"></script>
+<script src="../static/js/font.js"></script>
+<script src="../static/js/font.js"></script>
+<script>
+    var cur = {{ cur }};
+    var sum = {{ len }};
+    var ulNode = document.getElementById('chapter');
+
+    var url = window.location.href;
+    var bookid = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
+    console.log(bookid);
+    if (cur - 5 > 0) {
+        var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
+        var textNode = document.createTextNode('第' + (cur - 5).toString() + '话');
+        aNode.appendChild(textNode);
+        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 5).toString();
+        liNode.appendChild(aNode);
+        ulNode.appendChild(liNode);
+    }
+    if (cur - 4 > 0) {
+        var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
+        var textNode = document.createTextNode('第' + (cur - 4).toString() + '话');
+        aNode.appendChild(textNode);
+        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 4).toString();
+        liNode.appendChild(aNode);
+        ulNode.appendChild(liNode);
+    }
+
+    if (cur - 3 > 0) {
+        var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
+        var textNode = document.createTextNode('第' + (cur - 3).toString() + '话');
+        aNode.appendChild(textNode);
+        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 3).toString();
+        liNode.appendChild(aNode);
+        ulNode.appendChild(liNode);
+    }
+    if (cur - 2 > 0) {
+        var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
+        var textNode = document.createTextNode('第' + (cur - 2).toString() + '话');
+        aNode.appendChild(textNode);
+        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 2).toString();
+        liNode.appendChild(aNode);
+        ulNode.appendChild(liNode);
+    }
+    if (cur - 1 > 0) {
+        var liNode = document.createElement('li');
+        var aNode = document.createElement('a');
+        var textNode = document.createTextNode('第' + (cur - 1).toString() + '话');
+        aNode.appendChild(textNode);
+        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 1).toString();
+        liNode.appendChild(aNode);
+        ulNode.appendChild(liNode);
+    }
+    if (cur < sum) {
+        var nexta = $('.foot a').eq(1);
+        nexta.attr('href','/comicbrowse/' + bookid + '?chapter=' + (cur + 1).toString());
+    }

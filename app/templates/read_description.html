@@ -57,38 +57,10 @@
 			<table>
                 {% for c in chapters %}
                     <tr>
-					    <td>第2章</td>
-					<td>仿佛“三年不鸣，一鸣惊人”的神鸟</td>
-				</tr>
+					    <td>{{ c.get('a') }}</td>
+					    <td onclick="location.href='readbrowse/{{ c.id }}'">{{ c.get('b') }}</td>
+				    </tr>
                 {% endfor %}
-				<tr>
-					<td onclick="location.href='read_details.html'">第1章</td>
-					<td>其实是被爹坑...</td>
-				</tr>
-				<tr>
-					<td>第2章</td>
-					<td>仿佛“三年不鸣，一鸣惊人”的神鸟</td>
-				</tr>
-				<tr>
-					<td>第3章</td>
-					<td>为不使父有杀子不慈之名，我先走了</td>
-				</tr>
-				<tr>
-					<td>第4章</td>
-					<td>跟这群神经病混久了，真是大开眼界</td>
-				</tr>
-				<tr>
-					<td>第5章</td>
-					<td>真是机智到没有朋友...</td>
-				</tr>
-				<tr>
-					<td>第6章</td>
-					<td>姜氏的心，有点乱</td>
-				</tr>
-				<tr>
-					<td>第7章</td>
-					<td>姨妈在眼前</td>
-				</tr>
 			</table>
 		</div>
 	</body>

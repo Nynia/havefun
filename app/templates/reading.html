@@ -30,7 +30,9 @@
 		</nav>
 		<div class="banner slide">
 	    	<ul>
-                <li><img src="../static/img/read.jpg" alt="" /><div>了解详情></div></li>
+                {% for p in packages %}
+                    <li><img src="../static/img/read.jpg" alt="" /><div><a href="package?id={{ p.id }}">了解详情></a></div></li>
+                {% endfor %}
 			</ul>
 			<!--<section class="icon">
 				<span class="circle"></span>

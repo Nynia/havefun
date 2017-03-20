@@ -1,10 +1,11 @@
+#-*-coding=utf-8-*-
 from . import main
 from flask import render_template,session
 from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
 from werkzeug.utils import secure_filename
-import os
+import os,re
 from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
 import config
@@ -82,7 +83,8 @@ def package():
         pass
     else:
         #reading
-        pass
+        books = Reading.query.filter_by(packageid=id).all()
+        return render_template('package_reading.html', package=package, books=books, flag=ordered)
 
 @main.route('/gamedetail',methods=['GET'])
 def gamedetail():
@@ -118,11 +120,25 @@ def reading():
     print packages
     return render_template('reading.html',packages=packages)
 
-@main.route('/readinginfo',methods=['GET'])
+@main.route('/readinfo',methods=['GET'])
 def readinginfo():
     id = request.args.get('id')
     reading = Reading.query.get(int(id))
     bookid = reading.bookid
     chapters = Chapter.query.filter_by(bookid=bookid).order_by(Chapter.id).all()
-    print chapters
-    return render_template('read_description.html',book=reading,chapters=chapters)
+    chapter_dict_list = []
+    for c in chapters:
+        chaptername = c.chaptername.split(' ')
+        dict = {}
+        dict['a'] = chaptername[0].split('-')[0]
+        dict['b'] = chaptername[1] if len(chaptername)>1 else u'前言'
+        dict['id'] = c.id
+        chapter_dict_list.append(dict)
+    return render_template('read_description.html',book=reading,chapters=chapter_dict_list)
+
+@main.route('/readbrowse/<id>',methods=['GET'])
+def readbrowse(id):
+    chapter = Chapter.query.get(int(id))
+    ptaglist = re.findall(r'\<p\>(.*?)\<\/p\>',chapter.content)
+    print ptaglist
+    return render_template('read_browse.html',ptaglist=ptaglist,cur=chapter,len=)
