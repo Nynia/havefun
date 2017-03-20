@@ -144,10 +144,10 @@ def readbrowse(id):
     chapter = chapters[int(chapterid)-1]
     chaptername = chapter.chaptername.split(' ')
     if len(chaptername) > 1:
-        chapter.chaptername = chapter.chaptername[3:]
+        chaptername = chapter.chaptername[3:]
     else:
-        chapter.chaptername = chaptername[0][:2]
+        chaptername = chaptername[0][:2]
     print chapter
     ptaglist = re.findall(r'\<p\>(.*?)\<\/p\>',chapter.content)
     print ptaglist
-    return render_template('read_browse.html',ptaglist=ptaglist,cur=chapter,len=len(chapters))
+    return render_template('read_browse.html',ptaglist=ptaglist,name=chaptername,cur=chapter,len=len(chapters))
