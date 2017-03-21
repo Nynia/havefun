@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" value="notranslate">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>玩乐派-游戏</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
+    <link rel="stylesheet" href="../static/css/index.css"/>
+    <link rel="stylesheet" href="../static/css/common.css"/>
+    <script src="../static/libs/jquery-3.1.0.js"></script>
+    <script src="../static/libs/template.js"></script>
+</head>
+<body style="padding-bottom: 2.56rem;">
+<!-- header -->
+<header id="header" class="">
+    <div class="header-logo-container">
+        <img src="../static/img/logo.png" alt="">
+    </div>
+    <div class="header-menu-container">
+        <a href="cartoon.html">动漫</a>
+        <a href="javascript:;">视频</a>
+        <a href="javascript:;" class="current">游戏</a>
+        <a href="reading.html">阅读</a>
+        <a href="javascript:;">音乐</a>
+    </div>
+</header>
+<!-- header end -->
+<!-- slide-banner -->
+<div class="slide-banner" id="slide-banner">
+    <div class="bd">
+        <ul class="banner">
+            <li>
+                <a href="javascript:;">
+                    <img src="../static/img/banner.png"/>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="../static/img/banner2.png"/>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="../static/img/banner3.png"/>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="hd">
+        <ul></ul>
+    </div>
+</div>
+<!-- slide-banner end -->
+<div class="play">
+    <div class="play_top">
+        <ul>
+            <li><a href=""><img src="../static/img/watch.png" alt="最近观看"/>我玩过的</a></li>
+            <li><a href="">个人中心<img src="../static/img/arrow.png" alt="箭头"/></a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="play_bottom">
+        <ul>
+            <li><a href="gamedetail.html"><img src="../static/img/1.png" alt=""/></a></li>
+            <li><a href="gamedetailb.html"><img src="../static/img/2.png" alt=""/></a></li>
+            <li><a href="javascript:;"><img src="../static/img/3.png" alt=""/></a></li>
+            <li><a href="javascript:;"><img src="../static/img/4.png" alt=""/></a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="line"></div>
+<div class="recommend">
+    <div class="recommend_top">
+        <ul>
+            <li><a href="javascript:;" style="color: #eba241;">热门推荐</a></li>
+            <li><a href="javascript:;">特惠礼包</a></li>
+            <li><a href="javascript:;">游戏分类</a></li>
+            <li><a href="javascript:;">最新活动</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="recommend_bottom">
+        <div class="part">
+            <ul>
+                <li class="index">
+                    <p>推荐指数</p>
+                    <p>堆雪人</p>
+                    <div id="star"><img src="../static/img/solid.png" alt=""/>
+                        <img src="../static/img/solid.png" alt=""/>
+                        <img src="../static/img/solid.png" alt=""/>
+                        <img src="../static/img/solid.png" alt=""/>
+                        <img src="../static/img/empty.png" alt=""/></div>
+                    <p>小熊勇士</p>
+                    <img src="../static/img/solid.png" alt=""/>
+                    <img src="../static/img/solid.png" alt=""/>
+                    <img src="../static/img/solid.png" alt=""/>
+                    <img src="../static/img/empty.png" alt=""/>
+                    <img src="../static/img/empty.png" alt=""/>
+                    <div class="more"><img src="../static/img/orange.png" alt=""/><a href="#">更多游戏</a></div>
+                </li>
+                <div id="role">
+                    {% for g in h5 %}
+                        <li class="games">
+                            <img src="{{ g.img_icon }}" alt="{{ g.name }}"/>
+                            <p>{{ g.name }}</p>
+                            <a href="{{ g.url }}"><p>开始游戏</p></a>
+                        </li>
+                    {% endfor %}
+                </div>
+                <li class="index indexs">
+                    <p>推荐指数</p>
+                    <p>堆雪人</p>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <p>小熊勇士</p>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <img src="../static/img/solids.png" alt=""/>
+                    <img src="../static/img/emptys.png" alt=""/>
+                    <div class="more mores"><img src="../static/img/green.png" alt=""/><a href="#">更多游戏</a></div>
+                </li>
+            </ul>
+        </div>
+        <div class="part parts" id="package">
+            <ul>
+                {% for p in packages %}
+                    <li><a href="package?id={{ p.id }}"><img src="{{ p.img }}" alt=""/>
+                        <div>点击进入>></div>
+                    </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="part role_play" id="role">
+            <ul>
+                <li><a href="http://h5.play.cn/pgame/list?type=1003&CAF=6056"><p>角色扮演</p><br>
+                    <p>23款</p><img src="../static/img/rolea.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1013&CAF=6056"><p>模拟经营</p><br>
+                    <p>12款</p><img src="../static/img/roled.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1007&CAF=6056"><p>休闲益智</p><br>
+                    <p>41款</p><img src="../static/img/rolej.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1014&CAF=6056"><p>跑酷赛车</p><br>
+                    <p>3款</p><img src="../static/img/rolee.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1006&CAF=6056"><p>棋牌麻将</p><br>
+                    <p>22款</p><img src="../static/img/roleg.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1009&CAF=6056"><p>体育竞技</p><br>
+                    <p>34款</p><img src="../static/img/rolei.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1005&CAF=6056"><p>动作冒险</p><br>
+                    <p>6款</p><img src="../static/img/rolec.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1004&CAF=6056"><p>射击飞行</p><br>
+                    <p>17款</p><img src="../static/img/roleh.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1002&CAF=6056"><p>策略塔防</p><br>
+                    <p>2款</p><img src="../static/img/roleb.jpg" alt="角色扮演"/></a></li>
+                <li><a href="http://h5.play.cn/pgame/list?type=1011&CAF=6056"><p>其他游戏</p><br>
+                    <p>31款</p><img src="../static/img/rolef.jpg" alt="角色扮演"/></a></li>
+            </ul>
+        </div>
+        <div class="part"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!-- footer-nav -->
+<nav class="footer-nav">
+    <ul>
+        <li><a href="###" class="homepage">首页</a></li>
+        <li><a href="###" class="find">发现</a></li>
+        <li><a href="###" class="follow">关注</a></li>
+        <li><a href="my.html" class="mine">我的</a></li>
+    </ul>
+</nav>
+<!-- footer-nav end -->
+</body>
+</html>
+<script src="../static/js/index.js"></script>
+<script src="../static/js/font.js"></script>
+<script src="../static/js/TouchSlide.1.1.js"></script>
+<script>
+    TouchSlide({
+        slideCell: "#slide-banner",
+        titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+        mainCell: ".bd ul",
+        effect: "leftLoop",
+        autoPlay: true,//自动播放
+        autoPage: true //自动分页
+    });
+</script>

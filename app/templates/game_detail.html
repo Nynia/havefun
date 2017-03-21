@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{{ game.name }}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<link rel="stylesheet" href="../static/libs/swiper-3.4.1.min.css">
+        <script src="../static/libs/jquery-3.1.0.js"></script>
+	</head>
+	<body class="package">
+		<div class="bar_top">
+			<a href="game"><img src="../static/img/back.png" alt="" /></a>
+		</div>
+		<div class="super supers">
+			<div class="super_left">
+				<img src="../static/img/super.png" alt="" />
+			</div>
+			<div class="super_right">
+				<ul>
+					<li>{{ game.name }}</li>
+					<li>推荐指数
+					<img src="../static/img/ysolid.png" alt="" />
+					<img src="../static/img/ysolid.png" alt="" />
+					<img src="../static/img/ysolid.png" alt="" />
+					<img src="../static/img/yempty.png" alt="" />
+					<img src="../static/img/yempty.png" alt="" />
+					</li>
+				</ul><br />
+				<a href="{{ game.url }}">下&#x3000载</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="summary">
+			<p>游戏概括：</p>
+			<dd id="intro_short">
+			    <p>{{ game.brief }}</p>
+			    <a href="javascript:void(0)" onclick="$('#intro_short').hide();$('#intro_long').show();return false;" class="data_more">详细</a>
+
+			</dd>
+            <dd id="intro_long" style="display:none">
+			    <p>{{ game.brief }}<a href="javascript:void(0)" onclick="$('#intro_short').show();$('#intro_long').hide();return false;">收起</a></p>
+
+            </dd>
+		</div>
+		<div class="summary style picture snow">
+			<p>游戏截图：</p>
+			<div class="screenshots swiper-container">
+				<!--<img src="img/snow.png" class="snow"/>-->
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"><img src="{{ game.img_screenshot_1 }}" alt="" /></div>
+					<div class="swiper-slide"><img src="{{ game.img_screenshot_2 }}" alt="" /></div>
+					<div class="swiper-slide"><img src="{{ game.img_screenshot_3 }}" alt="" /></div>
+					<div class="swiper-slide"><img src="{{ game.img_screenshot_4 }}" alt="" /></div>
+					<div class="swiper-slide"><img src="{{ game.img_screenshot_5 }}" alt="" /></div>
+					<div class="swiper-slide"><img src="{{ game.img_screenshot_6 }}" alt="" /></div>
+				</div>
+			</div>
+			<script src="../static/libs/swiper-3.4.0.min.js"></script>
+            <script>
+			    var swiper = new Swiper('.swiper-container',{
+			    	pagination: '.swiper-pagination',
+			    	 slidesPerView: 2,
+			        paginationClickable: true,
+			        spaceBetween:350
+			    });
+			</script>
+
+		</div>
+	</body>
+</html>

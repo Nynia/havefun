@@ -14,7 +14,7 @@ from datetime import datetime
 from flask_login import current_user
 from app.models import Package,Comic,Reading,Chapter
 
-@main.route('/',methods=['GET', 'POST'])
+@main.route('/config',methods=['GET', 'POST'])
 def index():
     print request.method
     form = GameForm()
@@ -60,7 +60,7 @@ def game():
     packages = Package.query.filter_by(type=2).all()
     h5 = Game.query.filter_by(type=2).limit(4).all()
     print h5
-    return  render_template('game.html',packages=packages,h5=h5)
+    return render_template('game.html',packages=packages,h5=h5)
 
 @main.route('/package',methods=['GET'])
 def package():
