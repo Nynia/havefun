@@ -506,7 +506,7 @@ html{font-size:62.5%;}
 .super_right{
 	display: inline-block;
 	color: #fff;
-	line-height: 1.69rem;
+	line-height: 1.55rem;
 	position: absolute;
 	right: 0;
 	width: 10.144rem;
@@ -533,8 +533,8 @@ html{font-size:62.5%;}
 	}
 /*详细收起*/
 #intro_short  p{
-	text-overflow: -o-ellipsis-lastline; 
-	overflow: hidden;  
+	text-overflow: -o-ellipsis-lastline;
+	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
@@ -562,7 +562,7 @@ dd a{
 	text-align: center;
 	float: left;
 	width: 23.8%;
-	}	
+	}
 .style ul{
 	margin: 10px 5px;
 	text-align: center;
@@ -633,7 +633,7 @@ dd a{
 /*动漫页面*/
 
 .world{
-	margin-top: 20px;
+	margin-top: 0.966rem;
 	}
 .world ul li{
 	float: left;
@@ -643,58 +643,52 @@ dd a{
 .world ul li a{
 	display: block;
 	}
-@media (min-width: 320px) and (max-width: 375px){
-	.world ul li .pictures{
-		/*width: 95%;
-		height: 95%;*/
-		}
-	}
 .world ul li{
 	position: relative;
 	}
 .world ul li div{
 	position: absolute;
 	bottom: 0;
-	top:10px;
+	top:0.4830rem;
 	color: #fff;
 	text-align: center;
 	width: 100%;
-	line-height: 30px;
+	line-height: 1.449rem;
 	}
 .world ul li div span:nth-child(1){
 	border-bottom: 1px solid #fff;
 	font-size: 0.9rem;
-	padding: 5px;
+	padding: 0.24154rem;
 	}
 .world ul li div p{
 	font-size: 0.9rem;
-	line-height: 30px;
+	line-height: 1.449rem;
 	}
 .world ul li div span:nth-child(3){
 	font-size: 0.69rem;
 	float: left;
-	margin-left: 15px;
+	margin-left: 0.7246rem;
 	}
 .world ul li div span:nth-child(3) img{
-	margin-right: 3px;
+	margin-right: 0.1449rem;
 	}
 .world ul li div span:nth-last-child(1){
 	background: url(../img/detail.png) no-repeat center center;
 	float: right;
 	font-size: 0.53rem;
 	color: #000;
-	margin:1px 20px 0 0;
+	margin:0.0483rem 0.966rem 0 0;
 	line-height: 1rem;
 	}
 .defeat{
 	position: relative;
-	margin: 20px auto 0;
+	margin: 0.966rem auto 0;
 	}
 .defeat .thumb{
 	position: absolute;
-	right: 10px;
-	top: 10px;
-	padding:4px 0;
+	right: 0.4831rem;
+	top: 0.4831rem;
+	padding:0.1932rem 0;
 	background: #5e6364;
 	opacity: 0.8;
 	border-radius: 15px;
@@ -702,11 +696,11 @@ dd a{
 	font-size: 0.69rem;
 	}
 .thumb span{
-	margin-left: 5px;
+	margin-left: 0.24154rem;
 	}
 .thumb img{
 	vertical-align: middle;
-	margin: 0 5px 5px;
+	margin: 0 0.24154rem 0.24154rem;
 	}
 .defeat .update{
 	position: absolute;
@@ -742,10 +736,10 @@ dd a{
 	}
 @media (min-width: 320px) and (max-width: 375px){
 	.world ul li div span:nth-last-child(1){
-		margin: -8px 10px 0 0;
+		/*margin: -8px 10px 0 0;*/
 		}
 	.world ul li div span:nth-child(3){
-		margin-top: -12px;
+		/*margin-top: -12px;*/
 		}
 	}
 
@@ -756,16 +750,16 @@ dd a{
 	}
 .detail{
 	margin: 6.76rem auto 0;
-	background: url(../img/white_bg.png) no-repeat;
-	background-attachment: fixed;
+	background: #fff;
+	border-radius: 10px;
 	width: 93%;
-	height: 662px;
+	height: 69.7077rem;
 	}
 .detail_page{
 	position: absolute;
 	top:3.382rem;
-	left:1.449rem;
-	width: 88%;
+	left: 1.4rem;
+	width: 86%;
 	}
 .detail_left{
 	float: left;
@@ -776,7 +770,7 @@ dd a{
 	height: 9.13rem;
 	}
 .detail_right{
-	margin-left: 180px;
+	margin: 0 0 0 7.97rem;
 	font-size: 0.86rem;
 	}
 .detail_right p:nth-child(1){
@@ -791,79 +785,52 @@ dd a{
 	font-size: 0.74rem;
 	margin-bottom: 0;
 	}
-.detail_right a{
-	padding:0.09rem 2.65rem;
-	background: #f7d631;
-	border-radius: 10px;
-	margin-top: 5px;
-	display: inline-block;
-	}
 .detail .list{
 	position: absolute;
 	top: 14.49rem;
-	margin: 0 1% 0;
+	margin: 0 auto;
+	width: 86%;
+	left: 1.4rem;
 	}
 .list ul li{
 	float: left;
-	margin: 0 0 0 2% ;
+	margin: 0 0.5% 0 1.5%;
 	position: relative;
-	width: 46%;
-	height: 7rem;
+	width: 48%;
 	}
 .list ul li  a{
 	display: block;
 	}
 .list li div{
 	position: absolute;
-	bottom: 1.69rem;
+	bottom: 1.45rem;
 	color: #fff;
-	padding: 5px 10px;
+	padding: 8.5rem 0.3865rem 0.24154rem 0.4830rem;
 	font-size: 0.53rem;
+	background: rgba(0,0,0,0.25);
+	width: 7.971rem;
+	height: 10.628rem;
+	}
+.list li div p{
+	position: absolute;
 	}
 .list li div img{
 	padding: 0 5px 0 0;
 	}
 .summer{
-	font-size: 0.69rem;
-	line-height: 30px;
+	font-size: 0.6937rem;
+	line-height: 1.449rem;
+	color: #383838;
 	}
 
 /*媒体查询*/
-@media (min-width: 320px) and (max-width: 375px){
-	.detail_left img{
-		/*width: 90%;
-		height: 90%;*/
-		}
-	}
-@media (min-width: 320px) and (max-width: 375px){
-	.detail_right{
-		margin-left: 150px;
-		}
-	}
-@media (min-width: 320px) and (max-width: 360px){
-	.detail_right a{
-		padding: 4px 35px;
-		}
-	.detail_right p:nth-child(2){
-		line-height: 1.1;
-		}	
-	}
 @media (min-width: 320px) and (max-width: 360px){
 	.detail .list{
 		position: absolute;
 		top: 15.49rem;
 		}
-	}
-@media (min-width: 340px) and (max-width: 375px){
-	.list ul li .big{
-		/*width: 100%;
-		height: 100%;*/
-		}
-	}
-@media (min-width: 320px) and (max-width: 340px){
-	.list ul li .big{
-		/*width: 100%;*/
-		/*height: 100%;*/
+	.list li div{
+		padding-top: 8rem;
 		}
 	}
 /*阅读*/
@@ -972,7 +939,7 @@ dd a{
 	}
 .lists li:nth-child(7) span{
 	color: #e0c500;
-	}	
+	}
 #book{
 	margin: 10px auto 0;
 	display: inline-block;
@@ -1053,7 +1020,7 @@ table{
 	border: 1px solid #fff;
 	text-align: center;
 	margin: 10px auto;
-	border-collapse: collapse; 
+	border-collapse: collapse;
 	font-size: 0.693rem;
 	}
 tr{
@@ -1112,11 +1079,6 @@ button{
 
 
 /*动漫详情页*/
-.super_right a{
-	padding: 0.145rem 2.898rem;
-	background: #ffe000;
-	border-radius: 10px;
-	}
 .descend,.ascend{
 	width: 15%;
 	float: right!important;
@@ -1150,14 +1112,7 @@ button{
 .comics{
 	position: absolute;
 	right: 0;
-	/*line-height: 32px;*/
 	}
-@media (min-width:320px) and (max-width:360px){
-	.comics{
-		/*position: absolute;
-	    right: 0%;*/
-	}
-}
 /*动漫漫画*/
 .cartoon_detail{
 	border-bottom: 1px solid #e2e2e2;
@@ -1230,7 +1185,8 @@ button{
 	width: 100%;
 	}
 .list ul li a>img{
-	width: 100%;
+	width: 7.971rem;
+	height: 10.628rem;
 	background-color: rgba(0,0,0,0.8);
 	}
 .play_top a{
@@ -1285,7 +1241,7 @@ dd p{
 .perfect{
 	width: 90%;
 	margin: 2.4154rem auto 0;
-}	
+}
 .perfect p:nth-child(1){
 	font-size: 1.093rem;
 	font-weight: 800;
@@ -1313,4 +1269,3 @@ dd p{
 	font-size: 0.7468rem;
 	line-height: 1.449rem;
 }
-

@@ -11,24 +11,25 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
     <script src="../static/libs/jquery-3.1.0.js"></script>
 </head>
-<body id="read">
+<body id="read" style="padding-bottom: 2.56rem;">
 <div class="bar_top">
-    <a href="package_comic.html"><img src="../static/img/back.png" alt=""/></a>
+    <a href="javascript:history.go(-1)"><img src="../static/img/back.png" alt=""/></a>
 </div>
 <div class="super">
     <div class="super_left books_left">
-        <img src="../static/img/pages.jpg" alt="五月潮汐"/>
+        <img src="../static/img/pages.jpg" alt=""/>
     </div>
-    <div class="super_right books comics">
+    <div class="super_right books tides">
         <ul>
-            <li>《{{ comic.comicname }}》</li>
+            <li>{{ comic.comicname }}</li>
             <li>作者：<span>{{ comic.author }}</span></li>
             <li>状态：<span>更新至{{ comic.curchapter }}集</span></li>
             <li>题材：<span>{{ comic.category }}</span></li>
             <li>人气： <span>{{ comic.hits }}</span></li>
-            <li><a href="#">开始阅读</a></li>
+            <li><a href="#"><img src="../static/img/starts.png"></a></li>
         </ul>
     </div>
     <div class="clear"></div>
@@ -49,8 +50,8 @@
 <div class="directory">
     <ul>
         <li>目录</li>
-        <li><img src="../static/img/s.png" alt=""/>升序</li>
-        <li><img src="../static/img/j.png" alt=""/>降序</li>
+        <li class="ascend"><img src="../static/img/s.png" alt=""/>升序</li>
+        <li class="descend"><img src="../static/img/j.png" alt=""/>降序</li>
     </ul>
     <div class="clear"></div>
 
@@ -66,4 +67,78 @@
 </html>
 <script src="../static/js/cartoon_description.js"></script>
 <script src="../static/js/font.js"></script>
+<!--<script>
+var oLi = document.querySelector('.orderby li')
+console.log(oLi)
+var chapters = 50;  //50章
+var len = (chapters + '').length;
+console.log(len)  //2
+if (len == 1) len = 2;
+var divisor = Math.pow(10,len-1); //10的b次方
+console.log(divisor)
+var space = chapters / 3;
+console.log(space)
+if (space % divisor != 0) {
+    space = (parseInt(space/divisor) + 1)*divisor;
+    alert(space);
+}
+if (chapters <= space) {
+    //1-chapters
+//  $(".orderby ul")
+    var oA = document.createElement('a')
+    oA.href ='#'
+    oLi.appendChild(oA)
+    console.log( oLi.appendChild(oA))
+}
+else if (chapters <= space * 2) {
+    //1-space
+    //space+1-chapters
+}
+else {
+    //1-space
+    //space+1-2*space
+    //2*space+1-chapters
+}
+</script>-->
+<script>
+    var a = $('.chapter ul  li')[0].innerHTML;
+    var arr = $('.chapter ul  li');
+    temp = [];
+    //降序
+    $('.descend').click(function () {
+        var b = $('.chapter ul  li')[0].innerHTML;
+        if (b == a) {
+            show();
+            var temp2 = temp.reverse();
+            for (var j = 0; j < arr.length; j++) {
+                arr[j].innerHTML = temp2[j];
+            }
+        }
+        $('.ascend').css('color', "#fff");
+        $('.descend').css('color', '#F7D631');
+    })
+    //升序
+    $('.ascend').click(function () {
+        var c = $('.chapter ul  li')[0].innerHTML;
+        if (c == a) {
+            show();
+            for (var k = 0; k < arr.length; k++) {
+                arr[k].innerHTML = temp[k];
+            }
+
+        } else {
+            show();
+            var temp3 = temp.reverse();
+            for (var k = 0; k < arr.length; k++) {
+                arr[k].innerHTML = temp3[k];
+            }
+        }
+        $('.ascend').css('color', "#F7D631");
+        $('.descend').css('color', '#fff');
+    })
+    function show() {
+        for (var i = 0; i < arr.length; i++) {
+            temp.push(arr[i].innerHTML);
+        }
+    }
 </script>
