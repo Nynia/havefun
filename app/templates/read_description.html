@@ -21,13 +21,13 @@
 		</div>
 		<div class="super">
 			<div class="super_left books_left">
-				<img src="../static/img/cover.png" alt="五月潮汐" />
+				<img src="{{ book.cover }}" alt="{{ book.name }}" />
 			</div>
 			<div class="super_right books tides">
 				<ul>
 					<li>{{ book.name }}</li>
 					<li>作者：<span>{{ book.author }}</span></li>
-					<li>状态：<span>共{{ book.curchapter }}章 （已完结）</span></li>
+					<li>状态：<span>共{{ book.curchapter }}章 {% if book.state == '1' %}（已完结）{% endif %}</span></li>
 					<li>题材：<span>{{ book.catetory }}</span></li>
 					<li>打分
 					<img src="../static/img/ysolid.png" alt="" />
