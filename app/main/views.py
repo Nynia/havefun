@@ -108,12 +108,13 @@ def comicdetail():
 @main.route('/comicbrowse/<id>',methods=['GET'])
 def comicbrowse(id):
     chapter = request.args.get('chapter')
+    comic = Comic.query.get(int(id))
     myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
     myftp.login()
     filelist = myftp.listfiles('/comics'+'/'+id+'/'+chapter)
     filelist = ['/comics'+'/'+id+'/'+chapter+'/'+str(i+1)+'.jpg' for i in range(len(filelist))]
     print filelist
-    return render_template('cartoon_browse.html',imglist=filelist,cur=chapter,len=len(filelist))
+    return render_template('cartoon_browse.html',imglist=filelist,cur=chapter,len=comic.curchapter)
 
 @main.route('/reading',methods=['GET'])
 def reading():
