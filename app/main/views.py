@@ -131,6 +131,7 @@ def readinginfo():
     chapter_dict_list = []
     for c in chapters:
         chaptername = c.chaptername.split(' ')
+        print chaptername
         dict = {}
         dict['a'] = chaptername[0].split('-')[1]
         dict['b'] = chaptername[1] if len(chaptername)>1 else u'前言'
