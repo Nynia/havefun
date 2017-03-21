@@ -151,5 +151,5 @@ def readbrowse(id):
         chaptername = chaptername[0][:2]
     #print chapter
     ptaglist = re.findall(r'\<p\>[\s　]*(.*?)\<\/p\>',chapter.content)
-    ptaglist
+    print ptaglist
     return render_template('read_browse.html',ptaglist=ptaglist,name=chaptername,cur=chapter,len=len(chapters))
