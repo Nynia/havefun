@@ -31,15 +31,16 @@ body{
 .icon{
 	position: absolute;
 	bottom: 10px;
-	left: 9.13rem;
-	left: -webkit-calc(50% - 20px);
-	left:calc(50% - 20px);
+	left: 8.261rem;
+	left: -webkit-calc(50% - 2.377rem);
+	left:calc(50% - 2.377rem);
 	}
 .icon span{
 	text-align: center;
 	display: inline-block;
-	width: 10px;
-	height: 10px;
+	width: 0.4831rem;
+	height: 0.4831rem;
+	margin: 0 0.4831rem;
 	border-radius: 50%;
 	background-color:#c4c3c9;
 	}
@@ -53,10 +54,14 @@ body{
 .recommend{
 	width: 100%;
 	margin: 0 auto;
+	padding: 0 0.4831rem;
+	}
+.recommend_top{
+	overflow: hidden;
 	}
 .play_top{
-	line-height: 35px;
-	padding: 0 15px;
+	padding: 0 0.4831rem;
+	overflow: hidden;
 	}
 .play_top ul li:nth-child(1){
 	float: left;
@@ -64,9 +69,15 @@ body{
 .play_top ul li:nth-last-child(1){
 	float: right;
 	}
-.play_top img{
-	vertical-align: middle;
-	margin:0 0.25rem;
+.play_top ul li:nth-child(1) img{
+	width: 0.966rem;
+	height: 0.966rem;
+	margin-right:0.25rem;
+	}
+.play_top ul li:nth-child(2) img{
+	width: 0.2416rem;
+	height: 0.3382rem;
+	margin-left:0.25rem;
 	}
 .play_top span{
 	font-size: 0.746rem;
@@ -74,6 +85,7 @@ body{
 	}
 .play_bottom{
 	margin-top: 10px;
+	padding: 0 0.4831rem;
 	}
 .play_bottom ul li{
 	float: left;
@@ -81,6 +93,13 @@ body{
 	height: 4.5rem;
 	text-align: center;
 	overflow: hidden;
+	}
+.play_bottom ul li:nth-child(1){
+	/*margin-left: 20px;*/
+	text-align: left;
+	}
+.play_bottom ul li:nth-child(4){
+	text-align: right;
 	}
 .play_bottom ul li a{
 	display: block;
@@ -98,12 +117,21 @@ body{
 	width:25%;
 	text-align: center;
 	float: left;
-	line-height: 40px;
+	line-height: 1.9324rem;
+	}
+.recommend_top ul li:nth-child(1){
+	text-align: left;
+	}
+ .recommend_top ul li:nth-last-child(1){
+	text-align: right;
 	}
 .recommend_top ul li a{
 	width:25%;
-	font-size: 0.9rem;
-	} 
+	font-size: 0.74686rem;
+	}
+.recommend_bottom,.recommend_bottom ul{
+	overflow: hidden;
+	}
 .recommend_bottom ul li{
 	float: left;
 	text-align: center;
@@ -114,9 +142,8 @@ body{
 .recommend_bottom ul .index{
 	background: #feeebb;
 	color: #eba64b;
-	width: 115px;
-	height:129px;
-	margin-left: 3vw;
+	width: 5.57rem;
+	height:6.232rem;
 	position: relative;
 	}
 .recommend_bottom ul .games{
@@ -159,10 +186,6 @@ body{
 	color: #fff;
 	margin-top: 5px;
 	}
-
-
-
-
 
 /*我的页面*/
 .header{
@@ -287,7 +310,7 @@ html{font-size:62.5%;}
 	background: url(../img/sya.png) no-repeat;
 	background-size: contain;
 	background-position: center .1rem;
-	} 
+	}
 #my li:nth-last-child(1) div{
 	background: url(../img/mys.png) no-repeat;
 	background-size: contain;
@@ -302,7 +325,7 @@ html{font-size:62.5%;}
 	white-space: nowrap;
 	font-size: 0.613rem;
 	}
-/*登录页面*/ 
+/*登录页面*/
 .logins{
 	background: #f4f4f4;
 	}
@@ -329,7 +352,7 @@ html{font-size:62.5%;}
 	}
 .show label{
 	margin: 6px 0;
-	vertical-align: middle; 
+	vertical-align: middle;
 	display: inline-block;
 	width: 10vw;
 	height: 50px;
@@ -363,7 +386,7 @@ html{font-size:62.5%;}
 	right: 50px;
 	}
 .show input[type="submit"]{
-	outline: none; 
+	outline: none;
 	margin: 19px 0;
 	width: 68vw;
 	line-height: 45px;
@@ -428,6 +451,7 @@ html{font-size:62.5%;}
 	}
 .recommend_bottom .part:nth-child(1){
 	display: block;
+	overflow: hidden;
 	}
 .parts ul li{
 	position: relative;
@@ -484,10 +508,11 @@ html{font-size:62.5%;}
 	background-size: 100% 900px;
 	}
 .bar_top{
-	padding: 0.82rem;
+	padding: 0 0.82rem;
 	position: fixed;
 	top: 0;
 	height:2.4154rem;
+	line-height: 2.4154rem;
 	display: block;
 	width: 100%;
 	text-align: center;
@@ -835,12 +860,16 @@ dd a{
 	}
 /*阅读*/
 .classify{
-	margin: 20px auto;
+	margin: 0.869rem auto;
 	width: 90%;
+	}
+.sorts{
+	overflow: hidden;
+	line-height: 1.2077rem;
 	}
 .classify_left{
 	float: left;
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	}
 .classify_left img{
 	margin-right: 5px;
@@ -856,36 +885,49 @@ dd a{
 	height: 1.256rem;
 	}
 .classify_right span{
-	font-size: 0.76rem;
+	font-size: 0.6rem;
 	line-height: 1.256rem;
 	display: inline-block;
 	text-align: center;
 	width: 1.594rem;
+
 	}
 .on{
 	background: url(../img/off.png) no-repeat;
 	background-size: contain;
 	}
 .classify_right span:nth-child(1){
+	margin-left: 0.0967rem;
 	color: #fff;
 	}
 .classify_right span:nth-child(2){
 	color: #e9766f;
 	}
 .classify_bottom{
-	margin-top:10px;
+	margin-top:0.4831rem;
+	overflow: hidden;
 	}
 .classify_bottom ul li{
 	float: left;
-	margin: 0.48rem 0.72rem;
 	border-radius: 10px;
-	padding: 0 10px;
+	width: 3.1884rem;
+	height: 1.49758rem;
+	text-align: center;
+	margin-right:1.7rem;
+	margin-bottom: 0.3864rem;
+	}
+.classify_bottom ul li:nth-child(4n+4){
+	margin-right: 0;
+	float: right;
 	}
 .classify_bottom ul li span{
-	font-size: 0.9rem;
-	line-height: 30px;
+	font-size: 0.7468rem;
+	line-height: 1.4rem;
 	display: inline-block;
 	text-align: center;
+	}
+.lists{
+	overflow: hidden;
 	}
 .lists .open{
 	background: #f00;
@@ -901,8 +943,15 @@ dd a{
 	border: 1px solid #c64bf6;
 	color: #fff;
 	}
-.lists em{
-	margin-left:5px;
+.lists .ons span{
+	float: left;
+	margin-left: 0.3rem;
+	}
+.lists i{
+	float: right;
+	margin-right:0.3865rem;
+	margin-top: 0.2rem;
+	font-style: normal;
 	}
 .lists li:nth-child(2){
 	border: 1px solid #f6b709;
@@ -924,32 +973,45 @@ dd a{
 	}
 .lists li:nth-child(5){
 	border: 1px solid #7ec51f;
+	margin-bottom: 0;
 	}
 .lists li:nth-child(5) span{
 	color: #7ec51f;
 	}
 .lists li:nth-child(6){
 	border: 1px solid #ea3838;
+	margin-bottom: 0;
 	}
 .lists li:nth-child(6) span{
 	color: #ea3838;
 	}
 .lists li:nth-child(7){
 	border: 1px solid #e0c500;
+	margin-bottom: 0;
 	}
 .lists li:nth-child(7) span{
 	color: #e0c500;
 	}
 #book{
-	margin: 10px auto 0;
+	margin: 0 auto;
 	display: inline-block;
+	}
+#book ul{
+	overflow: hidden;
 	}
 #book ul li{
 	width: 30%;
 	text-align: center;
 	float: left;
-	margin-right: .34rem;
 	margin-bottom: 1.12rem;
+	}
+#book ul li img{
+	width: 100%;
+	}
+#book ul li:nth-child(3n+2){
+	width: 40%;
+	padding-left: 5%;
+	padding-right: 5%;
 	}
 #book ul li p{
 	font-size:  0.69rem;
@@ -958,22 +1020,10 @@ dd a{
 	margin-top: .9rem;
 	}
 @media (min-width:320px) and (max-width:375px){
-	#book ul li img{
-		/*width: 90%;*/
-		/*height: 90%;*/
+		.lists i{
+			margin-top: 0.08rem;
 		}
 	}
-@media (min-width:340px) and (max-width:375px){
-	.classify_bottom ul li {
-		margin: 0.24rem 0.65rem;
-		}
-	}
-@media (min-width:320px) and (max-width:340px){
-	.classify_bottom ul li{
-		margin: 0.24rem 0.55rem;
-		}
-	}
-
 /*阅读详情*/
 #read{
 	background: url(../img/bga.png);
@@ -983,9 +1033,14 @@ dd a{
 .super_right ul li:nth-child(2){
 	margin-top: 0.483rem;
 	}
+.super_right ul li:nth-child(5) img{
+	margin-bottom: 0.24154rem;
+	width: 0.7729rem;
+	height: 0.7246rem;
+	}
 .books_left img{
 	width: 6.4734rem;
-	height: 9.08rem;
+	height: 9rem;
 	}
 .books{
 	text-align:left;
@@ -995,6 +1050,9 @@ dd a{
 .books ul li:nth-child(1){
 	margin-left: -10px;
 	line-height: 0.966rem;
+	}
+.books ul li:nth-last-child(1){
+	bottom: 0;
 	}
 @media (min-width:320px) and (max-width:375px){
 		.tides ul li{
@@ -1016,7 +1074,7 @@ dd a{
 	padding: 0 5px;
 	}
 table{
-	width: 95%;
+	width: 100%;
 	border: 1px solid #fff;
 	text-align: center;
 	margin: 10px auto;
@@ -1034,7 +1092,10 @@ td{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	}
-
+table tr td:nth-child(2){
+	text-align: left;
+	padding-left: 1.2077rem;
+	}
 
 /*订购*/
 #main,#mains{
@@ -1076,7 +1137,6 @@ button{
 .order img{
 	margin-top: 50px;
 	}
-
 
 /*动漫详情页*/
 .descend,.ascend{
@@ -1121,7 +1181,12 @@ button{
 	}
 .comic{
 	margin: 2.4154rem auto 0;
-	text-align: center;
+	overflow: hidden;
+	padding: 0 0.82rem;
+	}
+.comic p{
+	font-size: 0.79rem;
+	text-indent: 2em;
 	}
 .comic img{
 	width: 100%;
@@ -1170,7 +1235,8 @@ button{
 	}
 @media (min-width:320px) and (max-width:375px){
 	/*.comic img{width: 90%;height: 90%;*/
-}
+	   }
+	}
 /*已订购样式*/
 .super .ordered{
 	background: #fff;
@@ -1189,7 +1255,7 @@ button{
 	background-color: rgba(0,0,0,0.8);
 	}
 .play_top a{
-	font-size: 0.9rem;
+	font-size: 0.7469rem;
 	}
 .slides{
 	width: 150px;
@@ -1240,7 +1306,7 @@ dd p{
 .perfect{
 	width: 90%;
 	margin: 2.4154rem auto 0;
-}
+}	
 .perfect p:nth-child(1){
 	font-size: 1.093rem;
 	font-weight: 800;
@@ -1252,12 +1318,6 @@ dd p{
 .monthly{
 	width: 94%;
 	margin: 0.483rem auto ;
-	height: 2.1256rem;
-	background: #f6d72f;
-	text-align: center;
-	line-height: 2.1256rem;
-	border-radius: 10px;
-	font-size: 0.7468rem;
 }
 .items{
 	width: 90%;

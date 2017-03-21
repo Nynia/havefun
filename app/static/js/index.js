@@ -40,3 +40,70 @@ $(document).ready(function(){
     $('.recommend_bottom .part').eq($index).show().siblings().hide();
   })
 })
+
+//游戏页面特惠礼包
+
+$.ajax({
+	type:"get",
+	url:"http://221.228.17.87/api/v1.0/packages",
+	data:{
+		type:2,
+	},
+	dataType:'jsonp',
+	success:function(data){
+		console.log(data);
+        var html = template('data',{data:data.data})
+		$('#package').html(html)
+		
+		for(var postId = 0;postId<data.data.length;postId++){
+			$("#package ul li")[postId].onclick = function(){
+				var id=$(this).attr("id")
+				location.href="package.html/#"+id	
+		
+			}
+		}
+	}
+});
+   $.ajax({
+   	type:""
+   });
+//游戏接口
+console.log($("#package ul li"))
+//热门推荐  推荐指数
+    $.ajax({
+	type:"get",
+	url:"http://221.228.17.87/api/v1.0/games", 
+	data:{
+		type:2,
+	},
+	dataType:'json',
+	success:function(data){
+		console.log(data);
+		var array=[];
+		for(var i=0;i<data.data.length;i++){
+			array.push(data.data[i])
+			if(i==3){break;}
+		}
+        var html = template('datas',{datas:array})
+        console.log(array)
+		$('#role').html(html)
+		
+	}
+});
+
+   $.ajax({
+	type:"get",
+	url:"http://221.228.17.87/api/v1.0/packages",
+	data:{
+		id:10,
+	},
+	dataType:'json',
+	success:function(data){
+		console.log(data);
+//      var html = template('games',{games:data.data})
+//      console.log(html)
+//		$('#role').html(html)
+	}
+});
+
+

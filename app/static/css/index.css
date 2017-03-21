@@ -55,10 +55,9 @@ a:hover {
   color: #333;
   margin: 0 .55rem;
 }
-
 .header-menu-container a.current {
   font-size: 1rem;
-  color: #7ec51f;
+  color: #5fa4e9;
   font-weight: 800;
 }
 .header-menu-container a.currents {
@@ -597,12 +596,13 @@ a:hover {
 }
 .banners  li div{
 	position: absolute;
-	bottom: 10px;
-	right: 10px;
-	font-size: 0.9rem;
+	bottom: 0.483rem;
+	right: 1.0145rem;
+	
 	}
 .banners li div a{
 	   color: #fff;
+	   font-size: 0.79rem;
 	}
 .banners li img,.banner li img{
 		width: 750px;
