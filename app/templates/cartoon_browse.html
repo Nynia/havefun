@@ -17,7 +17,7 @@
 </head>
 <body style="padding-bottom: 2.56rem;">
 <div class="bar_top cartoon_detail">
-    <a href="javascript:history.go(-1)"><img src="../static/img/right.png" alt=""/></a>
+    <a id="back" href="#"><img src="../static/img/right.png" alt=""/></a>
     <span>第{{ cur }}话</span>
 </div>
 <div class="comic">
@@ -97,4 +97,6 @@
         var nexta = $('.foot a').eq(1);
         nexta.attr('href', '/comicbrowse/' + bookid + '?chapter=' + (cur + 1).toString());
     }
+
+    $('#back').attr('href','/comicdescription?id=' + bookid);
 </script>
