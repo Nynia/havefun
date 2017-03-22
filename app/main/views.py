@@ -100,20 +100,18 @@ def comic():
     return render_template('cartoon.html',packages=packages)
 
 @main.route('/comic/<id>',methods=['GET'])
-def comicdetail(id):
-    comic = Comic.query.get(int(id))
-    return render_template('cartoon_description.html',comic=comic)
-
-@main.route('/comic/<id>',methods=['GET'])
 def comicbrowse(id):
     comic = Comic.query.get(int(id))
     chapter = request.args.get('chapter')
-    myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
-    myftp.login()
-    filelist = myftp.listfiles('/comics'+'/'+id+'/'+chapter)
-    filelist = ['/comics'+'/'+id+'/'+chapter+'/'+str(i+1)+'.jpg' for i in range(len(filelist))]
-    print filelist
-    return render_template('cartoon_browse.html',imglist=filelist,cur=chapter,len=comic.curchapter)
+    if chapter == None:
+        return render_template('cartoon_description.html', comic=comic)
+    else:
+        myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
+        myftp.login()
+        filelist = myftp.listfiles('/comics'+'/'+id+'/'+chapter)
+        filelist = ['/comics'+'/'+id+'/'+chapter+'/'+str(i+1)+'.jpg' for i in range(len(filelist))]
+        #print filelist
+        return render_template('cartoon_browse.html',imglist=filelist,cur=chapter,len=comic.curchapter)
 
 @main.route('/reading',methods=['GET'])
 def reading():

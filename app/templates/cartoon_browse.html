@@ -52,7 +52,7 @@
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur - 5).toString() + '话');
         aNode.appendChild(textNode);
-        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 5).toString();
+        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 5).toString();
         liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
@@ -61,7 +61,7 @@
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur - 4).toString() + '话');
         aNode.appendChild(textNode);
-        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 4).toString();
+        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 4).toString();
         liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
@@ -71,7 +71,7 @@
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur - 3).toString() + '话');
         aNode.appendChild(textNode);
-        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 3).toString();
+        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 3).toString();
         liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
@@ -80,7 +80,7 @@
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur - 2).toString() + '话');
         aNode.appendChild(textNode);
-        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 2).toString();
+        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 2).toString();
         liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
@@ -89,14 +89,14 @@
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (cur - 1).toString() + '话');
         aNode.appendChild(textNode);
-        aNode.href = '/comicbrowse/' + bookid + '?chapter=' + (cur - 1).toString();
+        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 1).toString();
         liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
     if (cur < sum) {
         var nexta = $('.foot a').eq(1);
-        nexta.attr('href', '/comicbrowse/' + bookid + '?chapter=' + (cur + 1).toString());
+        nexta.attr('href', '/comic/' + bookid + '?chapter=' + (cur + 1).toString());
     }
 
-    $('#back').attr('href','/comicdescription?id=' + bookid);
+    $('#back').attr('href','/comic/' + bookid);
 </script>
