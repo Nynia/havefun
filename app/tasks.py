@@ -155,7 +155,7 @@ def comic_init():
 def readings_job():
     base_url = 'http://127.0.0.1:5000/api/v1.0/readings'
     host = 'http://wap.tyread.com'
-    url = 'http://wap.tyread.com/baoyueInfoListAction.action?is_ctwap=0&monthProductId=169124282'
+    url = 'http://wap.tyread.com/baoyueInfoListAction.action?is_ctwap=0&monthProductId=169124282&pageNo=2'
     headers = {
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
@@ -186,62 +186,61 @@ def readings_job():
         # print soup
         cover_tag = soup.find('img', src=lambda src: src and re.compile("\.jpg$").search(src))
         cover_url = cover_tag['src']
-        info_tag = soup.find('div', class_="f-12 txt-gray")
-        text = info_tag.text
-        text = confir(text).replace(' ', '')
-        m = re.match(u'^(\S+)作者:(\S+)状态：(\S+)已有(\w+)人阅读', text)
+        m = re.search(u"content=\"(\S+)?,手机在线阅读。作者：(\S+)? ,分类：(\S+)?,已更新：(\d+)章,进度：(\S+)?,点击量：(\d+)?。作品介绍：(\S+)\"", r.text)
         if m:
             name = m.group(1)
             author = m.group(2)
-            state = m.group(3)
-            hits = m.group(4)
+            category = m.group(3)
+            curchapter = m.group(4)
+            state = m.group(5)
+            hits = m.group(6)
+            brief = m.group(7)
         m = re.search(r'bookId=(\d+)&', r.text)
         bookid = m.group(1)
-        brief_tag = soup.find(id='con_desc')
-        brief = brief_tag.string.strip()
-        print bookid, name, author, state, hits, cover_url, brief
+        print bookid, name, author, category,curchapter,state, hits, cover_url, brief
         # updata database
         url = 'http://127.0.0.1:5000/api/v1.0/readings'
         data = {
             'bookid': bookid,
             'name': name,
             'author': author,
-            'packageid': '135000000000000243168',
-            'state': '1' if state.encode("UTF-8") == '完本' else '0',
+            'packageid': 19,
+            'state': '1' if state.encode("UTF-8") == '已完本' else '0',
             'hits': hits,
             'cover': cover_url,
             'brief': brief,
-            'curchapter': 0,
-            'freechapter': 0
+            'curchapter': curchapter,
+            'freechapter': curchapter,
+            'category':category
         }
         r = requests.post(url, data=data)
         print r.text
 
         # 获取书本内容
-        menu_url = 'http://wap.tyread.com/bookdetail/%s/gobookdescription.html?is_ctwap=0&pagesize=10000&orderBy=0' % bookid
-        r = requests.get(menu_url, headers=headers, cookies=_cookies)
-        soup = BeautifulSoup(r.text, 'html.parser')
-        menutag = soup.find_all(href=lambda href: href and re.compile("^/goChapterContent.action").search(href))
-        url = 'http://127.0.0.1:5000/api/v1.0/chapters'
-        i = 1
-        for tag in menutag:
-            chapter_name = tag.string
-            chapter_url = host + tag['href']
-            r = requests.get(chapter_url, headers=headers, cookies=_cookies)
-            m = re.search(r'<div style=\"overflow:hidden;\">(.*?)</div>', r.text, re.S)
-            print chapter_name
-            if m:
-                chapter_content = '<p>    ' + m.group(1).strip()
-                # print chapter_content
-                data = {
-                    'chapterid': i-1,
-                    'chaptername': chapter_name,
-                    'content': chapter_content,
-                    'bookid': bookid
-                }
-                r = requests.post(url, data=data)
-                print r.text
-            i = i + 1
+        # menu_url = 'http://wap.tyread.com/bookdetail/%s/gobookdescription.html?is_ctwap=0&pagesize=10000&orderBy=0' % bookid
+        # r = requests.get(menu_url, headers=headers, cookies=_cookies)
+        # soup = BeautifulSoup(r.text, 'html.parser')
+        # menutag = soup.find_all(href=lambda href: href and re.compile("^/goChapterContent.action").search(href))
+        # url = 'http://127.0.0.1:5000/api/v1.0/chapters'
+        # i = 1
+        # for tag in menutag:
+        #     chapter_name = tag.string
+        #     chapter_url = host + tag['href']
+        #     r = requests.get(chapter_url, headers=headers, cookies=_cookies)
+        #     m = re.search(r'<div style=\"overflow:hidden;\">(.*?)</div>', r.text, re.S)
+        #     print chapter_name
+        #     if m:
+        #         chapter_content = '<p>    ' + m.group(1).strip()
+        #         # print chapter_content
+        #         data = {
+        #             'chapterid': i-1,
+        #             'chaptername': chapter_name,
+        #             'content': chapter_content,
+        #             'bookid': bookid
+        #         }
+        #         r = requests.post(url, data=data)
+        #         print r.text
+        #     i = i + 1
 
 
 readings_job()

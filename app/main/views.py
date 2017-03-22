@@ -70,7 +70,7 @@ def package():
         comic = Comic.query.get(int(comicid))
         id = comic.packageid
     elif bookid:
-        reading = Reading.query.get(int(bookid))
+        reading = Reading.query.filter_by(bookid=bookid)
         id = reading.packageid
     else:
         id = request.args.get('id')

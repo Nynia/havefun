@@ -237,6 +237,8 @@ class Reading(db.Model):
     recentupdatetime = db.Column(db.String(14))
     modifiedtime = db.Column(db.String(14))
 
+    category = db.Column(db.String(255))
+
     def __repr__(self):
         return '<Reading %r>' % self.name
 
@@ -250,6 +252,7 @@ class Reading(db.Model):
             'state':self.state,
             'hits':self.hits,
             'brief':self.brief,
+            'category':self.category,
             'cover':self.cover,
             'curchapter':self.curchapter,
             'freechapter':self.freechapter,

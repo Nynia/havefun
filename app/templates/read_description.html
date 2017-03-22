@@ -29,13 +29,6 @@
 					<li>作者：<span>{{ book.author }}</span></li>
 					<li>状态：<span>共{{ book.curchapter }}章 {% if book.state == '1' %}（已完结）{% endif %}</span></li>
 					<li>题材：<span>{{ book.catetory }}</span></li>
-					<li>打分
-					<img src="../static/img/ysolid.png" alt="" />
-					<img src="../static/img/ysolid.png" alt="" />
-					<img src="../static/img/ysolid.png" alt="" />
-					<img src="../static/img/yempty.png" alt="" />
-					<img src="../static/img/yempty.png" alt="" />
-					</li>
 					<li><a id="start" href="/reading/{{ book.bookid }}?chapter=1"><img src="../static/img/start.png" alt="" /></a></li>
 				</ul>
 			</div>
