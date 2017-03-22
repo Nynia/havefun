@@ -64,7 +64,17 @@ def game():
 
 @main.route('/package',methods=['GET'])
 def package():
-    id = request.args.get('id')
+    comicid = request.args.get('comicid')
+    bookid = request.args.get('bookid')
+    if comicid:
+        comic = Comic.query.get(int(comicid))
+        id = comic.packageid
+    elif bookid:
+        reading = Reading.query.get(int(bookid))
+        id = reading.packageid
+    else:
+        id = request.args.get('id')
+
     package = Package.query.get(int(id))
     ordered = False
     if not current_user.is_anonymous:

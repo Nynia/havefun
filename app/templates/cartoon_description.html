@@ -108,7 +108,6 @@
             temp.push(arr[i].innerHTML);
         }
     }
-
     function GetQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
@@ -117,5 +116,7 @@
         return null;
     }
     var backurl = GetQueryString('backUrl');
-    $('#back').attr('href', backurl);
+    var url = window.location.href;
+    var id = url.substring(url.lastIndexOf('/') + 1, url.length);
+    $('#back').attr('href', '/package?comicid='+id);
 </script>
