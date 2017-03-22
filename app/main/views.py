@@ -108,8 +108,6 @@ def comicdetail():
 @main.route('/comicbrowse/<id>',methods=['GET'])
 def comicbrowse(id):
     chapter = request.args.get('chapter')
-    if chapter == None:
-        chapter = '1'
     comic = Comic.query.get(int(id))
     myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
     myftp.login()
