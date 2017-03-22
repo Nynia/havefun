@@ -59,7 +59,7 @@
 <div class="chapter">
     <ul class="session">
         {% for i in range(comic.curchapter) %}
-            <li><a href="comic/{{ comic.id }}?chapter={{ i+1 }}">第{{ i+1 }}话</a></li>
+            <li><a href="/comic/{{ comic.id }}?chapter={{ i+1 }}">第{{ i+1 }}话</a></li>
         {% endfor %}
     </ul>
 </div>
