@@ -1033,6 +1033,7 @@ dd a{
 	}
 .lists li:nth-child(6){
 	border: 1px solid #ea3838;
+	margin-bottom: 0;
 	}
 .lists li:nth-child(6) span{
 	color: #ea3838;
