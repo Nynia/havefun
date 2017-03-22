@@ -14,7 +14,7 @@
 	</head>
 	<body style="padding-bottom:2.56rem;">
 		<div class="bar_top cartoon_detail" style="padding-bottom: 2.56rem;">
-			<a href="javascript:history.go(-1)"><img src="../static/img/right.png" alt="" /></a>
+			<a id="back" href="#"><img src="../static/img/right.png" alt="" /></a>
 			<span>{{ name }}</span>
 		</div>
 		<div class="comic">
@@ -41,10 +41,11 @@
     var bookid = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
     if (cur < sum) {
         var nexta = $('.foot a').eq(1);
-        nexta.attr('href','/readbrowse/' + bookid + '?chapter=' + (cur + 1).toString());
+        nexta.attr('href','/reading/' + bookid + '?chapter=' + (cur + 1).toString());
     }
     if (cur > 0) {
         var preva = $('.foot a').eq(0);
-        preva.attr('href','/readbrowse/' + bookid + '?chapter=' + (cur - 1).toString());
+        preva.attr('href','/reading/' + bookid + '?chapter=' + (cur - 1).toString());
     }
+    $('#back').attr('href','/reading/' + bookid);
 </script>

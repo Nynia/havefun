@@ -129,34 +129,31 @@ def reading():
     print packages
     return render_template('reading.html',packages=packages)
 
-@main.route('/readinfo',methods=['GET'])
-def readinginfo():
-    id = request.args.get('id')
-    reading = Reading.query.get(int(id))
-    bookid = reading.bookid
-    chapters = Chapter.query.filter_by(bookid=bookid).order_by(Chapter.id).all()
-    chapter_dict_list = []
-    for c in chapters:
-        chaptername = c.chaptername.split(' ')
-        print chaptername
-        dict = {}
-        dict['a'] = chaptername[0].split('-')[1]
-        dict['b'] = chaptername[1] if len(chaptername)>1 else u'前言'
-        dict['id'] = c.chapterid
-        chapter_dict_list.append(dict)
-    return render_template('read_description.html',book=reading,chapters=chapter_dict_list)
-
-@main.route('/readbrowse/<id>',methods=['GET'])
-def readbrowse(id):
-    chapterid = request.args.get('chapter')
+@main.route('/reading/<id>',methods=['GET'])
+def readinginfo(id):
     chapters = Chapter.query.filter_by(bookid=id).order_by(Chapter.chapterid).all()
-    chapter = chapters[int(chapterid)-1]
-    chaptername = chapter.chaptername.split(' ')
-    if len(chaptername) > 1:
-        chaptername = chapter.chaptername[3:]
+    chapterid = request.args.get('chapter')
+    if chapterid:
+        chapter = chapters[int(chapterid) - 1]
+        chaptername = chapter.chaptername.split(' ')
+        if len(chaptername) > 1:
+            chaptername = chapter.chaptername[3:]
+        else:
+            chaptername = chaptername[0][:2]
+        # print chapter
+        ptaglist = re.findall(u'\<p\>[\s　]*(.*?)\<\/p\>', chapter.content)
+        #print ptaglist
+        return render_template('read_browse.html', ptaglist=ptaglist, name=chaptername, cur=chapter, len=len(chapters))
     else:
-        chaptername = chaptername[0][:2]
-    #print chapter
-    ptaglist = re.findall(u'\<p\>[\s　]*(.*?)\<\/p\>',chapter.content)
-    print ptaglist
-    return render_template('read_browse.html',ptaglist=ptaglist,name=chaptername,cur=chapter,len=len(chapters))
+        reading = Reading.query.get(int(id))
+        chapter_dict_list = []
+        for c in chapters:
+            chaptername = c.chaptername.split(' ')
+            print chaptername
+            dict = {}
+            dict['a'] = chaptername[0].split('-')[1]
+            dict['b'] = chaptername[1] if len(chaptername)>1 else u'前言'
+            dict['id'] = c.chapterid
+            chapter_dict_list.append(dict)
+        return render_template('read_description.html',book=reading,chapters=chapter_dict_list)
+

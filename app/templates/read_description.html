@@ -17,7 +17,7 @@
 	</head>
 	<body id="read" style="padding-bottom: 2.56rem;">
 		<div class="bar_top">
-			<a href="javascript:history.go(-1)"><img src="../static/img/back.png" alt="" /></a>
+			<a id="back" href="#"><img src="../static/img/back.png" alt="" /></a>
 		</div>
 		<div class="super">
 			<div class="super_left books_left">
@@ -36,7 +36,7 @@
 					<img src="../static/img/yempty.png" alt="" />
 					<img src="../static/img/yempty.png" alt="" />
 					</li>
-					<li><img src="../static/img/starts.png" alt="" /></li>
+					<li>><a id="start" href="/reading/{{ book.id }}?chapter=1"><img src="../static/img/start.png" alt="" /></a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -71,3 +71,8 @@
 </html>
 <script src="../static/js/cartoon_description.js"></script>
 <script src="../static/js/font.js"></script>
+<script>
+    var url = window.location.href;
+    var id = url.substring(url.lastIndexOf('/') + 1, url.length);
+    $('#back').attr('href', '/package?bookid='+id);
+</script>
