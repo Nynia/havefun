@@ -49,7 +49,7 @@ def orderaction():
                     orderhistory.createtime = timestamp
                 else:
                     orderaction.endtime = timestamp
-                    orderaction.status = '0'
+                    orderaction.status = '4'
                     orderhistory.action = '0'
                     orderhistory.createtime = timestamp
 

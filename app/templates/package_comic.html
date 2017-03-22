@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<html lang="zh-cmn-Hans" xmlns:javascript="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="robots" content="index,follow">
@@ -31,7 +31,7 @@
 				<div class="list">
 					<ul>
                         {% for c in comics %}
-                            <li><a href="comic/{{ c.id }}"><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
+                            <li><a href="comic/{{ c.id }}?backUrl=\"javascript:window.location.href\""><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
                         {% endfor %}
 					</ul>
 				</div>
