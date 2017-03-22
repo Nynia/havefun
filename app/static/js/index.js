@@ -41,32 +41,6 @@ $(document).ready(function(){
   })
 })
 
-//游戏页面特惠礼包
-
-$.ajax({
-	type:"get",
-	url:"http://221.228.17.87/api/v1.0/packages",
-	data:{
-		type:2,
-	},
-	dataType:'jsonp',
-	success:function(data){
-		console.log(data);
-        var html = template('data',{data:data.data})
-		$('#package').html(html)
-		
-		for(var postId = 0;postId<data.data.length;postId++){
-			$("#package ul li")[postId].onclick = function(){
-				var id=$(this).attr("id")
-				location.href="package.html/#"+id	
-		
-			}
-		}
-	}
-});
-   $.ajax({
-   	type:""
-   });
 //游戏接口
 console.log($("#package ul li"))
 //热门推荐  推荐指数

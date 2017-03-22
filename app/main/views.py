@@ -97,11 +97,10 @@ def package():
         print books
         return render_template('package_reading.html', package=package, books=books, flag=ordered)
 
-@main.route('/gamedetail',methods=['GET'])
-def gamedetail():
-    id = request.args.get('id')
+@main.route('/game/<id>',methods=['GET'])
+def gamedetail(id):
     game = Game.query.get(int(id))
-    return render_template('game_detail.html',game=game)
+    return render_template('game_description.html',game=game)
 
 @main.route('/comic',methods=['GET'])
 def comic():
