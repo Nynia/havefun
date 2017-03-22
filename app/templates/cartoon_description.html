@@ -26,10 +26,10 @@
         <ul>
             <li>{{ comic.comicname }}</li>
             <li>作者：<span>{{ comic.author }}</span></li>
-            <li>状态：<span>更新至{{ comic.curchapter }}集</span></li>
+            <li>状态：<span>更新至{{ comic.curchapter }}话</span></li>
             <li>题材：<span>{{ comic.category }}</span></li>
             <li>人气： <span>{{ comic.hits }}</span></li>
-            <li><a href="#"><img src="../static/img/start.png"></a></li>
+            <li><a id="start" href="comicbrowse/{{ comic.id }}"><img src="../static/img/start.png"></a></li>
         </ul>
     </div>
     <div class="clear"></div>
@@ -59,7 +59,7 @@
 <div class="chapter">
     <ul class="session">
         {% for i in range(comic.curchapter) %}
-            <li><a href="comicbrowse/{{ comic.id }}?chapter={{ i+1 }}">第{{ i+1 }}章</a></li>
+            <li><a href="comicbrowse/{{ comic.id }}?chapter={{ i+1 }}">第{{ i+1 }}话</a></li>
         {% endfor %}
     </ul>
 </div>
@@ -67,39 +67,6 @@
 </html>
 <script src="../static/js/cartoon_description.js"></script>
 <script src="../static/js/font.js"></script>
-<!--<script>
-var oLi = document.querySelector('.orderby li')
-console.log(oLi)
-var chapters = 50;  //50章
-var len = (chapters + '').length;
-console.log(len)  //2
-if (len == 1) len = 2;
-var divisor = Math.pow(10,len-1); //10的b次方
-console.log(divisor)
-var space = chapters / 3;
-console.log(space)
-if (space % divisor != 0) {
-    space = (parseInt(space/divisor) + 1)*divisor;
-    alert(space);
-}
-if (chapters <= space) {
-    //1-chapters
-//  $(".orderby ul")
-    var oA = document.createElement('a')
-    oA.href ='#'
-    oLi.appendChild(oA)
-    console.log( oLi.appendChild(oA))
-}
-else if (chapters <= space * 2) {
-    //1-space
-    //space+1-chapters
-}
-else {
-    //1-space
-    //space+1-2*space
-    //2*space+1-chapters
-}
-</script>-->
 <script>
     var a = $('.chapter ul  li')[0].innerHTML;
     var arr = $('.chapter ul  li');
