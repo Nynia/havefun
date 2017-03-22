@@ -1,8 +1,8 @@
-/**{
+*{
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
- }*/
+ }
 a{
 	text-decoration: none;
 	color: #000;
@@ -56,9 +56,8 @@ body{
 	margin: 0 auto;
 	padding: 0 0.4831rem;
 	}
-.recommend_top,.recommend_top ul{
+.recommend_top{
 	overflow: hidden;
-	margin-bottom: 0;
 	}
 .play_top{
 	padding: 0 0.4831rem;
@@ -88,44 +87,40 @@ body{
 	margin-top: 10px;
 	padding: 0 0.4831rem;
 	}
-.play_bottom ul{
-	overflow: hidden;
-	}
 .play_bottom ul li{
 	float: left;
+	width:25%;
+	height: 4.5rem;
+	text-align: center;
 	overflow: hidden;
 	}
-.play_bottom ul li:nth-child(1),.play_bottom ul li:nth-child(2),.play_bottom ul li:nth-child(3){
-	padding-right:1.3rem;
-	padding-right: -webkit-calc(100% / 3 - 5.088rem);
-	padding-right:calc(100% / 3 - 5.088rem);
+.play_bottom ul li:nth-child(1){
+	/*margin-left: 20px;*/
+	text-align: left;
+	}
+.play_bottom ul li:nth-child(4){
+	text-align: right;
 	}
 .play_bottom ul li a{
 	display: block;
 	}
 .play_bottom ul li 	img{
 	width: 3.816rem;
-	height: 3.816rem;
 	}
+
 .line,main>img{
 	width: 100%;
 	height: 0.6rem;
 	background: #eeeeee;
 	}
 .recommend_top ul li{
+	width:25%;
 	text-align: center;
 	float: left;
 	line-height: 1.9324rem;
-	
 	}
-.recommend_top ul li a{
-	width: 2.987rem;
-	height: 1.9324rem;
-	}
-.recommend_top ul li:nth-child(1),.recommend_top ul li:nth-child(2),.recommend_top ul li:nth-child(3){
-	padding-right:2.3454rem;
-	padding-right: -webkit-calc(100% / 3 - 4rem);
-	padding-right:calc(100% / 3 - 4rem);
+.recommend_top ul li:nth-child(1){
+	text-align: left;
 	}
  .recommend_top ul li:nth-last-child(1){
 	text-align: right;
@@ -133,14 +128,14 @@ body{
 .recommend_top ul li a{
 	width:25%;
 	font-size: 0.74686rem;
-	} 
+	}
 .recommend_bottom,.recommend_bottom ul{
 	overflow: hidden;
 	}
-.recommend_bottom div:nth-child(1) ul li{
+.recommend_bottom ul li{
 	float: left;
 	text-align: center;
-	height:6.232rem;
+	height:129px;
 	margin:10px 0 20px 0;
 	position: relative;
 	}
@@ -150,22 +145,13 @@ body{
 	width: 5.57rem;
 	height:6.232rem;
 	position: relative;
-	line-height: 1.45;
 	}
-.recommend_bottom ul .games p{
-	font-size: 0.5604rem;
+.recommend_bottom ul .games{
+	width: calc((100vw - 115px - 3vw)/2);
 	}
-.recommend_bottom div:nth-child(1) ul li:nth-child(3n+2){
-	 padding-left: 15%;
-	 padding-right: 15%;
-	}
-.games>img{
-	width:3.8164rem;
-	height:3.8164rem;
-	}
-.games a img{
-	 width: 3.816rem;
-	 height: 1.546rem;
+.games img{
+	width:79px;
+	height:79px;
 	}
 .recommend_bottom ul .indexs{
 	background: #eeffb8;
@@ -175,40 +161,31 @@ body{
 	font-size: 1rem;
 	line-height: 30px;
 	}
-.recommend_bottom .index p:nth-child(1){
-	font-size: 0.7468rem;
-	margin-top: 0.2rem;
-	}
-.recommend_bottom .index p:nth-child(2),.recommend_bottom .index p:nth-child(4){
-	font-size: 0.561rem;
+.recommend_bottom ul li p{
+	font-size: 0.725rem;
 	}
 .more{
 	position: absolute;
-	left: 1.755rem;
-	left: -webkit-calc(50% - 1.8841rem);
-	left: calc(50% - 1.8841rem);
-	margin-top: 0.24154rem;
+	left: calc(50% - 39px);
+	margin: 5px 0;
 	}
 .more a{
 	display: inline-block;
+	position: absolute;
+	bottom: 10px;
+	font-size: 0.75rem;
+	left: 10px;
+	color: #fff;
 	}
-.more a img{
-	width: 3.8164rem;
-	height: 1.0628rem;
+.recommend_bottom ul .games a p{
+	line-height: 30px;
+	background: #2d6efc;
+	border-radius: 10px;
+	width: 5rem;
+	display: inline-block;
+	color: #fff;
+	margin-top: 5px;
 	}
-@media  (min-width: 320px) and (max-width: 360px){
-	.recommend_bottom div:nth-child(1) ul li:nth-child(3n+2){
-		 padding-left: 14%;
-		 padding-right: 13%;
-		}
-	.recommend_bottom .index p{
-		 line-height: 1.3;
-		}
-	.recommend_bottom .index div{
-		 line-height: 1;
-	}
-	}
-
 
 /*我的页面*/
 .header{
@@ -308,11 +285,24 @@ main{
 .watchs .column{
 	margin-top: 20px;
 	}
-@media  (min-width: 320px) and (max-width: 375px){
+@media  (min-width: 320px) and (max-width: 425px){
+	.watchs ul li img{
+		width: 90%;
+		/*height: 80%;*/
+		}
 	.watchs ul li:nth-last-child(1) img{
 		height: 51px;
 		}
 	}
+/*控制基准html的大小*/
+
+html{font-size:62.5%;}
+@media (min-width: 360px) and (max-width: 400px) {
+     html{font-size: 90%;}
+}
+@media (min-width: 401px){
+     html{font-size: 110%;}
+}
 .set{
 	margin-bottom: 2.4rem;
 	}
@@ -320,7 +310,7 @@ main{
 	background: url(../img/sya.png) no-repeat;
 	background-size: contain;
 	background-position: center .1rem;
-	} 
+	}
 #my li:nth-last-child(1) div{
 	background: url(../img/mys.png) no-repeat;
 	background-size: contain;
@@ -335,7 +325,7 @@ main{
 	white-space: nowrap;
 	font-size: 0.613rem;
 	}
-/*登录页面*/ 
+/*登录页面*/
 .logins{
 	background: #f4f4f4;
 	}
@@ -362,7 +352,7 @@ main{
 	}
 .show label{
 	margin: 6px 0;
-	vertical-align: middle; 
+	vertical-align: middle;
 	display: inline-block;
 	width: 10vw;
 	height: 50px;
@@ -396,7 +386,7 @@ main{
 	right: 50px;
 	}
 .show input[type="submit"]{
-	outline: none; 
+	outline: none;
 	margin: 19px 0;
 	width: 68vw;
 	line-height: 45px;
@@ -456,37 +446,37 @@ main{
 .parts ul li{
 	margin: 10px 0;
 	}
+.recommend_bottom .part{
+	display: none;
+	}
 .recommend_bottom .part:nth-child(1){
 	display: block;
 	overflow: hidden;
 	}
-.recommend_bottom .part{
-	display: none;
-	}
 .parts ul li{
 	position: relative;
 	}
-.parts ul li a{
-	overflow: hidden;
-	}
 .parts ul li img{
-	width: 18.65rem;
-	height: 6.1836rem;
+	width: 386px;
+	height: 128px;
 	}
 .parts ul li a  div{
 	position: absolute;
-	bottom: 0.4831rem;
-	right: 0.4831rem;
+	bottom: 10px;
+	right: 10px;
 	color: #fff;
-	font-size: 0.7469rem;
+	}
+@media (min-width: 320px) and (max-width: 375px){
+	.parts ul li img{
+		width: 95%;
+		height: 95%;
+		}
 	}
 /*热门推荐游戏分类*/
 .role_play ul li{
-	width: 9.5rem;
-	height: 5rem;
+	width: 10rem;
 	text-align: center;
 	position: relative;
-	float: left;
 	}
 .role_play ul li a{
 	display: block;
@@ -500,8 +490,8 @@ main{
 	vertical-align: middle;
 	position: absolute;
 	right: 10%;
-	width: 3.768rem;
-	height: 3.768rem;
+	width: 78px;
+	height: 78px;
 	}
 .role_play ul li a p:nth-child(1){
 	font-size: 0.69rem;
@@ -544,45 +534,36 @@ main{
 	line-height: 1.55rem;
 	position: absolute;
 	right: 0;
-	font-size: 1.353rem;
-	/*width: 10.144rem;
-	height: 9.1787rem;*/
+	width: 10.144rem;
+	height: 9.1787rem;
 	}
-.super .button{
+.super_right li:nth-child(1){
+	font-size:1.06rem;
+	}
+.super button{
+	background: #fde000;
+	border:1px solid #fde000;
+	border-radius: 10px;
+	width:72px;
+	height:31px;
 	position: absolute;
 	bottom: 0;
 	right: 0;
 	margin: 0;
 	}
-.super .button img,.download img{
-	width:3.478rem!important;
-	height:1.4976rem!important;
-	}
 .summary{
-	margin: 1rem auto 0;
+	margin: 20px auto 0;
 	color: #fff;
 	width: 90%;
 	}
-.picture{
-	margin-left: 5%;
-	}
-#game_package>p,.style p:nth-child(1){
-	font-size: 0.8266rem!important;
-	margin-bottom: 0;
-	}
-#game_package dd{
-	margin-top: 0.4831rem;
-	text-indent: 2em;
-	}
 /*详细收起*/
 #intro_short  p{
-	text-overflow: -o-ellipsis-lastline; 
-	overflow: hidden;  
+	text-overflow: -o-ellipsis-lastline;
+	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
-	margin-bottom: 0;
 	}
 .fly{
 	/*font-size: 0.586rem!important;*/
@@ -591,8 +572,8 @@ dd a{
 	color: #F7D631;
 	font-size: 0.586rem;
 	}
-.summary p:nth-child(1){
-	font-size: 0.746rem;
+.summary p:nth-child(1),.style p:nth-child(1){
+	font-size:   0.746rem;
 	}
 .summary p:nth-child(2){
 	margin-top: 20px;
@@ -605,84 +586,63 @@ dd a{
 	margin-top: 10px;
 	text-align: center;
 	float: left;
-	}	
+	width: 23.8%;
+	}
 .style ul{
-	margin: 10px 0;
+	margin: 10px 5px;
 	text-align: center;
-	overflow: hidden;
 	}
 .style ul li {
+	margin: 5px 2px;
 	text-align: center;
 	}
-.style ul li a{
-	overflow: hidden;
-	}
-.style ul li:nth-child(4n+1),.style ul li:nth-child(4n+2),.style ul li:nth-child(4n+3){
-	padding-right: 0.82rem;
-	padding-right: -webkit-calc(100% /3 - 5.1rem);
-	padding-right:calc(100% /3 - 5.1rem);
-	}
 .style ul li img{
-	width: 3.816rem;
-	height: 3.816rem;
-	}
-.style ul li p{
-	margin: 0!important;
-	font-size: 0.641rem;
-	color: #fff;
-	line-height: 25px;
+	width: 79px;
+	height: 78px;
 	}
 @media (min-width: 320px) and (max-width: 375px){
+		/*.super_right{
+			width: 10.144rem;
+			height: 9.1787rem;
+		}*/
 		.snows{
 			height: 95%;
 			}
 		}
-@media (min-width: 320px) and (max-width: 360px){
-	.style ul li:nth-child(4n+1),.style ul li:nth-child(4n+2),.style ul li:nth-child(4n+3){
-		padding-right: 0.464rem;
-		padding-right: -webkit-calc(100% /3 - 5.4rem);
-		padding-right:calc(100% /3 - 5.4rem);
-	}
+@media (min-width: 320px) and (max-width: 375px){
+	.style li a img{
+		width:90%;
+		height: 90%;
+		}
 	}
 @media (min-width: 320px) and (max-width: 375px){
 	.summary p:nth-child(2){
-		/*font-size: 1.2rem;*/
+		font-size: 1.2rem;
+		}
+	}
+@media (min-width: 320px) and (max-width: 375px){
+	.style ul li{
+		width: 23.5%;
+		height: 23.5%;
 		}
 	}
 /*极地雪球冒险*/
-.game img{
-	width: 6.4735rem;
-	height: 6.4735rem;
-	}
-.snows{
-	position: absolute;
-	right: 13%;
-	}
-.snows li:nth-child(1){
-	font-size:1.067rem;
-	margin-top: -0.2rem;
-	}
-.snows li:nth-child(2),.snows li:nth-child(3),.snows li:nth-child(4){
-	font-size: 0.7469rem;
-	line-height: 1.7;
-	}
-.snows li:nth-child(2) img{
-	width: 0.773rem;
-	height: 0.773rem;
-	margin-top: -5px;
-	}
-.snows ul{
-	margin-bottom:0 ;
-	float: left;
+.supers .download{
+	margin-top: 10px;
+	right: auto;
+	color: #000;
 	}
 .screenshots{
 	margin-top: 20px;
 	}
 .snow img{
-	width: 17.633rem;
-	height: 10.58rem;
+	width: 365px;
+	height: 219px;
 	}
-/*@media (min-width: 360px) and (max-width: 375px){
+.picture{
+	padding: 17px 0 0 17px;
+	}
+@media (min-width: 360px) and (max-width: 375px){
 	.swiper-slide img{
 		width: 310px;
 		height: 200px;
@@ -693,7 +653,7 @@ dd a{
 		width: 280px;
 		height: 200px;
 		}
-	}*/
+	}
 
 /*动漫页面*/
 
@@ -722,18 +682,17 @@ dd a{
 	}
 .world ul li div span:nth-child(1){
 	border-bottom: 1px solid #fff;
-	font-size: 0.7464rem;
+	font-size: 0.9rem;
 	padding: 0.24154rem;
 	}
 .world ul li div p{
-	font-size: 0.7464rem;
+	font-size: 0.9rem;
 	line-height: 1.449rem;
 	}
 .world ul li div span:nth-child(3){
-	font-size: 0.5329rem;
+	font-size: 0.69rem;
 	float: left;
 	margin-left: 0.7246rem;
-	line-height: 1.9;
 	}
 .world ul li div span:nth-child(3) img{
 	margin-right: 0.1449rem;
@@ -754,12 +713,10 @@ dd a{
 	position: absolute;
 	right: 0.4831rem;
 	top: 0.4831rem;
-	width: 2.7536rem;
-	height: 1.4rem;
-	line-height: 1.4rem;
+	padding:0.1932rem 0;
 	background: #5e6364;
 	opacity: 0.8;
-	border-radius: 10px;
+	border-radius: 15px;
 	color: #fff;
 	font-size: 0.69rem;
 	}
@@ -767,8 +724,8 @@ dd a{
 	margin-left: 0.24154rem;
 	}
 .thumb img{
-	margin-left:0.24154rem;
-	margin-top: -0.2rem;
+	vertical-align: middle;
+	margin: 0 0.24154rem 0.24154rem;
 	}
 .defeat .update{
 	position: absolute;
@@ -802,6 +759,15 @@ dd a{
 		top: 5px;
 		}
 	}
+@media (min-width: 320px) and (max-width: 375px){
+	.world ul li div span:nth-last-child(1){
+		/*margin: -8px 10px 0 0;*/
+		}
+	.world ul li div span:nth-child(3){
+		/*margin-top: -12px;*/
+		}
+	}
+
 /*漫漫世界精品包*/
 #cartoon{
 	background: url(../img/bg.png) no-repeat;
@@ -812,11 +778,11 @@ dd a{
 	background: #fff;
 	border-radius: 10px;
 	width: 93%;
-	overflow: hidden;
+	height: 69.7077rem;
 	}
 .detail_page{
 	position: absolute;
-	top:2.2rem;
+	top:3.382rem;
 	left: 1.4rem;
 	width: 86%;
 	}
@@ -838,40 +804,24 @@ dd a{
 	display: inline-block;
 	font-size:  1.09rem;
 	margin-bottom: 0;
-	margin-top: 1.21rem;
 	}
 .detail_right p:nth-child(2){
 	margin-top: 0.48rem;
 	font-size: 0.74rem;
-	line-height: 1.2;
+	margin-bottom: 0;
 	}
 .detail .list{
+	position: absolute;
+	top: 14.49rem;
 	margin: 0 auto;
-	width: 92.8%;
-	zoom: 1;
-	}
-.list ul{
-	margin-top: 6.89rem;
-	overflow: hidden;
-	}
-.clearfloat:after{
-	display: block;
-	clear: both;
-	content: "";
-	visibility: hidden;
-	height: 0;
-	
+	width: 86%;
+	left: 1.4rem;
 	}
 .list ul li{
 	float: left;
+	margin: 0 0.5% 0 1.5%;
 	position: relative;
 	width: 48%;
-	}
-.list ul li:nth-child(2n+1){
-	margin-right: 3.5%;
-	}
-.list ul li:nth-child(2n+2){
-	margin-left: 0.5%;
 	}
 .list ul li  a{
 	display: block;
@@ -880,20 +830,17 @@ dd a{
 	position: absolute;
 	bottom: 1.45rem;
 	color: #fff;
-	padding: 8.8rem 0 0 0.4830rem;
+	padding: 8.5rem 0.3865rem 0.24154rem 0.4830rem;
 	font-size: 0.53rem;
-	background: rgba(0,0,0,0.4);
-	width: 100%;
+	background: rgba(0,0,0,0.25);
+	width: 7.971rem;
 	height: 10.628rem;
 	}
 .list li div p{
 	position: absolute;
-	
 	}
 .list li div img{
-	margin-right: 0.24154rem;
-	width: 0.6764rem;
-	height: 0.5314rem;
+	padding: 0 5px 0 0;
 	}
 .summer{
 	font-size: 0.6937rem;
@@ -902,13 +849,13 @@ dd a{
 	}
 
 /*媒体查询*/
-@media (min-width: 320px) and (max-width: 375px){
+@media (min-width: 320px) and (max-width: 360px){
 	.detail .list{
-		/*position: absolute;
-		top: 15.49rem;*/
+		position: absolute;
+		top: 15.49rem;
 		}
 	.list li div{
-		padding-top: 8.5rem;
+		padding-top: 8rem;
 		}
 	}
 /*阅读*/
@@ -943,7 +890,7 @@ dd a{
 	display: inline-block;
 	text-align: center;
 	width: 1.594rem;
-	
+
 	}
 .on{
 	background: url(../img/off.png) no-repeat;
@@ -999,7 +946,7 @@ dd a{
 .lists .ons span{
 	float: left;
 	margin-left: 0.3rem;
-	} 
+	}
 .lists i{
 	float: right;
 	margin-right:0.3865rem;
@@ -1044,7 +991,7 @@ dd a{
 	}
 .lists li:nth-child(7) span{
 	color: #e0c500;
-	}	
+	}
 #book{
 	margin: 0 auto;
 	display: inline-block;
@@ -1059,7 +1006,7 @@ dd a{
 	margin-bottom: 1.12rem;
 	}
 #book ul li img{
-	/*width: 100%;*/
+	width: 100%;
 	}
 #book ul li:nth-child(3n+2){
 	width: 40%;
@@ -1093,7 +1040,7 @@ dd a{
 	}
 .books_left img{
 	width: 6.4734rem;
-	height: 9.128rem;
+	height: 9rem;
 	}
 .books{
 	text-align:left;
@@ -1103,20 +1050,13 @@ dd a{
 .books ul li:nth-child(1){
 	margin-left: -10px;
 	line-height: 0.966rem;
-	font-size: 1rem;
 	}
-.books ul li:nth-last-child(1) img{
-	width: 9.3237rem;
-	height: 1.41rem;
+.books ul li:nth-last-child(1){
+	bottom: 0;
 	}
 @media (min-width:320px) and (max-width:375px){
 		.tides ul li{
 			line-height: 1.51rem;
-		}
-	}
-@media (min-width:320px) and (max-width:360px){
-	.tides{
-		  
 		}
 	}
 .directory{
@@ -1138,7 +1078,7 @@ table{
 	border: 1px solid #fff;
 	text-align: center;
 	margin: 10px auto;
-	border-collapse: collapse; 
+	border-collapse: collapse;
 	font-size: 0.693rem;
 	}
 tr{
@@ -1169,46 +1109,33 @@ table tr td:nth-child(2){
 	text-align: left;
 	}
 .order{
-	width: 14.493rem;
-	height: 8rem;
+	width: 300px;
+	height: 200px;
 	text-align: center;
 	background: #fff;
 	position: absolute;
-	left: calc(50% - 7.2465rem);
-	top: calc(50% - 3.9855rem);
-	border-radius: 10px;
-	}
-#mains .order p{
-	font-size: 0.961rem;
-	margin-top: 0.725rem;
+	left: calc(50% - 150px);
+	top: calc(50% - 100px);
 	}
 .order_top{
 	color: #2d6efc;
-	line-height: 1.933rem;
+	line-height: 50px;
 	border-bottom: 1px solid #2d6efc;
-	font-size: 0.961rem;
 	}
 .order_bottom{
-	margin-top: 0.967rem;
-	font-size: 0.694rem;
+	margin-top: 20px;
 	}
-.order_bottom p{
-	margin-bottom: 1.3527rem;
-	}
-.order_bottom button{
-	width: 5.7971rem;
-	height: 1.934rem;
-	font-size: 0.747rem;
+button{
+	width: 100px;
+	height: 40px;
+	margin: 30px 30px 0 10px;
 	background: #2d6efc;
 	border: 1px solid #2d6efc;
 	border-radius: 10px;
 	color: #fff;
 	}
-.order_bottom button:nth-child(2){
-	margin-right: 1.45rem;
-	}
 .order img{
-	margin-top: 2.42rem;
+	margin-top: 50px;
 	}
 
 /*动漫详情页*/
@@ -1228,11 +1155,6 @@ table tr td:nth-child(2){
 .chapter{
 	color: #fff;
 	margin:5px auto;
-	overflow: hidden;
-	width: 90%;
-	}
-.chapter ul{
-	overflow: hidden;
 	}
 .chapter ul li{
 	width: 23%;
@@ -1241,16 +1163,7 @@ table tr td:nth-child(2){
 	text-align: center;
 	float: left;
 	border: 1px solid #fff;
-	margin-top: 5%;
-	}
-.chapter ul li:nth-child(3n+2){
-	margin: 5% 10% 0;
-	}
-.chapter ul li:nth-child(3n+1){
-	margin-right: 5.5%;
-	}
-.chapter ul li:nth-child(3n+3){
-	margin-left: 5.5%;
+	margin:5% 5% 0;
 	}
 .chapter li a{
 	color: #fff;
@@ -1337,7 +1250,7 @@ table tr td:nth-child(2){
 	width: 100%;
 	}
 .list ul li a>img{
-	width: 100%;
+	width: 7.971rem;
 	height: 10.628rem;
 	background-color: rgba(0,0,0,0.8);
 	}
@@ -1356,6 +1269,12 @@ table tr td:nth-child(2){
 .slides ul li{
 	width: 150px;
 	height: 25px;
+	}
+.chapter .session{
+	display: none;
+	}
+.chapter .session:nth-child(1){
+	display: block;
 	}
 .directory .orderby a:nth-child(1){
 	color: #F7D631;
@@ -1408,4 +1327,7 @@ dd p{
 	color: #fff;
 	font-size: 0.7468rem;
 	line-height: 1.449rem;
+}
+.items ul{
+	padding: 0;
 }
