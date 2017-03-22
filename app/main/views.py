@@ -129,9 +129,9 @@ def reading():
     print packages
     return render_template('reading.html',packages=packages)
 
-@main.route('/reading/<id>',methods=['GET'])
-def readinginfo(id):
-    chapters = Chapter.query.filter_by(bookid=id).order_by(Chapter.chapterid).all()
+@main.route('/reading/<bookid>',methods=['GET'])
+def readinginfo(bookid):
+    chapters = Chapter.query.filter_by(bookid=bookid).order_by(Chapter.chapterid).all()
     chapterid = request.args.get('chapter')
     if chapterid:
         chapter = chapters[int(chapterid) - 1]
@@ -145,7 +145,7 @@ def readinginfo(id):
         #print ptaglist
         return render_template('read_browse.html', ptaglist=ptaglist, name=chaptername, cur=chapter, len=len(chapters))
     else:
-        reading = Reading.query.get(int(id))
+        reading = Reading.query.filter_by(bookid=bookid)
         chapter_dict_list = []
         for c in chapters:
             chaptername = c.chaptername.split(' ')

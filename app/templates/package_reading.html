@@ -25,7 +25,7 @@
 <div class="items">
     <ul>
         {% for b in books %}
-            <li><a href="/reading/{{ b.id }}">{{ loop.index }}.&nbsp;{{ b.name }}</a></li>
+            <li><a href="/reading/{{ b.bookid }}">{{ loop.index }}.&nbsp;{{ b.name }}</a></li>
         {% endfor %}
     </ul>
 </div>
