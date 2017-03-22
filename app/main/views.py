@@ -145,7 +145,7 @@ def readinginfo(bookid):
         #print ptaglist
         return render_template('read_browse.html', ptaglist=ptaglist, name=chaptername, cur=chapter, len=len(chapters))
     else:
-        reading = Reading.query.filter_by(bookid=bookid)
+        reading = Reading.query.filter_by(bookid=bookid).first()
         chapter_dict_list = []
         for c in chapters:
             chaptername = c.chaptername.split(' ')
