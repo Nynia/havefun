@@ -31,7 +31,7 @@
 				<div class="list">
 					<ul>
                         {% for c in comics %}
-                            <li><a href="comic/{{ c.id }}?backUrl=\"javascript:window.location.href\""><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
+                            <li><a href="comic/{{ c.id }}?backUrl='javascript:window.location.href'"><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
                         {% endfor %}
 					</ul>
 				</div>
