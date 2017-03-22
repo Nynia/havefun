@@ -31,7 +31,7 @@
 				<div class="list">
 					<ul>
                         {% for c in comics %}
-                            <li><a href="comic/{{ c.id }}?backUrl='javascript:window.location.href'"><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
+                            <li><a id="back" href="/comic/{{ c.id }}"><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
                         {% endfor %}
 					</ul>
 				</div>
@@ -40,3 +40,8 @@
 </html>
 <script src="../static/js/font.js"></script>
 <script src="../static/libs/jquery-3.1.0.js"></script>
+<script>
+    var url = window.location.href;
+    var href = $('#back').href()+'?backUrl='+url;
+    $('#back').attr('href',href);
+</script>
