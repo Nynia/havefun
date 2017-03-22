@@ -17,6 +17,7 @@
 		  <div class="bar_top">
 			<a href="javascript:history.go(-1)"><img src="../static/img/back.png" alt="" /></a>
 		  </div>
+          <div class="clear"></div>
 		  <div class="detail">
 				<div class="detail_page">
 					<div class="detail_left">
@@ -28,11 +29,13 @@
 					    <a href=""><img src="../static/img/buy.png" alt=""></a>
 					</div>
 				</div>
-				<div class="list">
+                <div class="clear"></div>
+				<div class="list clearfloat">
 					<ul>
                         {% for c in comics %}
                             <li><a class="back" href="/comic/{{ c.id }}"><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
                         {% endfor %}
+                        <div class="clear"></div>
 					</ul>
 				</div>
 		  </div>
