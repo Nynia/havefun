@@ -93,39 +93,39 @@
         $('.super .button img').attr('src', '../static/img/ordered.png');
     {% else %}
         $('.super .button').click(function () {
-            $('#main').show()
+            {% if session.phonenum != ''%}
+                var url = window.location.href;
+                window.location.href = '/auth/login?backurl=' + url;
+            {% else %}
+                $('#main').show();
+            {% endif %}
+
         });
         $('.order_bottom .cancel').click(function () {
             $('#main').hide()
         });
         $('.order_bottom .confirm').click(function () {
             $('#main').hide();
-            if ({{ session.phonenum }}) {
-                $.ajax({
-                    type: "post",
-                    url: "/api/v1.0/orders?action=subscribe",
-                    data: {
-                        'spid': '{{ package.spid }}',
-                        'chargeid': '{{ package.chargeid }}',
-                        'secret': '{{ package.secret }}',
-                        'phonenum': '{{ session.phonenum }}',
-                        'productid': '{{ package.productid }}'
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        $('#mains p').text(data.message);
-                        $('#mains').show();
-                        if (data.code == "0") {
-                            //success
-                            $('.super .button img').attr('src', '../static/img/ordered.png');
-                        }
+            $.ajax({
+                type: "post",
+                url: "/api/v1.0/orders?action=subscribe",
+                data: {
+                    'spid': '{{ package.spid }}',
+                    'chargeid': '{{ package.chargeid }}',
+                    'secret': '{{ package.secret }}',
+                    'phonenum': '{{ session.phonenum }}',
+                    'productid': '{{ package.productid }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('#mains p').text(data.message);
+                    $('#mains').show();
+                    if (data.code == "0") {
+                        //success
+                        $('.super .button img').attr('src', '../static/img/ordered.png');
                     }
-                });
-            }
-            else {
-                window.location.href='/auth/login';
-            }
-
+                }
+            });
         });
     {% endif %}
 </script>
