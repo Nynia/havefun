@@ -6,6 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
     <script src="../static/libs/jquery-3.1.0.js"></script>
     <script src="../static/js/login.js"></script>
     <script src="../static/js/vue.min.js"></script>
@@ -18,16 +19,21 @@
 
 <body class="logins">
 <div id="login">
-    <a href="my.html"><img src="../static/img/cha.png" alt="叉号"/></a>
+    <a href="/my"><img src="../static/img/cha.png" alt="叉号"/></a>
     <span>登录</span>
 </div>
 <div class="show">
     <form class="show_top" method="post">
         {{ form.hidden_tag() }}
-        <label for="phonenum"><img src="../static/img/person.png"
-                                   alt=""/></label>{{ form.phonenum(placeholder="请输入手机号码") }}
-        <label for="password"><img src="../static/img/password.png"
-                                   alt=""/></label>{{ form.password(placeholder="请输入密码") }}
+        <div class="user">
+            <label for="phonenum"><img src="../static/img/person.png"
+                                       alt=""/></label>{{ form.phonenum(placeholder="请输入手机号码") }}
+        </div>
+        <div class="password">
+            <label for="password"><img src="../static/img/password.png"
+                                       alt=""/></label>{{ form.password(placeholder="请输入密码") }}
+        </div>
+
         {{ form.submit(value="登   录") }}
     </form>
 
@@ -45,3 +51,4 @@
     //      alert(demo.username)
 </script>
 </html>
+<script src="../static/js/font.js"></script>
