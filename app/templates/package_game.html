@@ -75,10 +75,10 @@
 </div>
 
 <div class="summary style">
-    <p>12款游戏：</p>
+    <p>游戏列表：</p>
     <ul>
         {% for g in games %}
-            <li><a href="gamedetail?id={{ g.id }}"><img src="{{ g.img_icon }}" alt=""/><p>{{ g.name }}</p></a></li>
+            <li><a href="/game/{{ g.id }}"><img src="{{ g.img_icon }}" alt=""/><p>{{ g.name }}</p></a></li>
         {% endfor %}
         <div class="clear"></div>
     </ul>

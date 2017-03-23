@@ -618,10 +618,11 @@ dd a{
 	overflow: hidden;
 	}
 .style ul li:nth-child(4n+1),.style ul li:nth-child(4n+2),.style ul li:nth-child(4n+3){
-	padding-right: 0.82rem;
-	padding-right: -webkit-calc(100% /3 - 5.1rem);
-	padding-right:calc(100% /3 - 5.1rem);
+	padding-right: 0.9121rem;
+	padding-right: -webkit-calc(100% /3 - 5.088rem);
+	padding-right:calc(100% /3 - 5.088rem);
 	}
+
 .style ul li img{
 	width: 3.816rem;
 	height: 3.816rem;
