@@ -89,7 +89,7 @@
 <script>
     {% if flag %}
         //$('.super .button').text('已订购');
-        $('.super .button img').attr('src','../static/img/ordered.png');
+        $('.super .button img').attr('src','../static/img/orders.png');
     {% else %}
         $('.super .button').click(function () {
             $('#main').show()
@@ -112,8 +112,10 @@
                 },
                 dataType: 'json',
                 success: function (data) {
+                    $('#mains p').text(data.message);
+                    $('#main').show();
                     alert(data.message);
-                    if (data.code == "0" || data.code == "131") {
+                    if (data.code == "0") {
                         //success
                         $('.super .button img').attr('src','../static/img/ordered.png');
                     }
