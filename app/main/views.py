@@ -15,7 +15,7 @@ from flask_login import current_user
 from app.models import Package,Comic,Reading,Chapter
 
 @main.route('/config',methods=['GET', 'POST'])
-def index():
+def config():
     print request.method
     form = GameForm()
     if request.method == 'POST':
@@ -168,4 +168,4 @@ def my():
 
 @main.route('/index', methods=['GET'])
 def index():
-    return redirect(next or url_for('main.game'))
+    return redirect(url_for('main.game'))
