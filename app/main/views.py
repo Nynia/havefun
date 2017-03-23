@@ -117,7 +117,9 @@ def comicbrowse(id):
     if chapter == None:
         return render_template('cartoon_description.html', comic=comic)
     else:
-        myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
+        #myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
+        myftp = MyFTP('192.168.114.138', 12345, 'jsgx','jsgx2017', '/')
+
         myftp.login()
         filelist = myftp.listfiles('/comics'+'/'+id+'/'+chapter)
         filelist = ['/comics'+'/'+id+'/'+chapter+'/'+str(i+1)+'.jpg' for i in range(len(filelist))]
