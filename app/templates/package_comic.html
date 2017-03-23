@@ -27,7 +27,7 @@
         <div class="detail_right">
             <p>{{ package.productname }}</p>
             <p>&#x3000;{{ package.description }}</p>
-            <a href=""><img src="../static/img/buy.png" alt=""></a>
+            <a class="button" href=""><img src="../static/img/buy.png" alt=""></a>
         </div>
     </div>
     <div class="clear"></div>
@@ -65,17 +65,15 @@
 <script src="../static/libs/jquery-3.1.0.js"></script>
 <script>
     {% if flag %}
-        $('.detail_right img').attr('src', '../static/img/ordered.png');
+        $('.detail_right .button img').attr('src', '../static/img/ordered.png');
     {% else %}
-        $('.detail_right a').click(function () {
+        $('.detail_right .button').click(function () {
             {% if not session.phonenum %}
                 var url = window.location.href;
                 window.location.href = '/auth/login?backurl=' + url;
             {% else %}
-                var phonenum = '{{ session.phonenum }}';
                 $('#main').show();
             {% endif %}
-
         });
         $('.order_bottom .cancel').click(function () {
             $('#main').hide()
