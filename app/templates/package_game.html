@@ -61,7 +61,6 @@
 </div>
 <div class="summary " id="game_package">
     <p>游戏包概括：</p>
-    welcome,{{ session.phonenum }}
     <dd id="intro_short">
         <p class="fly">{{ package.description }}</p>
         <a href="javascript:void(0)" onclick="$('#intro_short').hide();$('#intro_long').show();return false;"
@@ -78,7 +77,8 @@
     <p>游戏列表：</p>
     <ul>
         {% for g in games %}
-            <li><a href="/game/{{ g.id }}"><img src="{{ g.img_icon }}" alt=""/><p>{{ g.name }}</p></a></li>
+            <li><a href="/game/{{ g.id }}"><img src="{{ g.img_icon }}" alt=""/>
+                <p>{{ g.name }}</p></a></li>
         {% endfor %}
         <div class="clear"></div>
     </ul>
@@ -90,7 +90,7 @@
 <script>
     {% if flag %}
         //$('.super .button').text('已订购');
-        $('.super .button img').attr('src','../static/img/ordered.png');
+        $('.super .button img').attr('src', '../static/img/ordered.png');
     {% else %}
         $('.super .button').click(function () {
             $('#main').show()
@@ -100,27 +100,32 @@
         });
         $('.order_bottom .confirm').click(function () {
             $('#main').hide();
-
-            $.ajax({
-                type: "post",
-                url: "/api/v1.0/orders?action=subscribe",
-                data: {
-                    'spid': '{{ package.spid }}',
-                    'chargeid': '{{ package.chargeid }}',
-                    'secret': '{{ package.secret }}',
-                    'phonenum': '18118999630',
-                    'productid': '{{ package.productid }}'
-                },
-                dataType: 'json',
-                success: function (data) {
-                    $('#mains p').text(data.message);
-                    $('#mains').show();
-                    if (data.code == "0") {
-                        //success
-                        $('.super .button img').attr('src','../static/img/ordered.png');
+            if ({{ session.phonenum }}) {
+                $.ajax({
+                    type: "post",
+                    url: "/api/v1.0/orders?action=subscribe",
+                    data: {
+                        'spid': '{{ package.spid }}',
+                        'chargeid': '{{ package.chargeid }}',
+                        'secret': '{{ package.secret }}',
+                        'phonenum': '{{ session.phonenum }}',
+                        'productid': '{{ package.productid }}'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#mains p').text(data.message);
+                        $('#mains').show();
+                        if (data.code == "0") {
+                            //success
+                            $('.super .button img').attr('src', '../static/img/ordered.png');
+                        }
                     }
-                }
-            });
+                });
+            }
+            else {
+                window.location.href='/auth/login';
+            }
+
         });
     {% endif %}
 </script>

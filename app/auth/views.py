@@ -29,3 +29,7 @@ def login():
 def logout():
     logout_user()
     return 'logout success'
+
+@auth.route('/register', methods=['GET'])
+def register():
+    return render_template('register.html')
