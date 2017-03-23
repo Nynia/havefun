@@ -88,18 +88,16 @@
                     'chargeid': '{{ package.chargeid }}',
                     'secret': '{{ package.secret }}',
                     'phonenum': '{{ session.phonenum }}',
-                    'productid': '{{ package.productid }}',
+                    'productid': '{{ package.productid }}'
                 },
                 dataType: 'json',
                 success: function (data) {
                     $('#mains p').text(data.message);
                     $('#mains').show();
-                    setTimeout(function () {
-                        $('#mains').hide();
-                    }, 1000);
+                    setTimeout(function() { $('#mains').hide(); }, 1000);
                     if (data.code == "0") {
                         //success
-                        $('.super .button img').attr('src', '../static/img/ordered.png');
+                        $('.detail_right .button img').attr('src', '../static/img/ordered.png');
                     }
                 }
             });
