@@ -2,8 +2,8 @@ from . import auth
 from flask_login import login_user, logout_user, login_required
 from flask import render_template, redirect, request, url_for, flash,session,request
 from ..models import User,OrderRelation
-from .forms import LoginForm
-
+from .forms import LoginForm,RegisterFrom
+from ..utils.func import generate_identifying_code
 @auth.route('/login', methods=['GET','POST'])
 def login():
     form = LoginForm()
@@ -30,6 +30,24 @@ def logout():
     logout_user()
     return 'logout success'
 
-@auth.route('/register', methods=['GET'])
+@auth.route('/register', methods=['GET','POST'])
 def register():
+    form = RegisterFrom()
+    codemap = {}
+    action = request.args.get('action')
+    if action == 'getIdentifingCode':
+        phonenum = form.phonenum
+        code = generate_identifying_code()
+        codemap.__setattr__(phonenum,code)
+        import requests
+        url = 'http://221.228.17.88:8080/sendmsg/send'
+        params = {
+            'phonenum':phonenum,
+            'msg':code
+        }
+        r = requests.get(url,params=params)
+        print r.text
+    if form.validate_on_submit():
+        pass
+
     return render_template('register.html')

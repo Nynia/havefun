@@ -507,7 +507,28 @@ main{
 	color: #30afe2;
 	line-height: 2.3672rem;
 	}
-
+#codes{
+	position: absolute;
+	right: 5.5rem;
+	width: 3.816rem;
+	height: 1.546rem;
+	background: #f3f3f3;
+	top: 0.4213rem;
+	padding: 0 0.5rem;
+	}
+.codes{
+	width: 18.4rem;
+	height: 2.3672rem;
+	background: #fff;
+	margin: 0 auto 0.3865rem;
+	}
+.codes label{
+	float: left;
+	}
+.codes .tel{
+	width: 5.0242rem!important;
+	float: left;
+	}
 /*热门推荐特惠礼包*/
 .parts ul{
 	width: 93%;
@@ -1476,4 +1497,16 @@ dd p{
 	}
 #star{
 	line-height: 0.8;
+	}
+/*登录成功*/
+#portrait{
+	background:#fff;
+	text-align: center;
+	}
+.head_logo img{
+	width: 4.155rem;
+	height: 4.155rem;
+	}
+.head_logo{
+	/*margin-top: 1.16rem;*/
 	}
