@@ -77,9 +77,11 @@ def package():
 
     package = Package.query.get(int(id))
     ordered = False
+    phonenum = '';
     if not current_user.is_anonymous:
         if package.productid in session['ordered']:
             ordered = True
+            phonenum = session['phonenum']
     if package.type == '1':
         #comic
         comics = Comic.query.filter_by(packageid=id).all()
