@@ -258,7 +258,7 @@ main{
 .main a{
 	display: inline-block;
 	width: 100%;
-	padding: 2vw;
+	margin: 0.2415rem 0;
 	line-height: 30px;
 	color: #c5c5c5;
 	}
@@ -315,7 +315,7 @@ main{
 	margin-top: 0.483rem;
 	}
 .watchs ul{
-	margin-left: 2vw;
+	overflow: hidden;
 	}
 .watchs ul li{
 	float: left;
@@ -344,7 +344,13 @@ main{
 	.watchs ul li div img{
 		margin-top: 0.9rem;
 		}
+	.main a div{
+		margin: 0.5rem 0.9rem 0 0;
+		}
 }
+#play{
+	padding: 0;
+	}
 .watchs ul li a>img{
 	width: 5.0242rem;
 	height: 3.092rem;
@@ -1508,5 +1514,14 @@ dd p{
 	height: 4.155rem;
 	}
 .head_logo{
-	/*margin-top: 1.16rem;*/
+	position: absolute;
+	top: 1.16rem;
+	top: -webkit-calc(50% - 2.585rem);
+	top: calc(50% - 2.585rem);
+	left: 7.923rem;
+	left: -webkit-calc(50% - 2.077rem);
+	left: calc(50% - 2.077rem);
+	}
+.success a>span,#recently,#watched ul li a p{
+	color: #242424;
 	}

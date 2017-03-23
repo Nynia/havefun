@@ -20,7 +20,7 @@ def login():
             session['phonenum'] = user.phonenum
             next = request.args.get('next')
             print session['user_id']
-            return redirect(next or url_for('main.index'))
+            return redirect(next or url_for('main.my'))
         flash('Invalid username or password.')
     return render_template('login.html', form=form)
 
@@ -36,7 +36,7 @@ def register():
     codemap = {}
     action = request.args.get('action')
     if action == 'getIdentifingCode':
-        phonenum = form.phonenum
+        phonenum = request.args.get('phonenum')
         code = generate_identifying_code()
         codemap.__setattr__(phonenum,code)
         import requests
@@ -50,4 +50,4 @@ def register():
     if form.validate_on_submit():
         pass
 
-    return render_template('register.html')
+    return render_template('register.html',form=form)

@@ -160,4 +160,7 @@ def readinginfo(bookid):
 
 @main.route('/my',methods=['GET'])
 def my():
-    return render_template('my.html')
+    if not current_user.is_anonymous:
+        return render_template('my_loggedin.html')
+    else:
+        return render_template('my.html')
