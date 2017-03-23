@@ -1,6 +1,6 @@
 #-*-coding=utf-8-*-
 from . import main
-from flask import render_template,session
+from flask import render_template,session,redirect,url_for
 from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
@@ -164,3 +164,8 @@ def my():
         return render_template('my_loggedin.html')
     else:
         return render_template('my.html')
+
+
+@main.route('/index', methods=['GET'])
+def index():
+    return redirect(next or url_for('main.game'))
