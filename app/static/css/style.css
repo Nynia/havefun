@@ -537,7 +537,6 @@ main{
 	}
 /*热门推荐特惠礼包*/
 .parts ul{
-	width: 93%;
 	margin: 0 auto;
 	}
 .parts ul li{
@@ -557,7 +556,7 @@ main{
 	overflow: hidden;
 	}
 .parts ul li img{
-	width: 18.65rem;
+	width: 100%;
 	height: 6.1836rem;
 	}
 .parts ul li a  div{
