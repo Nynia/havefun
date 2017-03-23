@@ -89,7 +89,7 @@
 <script>
     {% if flag %}
         //$('.super .button').text('已订购');
-        $('.super .button img').attr('src','../static/img/orders.png');
+        $('.super .button img').attr('src','../static/img/ordered.png');
     {% else %}
         $('.super .button').click(function () {
             $('#main').show()
@@ -115,7 +115,7 @@
                     alert(data.message);
                     if (data.code == "0" || data.code == "131") {
                         //success
-                        $('.super .button img').attr('src','../static/img/orders.png');
+                        $('.super .button img').attr('src','../static/img/ordered.png');
                     }
                 }
             });
