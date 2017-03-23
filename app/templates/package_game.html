@@ -56,7 +56,7 @@
 <div id="mains">
     <div class="order">
         <img src="../static/img/gou.png" alt=""/>
-        <p>订购成功</p>
+        <p></p>
     </div>
 </div>
 <div class="summary " id="game_package">
@@ -88,8 +88,8 @@
 <script src="../static/js/font.js"></script>
 <script>
     {% if flag %}
-        $('.super .button').text('已订购');
-        $('.super .button').addClass('ordered');
+        //$('.super .button').text('已订购');
+        $('.super .button img').attr('src','../static/img/orders.png');
     {% else %}
         $('.super .button').click(function () {
             $('#main').show()
@@ -115,12 +115,11 @@
                     alert(data.message);
                     if (data.code == "0" || data.code == "131") {
                         //success
-                        $('.super .button').text('已订购');
-                        $('.super .button').addClass('ordered');
+                        $('.super .button img').attr('src','../static/img/orders.png');
                     }
                 }
             });
-        })
+        });
     {% endif %}
 </script>
 <script src="../static/js/cartoon_description.js"></script>
