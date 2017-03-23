@@ -93,10 +93,11 @@
         $('.super .button img').attr('src', '../static/img/ordered.png');
     {% else %}
         $('.super .button').click(function () {
-            {% if session.phonenum != ''%}
+            {% if not session.phonenum %}
                 var url = window.location.href;
                 window.location.href = '/auth/login?backurl=' + url;
             {% else %}
+                var phonenum = '{{ session.phonenum }}';
                 $('#main').show();
             {% endif %}
 
