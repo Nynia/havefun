@@ -105,14 +105,14 @@
                     <img src="../static/img/solid.png" alt=""/>
                     <img src="../static/img/empty.png" alt=""/>
                     <img src="../static/img/empty.png" alt=""/>
-                    <div class="more"><img src="../static/img/orange.png" alt=""/><a href="#">更多游戏</a></div>
+                    <div class="more"><a href="#"><img src="../static/img/orange.png" alt=""/></a></div>
                 </li>
                 <div id="role">
                     {% for g in h5 %}
                         <li class="games">
                             <img src="{{ g.img_icon }}" alt="{{ g.name }}"/>
                             <p>{{ g.name }}</p>
-                            <a href="{{ g.url }}"><p>开始游戏</p></a>
+                            <a href="{{ g.url }}"><img src="../static/img/start_game.png" alt="" /></a>
                         </li>
                     {% endfor %}
                 </div>
@@ -130,7 +130,7 @@
                     <img src="../static/img/solids.png" alt=""/>
                     <img src="../static/img/solids.png" alt=""/>
                     <img src="../static/img/emptys.png" alt=""/>
-                    <div class="more mores"><img src="../static/img/green.png" alt=""/><a href="#">更多游戏</a></div>
+                    <div class="more mores"><a href="#"><img src="../static/img/green.png" alt=""/></a></div>
                 </li>
             </ul>
         </div>
