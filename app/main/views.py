@@ -74,9 +74,9 @@ def package():
         id = reading.packageid
     else:
         id = request.args.get('id')
-
     package = Package.query.get(int(id))
     ordered = False
+    print current_user.is_anonymous
     if not current_user.is_anonymous:
         if package.productid in session['ordered']:
             print package.productid
