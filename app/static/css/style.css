@@ -852,9 +852,11 @@ dd a{
 	margin-left: 0.24154rem;
 	}
 .thumb img{
-	margin-left:0.24154rem;
-	margin-top: -0.2rem;
+	position: absolute;
+	right: 0.1rem;
+	top: 0.3rem;
 	}
+
 .defeat .update{
 	position: absolute;
 	bottom: 0;
@@ -1524,4 +1526,10 @@ dd p{
 	}
 .success a>span,#recently,#watched ul li a p{
 	color: #242424;
+	}
+.unregistered{
+	color: #30AFE2;
+	font-size: 0.7483rem;
+	margin-top: 0.7rem;
+	display: block;
 	}
