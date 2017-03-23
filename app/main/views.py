@@ -158,3 +158,6 @@ def readinginfo(bookid):
             chapter_dict_list.append(dict)
         return render_template('read_description.html',book=reading,chapters=chapter_dict_list)
 
+@main.route('/my',methods=['GET'])
+def my():
+    return render_template('my.html')
