@@ -32,7 +32,7 @@
                 <img src="../static/img/ysolid.png" alt=""/>
                 <img src="../static/img/ysolid.png" alt=""/>
                 <img src="../static/img/ysolid.png" alt=""/>
-                <img src="../static/img/yempty.png" alt=""/>
+                <img src="../static/img/ysolid.png" alt=""/>
                 <img src="../static/img/yempty.png" alt=""/>
             </li>
             <li>资费：{{ package.price }}元/月</li>
@@ -40,7 +40,6 @@
         </ul>
     </div>
     <a href="#" class="button"><img src="../static/img/orders.png" alt=""/></a>
-    <!--<button >订&#x3000购</button>-->
     <div class="clear"></div>
 </div>
 <!--弹出框-->
@@ -48,7 +47,7 @@
     <div class="order">
         <div class="order_top">提 示</div>
         <div class="order_bottom">
-            <p>您将订购“超凡游戏包”</p>
+            <p>您将订购“{{ package.productname }}”</p>
             <button class="cancel">取消</button>
             <button class="confirm">确认</button>
         </div>
@@ -83,36 +82,45 @@
         <div class="clear"></div>
     </ul>
 </div>
-<!--</script>-->
 
 </body>
 </html>
-<!--<script src="js/package.js"></script>-->
 <script src="../static/js/font.js"></script>
 <script>
-    console.log(document.getElementById('buy'))
-    console.log($('#buy'))
+    {% if flag %}
+        $('.super .button').text('已订购');
+        $('.super .button').addClass('ordered');
+    {% else %}
+        $('.super .button').click(function () {
+            $('#main').show()
+        });
+        $('.order_bottom .cancel').click(function () {
+            $('#main').hide()
+        });
+        $('.order_bottom .confirm').click(function () {
+            $('#main').hide();
 
-
-    $('.super .button').click(function () {
-        $('#main').show();
-    })
-    $('.order_bottom .cancel').click(function () {
-        $('#main').hide();
-    })
-    $('.order_bottom .confirm').click(function () {
-        $('#main').hide();
-        $('#mains').show();
-        $.ajax({
-            type: "post",
-            url: "",
-            data: {},
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                $('#mains').show()
-            }
+            $.ajax({
+                type: "post",
+                url: "/api/v1.0/orders?action=subscribe",
+                data: {
+                    'spid': '{{ package.spid }}',
+                    'chargeid': '{{ package.chargeid }}',
+                    'secret': '{{ package.secret }}',
+                    'phonenum': '18118999630',
+                    'productid': '{{ package.productid }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    alert(data.message);
+                    if (data.code == "0" || data.code == "131") {
+                        //success
+                        $('.super .button').text('已订购');
+                        $('.super .button').addClass('ordered');
+                    }
+                }
+            });
         })
-    })
+    {% endif %}
 </script>
 <script src="../static/js/cartoon_description.js"></script>
