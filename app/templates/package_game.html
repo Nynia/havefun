@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>{{ package.productname }}</title>
+    <meta name="robots" content="index,follow">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>超凡游戏包</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
     <script src="../static/libs/jquery-3.1.0.js"></script>
-
+    <script src="../static/libs/template.js"></script>
 </head>
-<body class="package">
+<body class="package" id="packages" style="padding-bottom: 2.56rem;">
+<!--<script id="data" type="text/html">-->
 <div class="bar_top">
-    <a href="game"><img src="../static/img/back.png" alt=""/></a>
+    <a href=""><img src="../static/img/back.png" alt=""/></a>
 </div>
 <div class="super">
-    <div class="super_left">
+    <div class="super_left game">
         <img src="../static/img/super.png" alt="{{ package.productname }}"/>
     </div>
-    <div class="super_right">
+    <div class="super_right snows">
+
         <ul>
             <li>{{ package.productname }}</li>
             <li>推荐指数
@@ -28,72 +36,84 @@
                 <img src="../static/img/yempty.png" alt=""/>
             </li>
             <li>资费：{{ package.price }}元/月</li>
+            <!--<li >资费：<span>{{data.price}}</span>元/月</li>-->
+
         </ul>
     </div>
-    <button>订&#x3000购</button>
+    <a href="#" class="button"><img src="../static/img/orders.png" alt=""/></a>
+    <!--<button >订&#x3000购</button>-->
     <div class="clear"></div>
 </div>
+<!--弹出框-->
 <div id="main">
     <div class="order">
-        <div class="order_top">提示</div>
+        <div class="order_top">提 示</div>
         <div class="order_bottom">
-            <p>您将订购{{ package.productname }}</p>
+            <p>您将订购“超凡游戏包”</p>
             <button class="cancel">取消</button>
             <button class="confirm">确认</button>
         </div>
     </div>
 </div>
-
-<div class="summary">
-    <p>游戏包概括：</p>
-    <p>{{ package.description }}</p>
-
+<div id="mains">
+    <div class="order">
+        <img src="../static/img/gou.png" alt=""/>
+        <p>订购成功</p>
+    </div>
 </div>
+<div class="summary " id="game_package">
+    <p>游戏包概括：</p>
+    <dd id="intro_short">
+        <p class="fly">{{ package.description }}</p>
+        <a href="javascript:void(0)" onclick="$('#intro_short').hide();$('#intro_long').show();return false;"
+           class="data_more">详细</a>
+    </dd>
+    <dd id="intro_long" style="display:none">
+        <p class="fly">{{ package.description }}<a href="javascript:void(0)"
+                                                   onclick="$('#intro_short').show();$('#intro_long').hide();return false;">收起</a>
+        </p>
+    </dd>
+</div>
+
 <div class="summary style">
     <p>12款游戏：</p>
     <ul>
         {% for g in games %}
-            <li><a href="gamedetail?id={{ g.id }}"><img src="{{ g.img_icon }}" alt=""/></a></li>
+            <li><a href="gamedetail?id={{ g.id }}"><img src="{{ g.img_icon }}" alt=""/><p>{{ g.name }}</p></a></li>
         {% endfor %}
+        <div class="clear"></div>
     </ul>
-
 </div>
+<!--</script>-->
+
 </body>
-<script type="application/javascript">
-    {% if flag %}
-        $('.super button').text('已订购');
-        $('.super button').addClass('ordered');
-    {% else %}
-        $('.super button').click(function () {
-        $('#main').show()
-    });
+</html>
+<!--<script src="js/package.js"></script>-->
+<script src="../static/js/font.js"></script>
+<script>
+    console.log(document.getElementById('buy'))
+    console.log($('#buy'))
+
+
+    $('.super .button').click(function () {
+        $('#main').show();
+    })
     $('.order_bottom .cancel').click(function () {
-        $('#main').hide()
-    });
+        $('#main').hide();
+    })
     $('.order_bottom .confirm').click(function () {
         $('#main').hide();
-
+        $('#mains').show();
         $.ajax({
             type: "post",
-            url: "/api/v1.0/orders?action=subscribe",
-            data: {
-                'spid': '{{ package.spid }}',
-                'chargeid': '{{ package.chargeid }}',
-                'secret': '{{ package.secret }}',
-                'phonenum': '18118999630',
-                'productid': '{{ package.productid }}'
-            },
+            url: "",
+            data: {},
             dataType: 'json',
             success: function (data) {
-                alert(data.message);
-                if (data.code == "0" || data.code == "131") {
-                    //success
-                    $('.super button').text('已订购');
-                    $('.super button').addClass('ordered');
-                }
+                console.log(data);
+                $('#mains').show()
             }
-        });
+        })
     })
-    {% endif %}
 </script>
-</html>
+<script src="../static/js/cartoon_description.js"></script>
