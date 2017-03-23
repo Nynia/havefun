@@ -60,7 +60,7 @@
     <div class="screenshots swiper-container">
         <div class="swiper-wrapper">
             {% if game.img_screenshot_1 %}
-                <div class="swiper-slide"><img src="{{ game.img_screenshot_1 }}" alt=""/></div>
+                <div class="swiper-slide"><img class="photoss" src="{{ game.img_screenshot_1 }}" alt=""/></div>
             {% endif %}
             {% if game.img_screenshot_2 %}
                 <div class="swiper-slide"><img src="{{ game.img_screenshot_2 }}" alt=""/></div>
@@ -81,12 +81,25 @@
     </div>
     <script src="../static/libs/swiper-3.4.0.min.js"></script>
     <script>
-        var swiper = new Swiper('.swiper-container', {
+        var w = $('.swiper-slide .photoss').width();
+        var h = $('.swiper-slide .photoss').height();
+
+        if (w > h) {
+            var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
-            slidesPerView: 1.1,
+            slidesPerView: 1.2,
             paginationClickable: true,
             spaceBetween: 12
         });
+        }
+        else {
+            var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            slidesPerView: 1.8,
+            paginationClickable: true,
+            spaceBetween: 12
+        });
+        }
     </script>
 </div>
 </body>

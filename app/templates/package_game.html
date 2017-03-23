@@ -121,6 +121,7 @@
                 success: function (data) {
                     $('#mains p').text(data.message);
                     $('#mains').show();
+                    setTimeout(function() { $('#mains').hide(); }, 1000);
                     if (data.code == "0") {
                         //success
                         $('.super .button img').attr('src', '../static/img/ordered.png');
@@ -129,8 +130,5 @@
             });
         });
     {% endif %}
-    $('body').on('touchstart', function () {
-        setTimeout("$('#mains .order').hide()", 2000 );
-    })
 </script>
 <script src="../static/js/cartoon_description.js"></script>

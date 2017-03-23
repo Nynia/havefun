@@ -1,45 +1,110 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:javascript="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="robots" content="index,follow">
-	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
-	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-	    <meta name="msapplication-tap-highlight" content="no">
-		<title>{{package.packagename}}</title>
-		<meta name="keywords" content="">
-        <meta name="description" content="">
-		<link rel="stylesheet" href="../static/css/style.css" />
-		<link rel="stylesheet" href="../static/css/main.css" />
-		<link rel="stylesheet" href="../static/css/common.css" />
-	</head>
-	<body id="cartoon" style="padding-bottom: 2.56rem;">
-		  <div class="bar_top">
-			<a href="javascript:history.go(-1)"><img src="../static/img/back.png" alt="" /></a>
-		  </div>
-          <div class="clear"></div>
-		  <div class="detail">
-				<div class="detail_page">
-					<div class="detail_left">
-						<img src="../static/img/page.png" alt="{{ package.packagename }}" />
-					</div>
-					<div class="detail_right">
-						<p>{{ package.productname }}</p>
-						<p>&#x3000;{{ package.description }}</p>
-					    <a href=""><img src="../static/img/buy.png" alt=""></a>
-					</div>
-				</div>
-                <div class="clear"></div>
-				<div class="list clearfloat">
-					<ul>
-                        {% for c in comics %}
-                            <li><a class="back" href="/comic/{{ c.id }}"><img src="{{ c.cover }}" alt="" class="big" /><div><img src="../static/img/player.png" alt="" />{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div><p class="summer">{{ c.comicname }}</p></a></li>
-                        {% endfor %}
-                        <div class="clear"></div>
-					</ul>
-				</div>
-		  </div>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>{{ package.packagename }}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
+    <link rel="stylesheet" href="../static/css/common.css"/>
+</head>
+<body id="cartoon" style="padding-bottom: 2.56rem;">
+<div class="bar_top">
+    <a href="javascript:history.go(-1)"><img src="../static/img/back.png" alt=""/></a>
+</div>
+<div class="clear"></div>
+<div class="detail">
+    <div class="detail_page">
+        <div class="detail_left">
+            <img src="../static/img/page.png" alt="{{ package.packagename }}"/>
+        </div>
+        <div class="detail_right">
+            <p>{{ package.productname }}</p>
+            <p>&#x3000;{{ package.description }}</p>
+            <a href=""><img src="../static/img/buy.png" alt=""></a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="list clearfloat">
+        <ul>
+            {% for c in comics %}
+                <li><a class="back" href="/comic/{{ c.id }}"><img src="{{ c.cover }}" alt="" class="big"/>
+                    <div><img src="../static/img/player.png" alt=""/>{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div>
+                    <p class="summer">{{ c.comicname }}</p></a></li>
+            {% endfor %}
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div>
+<!--弹出框-->
+<div id="main">
+    <div class="order">
+        <div class="order_top">提 示</div>
+        <div class="order_bottom">
+            <p>您将订购“{{ package.productname }}”</p>
+            <button class="cancel">取消</button>
+            <button class="confirm">确认</button>
+        </div>
+    </div>
+</div>
+<div id="mains">
+    <div class="order">
+        <img src="../static/img/gou.png" alt=""/>
+        <p></p>
+    </div>
+</div>
+</body>
 </html>
 <script src="../static/js/font.js"></script>
 <script src="../static/libs/jquery-3.1.0.js"></script>
+<script>
+    {% if flag %}
+        $('.detail_right img').attr('src', '../static/img/ordered.png');
+    {% else %}
+        $('.detail_right a').click(function () {
+            {% if not session.phonenum %}
+                var url = window.location.href;
+                window.location.href = '/auth/login?backurl=' + url;
+            {% else %}
+                var phonenum = '{{ session.phonenum }}';
+                $('#main').show();
+            {% endif %}
+
+        });
+        $('.order_bottom .cancel').click(function () {
+            $('#main').hide()
+        });
+        $('.order_bottom .confirm').click(function () {
+            $('#main').hide();
+            $.ajax({
+                type: "post",
+                url: "/api/v1.0/orders?action=subscribe",
+                data: {
+                    'spid': '{{ package.spid }}',
+                    'chargeid': '{{ package.chargeid }}',
+                    'secret': '{{ package.secret }}',
+                    'phonenum': '{{ session.phonenum }}',
+                    'productid': '{{ package.productid }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('#mains p').text(data.message);
+                    $('#mains').show();
+                    setTimeout(function () {
+                        $('#mains').hide();
+                    }, 1000);
+                    if (data.code == "0") {
+                        //success
+                        $('.super .button img').attr('src', '../static/img/ordered.png');
+                    }
+                }
+            });
+        });
+    {% endif %}
+</script>
