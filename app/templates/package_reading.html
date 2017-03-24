@@ -21,7 +21,7 @@
     <p>{{ package.productname }}包月专区</p>
     <p>包月价格：{{ package.price }}元/月</p>
 </div>
-<div class="monthly"><a class="button" href="#"><img src="../static/img/month.png" alt="" /></a></div>
+<div class="monthly"><a class="button" href="#">点击订购</a></div>
 <!--弹出框-->
 <div id="main">
     <div class="order">
@@ -61,8 +61,9 @@
         autoPage: true //自动分页
     });
     {% if flag %}
-        //$('.super .button').text('已订购');
-        $('.monthly .button img').attr('src', '../static/img/ordered.png');
+        $('.monthly .button').text('已订购');
+        $('.monthly .button').css('background','#fff');
+        $('.monthly .button').css('color','#626262');
     {% else %}
         $('.monthly .button').click(function () {
             {% if not session.phonenum %}
@@ -95,7 +96,9 @@
                     setTimeout(function() { $('#mains').hide(); }, 1000);
                     if (data.code == "0") {
                         //success
-                        $('.monthly img').attr('src', '../static/img/ordered.png');
+                                $('.monthly .button').text('已订购');
+                                $('.monthly .button').css('background','#fff');
+                                $('.monthly .button').css('color','#626262');
                     }
                 }
             });

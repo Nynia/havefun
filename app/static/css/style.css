@@ -1,8 +1,8 @@
-/**{
+*{
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
- }*/
+ }
 a{
 	text-decoration: none;
 	color: #000;
@@ -595,17 +595,21 @@ main{
 .role_play ul li a p:nth-child(1){
 	font-size: 0.69rem;
 	font-weight: bold;
-	margin-top: 4%;
+	margin-top: 0.5rem;
 	}
 .role_play ul li a p:nth-child(3){
 	top: 2.1739rem;
 	font-size: 0.5599rem;
 	}
-
+@media (min-width: 320px) and (max-width: 360px){
+	.role_play ul li a p:nth-child(1){
+		margin-top: 0.7rem;
+		}
+	}
 /*超凡游戏包*/
 .package{
-	background: url(../img/package.png) no-repeat center center;
-	background-size: 100% 900px;
+	background: url(../img/package.png) no-repeat;
+	background-attachment: fixed;
 	}
 .bar_top{
 	padding: 0 0.82rem;
@@ -635,8 +639,6 @@ main{
 	position: absolute;
 	right: 0;
 	font-size: 1.353rem;
-	/*width: 10.144rem;
-	height: 9.1787rem;*/
 	}
 .super .button{
 	position: absolute;
@@ -680,9 +682,6 @@ main{
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	margin-bottom: 0;
-	}
-.fly{
-	/*font-size: 0.586rem!important;*/
 	}
 dd a{
 	color: #F7D631;
@@ -738,11 +737,6 @@ dd a{
 			height: 95%;
 			}
 		}
-@media (min-width: 320px) and (max-width: 375px){
-	.summary p:nth-child(2){
-		/*font-size: 1.2rem;*/
-		}
-	}
 /*极地雪球冒险*/
 .game img{
 	width: 6.4735rem;
@@ -772,25 +766,7 @@ dd a{
 .screenshots{
 	margin-top: 20px;
 	}
-.snow img{
-	/*width: 17.633rem;
-	height: 10.58rem;*/
-	}
-/*@media (min-width: 360px) and (max-width: 375px){
-	.swiper-slide img{
-		width: 310px;
-		height: 200px;
-		}
-	}
-@media (min-width: 320px) and (max-width: 360px){
-	.swiper-slide img{
-		width: 280px;
-		height: 200px;
-		}
-	}*/
-
 /*动漫页面*/
-
 .world{
 	margin-top: 0.966rem;
 	}
@@ -904,7 +880,7 @@ dd a{
 	}
 .detail{
 	margin: 6.76rem auto 0;
-	background: #fff;
+	background: #dce6e4;
 	border-radius: 10px;
 	width: 93%;
 	overflow: hidden;
@@ -1293,6 +1269,7 @@ table tr td:nth-child(2){
 	}
 .order_bottom p{
 	margin-bottom: 1.3527rem;
+	color: #373a3c;
 	}
 .order_bottom button{
 	width: 5.7971rem;
@@ -1368,42 +1345,44 @@ table tr td:nth-child(2){
 .comic{
 	margin: 2.4154rem auto 0;
 	overflow: hidden;
-	padding: 0 0.82rem;
+	padding: 0.4831rem 0.82rem;
 	}
 .comic p{
 	font-size: 0.79rem;
 	text-indent: 2em;
-	}
-.comic img{
-	width: 100%;
+	margin-bottom: 0;
 	}
 .foot{
 	position: fixed;
 	bottom: 0;
-	height: 50px;
+	height: 2.4155rem;
 	background: #FEFEFE;
 	border-top: 1px solid #E2E2E2;
 	display: block;
 	width: 100%;
 	}
+.foot ul{
+	overflow: hidden;
+	}
 .foot ul:nth-child(1) li{
 	float: left;
 	width: 50%;
-	line-height: 50px;
+	line-height:2.4155rem;
 	text-align: center;
 	}
-.foot #chapters li:nth-child(1) a{
+.foot  li:nth-child(1) a{
 	border-right: 1px solid #d3d3d3;
 	padding: 0 1.449rem;
 	}
 .foot ul li a{
 	color: #989898;
+	font-size: 0.6937rem
 	}
 #chapter{
 	position: absolute;
 	display:none;
-	bottom: 50px;
-	left: 40px;
+	bottom: 1.4493rem;
+	left: 1.9324rem;
 	background: #ffe739;
 	text-align: center;
 	}

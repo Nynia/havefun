@@ -116,6 +116,9 @@ def comicbrowse(id):
     if chapter == None:
         return render_template('cartoon_description.html', comic=comic)
     else:
+        #是否超过免费章节
+        if int(chapter) > comic.freechapter:
+            pass
         #myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
         myftp = MyFTP('192.168.114.138', 12345, 'jsgx','jsgx2017', '/')
 
