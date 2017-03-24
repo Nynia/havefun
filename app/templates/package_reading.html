@@ -15,13 +15,30 @@
 </head>
 <body id="books" style="padding-bottom: 2.56rem;">
 <div class="bar_top">
-    <a href="javascript:history.go(-1)"><img src="../static/img/back.png" alt=""/></a>
+    <a href="/reading"><img src="../static/img/back.png" alt=""/></a>
 </div>
 <div class="perfect">
     <p>{{ package.productname }}包月专区</p>
     <p>包月价格：{{ package.price }}元/月</p>
 </div>
-<div class="monthly"><a href="#"><img src="../static/img/month.png" alt="" /></a></div>
+<div class="monthly"><a class="button" href="#"><img src="../static/img/month.png" alt="" /></a></div>
+<!--弹出框-->
+<div id="main">
+    <div class="order">
+        <div class="order_top">提 示</div>
+        <div class="order_bottom">
+            <p>您将订购“{{ package.productname }}”</p>
+            <button class="cancel">取消</button>
+            <button class="confirm">确认</button>
+        </div>
+    </div>
+</div>
+<div id="mains">
+    <div class="order">
+        <img src="../static/img/gou.png" alt=""/>
+        <p></p>
+    </div>
+</div>
 <div class="items">
     <ul>
         {% for b in books %}
@@ -29,6 +46,7 @@
         {% endfor %}
     </ul>
 </div>
+
 </body>
 </html>
 <script src="../static/js/font.js"></script>
@@ -42,5 +60,45 @@
         autoPlay: true,//自动播放
         autoPage: true //自动分页
     });
+    {% if flag %}
+        //$('.super .button').text('已订购');
+        $('.monthly .button img').attr('src', '../static/img/ordered.png');
+    {% else %}
+        $('.monthly .button').click(function () {
+            {% if not session.phonenum %}
+                var url = window.location.href;
+                window.location.href = '/auth/login?backurl=' + url;
+            {% else %}
+                $('#main').show();
+            {% endif %}
 
+        });
+        $('.order_bottom .cancel').click(function () {
+            $('#main').hide()
+        });
+        $('.order_bottom .confirm').click(function () {
+            $('#main').hide();
+            $.ajax({
+                type: "post",
+                url: "/api/v1.0/orders?action=subscribe",
+                data: {
+                    'spid': '{{ package.spid }}',
+                    'chargeid': '{{ package.chargeid }}',
+                    'secret': '{{ package.secret }}',
+                    'phonenum': '{{ session.phonenum }}',
+                    'productid': '{{ package.productid }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('#mains p').text(data.message);
+                    $('#mains').show();
+                    setTimeout(function() { $('#mains').hide(); }, 1000);
+                    if (data.code == "0") {
+                        //success
+                        $('.monthly img').attr('src', '../static/img/ordered.png');
+                    }
+                }
+            });
+        });
+    {% endif %}
 </script>
