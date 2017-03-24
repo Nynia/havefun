@@ -172,4 +172,4 @@ def my():
 
 @main.route('/index', methods=['GET'])
 def index():
-    return redirect(url_for('main.game'))
+    return redirect(url_for('main.comic'))
