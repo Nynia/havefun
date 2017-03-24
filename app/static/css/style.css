@@ -64,7 +64,7 @@ body{
 	padding: 0 0.4831rem;
 	overflow: hidden;
 	}
-.play_top img{
+.play_top img,#set{
 	width: 1rem;
 	height: 1rem;
 	margin-right: 0.483rem;
@@ -1256,6 +1256,7 @@ table tr td:nth-child(2){
 #mains .order p{
 	font-size: 0.961rem;
 	margin-top: 0.725rem;
+	color: #373a3c;
 	}
 .order_top{
 	color: #2d6efc;
@@ -1351,6 +1352,7 @@ table tr td:nth-child(2){
 	font-size: 0.79rem;
 	text-indent: 2em;
 	margin-bottom: 0;
+	margin-top: 0;
 	}
 .foot{
 	position: fixed;
@@ -1520,7 +1522,7 @@ dd p{
 	margin-top: 0.7rem;
 	display: block;
 	}
-.detail_right .button{
+.detail_right .button,.super .books .button{
 	width: 9.3237rem;
 	height: 1.353rem;
 	display: inline-block;
@@ -1530,6 +1532,9 @@ dd p{
 	font-size: 0.74686rem;
 	line-height: 1.353rem;
 	}
+.super .books .button{
+	margin-bottom: -0.7246rem;
+	}
 .monthly .button{
 	width: 18.696rem;
 	height: 2.12561rem;
@@ -1538,4 +1543,11 @@ dd p{
 	border-radius: 5px;
 	line-height: 2.12561rem;
 	display: inline-block;
+	}
+#row{
+	float: right;
+	width: 0.4rem;
+	height: 0.5rem;
+	margin-top: 0.5rem;
+	margin-right: 0;
 	}
