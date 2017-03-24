@@ -4,7 +4,6 @@ from flask import render_template, redirect, request, url_for, flash, session, r
 from ..models import User, OrderRelation
 from .forms import LoginForm, RegisterFrom
 from ..utils.func import generate_identifying_code
-import json
 
 cache = {}
 from app import db
@@ -36,7 +35,6 @@ def login():
 def logout():
     logout_user()
     return 'logout success'
-
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():

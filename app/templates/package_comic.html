@@ -27,7 +27,7 @@
         <div class="detail_right">
             <p>{{ package.productname }}</p>
             <p>&#x3000;{{ package.description }}</p>
-            <a class="button" href="#"><img src="../static/img/buy.png" alt=""></a>
+            <a class="button" href="#">点击订购</a>
         </div>
     </div>
     <div class="clear"></div>
@@ -65,7 +65,9 @@
 <script src="../static/libs/jquery-3.1.0.js"></script>
 <script>
     {% if flag %}
-        $('.detail_right .button img').attr('src', '../static/img/ordered.png');
+        $('.detail_right .button').text('已订购');
+        $('.detail_right .button').css('background','#fff');
+        $('.detail_right .button').css('color','#626262');
     {% else %}
         $('.detail_right .button').click(function () {
             {% if not session.phonenum %}
@@ -97,7 +99,9 @@
                     setTimeout(function() { $('#mains').hide(); }, 1000);
                     if (data.code == "0") {
                         //success
-                        $('.detail_right .button img').attr('src', '../static/img/ordered.png');
+                        $('.detail_right .button').text('已订购');
+                        $('.detail_right .button').css('background','#fff');
+                        $('.detail_right .button').css('color','#626262');
                     }
                 }
             });

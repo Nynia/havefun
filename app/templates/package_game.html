@@ -39,7 +39,7 @@
 
         </ul>
     </div>
-    <a href="#" class="button"><img src="../static/img/orders2.png" alt=""/></a>
+    <a href="#" class="button">点击订购</a>
     <div class="clear"></div>
 </div>
 <!--弹出框-->
@@ -90,7 +90,10 @@
 <script>
     {% if flag %}
         //$('.super .button').text('已订购');
-        $('.super .button img').attr('src', '../static/img/ordered.png');
+        $('.super .button').text('已订购');
+        $('.super .button').css('background','#fff');
+        $('.super .button').css('color','#626262');
+
     {% else %}
         $('.super .button').click(function () {
             {% if not session.phonenum %}
@@ -124,7 +127,9 @@
                     setTimeout(function() { $('#mains').hide(); }, 1000);
                     if (data.code == "0") {
                         //success
-                        $('.super .button img').attr('src', '../static/img/ordered.png');
+                        $('.super .button').text('已订购');
+                        $('.super .button').css('background','#fff');
+                        $('.super .button').css('color','#626262');
                     }
                 }
             });
