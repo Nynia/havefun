@@ -161,8 +161,8 @@ body{
 	font-size: 0.5604rem;
 	}
 .recommend_bottom div:nth-child(1) ul li:nth-child(3n+2){
-	 padding-left: 15%;
-	 padding-right: 15%;
+	 padding-left: 20%;
+	 padding-right: 19.5%;
 	}
 .games>img{
 	width:3.8164rem;
@@ -204,8 +204,8 @@ body{
 	}
 @media  (min-width: 320px) and (max-width: 360px){
 	.recommend_bottom div:nth-child(1) ul li:nth-child(3n+2){
-		 padding-left: 14%;
-		 padding-right: 13%;
+		 padding-left: 18.2%;
+		 padding-right: 18%;
 		}
 	.recommend_bottom .index p{
 		 line-height: 1.1;
@@ -351,14 +351,14 @@ main{
 		}
 }
 #play{
-	padding: 0;
+	padding-left: 0;
+	margin-right: 0.725rem;
 	}
 .watchs ul li a>img{
 	width: 5.0242rem;
 	height: 3.092rem;
 	}
 .watchs ul li:nth-child(4){
-	/*width: 77px;*/
 	margin-right: 0;
 	}
 .watchs .column{
@@ -1171,6 +1171,9 @@ dd a{
 	position: absolute;
 	font-size: 0.746rem;
 	}
+.books ul{
+	margin-right: 2.4155rem;
+	}
 .books ul li:nth-child(1){
 	margin-left: -10px;
 	line-height: 0.966rem;
@@ -1546,8 +1549,13 @@ dd p{
 	}
 #row{
 	float: right;
-	width: 0.4rem;
-	height: 0.5rem;
+	width: 0.4rem!important;
+	height: 0.5rem!important;
 	margin-top: 0.5rem;
-	margin-right: 0;
+	}
+.exit{
+	font-size: 0.74rem;
+	color: #000;
+	line-height: 1.9324rem;
+	margin-left: 1.1rem;
 	}
