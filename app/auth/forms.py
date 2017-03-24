@@ -10,5 +10,5 @@ class LoginForm(FlaskForm):
 class RegisterFrom(FlaskForm):
     phonenum = StringField(validators=[Regexp('^1[3|5|7|8][0-9]{9}$', 0, 'phone error')])
     password = PasswordField()
-    vercode = IntegerField(validators=[DataRequired()])
+    vercode = StringField(validators=[DataRequired()])
     submit = SubmitField()

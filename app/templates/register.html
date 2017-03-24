@@ -1,37 +1,65 @@
 <!doctype html>
 <html lang="zh-cmn-Hans">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="robots" content="index,follow">
-	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
-	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-	    <meta name="msapplication-tap-highlight" content="no">
-		<title>注册</title>
-		<meta name="keywords" content="">
-        <meta name="description" content="">
-		<link rel="stylesheet" href="../static/css/style.css" />
-		<link rel="stylesheet" href="../static/css/main.css" />
-	</head>
-	<body class="logins" style="padding-bottom: 2.56rem;">
-		<div id="login">
-			<a href="/my"><img src="../static/img/cha.png" alt="叉号" /></a>
-			<span class="account">注册账号</span>
-		</div>
-		<div class="show">
-			<form  class="show_top registers">
-				<div class="user">
-					<label for="username" class="country">中国</label>
-				</div>
-				<div class="code codes">
-				    <label for="password">+86</label><input type="username" name="username" autocomplete="off" class="tel"><input type="text" id="codes" autocomplete="off"/><a href="#">获取验证码</a><br>
-				</div>
-				<div class="code">
-				    <label for="password"><img src="../static/img/password.png" alt="" /></label><input type="password" name="password" autocomplete="off" placeholder="密码设置"><br>
-			    </div>
-			</form>
-			<input type="submit" value="提&#X3000;交"></input>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>注册</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
+</head>
+<body class="logins" style="padding-bottom: 2.56rem;">
+<div id="login">
+    <a href="/my"><img src="../static/img/cha.png" alt="叉号"/></a>
+    <span class="account">注册账号</span>
+</div>
+<div class="show">
+    <form class="show_top registers" method="post">
+        {{ form.hidden_tag() }}
+        <div class="user">
+            <label for="username" class="country">中国</label>
+        </div>
+        <div class="code codes">
+            <label for="password">+86</label>{{ form.phonenum(class='tel') }}{{ form.vercode(id='codes') }}<a href="#">获取验证码</a><br>
+        </div>
+        <div class="code">
+            <label for="password"><img src="../static/img/password.png"
+                                       alt=""/></label>{{ form.password(placeholder="密码设置") }}<br>
+        </div>
+        {{ form.submit(value="提   交") }}
+    </form>
 
-		</div>
-	</body>
+
+</div>
+</body>
 </html>
 <script src="../static/js/font.js"></script>
+<script src="../static/libs/jquery-3.1.0.js"></script>
+<script>
+    $('.codes a').click(function () {
+            url = '/auth/register?action=getIdentifingCode&phonenum=' + phonenum;
+            $.ajax({
+                url: '/auth/register',
+                type: 'GET',
+                async: true,
+                data: {
+                    action: 'getIdentifingCode',
+                    phonenum: $('.tel').val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (xhr, textStatus) {
+                    console.log('错误');
+                    console.log(xhr);
+                    console.log(textStatus);
+                }
+            })
+    });
+</script>

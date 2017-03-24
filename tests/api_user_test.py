@@ -15,9 +15,9 @@ def test_1():
 def test_2():
     url = base_url
     data = {
-        'phonenum':'18118999630',
+        'phonenum':'15301588547',
         'password':'123456',
-        'nickname':'snk'
+        'nickname':'liqi'
     }
     r = requests.post(url, data=data)
     print r.text

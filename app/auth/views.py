@@ -1,9 +1,12 @@
 from . import auth
 from flask_login import login_user, logout_user, login_required
-from flask import render_template, redirect, request, url_for, flash,session,request
+from flask import render_template, redirect, request, url_for, flash,session,request,jsonify,g
 from ..models import User,OrderRelation
 from .forms import LoginForm,RegisterFrom
 from ..utils.func import generate_identifying_code
+import json
+cache = {}
+
 @auth.route('/login', methods=['GET','POST'])
 def login():
     form = LoginForm()
@@ -32,13 +35,14 @@ def logout():
 
 @auth.route('/register', methods=['GET','POST'])
 def register():
+    print cache
     form = RegisterFrom()
-    codemap = {}
     action = request.args.get('action')
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         code = generate_identifying_code()
-        codemap.__setattr__(phonenum,code)
+        cache[phonenum] = code
+
         import requests
         url = 'http://221.228.17.88:8080/sendmsg/send'
         params = {
@@ -46,8 +50,37 @@ def register():
             'msg':code
         }
         r = requests.get(url,params=params)
-        print r.text
-    if form.validate_on_submit():
-        pass
+        return jsonify({
+            'phonenum': phonenum,
+            'msg': code
+        })
+    if request.method == 'POST':
+        phonenum = form.phonenum.data
+        vercode = form.vercode.data
+        password = form.password.data
+        print cache
+        if vercode == cache.get(phonenum):
+            import requests
+            url = 'http://127.0.0.1:5000/api/v1.0/users'
+            payload = {
+                'phonenum':phonenum,
+                'password':password,
+            }
+            r = requests.post(url, data=payload)
+            print r.text
+            json_result = json.loads(r)
+            if json_result['code'] == '0':
+                user = User.query.filter_by(phonenum=form.phonenum.data).first()
+                if user is not None:
+                    login_user(user, True)
+                    relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
+                    orderedpro = []
+                    for r in relation:
+                        if r.status == '1':
+                            orderedpro.append(r.productid)
+                    session['ordered'] = orderedpro
+                    session['phonenum'] = user.phonenum
+                    next = request.args.get('next')
+                    return redirect(next or url_for('main.my'))
 
     return render_template('register.html',form=form)
