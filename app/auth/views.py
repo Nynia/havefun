@@ -85,6 +85,7 @@ def register():
                         orderedpro.append(r.productid)
                 session['ordered'] = orderedpro
                 session['phonenum'] = user.phonenum
+                print session
                 next = request.args.get('next')
                 return redirect(next or url_for('main.my'))
     return render_template('register.html', form=form)
