@@ -17,11 +17,9 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user, True)
             relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
-            orderedpro = []
             for r in relation:
                 if r.status == '1':
-                    orderedpro.append(r.productid)
-            session['ordered'] = orderedpro
+                    session[r.productid] = 1
             session['phonenum'] = user.phonenum
             next = request.args.get('next')
             print session['user_id']

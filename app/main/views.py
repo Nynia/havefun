@@ -10,9 +10,10 @@ from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
 import config
 from app import db
+from app import myftp
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package,Comic,Reading,Chapter
+from app.models import Package,Comic,Reading,Chapter,History
 
 @main.route('/config',methods=['GET', 'POST'])
 def config():
@@ -78,7 +79,7 @@ def package():
     ordered = False
     print current_user.is_anonymous
     if not current_user.is_anonymous:
-        if package.productid in session['ordered']:
+        if session.get(package.productid):
             print package.productid
             ordered = True
     if package.type == '1':
@@ -101,7 +102,14 @@ def package():
 @main.route('/game/<id>',methods=['GET'])
 def gamedetail(id):
     game = Game.query.get(int(id))
-    return render_template('game_description.html',game=game)
+    package = Package.query.get(int(game.packageid))
+    flag = False
+    if current_user.is_anonymous:
+        return redirect(url_for('auth.login',next='/package?id='+str(package.id)))
+    else:
+        if session.get(package.productid):
+            flag = True
+        return render_template('game_description.html',game=game, flag=flag)
 
 @main.route('/comic',methods=['GET'])
 def comic():
@@ -112,21 +120,56 @@ def comic():
 @main.route('/comic/<id>',methods=['GET'])
 def comicbrowse(id):
     comic = Comic.query.get(int(id))
+    package = Package.query.get(int(comic.packageid))
     chapter = request.args.get('chapter')
     if chapter == None:
         return render_template('cartoon_description.html', comic=comic)
     else:
-        #是否超过免费章节
-        if int(chapter) > comic.freechapter:
-            pass
-        #myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
-        myftp = MyFTP('192.168.114.138', 12345, 'jsgx','jsgx2017', '/')
+        if not current_user.is_anonymous:
+            if session.get(package.productid) or int(chapter) < comic.freechapter:
+                uid = session.get('user_id')
+                cid = comic.id
+                chapter = chapter
+                type = '1'
+                history = History.query.filter_by(uid=uid).filter_by(cid=cid).first()
+                if history:
+                    history.chapter = chapter
+                    history.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+                else:
+                    history = History()
+                    history.uid = uid
+                    history.cid = cid
+                    history.chapter = chapter
+                    history.type = type
+                    history.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+                    history.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+                db.session.add(history)
+                db.session.commit()
+                # myftp = MyFTP(config.FTP_ADDR, config.FTP_PORT, config.FTP_USER, config.FTP_PWD, '/')
+                #myftp = MyFTP('192.168.114.138', 12345, 'jsgx', 'jsgx2017', '/')
 
-        myftp.login()
-        filelist = myftp.listfiles('/comics'+'/'+id+'/'+chapter)
-        filelist = ['/comics'+'/'+id+'/'+chapter+'/'+str(i+1)+'.jpg' for i in range(len(filelist))]
-        #print filelist
-        return render_template('cartoon_browse.html',imglist=filelist,cur=chapter,len=comic.curchapter)
+                #myftp.login()
+                filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
+                filelist = ['/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg' for i in range(len(filelist))]
+                # print filelist
+                return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter)
+            else:
+
+                pass
+        else:
+            if int(chapter) < comic.freechapter:
+                myftp = MyFTP('192.168.114.138', 12345, 'jsgx', 'jsgx2017', '/')
+
+                myftp.login()
+                filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
+                filelist = ['/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg' for i in
+                            range(len(filelist))]
+                # print filelist
+                return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter)
+            else:
+                # 请先订购产品包
+                pass
+
 
 @main.route('/reading',methods=['GET'])
 def reading():
@@ -145,7 +188,7 @@ def readinginfo(bookid):
             chaptername = chapter.chaptername[3:]
         else:
             chaptername = chaptername[0][:2]
-        # print chapter
+        #print chapter
         ptaglist = re.findall(u'\<p\>[\s　]*(.*?)\<\/p\>', chapter.content)
         #print ptaglist
         return render_template('read_browse.html', ptaglist=ptaglist, name=chaptername, cur=chapter, len=len(chapters))

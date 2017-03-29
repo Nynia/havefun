@@ -5,6 +5,7 @@ from config import config
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import requests
+from app.utils.ftp import MyFTP
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -14,6 +15,8 @@ login_manager.session_protection = 'normal'
 login_manager.login_view = 'auth.login'
 
 #scheduler = APScheduler()
+
+myftp = MyFTP('192.168.114.138', 12345, 'jsgx', 'jsgx2017', '/')
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -25,6 +28,8 @@ def create_app(config_name):
     login_manager.init_app(app)
     #scheduler.init_app(app)
     #scheduler.start()
+
+    #myftp.login()
 
     from .api_1_0 import api as api_1_0_blueprint
     app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1.0')

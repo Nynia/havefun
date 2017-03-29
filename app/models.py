@@ -285,7 +285,29 @@ class Chapter(db.Model):
         }
         return json_post
 
+class History(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    type = db.Column(db.String(1))
+    cid = db.Column(db.Integer)
+    chapter = db.Column(db.Integer)
+    uid = db.Column(db.String(15))
+    createtime = db.Column(db.String(14))
+    updatetime = db.Column(db.String(14))
 
+    def __repr__(self):
+        return '<History %r>' % self.uid
+
+    def to_json(self):
+        json_post = {
+            'id':self.id,
+            'type':self.type,
+            'cid':self.cid,
+            'chapter':self.chapter,
+            'uid':self.uid,
+            'createtime':self.createtime,
+            'updatetiem':self.updatetime
+        }
+        return json_post
 
 
 

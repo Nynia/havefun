@@ -38,7 +38,7 @@
             <div class="clear"></div>
         </ul>
     </div>
-    <a href="{{ game.url }}" class="button">下载</a>
+    <a href="#" class="button">下载</a>
     <div class="clear"></div>
 </div>
 <div class="summary" id="game_package">
@@ -105,3 +105,12 @@
 </body>
 </html>
 <script src="../static/js/font.js"></script>
+<script>
+    {% if flag %}
+        $('.button').attr('href','{{ game.url }}');
+    {% else %}
+        $('.button').click(function () {
+            alert('请先订购游戏包');
+        });
+    {% endif %}
+</script>
