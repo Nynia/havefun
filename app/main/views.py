@@ -234,9 +234,6 @@ def subscribe():
         'productid': productid
     }
     r = requests.post(url, data=data)
-    json_result = json.loads(r.text)
-    if json_result['code'] == 0:
-        session[productid] = 1
-        print 'ss'
     print r.text
+
     return r.text
