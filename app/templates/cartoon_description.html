@@ -110,11 +110,13 @@
                     },
                     dataType: 'json',
                     success: function (data) {
+                        console.log(data);
                         $('#mains p').text(data.message);
                         $('#mains').show();
                         setTimeout(function () {
                             $('#mains').hide();
                         }, 1000);
+
                     }
                 });
             {% endif %}
