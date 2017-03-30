@@ -48,16 +48,31 @@
     var bookid = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
     console.log(bookid);
 
-    for (var i=0; i<sum; i++) {
+    for (var i = 0; i < sum; i++) {
         var liNode = document.createElement('li');
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (i + 1).toString() + '话');
-        if (i == cur-1) {
+        if (i == cur - 1) {
             liNode.style.color = '#a29e86';
         }
         aNode.appendChild(textNode);
-        aNode.href = '/comic/' + bookid + '?chapter=' + (i + 1).toString();
-
+        aNode.href = '#';
+        aNode.onclick = function () {
+            $.ajax({
+                type: "get",
+                url: "/comic/" + bookid,
+                contentType: "application/json",
+                data: {chapter: (cur + 1).toString(), type: 'json'},
+                success: function (data, status) {
+                    if (data == 'success') {
+                        window.location.href = '/comic/' + bookid + '?chapter=' + (cur + 1).toString();
+                    }
+                    else {
+                        alert('请先订购');
+                    }
+                }
+            });
+        };
 
         liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
@@ -67,5 +82,5 @@
         nexta.attr('href', '/comic/' + bookid + '?chapter=' + (cur + 1).toString());
     }
 
-    $('#back').attr('href','/comic/' + bookid);
+    $('#back').attr('href', '/comic/' + bookid);
 </script>

@@ -33,11 +33,11 @@
 	
 //游戏热门推荐
 $(document).ready(function(){
-	$('.recommend_top ul li').hover(function(){   
-    $(this).find('a').css('color','#eba241').end().siblings().find('a').css('color','#333');
-    $(this).find('a').css('font-weight','600').end().siblings().find('a').css('font-weight','normal');
+	$('.recommend_top a').hover(function(){
+    $(this).css('color','#eba241').siblings().css('color','#333');
+    $(this).css('font-weight','600').siblings().css('font-weight','normal');
     $index = $(this).index();
     $('.recommend_bottom .part').eq($index).show().siblings().hide();
   })
-})
+});
 

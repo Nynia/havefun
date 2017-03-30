@@ -14,6 +14,7 @@ class Package(db.Model):
     createtime = db.Column(db.String(14))
     modifiedtime = db.Column(db.String(14))
     img = db.Column(db.String(255))
+    bannerimg = db.Column(db.String(255))
     spid = db.Column(db.String(15))
     chargeid = db.Column(db.String(10))
     secret = db.Column(db.String(30))
@@ -29,6 +30,7 @@ class Package(db.Model):
             'createtime': self.createtime,
             'modifiedtime': self.modifiedtime,
             'img':self.img,
+            'bannerimg':self.bannerimg,
             'spid':self.spid,
             'chargeid':self.chargeid,
             'secret':self.secret

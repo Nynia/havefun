@@ -125,36 +125,38 @@ def comic():
 def comicbrowse(id):
     comic = Comic.query.get(int(id))
     chapter = request.args.get('chapter')
-    flag = False
-    if chapter == None:
-        package = Package.query.get(comic.packageid)
-        if session.get(package.productid):
-            flag = True
-        return render_template('cartoon_description.html', comic=comic, flag=flag)
+    if request.args.get('type') == 'json':
+        if session.get(comic.packageid) or int(chapter) <= comic.freechapter:
+            return 'success'
+        else:
+            return 'noauthority'
     else:
-        if not current_user.is_anonymous:
-            uid = session.get('user_id')
-            cid = comic.id
-            chapter = chapter
-            type = '1'
-            history = History.query.filter_by(uid=uid).filter_by(cid=cid).first()
-            if history:
-                history.chapter = chapter
-                history.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
-            else:
-                history = History()
-                history.uid = uid
-                history.cid = cid
-                history.chapter = chapter
-                history.type = type
-                history.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
-                history.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
-            db.session.add(history)
-            db.session.commit()
+        if chapter == None:
+            return render_template('cartoon_description.html', comic=comic)
+        else:
+            if not current_user.is_anonymous:
+                uid = session.get('user_id')
+                cid = comic.id
+                chapter = chapter
+                type = '1'
+                history = History.query.filter_by(uid=uid).filter_by(cid=cid).first()
+                if history:
+                    history.chapter = chapter
+                    history.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+                else:
+                    history = History()
+                    history.uid = uid
+                    history.cid = cid
+                    history.chapter = chapter
+                    history.type = type
+                    history.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+                    history.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+                db.session.add(history)
+                db.session.commit()
 
-        filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
-        filelist = ['/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg' for i in range(len(filelist))]
-        return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter)
+            filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
+            filelist = ['/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg' for i in range(len(filelist))]
+            return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter)
 
 
 @main.route('/reading', methods=['GET'])
@@ -168,15 +170,15 @@ def reading():
 def readinginfo(bookid):
     chapters = Chapter.query.filter_by(bookid=bookid).order_by(Chapter.chapterid).all()
     reading = Reading.query.filter_by(bookid=bookid).first()
-    chapterid = request.args.get('chapter')
+    chapter = request.args.get('chapter')
     if request.args.get('type') == 'json':
-        if session.get(reading.packageid) or int(chapterid) <= reading.freechapter+1:
+        if session.get(reading.packageid) or int(chapter) <= reading.freechapter + 1:
             return 'success'
         else:
             return 'noauthority'
     else:
-        if chapterid:
-            chapter = chapters[int(chapterid) - 1]
+        if chapter:
+            chapter = chapters[int(chapter) - 1]
             chaptername = chapter.chaptername.split(' ')
             if len(chaptername) > 1:
                 chaptername = chapter.chaptername[3:]
@@ -197,6 +199,7 @@ def readinginfo(bookid):
                 chapter_dict_list.append(dict)
             return render_template('read_description.html', book=reading, chapters=chapter_dict_list, flag=True)
 
+
 @main.route('/my', methods=['GET'])
 def my():
     if not current_user.is_anonymous:
@@ -208,4 +211,3 @@ def my():
 @main.route('/index', methods=['GET'])
 def index():
     return redirect(url_for('main.comic'))
-

@@ -80,22 +80,34 @@
 
         s = [];
         {% for i in range(comic.curchapter) %}
-            {% if i < comic.freechapter %}
-                s.push("<li><a href=\"/comic/{{ comic.id }}?chapter={{ i+1 }}\">第{{ i+1 }}话</a><img src=\"../static/img/free.png\" alt=\"\"/></li>");
-            {% elif flag  %}
-                s.push("<li><a href=\"/comic/{{ comic.id }}?chapter={{ i+1 }}\">第{{ i+1 }}话</a></li>");
-            {% else %}
-                s.push("<li><a href=\"#\">第{{ i+1 }}话</a></li>");
-            {% endif %}
-        {% endfor %}
-        $('.session').html(s);
-
-        {% for i in range(comic.curchapter) %}
-            {% if i > comic.freechapter - 1 and not flag%}
-                $('.session li:eq({{ i }})').click(function () {
-                    alert('hello');
+            var liNode = document.createElement('li');
+            var aNode = document.createElement('a');
+            var textNode = document.createTextNode('第{{ i+1 }}话');
+            aNode.appendChild(textNode);
+            aNode.href = '#';
+            aNode.onclick = function () {
+                $.ajax({
+                    type: "get",
+                    url: "/comic/{{ comic.id }}",
+                    contentType: "application/json",
+                    data: {chapter: {{ i+1 }}, type: 'json'},
+                    success: function (data, status) {
+                        if (data == 'success') {
+                            window.location.href = '/comic/{{ comic.id }}?chapter={{ i+1 }}'
+                        }
+                        else {
+                            alert('请先订购');
+                        }
+                    }
                 });
+            };
+            liNode.appendChild(aNode);
+            {% if i < comic.freechapter %}
+                var imgNode = document.createElement('img');
+                imgNode.setAttribute('src', "../static/img/free.png");
+                liNode.appendChild(imgNode);
             {% endif %}
+            document.getElementsByClassName('session')[0].appendChild(liNode);
         {% endfor %}
 
         var a = $('.chapter ul  li')[0].innerHTML;
