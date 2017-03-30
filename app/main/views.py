@@ -5,7 +5,7 @@ from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
 from werkzeug.utils import secure_filename
-import os, re,requests
+import os, re,requests,json
 from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
 import config
@@ -224,7 +224,7 @@ def index():
 def subscribe():
     productid = request.form.get('productid')
     phonenum = request.form.get('phonenum')
-    package = Package.query.get(productid=productid)
+    package = Package.query.get(productid)
     url = 'http://127.0.0.1/api/v1.0/orders?action=subscribe'
     data = {
         'spid': package.spid,
@@ -234,5 +234,9 @@ def subscribe():
         'productid': productid
     }
     r = requests.post(url, data=data)
+    json_result = json.loads(r.text)
+    if json_result['code'] == 0:
+        session[productid] = 1
+        print 'ss'
     print r.text
     return r.text
