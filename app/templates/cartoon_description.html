@@ -80,10 +80,12 @@
 
         s = [];
         {% for i in range(comic.curchapter) %}
-            {% if i > comic.freechapter - 1 and not flag%}
-                s.push("<li><a href=\"#\">第{{ i+1 }}话</a></li>");
-            {% else %}
+            {% if i < comic.freechapter %}
+                s.push("<li><a href=\"/comic/{{ comic.id }}?chapter={{ i+1 }}\">第{{ i+1 }}话</a><img src=\"../static/img/free.png\" alt=\"\"/></li>");
+            {% elif flag  %}
                 s.push("<li><a href=\"/comic/{{ comic.id }}?chapter={{ i+1 }}\">第{{ i+1 }}话</a></li>");
+            {% else %}
+                s.push("<li><a href=\"#\">第{{ i+1 }}话</a></li>");
             {% endif %}
         {% endfor %}
         $('.session').html(s);
