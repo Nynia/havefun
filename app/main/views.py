@@ -1,11 +1,11 @@
 # -*-coding=utf-8-*-
 from . import main
-from flask import render_template, session, redirect, url_for,jsonify
+from flask import render_template, session, redirect, url_for, jsonify
 from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
 from werkzeug.utils import secure_filename
-import os, re,requests,json
+import os, re, requests, json, hashlib
 from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
 import config
@@ -13,7 +13,7 @@ from app import db
 from app import myftp
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package, Comic, Reading, Chapter, History
+from app.models import Package, Comic, Reading, Chapter, History,OrderRelation,OrderHistroy
 
 
 @main.route('/config', methods=['GET', 'POST'])
@@ -129,8 +129,8 @@ def comicbrowse(id):
     if request.args.get('type') == 'json':
         if session.get(comic.packageid) or int(chapter) <= comic.freechapter:
             return jsonify({
-                'code':'0',
-                'msg':chapter
+                'code': '0',
+                'msg': chapter
             })
         else:
             return jsonify({
@@ -139,7 +139,7 @@ def comicbrowse(id):
             })
     else:
         if chapter == None:
-            return render_template('cartoon_description.html', comic=comic,package=package)
+            return render_template('cartoon_description.html', comic=comic, package=package)
         else:
             if not current_user.is_anonymous:
                 uid = session.get('user_id')
@@ -163,7 +163,8 @@ def comicbrowse(id):
 
             filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
             filelist = ['/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg' for i in range(len(filelist))]
-            return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter,package=package)
+            return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter,
+                                   package=package)
 
 
 @main.route('/reading', methods=['GET'])
@@ -220,20 +221,58 @@ def index():
     return redirect(url_for('main.comic'))
 
 
-@main.route('/subscribe',methods=['POST'])
+@main.route('/subscribe', methods=['POST'])
 def subscribe():
     productid = request.form.get('productid')
     phonenum = request.form.get('phonenum')
     package = Package.query.get(productid)
-    url = 'http://127.0.0.1/api/v1.0/orders?action=subscribe'
+    chargeid = package.chargeid
+    secret = package.secret
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    token = hashlib.sha1(chargeid + timestamp + secret).hexdigest()
     data = {
-        'spid': package.spid,
-        'chargeid': package.chargeid,
-        'secret': package.secret,
-        'phonenum': phonenum,
-        'productid': productid
+        'action': 'subscribe',
+        'spId': package.spid,
+        'chargeId': package.chargeid,
+        'phoneNum': phonenum,
+        'orderType': '1',
+        'timestamp': timestamp,
+        'accessToken': token
     }
-    r = requests.post(url, data=data)
-    print r.text
+    r = requests.post('http://61.160.185.51:9250/ismp/serviceOrder', data=data)
+    json_result = json.loads(r.text)
+    print json_result
+    err_code = json_result['errcode']
+    err_msg = json_result['errmsg']
+    if err_code == '0':
+        orderaction = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(productid=productid).first()
+        if not orderaction:
+            orderaction = OrderRelation()
+        orderhistory = OrderHistroy()
+        orderaction.productid = productid
+        orderaction.phonenum = phonenum
+        orderhistory.productid = productid
+        orderhistory.phonenum = phonenum
+        orderaction.starttime = timestamp
+        orderaction.status = '1'
+        orderhistory.action = '1'
+        orderhistory.createtime = timestamp
 
-    return r.text
+        db.session.add(orderaction)
+        db.session.add(orderhistory)
+        db.session.commit()
+
+        session[productid] = 1
+
+        return jsonify({
+            'code': err_code,
+            'message': err_msg,
+            'data': None
+        })
+
+    else:
+        return jsonify({
+            'code': err_code,
+            'message': err_msg,
+            'data': None
+        })
