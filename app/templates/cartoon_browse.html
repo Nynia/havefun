@@ -71,21 +71,20 @@
             console.log(id);
             $.ajax({
                 type: "post",
-                url: "/api/v1.0/orders?action=subscribe",
+                url: "/subscribe",
                 data: {
-                    'spid': '{{ package.spid }}',
-                    'chargeid': '{{ package.chargeid }}',
-                    'secret': '{{ package.secret }}',
                     'phonenum': '{{ session.phonenum }}',
                     'productid': '{{ package.productid }}'
                 },
                 dataType: 'json',
                 success: function (data) {
+                    console.log(data);
                     $('#mains p').text(data.message);
                     $('#mains').show();
                     setTimeout(function () {
                         $('#mains').hide();
                     }, 1000);
+
                 }
             });
         {% endif %}

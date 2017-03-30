@@ -103,7 +103,7 @@
                 console.log(id);
                 $.ajax({
                     type: "post",
-                    url: "/api/v1.0/orders?action=subscribe",
+                    url: "/subscribe",
                     data: {
                         'spid': '{{ package.spid }}',
                         'chargeid': '{{ package.chargeid }}',

@@ -25,13 +25,13 @@ def fun1():
     print json_result
 
 def func2():
-    url = 'http://221.228.17.87/api/v1.0/orders?action=subscribe'
+    url = 'http://221.228.17.87/api/v1.0/orders?action=unsubscribe'
     data = {
-        'spid':'35101296',
-        'chargeid':'1971',
-        'secret':'13e69a3164d5fe59c683',
+        'spid':'35101256',
+        'chargeid':'1974',
+        'secret':'dedb12a0a13266c652d4',
         'phonenum':'18118999630',
-        'productid':'135000000000000229481'
+        'productid':'135000000000000242190'
     }
     r = requests.post(url, data=data)
     print r.text
