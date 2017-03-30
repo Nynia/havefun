@@ -62,7 +62,7 @@
                 type: "get",
                 url: "/comic/" + bookid,
                 contentType: "application/json",
-                data: {chapter: (cur + 1).toString(), type: 'json'},
+                data: {chapter: (i + 1).toString(), type: 'json'},
                 dataType:'json',
                 success: function (data, status) {
                     console.log(data);
