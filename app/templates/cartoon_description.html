@@ -91,7 +91,7 @@
                     contentType: "application/json",
                     data: {chapter: {{ i+1 }}, type: 'json'},
                     success: function (data, status) {
-                        if (data == 'success') {
+                        if (data.code == '0') {
                             window.location.href = '/comic/{{ comic.id }}?chapter={{ i+1 }}'
                         }
                         else {
