@@ -38,7 +38,7 @@
             {% for p in packages %}
                 <li>
                     <a href=package?id={{ p.productid }}">
-                        <img src="../static/img/cartoon.png"/>
+                        <img src="{{ p.bannerimg }}"/>
                     </a>
                 </li>
             {% endfor %}
