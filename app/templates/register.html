@@ -24,10 +24,14 @@
         <div class="user">
             <label for="username" class="country">中国</label>
         </div>
-        <div class="code codes">
-            <label for="password">+86</label>{{ form.phonenum(class='tel') }}{{ form.vercode(id='codes') }}<a href="#">获取验证码</a><br>
+        <div class="codes">
+            <label for="password" class="col">+86</label>{{ form.phonenum(class='phonunum') }}<br>
         </div>
-        <div class="code">
+        <div class="code codes">
+            <label for="password">验证码</label>{{ form.vercode(class='tel') }}<a
+                href="#">获取验证码</a><br>
+        </div>
+        <div class="code codes">
             <label for="password"><img src="../static/img/password.png"
                                        alt=""/></label>{{ form.password(placeholder="密码设置") }}<br>
         </div>
@@ -42,24 +46,48 @@
 <script src="../static/libs/jquery-3.1.0.js"></script>
 <script>
     $('.codes a').click(function () {
-            url = '/auth/register?action=getIdentifingCode&phonenum=' + phonenum;
-            $.ajax({
-                url: '/auth/register',
-                type: 'GET',
-                async: true,
-                data: {
-                    action: 'getIdentifingCode',
-                    phonenum: $('.tel').val()
-                },
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (xhr, textStatus) {
-                    console.log('错误');
-                    console.log(xhr);
-                    console.log(textStatus);
-                }
-            })
+
+        $.ajax({
+            url: '/auth/register',
+            type: 'GET',
+            async: true,
+            data: {
+                action: 'getIdentifingCode',
+                phonenum: $('.phonunum').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                show();
+                $('.codes a').css('color', '#eae9e9');
+            },
+            error: function (xhr, textStatus) {
+                console.log('错误');
+                console.log(xhr);
+                console.log(textStatus);
+            }
+        })
     });
+    // 短信验证码计时器
+    var seconds = 60;
+    var obj = $('.codes a');
+    console.log(obj);
+    function show(){
+    	run(seconds, obj);
+    }
+	function run(seconds, obj){
+		clearInterval(seconds);
+			obj.html("重新获取(" + seconds + "s)");
+			setInterval(function() {
+				if (seconds <= 0) {
+					return;
+				}
+				seconds--;
+				obj.html("重新获取(" + seconds + "s)");
+				if (seconds <= 0) {
+					clearInterval(seconds);
+					obj.html( "重新获取");
+				}
+			}, 1000);
+	}
 </script>

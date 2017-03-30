@@ -15,6 +15,7 @@ ul,li{
 	}
 body{
 	width: 100%;
+	/*height: 100%;*/
 	overflow-x: hidden;
 	}
 /*轮播图*/
@@ -143,7 +144,7 @@ body{
 	float: left;
 	text-align: center;
 	height:6.232rem;
-	margin:10px 0 20px 0;
+	margin:0.4831rem 0 0.9662rem 0;
 	position: relative;
 	}
 .recommend_bottom ul .index{
@@ -197,7 +198,7 @@ body{
 	}
 .recommend_bottom .index p:nth-child(2),.recommend_bottom .index p:nth-child(4){
 	font-size: 0.561rem;
-	margin-top: 0.25rem;
+	margin-top: 0.5rem;
 	}
 .more{
 	position: absolute;
@@ -264,7 +265,8 @@ body{
 	margin-right: 2.174rem;
 	}
 main{
-	margin: 0.4831rem 0.725rem 0;
+	padding: 0.4831rem 0.725rem 0;
+	background: #fff;
 	}
 .main{
 	font-size: 0.74rem;
@@ -272,7 +274,7 @@ main{
 .main a{
 	display: inline-block;
 	width: 100%;
-	margin: 0.2415rem 0;
+	margin: 0.3rem 0;
 	line-height: 30px;
 	color: #c5c5c5;
 	}
@@ -319,8 +321,8 @@ main{
 	background-size: contain;
 	}
 #watch{
-	/*margin: 0.4831rem 0 0.4831rem 0.725rem;*/
 	margin: 0.4831rem auto;
+	background: #fff;
 	}
 #watch .play_top>img{
 	width: 0.9662rem;
@@ -363,9 +365,6 @@ main{
 	margin: 0 0 0.1rem 0.2rem;
 	}
 @media (min-width: 320px) and (max-width: 360px){
-	/*.watchs ul li div img{
-		margin-top: 0.9rem;
-		}*/
 	.main a div{
 		margin: 0.5rem 0.9rem 0 0;
 		}
@@ -374,6 +373,7 @@ main{
 	padding-left: 0;
 	margin-right: 0.725rem;
 	margin-left: 0.725rem;
+	padding-top: 0.4831rem;
 	}
 .watchs ul li a>img{
 	width: 5.0242rem;
@@ -636,10 +636,17 @@ main{
 		}
 	}
 /*超凡游戏包*/
-.package{
-	background: url(../img/package.png) no-repeat;
-	background-attachment: fixed;
-	}
+.package:before{
+	content: '';
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(../img/package.png) center 0 no-repeat;
+	background-size: cover;
+}
 .bar_top{
 	padding: 0 0.82rem;
 	position: fixed;
@@ -838,11 +845,8 @@ dd a{
 	margin-right: 0.1449rem;
 	}
 .world ul li div span:nth-last-child(1){
-	background: url(../img/detail.png) no-repeat center center;
 	float: right;
-	font-size: 0.53rem;
-	color: #000;
-	margin:0.0483rem 0.966rem 0 0;
+	margin:0.0483rem 0.6rem 0 0;
 	line-height: 1rem;
 	}
 .defeat{
@@ -867,7 +871,7 @@ dd a{
 	}
 .thumb img{
 	position: absolute;
-	right: 0.1rem;
+	right: 0.2rem;
 	top: 0.3rem;
 	}
 .defeat .update{
@@ -894,7 +898,7 @@ dd a{
 	}
 .update span img {
 	vertical-align: middle;
-	margin:0 5px 5px 0;
+	margin:0 0.24155rem 0.24155rem 0;
 	}
 /*媒体查询*/
 @media (min-width: 320px) and (max-width: 360px){
@@ -903,10 +907,17 @@ dd a{
 		}
 	}
 /*漫漫世界精品包*/
-#cartoon{
-	background: url(../img/bg.png) no-repeat;
-	background-attachment: fixed;
-	}
+#cartoon:before{
+	content: '';
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(../img/bg.png) center 0 no-repeat;
+	background-size: cover;
+}
 .detail{
 	margin: 6.76rem auto 0;
 	background: #dce6e4;
@@ -1000,13 +1011,6 @@ dd a{
 	line-height: 1.449rem;
 	color: #383838;
 	}
-
-/*媒体查询*/
-@media (min-width: 320px) and (max-width: 375px){
-	.list li div{
-		padding-top: 8.5rem;
-		}
-	}
 /*阅读*/
 .classify{
 	margin: 1.12rem auto 0;
@@ -1045,10 +1049,19 @@ dd a{
 	}
 /*阅读详情*/
 #read{
-	background: url(../img/bga.png);
-	background-attachment: fixed;
 	color: #fff;
 	}
+#read:before{
+	content: '';
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(../img/bga.png) center 0 no-repeat;
+	background-size: cover;
+}
 .super_right ul li:nth-child(2){
 	margin-top: 0.483rem;
 	}
@@ -1112,6 +1125,7 @@ tr{
 td{
 	border: 1px solid #fff;
 	height: 2.415rem;
+	line-height: 2.415rem;
 	width: 3.14rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1120,11 +1134,12 @@ td{
 table tr td:nth-child(2){
 	text-align: left;
 	padding-left: 1.2077rem;
+	position: relative;
 	}
 
 /*订购*/
 #main,#mains{
-	position: absolute;
+	position: fixed;
 	left: 0;
 	top: 0;
 	height: 100%;
@@ -1142,7 +1157,7 @@ table tr td:nth-child(2){
 	left: 2.754rem;
 	left: -webkit-calc(50% - 7.2465rem);
 	left: calc(50% - 7.2465rem);
-	top: 13.78rem;
+	top: 13.768rem;
 	top: -webkit-calc(50% - 3.9855rem);
 	top: calc(50% - 3.9855rem);
 	border-radius: 10px;
@@ -1213,7 +1228,13 @@ table tr td:nth-child(2){
 	float: left;
 	border: 1px solid #fff;
 	margin-top: 5%;
+	position: relative;
 	}
+.chapter ul li img{
+	position: absolute;
+	right: 0;
+	width: 30px;
+}
 .chapter ul li:nth-child(3n+2){
 	margin: 5% 10% 0;
 	}
@@ -1266,9 +1287,9 @@ table tr td:nth-child(2){
 	line-height:2.4155rem;
 	text-align: center;
 	}
-.foot  li:nth-child(1) a{
+.foot #chapters li:nth-child(1) a{
 	border-right: 1px solid #d3d3d3;
-	padding: 0 1.449rem;
+	padding: 0 2.6rem;
 	}
 .foot ul li a{
 	color: #989898;
@@ -1293,8 +1314,9 @@ table tr td:nth-child(2){
 	}
 .say img{
 	width: 0.82126rem;
-	height: 0.82126;
+	height: 0.821265rem;
 	margin-left: 0.4831rem;
+	margin-top: -0.2rem;
 	}
 /*已订购样式*/
 .super .ordered{
@@ -1353,10 +1375,19 @@ dd p{
 	}
 /*阅精彩包月专区*/
 #books{
-	background: url(../img/books.png) no-repeat;
-	background-attachment: fixed;
 	color: #fff;
 	}
+#books:before{
+	content: '';
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(../img/books.png) center 0 no-repeat;
+	background-size: cover;
+}
 .perfect{
 	width: 90%;
 	margin: 2.4154rem auto 0;
@@ -1365,6 +1396,7 @@ dd p{
 	font-size: 1.093rem;
 	font-weight: 800;
 	line-height: 2.4154rem;
+	margin-bottom: 0;
 }
 .perfect p:nth-child(2){
 	font-size: 0.7468rem;
@@ -1443,12 +1475,6 @@ dd p{
 	height: 0.5rem;
 	margin-top: 0.5rem;
 	}
-.exit{
-	font-size: 0.74rem;
-	color: #000;
-	line-height: 1.9324rem;
-	margin-left: 1.1rem;
-	}
 #book_bottom {
 	color: #f6843d;
 	font-size: 0.77343rem;
@@ -1458,8 +1484,9 @@ dd p{
 	width: 0.773rem;
 	height: 0.72464rem;
 	margin-left: 0.3rem;
+	margin-top: -0.2rem;
 	}
-#book_bottom span:nth-child(1){
+#book_bottom a:nth-child(1) span{
 	padding-left:  2.4155rem;
 	padding-right: 4.58rem;
 	}
@@ -1470,3 +1497,21 @@ dd p{
 #book ul:nth-child(1){
 	display: block;
 	}
+.exit{
+	margin:1rem auto 5rem;
+	width: 15.7005rem;
+	height: 2.4155rem;
+	background: #fff;
+	text-align: center;
+	line-height: 2.4155rem;
+	border-radius: 5px;
+	border: 1px solid #e77272;
+	color: #242424;
+	font-size: 0.774rem;
+}
+table tr td:nth-child(2) img{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 33px;
+}

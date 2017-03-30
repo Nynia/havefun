@@ -68,7 +68,7 @@
         $('.monthly .button').click(function () {
             {% if not session.phonenum %}
                 var url = window.location.href;
-                window.location.href = '/auth/login?backurl=' + url;
+                window.location.href = '/auth/login?next=' + url;
             {% else %}
                 $('#main').show();
             {% endif %}

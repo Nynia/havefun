@@ -23,10 +23,10 @@
 	            <img src="../static/img/logo.png" alt="">
 	        </div>
 	        <div class="header-menu-container">
-	            <a href="comic">动漫</a>
-	            <a href="javascript:;">视频</a>
-	            <a href="game">游戏</a>
-	            <a href="reading" class="currents">阅读</a>
+	            <a href="/comic">动漫</a>
+	            <a href="video.html">视频</a>
+	            <a href="/game">游戏</a>
+	            <a href="javascript:;" class="currents">阅读</a>
 	            <a href="javascript:;">音乐</a>
 	        </div>
 	    </header>
@@ -34,47 +34,54 @@
        <!-- slide-banner -->
 		<div class="banners slide">
 	    	<ul>
-			    {% for p in packages %}
-			    <li><img src="{{ p.img }}" alt="" /><div><a href="package?id={{ p.id }}">了解详情></a></div></li>
+				{% for p in packages %}
+			    <li><a href="package?id={{ p.productid }}"><img src="{{ p.img }}" alt="" /><div style="color: #fff;">了解详情></a></div></li>
                 {% endfor %}
 			</ul>
-			<section class="icon">
-				<span class="circle"></span>
-				<span></span>
-				<span></span>
-			</section>
 	    </div>
 	    <!-- slide-banner end -->
 	    <div class="classify">
-	    	<div class="classify_left">
-	    		<img src="../static/img/classify.png" alt="" />分类
-	    	</div>
-	    	<div class="classify_right">
-	    		<span>更新</span>
-	    		<span>人气</span>
-	    	</div>
-	    	<div class="clear"></div>
-	    	<div class="classify_bottom">
-	    		<ul class="lists">
-	    			<li class="all ons"><span>全部</span><i>x</i></li>
-	    			<li class="lis"><span>穿越</span></li>
-	    			<li class="lis"><span>玄幻</span></li>
-	    			<li class="lis"><span>耽美</span></li>
-	    			<li class="lis"><span>都市</span></li>
-	    			<li class="lis"><span>古代</span></li>
-	    			<li class="lis"><span>科幻</span></li>
-	    		</ul>
-	    	</div>
-	    	<div class="clear"></div>
 		    <div id="book">
 		    	<ul>
-		    		<li><a href="read_description.html"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href=""><img src="../static/img/readb.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href=""><img src="../static/img/readc.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href=""><img src="../static/img/readd.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href=""><img src="../static/img/reade.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href=""><img src="../static/img/readf.png" alt=""><p>《五月潮汐》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readb.png" alt=""><p>《浮夜决 公子裂月》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readc.png" alt=""><p>《赤轮与月》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/reade.png" alt=""><p>《总有刁民想害朕》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readf.png" alt=""><p>《嫌疑犯A》</p></a></li>
+		    		<div class="clear"></div>
 		    	</ul>
+		    	<ul>
+		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readb.png" alt=""><p>《浮夜决 公子裂月》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/reade.png" alt=""><p>《总有刁民想害朕》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
+		    		<div class="clear"></div>
+		    	</ul>
+		    	<ul>
+		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readb.png" alt=""><p>《浮夜决 公子裂月》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readc.png" alt=""><p>《赤轮与月》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/reade.png" alt=""><p>《总有刁民想害朕》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readf.png" alt=""><p>《嫌疑犯A》</p></a></li>
+		    		<div class="clear"></div>
+		    	</ul>
+		    	<ul>
+		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readb.png" alt=""><p>《浮夜决 公子裂月》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readc.png" alt=""><p>《赤轮与月》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/reade.png" alt=""><p>《总有刁民想害朕》</p></a></li>
+		    		<li><a href="javascript:;"><img src="../static/img/readf.png" alt=""><p>《嫌疑犯A》</p></a></li>
+		    		<div class="clear"></div>
+		    	</ul>
+		    </div>
+		    <div id="book_bottom">
+		    	<a href="read_descriptions.html"><span>更多人气小说<img src="../static/img/more.png" alt="" /></span></a>
+		    	<a href="javascript:;"><span class="change">换一换<img src="../static/img/change.png" alt="" /></span></a>
 		    </div>
 	    </div>
 	    <!-- footer-nav -->
@@ -92,3 +99,12 @@
 <script src="../static/js/read.js"></script>
 <script src="../static/js/font.js"></script>
 <script src="../static/js/index.js"></script>
+<script>
+    var $change = 0
+	$('.change').click(function(){
+		$change++;
+		if($change<0) $change = 3;
+		if($change==4) $change=0
+        $('#book ul').eq($change).fadeIn(800).siblings().hide()
+	})
+</script>

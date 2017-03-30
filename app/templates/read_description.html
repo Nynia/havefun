@@ -1,122 +1,139 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
-<head>
-    <meta charset="UTF-8">
-    <meta name="robots" content="index,follow">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
-    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <title>阅读详情</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link rel="stylesheet" href="../static/css/style.css"/>
-    <link rel="stylesheet" href="../static/css/main.css"/>
-    <link rel="stylesheet" href="../static/css/common.css"/>
-    <script src="../static/libs/jquery-3.1.0.js"></script>
-</head>
-<body id="read" style="padding-bottom: 2.56rem;">
-<div class="bar_top">
-    <a id="back" href="#"><img src="../static/img/back.png" alt=""/></a>
-</div>
-<div class="super">
-    <div class="super_left books_left">
-        <img src="{{ book.cover }}" alt="{{ book.name }}"/>
-    </div>
-    <div class="super_right books tides">
-        <ul>
-            <li>《{{ book.name }}》</li>
-            <li>作者：<span>{{ book.author }}</span></li>
-            <li>状态：<span>共{{ book.curchapter }}章 {% if book.state == '1' %}（已完结）{% endif %}</span></li>
-            <li>题材：<span>{{ book.category }}</span></li>
-            <li>
-                <img src="../static/img/ysolid.png" alt=""/>
-                <img src="../static/img/ysolid.png" alt=""/>
-                <img src="../static/img/ysolid.png" alt=""/>
-                <img src="../static/img/ysolid.png" alt=""/>
-                <img src="../static/img/white_empty.png" alt=""/>
-            </li>
-            <li><a class="button" id="start" href="/reading/{{ book.bookid }}?chapter=1">开始阅读</a></li>
-        </ul>
-    </div>
-    <div class="clear"></div>
-</div>
-<div class="summary">
-    <p>内容概括：</p>
-    <dd id="intro_short">
-        <p class="fly">&#x3000{{ book.brief }}</p>
-        <a href="javascript:void(0)" onclick="$('#intro_short').hide();$('#intro_long').show();return false;"
-           class="data_more">详细</a>
-    </dd>
-    <dd id="intro_long" style="display:none">
-        <p class="fly">&#x3000{{ book.brief }}<a href="javascript:void(0)"
-                                                 onclick="$('#intro_short').show();$('#intro_long').hide();return false;">收起</a>
-        </p>
-    </dd>
-</div>
-<div class="directory">
-    <ul>
-        <li>目录</li>
-        <li class="ascend"><img src="../static/img/s.png" alt=""/>升序</li>
-        <li class="descend"><img src="../static/img/j.png" alt=""/>降序</li>
-    </ul>
-    <div class="clear"></div>
-    <table>
-        {% for c in chapters %}
-            <tr>
-                <td>{{ c.get('a') }}</td>
-                <td onclick="location.href='/reading/{{ book.bookid }}?chapter={{ c.id }}'">{{ c.get('b') }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+	    <meta name="msapplication-tap-highlight" content="no">
+		<title>阅读详情</title>
+		<meta name="keywords" content="">
+        <meta name="description" content="">
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<link rel="stylesheet" href="../static/css/main.css" />
+		<link rel="stylesheet" href="../static/css/common.css" />
+		<script src="../static/libs/jquery-3.1.0.js"></script>
+	</head>
+	<body id="read" style="padding-bottom: 2.56rem;">
+		<div class="bar_top">
+			<a href="javascript:history.go(-1)"><img src="../static/img/back.png" alt="" /></a>
+		</div>
+		<div class="super">
+			<div class="super_left books_left">
+				<img src="{{ book.cover }}" alt="{{ book.name }}" />
+			</div>
+			<div class="super_right books tides">
+				<ul>
+					<li>{{ book.name }}</li>
+					<li>作者：<span>{{ book.author }}</span></li>
+					<li>状态：<span>共{{ book.curchapter }}章{% if book.state == '1' %}（已完结）{% endif %}</span></li>
+					<li>题材：<span>{{ book.category }}</span></li>
+					<li>人气： <span>{{ book.hits }}</span></li>
+					<li><a class="button" id="start" href="/reading/{{ book.bookid }}?chapter=1">开始阅读</a></li>
+
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="summary">
+			<p>内容概括：</p>
+            <dd id="intro_short">
+			    <p class="fly">&#x3000{{ book.brief }}</p>
+			    <a href="javascript:void(0)" onclick="$('#intro_short').hide();$('#intro_long').show();return false;" class="data_more">详细</a>
+			</dd>
+            <dd id="intro_long" style="display:none">
+			    <p class="fly">&#x3000{{ book.brief }}<a href="javascript:void(0)" onclick="$('#intro_short').show();$('#intro_long').hide();return false;">收起</a></p>
+            </dd>
+		</div>
+		<div class="directory">
+			<ul>
+				<li>目录</li>
+				<li><img src="../static/img/a.png" alt="" class="next"></li>
+				<li class="ascend"><img src="../static/img/s.png" alt="" />升序</li>
+				<li class="descend"><img src="../static/img/j.png" alt="" />降序</li>
+			</ul>
+			<div class="clear"></div>
+			<table>
+			</table>
+		</div>
+	</body>
 </html>
 <script src="../static/js/cartoon_description.js"></script>
 <script src="../static/js/font.js"></script>
 <script>
-    var b = $('tr').text();
-    console.log(b)
-    var a = $('tr:nth-child(1)').text();
-    var arr = $('tr');
-    temp = [];
-    //   降序
-    $('.descend').click(function () {
-        var b = $('tr:nth-child(1)').text();
-        if (b == a) {
-            show();
-            var temp2 = temp.reverse();
-            for (var j = 0; j < arr.length; j++) {
-                arr[j].innerHTML = temp2[j];
+    $(document).ready(function () {
+        var url = window.location.href;
+        var id = url.substring(url.lastIndexOf('/') + 1, url.length);
+        $('#back').attr('href', '/package?bookid=' + id);
+
+        var b = $('tr').text();
+        console.log(b)
+        var a = $('tr:nth-child(1)').text();
+        var arr = $('tr');
+        temp = [];
+        //   降序
+        $('.descend').click(function () {
+            var b = $('tr:nth-child(1)').text();
+            if (b == a) {
+                show();
+                var temp2 = temp.reverse();
+                for (var j = 0; j < arr.length; j++) {
+                    arr[j].innerHTML = temp2[j];
+                }
             }
-        }
-        $('.ascend').css('color', "#fff");
-        $('.descend').css('color', '#F7D631');
-    })
-    //	升序
-    $('.ascend').click(function () {
-        var c = $('tr:nth-child(1)').text()
-        if (c == a) {
-            show();
-            for (var k = 0; k < arr.length; k++) {
-                arr[k].innerHTML = temp[k];
+            $('.ascend').css('color', "#fff");
+            $('.descend').css('color', '#F7D631');
+        })
+        //	升序
+        $('.ascend').click(function () {
+            var c = $('tr:nth-child(1)').text()
+            if (c == a) {
+                show();
+                for (var k = 0; k < arr.length; k++) {
+                    arr[k].innerHTML = temp[k];
+                }
+            } else {
+                show();
+                var temp3 = temp.reverse();
+                for (var k = 0; k < arr.length; k++) {
+                    arr[k].innerHTML = temp3[k];
+                }
             }
-        } else {
-            show();
-            var temp3 = temp.reverse();
-            for (var k = 0; k < arr.length; k++) {
-                arr[k].innerHTML = temp3[k];
+            $('.ascend').css('color', "#F7D631");
+            $('.descend').css('color', '#fff');
+        })
+        function show() {
+            for (var i = 0; i < arr.length; i++) {
+                temp.push(arr[i].innerHTML);
             }
-        }
-        $('.ascend').css('color', "#F7D631");
-        $('.descend').css('color', '#fff');
-    })
-    function show() {
-        for (var i = 0; i < arr.length; i++) {
-            temp.push(arr[i].innerHTML);
-        }
-    }
-    var url = window.location.href;
-    var id = url.substring(url.lastIndexOf('/') + 1, url.length);
-    $('#back').attr('href', '/package?bookid=' + id);
+        };
+        {% for c in chapters %}
+            var trNode = document.createElement('tr');
+            var tdNode1 = document.createElement('td');
+            var textNode1 = document.createTextNode('{{ c.get('a') }}');
+            tdNode1.appendChild(textNode1);
+            var tdNode2 = document.createElement('td');
+            var textNode2 = document.createTextNode('{{ c.get('b') }}');
+            tdNode2.appendChild(textNode2);
+            tdNode2.onclick = function () {
+                $.ajax({
+                    type: "get",
+                    url: "/reading/{{ book.bookid }}",
+                    contentType: "application/json",
+                    data: {chapter: "{{ c.id }}",type:'json'},
+                    success: function (data, status) {
+                        if (data == 'success') {
+                            window.location.href = '/reading/{{ book.bookid }}?chapter={{ c.id }}'
+                        }
+                        else {
+                            alert('请先订购');
+                        }
+                    }
+                });
+            };
+            trNode.appendChild(tdNode1);
+            trNode.appendChild(tdNode2);
+            document.getElementsByTagName('table')[0].appendChild(trNode);
+        {% endfor %}
+    });
 </script>

@@ -58,9 +58,6 @@
 </div>
 <div class="chapter">
     <ul class="session">
-        {% for i in range(comic.curchapter) %}
-            <li><a href="/comic/{{ comic.id }}?chapter={{ i+1 }}">第{{ i+1 }}话</a></li>
-        {% endfor %}
     </ul>
 </div>
 </body>
@@ -68,46 +65,6 @@
 <script src="../static/js/cartoon_description.js"></script>
 <script src="../static/js/font.js"></script>
 <script>
-    var a = $('.chapter ul  li')[0].innerHTML;
-    var arr = $('.chapter ul  li');
-    temp = [];
-    //降序
-    $('.descend').click(function () {
-        var b = $('.chapter ul  li')[0].innerHTML;
-        if (b == a) {
-            show();
-            var temp2 = temp.reverse();
-            for (var j = 0; j < arr.length; j++) {
-                arr[j].innerHTML = temp2[j];
-            }
-        }
-        $('.ascend').css('color', "#fff");
-        $('.descend').css('color', '#F7D631');
-    })
-    //升序
-    $('.ascend').click(function () {
-        var c = $('.chapter ul  li')[0].innerHTML;
-        if (c == a) {
-            show();
-            for (var k = 0; k < arr.length; k++) {
-                arr[k].innerHTML = temp[k];
-            }
-
-        } else {
-            show();
-            var temp3 = temp.reverse();
-            for (var k = 0; k < arr.length; k++) {
-                arr[k].innerHTML = temp3[k];
-            }
-        }
-        $('.ascend').css('color', "#F7D631");
-        $('.descend').css('color', '#fff');
-    })
-    function show() {
-        for (var i = 0; i < arr.length; i++) {
-            temp.push(arr[i].innerHTML);
-        }
-    }
     function GetQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
@@ -115,8 +72,70 @@
             return unescape(r[2]);
         return null;
     }
-    var backurl = GetQueryString('backUrl');
-    var url = window.location.href;
-    var id = url.substring(url.lastIndexOf('/') + 1, url.length);
-    $('#back').attr('href', '/package?comicid='+id);
+    $(document).ready(function () {
+        var backurl = GetQueryString('backUrl');
+        var url = window.location.href;
+        var id = url.substring(url.lastIndexOf('/') + 1, url.length);
+        $('#back').attr('href', '/package?comicid=' + id);
+
+        s = [];
+        {% for i in range(comic.curchapter) %}
+            {% if i > comic.freechapter - 1 and not flag%}
+                s.push("<li><a href=\"#\">第{{ i+1 }}话</a></li>");
+            {% else %}
+                s.push("<li><a href=\"/comic/{{ comic.id }}?chapter={{ i+1 }}\">第{{ i+1 }}话</a></li>");
+            {% endif %}
+        {% endfor %}
+        $('.session').html(s);
+
+        {% for i in range(comic.curchapter) %}
+            {% if i > comic.freechapter - 1 and not flag%}
+                $('.session li:eq({{ i }})').click(function () {
+                    alert('hello');
+                });
+            {% endif %}
+        {% endfor %}
+
+        var a = $('.chapter ul  li')[0].innerHTML;
+        var arr = $('.chapter ul  li');
+        temp = [];
+        //降序
+        $('.descend').click(function () {
+            var b = $('.chapter ul  li')[0].innerHTML;
+            if (b == a) {
+                show();
+                var temp2 = temp.reverse();
+                for (var j = 0; j < arr.length; j++) {
+                    arr[j].innerHTML = temp2[j];
+                }
+            }
+            $('.ascend').css('color', "#fff");
+            $('.descend').css('color', '#F7D631');
+        });
+        //升序
+        $('.ascend').click(function () {
+            var c = $('.chapter ul  li')[0].innerHTML;
+            if (c == a) {
+                show();
+                for (var k = 0; k < arr.length; k++) {
+                    arr[k].innerHTML = temp[k];
+                }
+
+            } else {
+                show();
+                var temp3 = temp.reverse();
+                for (var k = 0; k < arr.length; k++) {
+                    arr[k].innerHTML = temp3[k];
+                }
+            }
+            $('.ascend').css('color', "#F7D631");
+            $('.descend').css('color', '#fff');
+        })
+        function show() {
+            for (var i = 0; i < arr.length; i++) {
+                temp.push(arr[i].innerHTML);
+            }
+        }
+    });
+
 </script>

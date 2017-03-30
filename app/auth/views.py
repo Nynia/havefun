@@ -8,7 +8,6 @@ from ..utils.func import generate_identifying_code
 cache = {}
 from app import db
 
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -22,16 +21,21 @@ def login():
                     session[r.productid] = 1
             session['phonenum'] = user.phonenum
             next = request.args.get('next')
-            print session['user_id']
+            print session.get('user_id')
             return redirect(next or url_for('main.my'))
         flash('Invalid username or password.')
     return render_template('login.html', form=form)
-
 
 @auth.route('/logout', methods=['GET'])
 @login_required
 def logout():
     logout_user()
+    if 'phonenum' in session:
+        phonenum = session.pop('phonenum')
+        relation = OrderRelation.query.filter_by(phonenum=phonenum).all()
+        for r in relation:
+            if r.productid in session:
+                session.pop(r.productid)
     return 'logout success'
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -51,6 +55,7 @@ def register():
             'msg': code
         }
         r = requests.get(url, params=params)
+        print r.text
         return jsonify({
             'phonenum': phonenum,
             'msg': code

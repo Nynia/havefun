@@ -1,51 +1,70 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="robots" content="index,follow">
-	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
-	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-	    <meta name="msapplication-tap-highlight" content="no">
-		<title>阅读</title>
-		<meta name="keywords" content="">
-        <meta name="description" content="">
-		<link rel="stylesheet" href="../static/css/style.css" />
-		<script src="../static/libs/jquery-3.1.0.js"></script>
-	</head>
-	<body style="padding-bottom:2.56rem;">
-		<div class="bar_top cartoon_detail">
-			<a id="back" href="#"><img src="../static/img/right.png" alt="" /></a>
-			<span>{{ name }}</span>
-		</div>
-		<div class="comic">
-			{% for ptag in ptaglist %}
-                <p style="text-align:left">{{ ptag }}</p>
-            {% endfor %}
-		</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>阅读</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <script src="../static/libs/jquery-3.1.0.js"></script>
+</head>
+<body style="padding-bottom:2.56rem;">
+<div class="bar_top cartoon_detail">
+    <a id="back" href="#"><img src="../static/img/right.png" alt=""/></a>
+    <span>{{ name }}</span>
+</div>
+<div class="comic">
+    {% for ptag in ptaglist %}
+        <p style="text-align:left">{{ ptag }}</p>
+    {% endfor %}
+</div>
 
-	   <div class="foot">
-	    	<ul>
-	    		<li><a href="#">上一章</a></li>
-	    		<li><a href="#">下一章</a></li>
-	    	</ul>
-	    </div>
-	</body>
+<div class="foot">
+    <ul>
+        <li><a href="#">上一章</a></li>
+        <li><a href="#">下一章</a></li>
+    </ul>
+</div>
+</body>
 </html>
 <script src="../static/js/cartoon_details.js"></script>
 <script src="../static/js/font.js"></script>
 <script>
-    var cur = {{ cur.chapterid }};
-    var sum = {{ len }};
-    var ulNode = document.getElementById('chapter');
-    var url = window.location.href;
-    var bookid = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
-    if (cur < sum) {
-        var nexta = $('.foot a').eq(1);
-        nexta.attr('href','/reading/' + bookid + '?chapter=' + (cur + 1).toString());
-    }
-    if (cur > 0) {
-        var preva = $('.foot a').eq(0);
-        preva.attr('href','/reading/' + bookid + '?chapter=' + (cur - 1).toString());
-    }
-    $('#back').attr('href','/reading/' + bookid);
+    $(document).ready(function () {
+        var cur = {{ cur.chapterid }};
+        var sum = {{ len }};
+        var ulNode = document.getElementById('chapter');
+        var url = window.location.href;
+        var bookid = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
+        if (cur < sum) {
+            var nexta = $('.foot a').eq(1);
+            nexta.click(function () {
+                $.ajax({
+                    type: "get",
+                    url: "/reading/" + bookid ,
+                    contentType: "application/json",
+                    data: {chapter: (cur+1).toString(),type:'json'},
+                    success: function (data, status) {
+                        if (data == 'success') {
+                            window.location.href = '/reading/' + bookid + '?chapter=' + (cur + 1).toString();
+                        }
+                        else {
+                            alert('请先订购');
+                        }
+                    }
+                });
+            });
+        }
+        if (cur > 0) {
+            var preva = $('.foot a').eq(0);
+            preva.attr('href', '/reading/' + bookid + '?chapter=' + (cur - 1).toString());
+        }
+        $('#back').attr('href', '/reading/' + bookid);
+    });
+
 </script>

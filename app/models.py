@@ -6,8 +6,7 @@ from flask import current_app, request, url_for
 from flask_login import UserMixin
 class Package(db.Model):
     __tablename__ = 'package'
-    id = db.Column(db.Integer,primary_key=True)
-    productid = db.Column(db.String(255))
+    productid = db.Column(db.String(255),primary_key=True)
     productname = db.Column(db.String(255))
     type = db.Column(db.String(1))
     price = db.Column(db.Integer)
@@ -22,7 +21,6 @@ class Package(db.Model):
 
     def to_json(self):
         json_post = {
-            'id':self.id,
             'productid': self.productid,
             'productname': self.productname,
             'type': self.type,
@@ -47,7 +45,7 @@ class Package(db.Model):
 class Comic(db.Model):
     __tablename__ = 'comic'
     id = db.Column(db.Integer, primary_key=True)
-    packageid = db.Column(db.Integer)
+    packageid = db.Column(db.String(21))
     comicname = db.Column(db.String(50))
     brief = db.Column(db.String(255))
     author = db.Column(db.String(50))
@@ -133,7 +131,7 @@ class Test(db.Model):
 class Game(db.Model):
     __tablename__ = 'game'
     id = db.Column(db.Integer, primary_key=True)
-    packageid = db.Column(db.Integer)
+    packageid = db.Column(db.String(21))
     name = db.Column(db.String(255))
     img_icon = db.Column(db.String(255))
     type = db.Column(db.String(1))
@@ -224,7 +222,7 @@ class Reading(db.Model):
     __tablename__ = 'reading'
     id = db.Column(db.Integer,primary_key=True)
     bookid = db.Column(db.String(30))
-    packageid = db.Column(db.Integer)
+    packageid = db.Column(db.String(21))
     name = db.Column(db.String(50))
     author = db.Column(db.String(50))
     state = db.Column(db.String(1))

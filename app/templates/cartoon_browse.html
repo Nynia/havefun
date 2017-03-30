@@ -52,59 +52,16 @@
         var liNode = document.createElement('li');
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (i + 1).toString() + '话');
+        if (i == cur-1) {
+            liNode.style.color = '#a29e86';
+        }
         aNode.appendChild(textNode);
         aNode.href = '/comic/' + bookid + '?chapter=' + (i + 1).toString();
-        liNode.appendChild(aNode);
-        ulNode.appendChild(liNode);
-    }
-    /*
-    if (cur - 5 > 0) {
-        var liNode = document.createElement('li');
-        var aNode = document.createElement('a');
-        var textNode = document.createTextNode('第' + (cur - 5).toString() + '话');
-        aNode.appendChild(textNode);
-        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 5).toString();
-        liNode.appendChild(aNode);
-        ulNode.appendChild(liNode);
-    }
-    if (cur - 4 > 0) {
-        var liNode = document.createElement('li');
-        var aNode = document.createElement('a');
-        var textNode = document.createTextNode('第' + (cur - 4).toString() + '话');
-        aNode.appendChild(textNode);
-        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 4).toString();
-        liNode.appendChild(aNode);
-        ulNode.appendChild(liNode);
-    }
 
-    if (cur - 3 > 0) {
-        var liNode = document.createElement('li');
-        var aNode = document.createElement('a');
-        var textNode = document.createTextNode('第' + (cur - 3).toString() + '话');
-        aNode.appendChild(textNode);
-        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 3).toString();
+
         liNode.appendChild(aNode);
         ulNode.appendChild(liNode);
     }
-    if (cur - 2 > 0) {
-        var liNode = document.createElement('li');
-        var aNode = document.createElement('a');
-        var textNode = document.createTextNode('第' + (cur - 2).toString() + '话');
-        aNode.appendChild(textNode);
-        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 2).toString();
-        liNode.appendChild(aNode);
-        ulNode.appendChild(liNode);
-    }
-    if (cur - 1 > 0) {
-        var liNode = document.createElement('li');
-        var aNode = document.createElement('a');
-        var textNode = document.createTextNode('第' + (cur - 1).toString() + '话');
-        aNode.appendChild(textNode);
-        aNode.href = '/comic/' + bookid + '?chapter=' + (cur - 1).toString();
-        liNode.appendChild(aNode);
-        ulNode.appendChild(liNode);
-    }
-    */
     if (cur < sum) {
         var nexta = $('.foot a').eq(1);
         nexta.attr('href', '/comic/' + bookid + '?chapter=' + (cur + 1).toString());
