@@ -51,7 +51,7 @@
     {% for i in range(len) %}
         var liNode = document.createElement('li');
         var aNode = document.createElement('a');
-        var textNode = document.createTextNode('第' + (i + 1).toString() + '话');
+        var textNode = document.createTextNode('第' + {{ i+1 }} + '话');
         if (i == cur - 1) {
             liNode.style.color = '#a29e86';
         }
@@ -63,7 +63,7 @@
                 async: false,
                 url: "/comic/" + bookid,
                 contentType: "application/json",
-                data: {chapter: (i + 1).toString(), type: 'json'},
+                data: {chapter: {{ i+1 }}, type: 'json'},
                 dataType:'json',
                 success: function (data, status) {
                     console.log(data);
