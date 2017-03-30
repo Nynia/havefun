@@ -125,6 +125,7 @@ def comic():
 def comicbrowse(id):
     comic = Comic.query.get(int(id))
     chapter = request.args.get('chapter')
+    package = Package.query.get(comic.packageid)
     if request.args.get('type') == 'json':
         if session.get(comic.packageid) or int(chapter) <= comic.freechapter:
             return jsonify({
@@ -138,7 +139,6 @@ def comicbrowse(id):
             })
     else:
         if chapter == None:
-            package = Package.query.get(comic.packageid)
             return render_template('cartoon_description.html', comic=comic,package=package)
         else:
             if not current_user.is_anonymous:
@@ -163,7 +163,7 @@ def comicbrowse(id):
 
             filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
             filelist = ['/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg' for i in range(len(filelist))]
-            return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter)
+            return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter,package=package)
 
 
 @main.route('/reading', methods=['GET'])

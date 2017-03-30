@@ -35,11 +35,63 @@
     <ul id="chapter">
     </ul>
 </div>
+<!--弹出框-->
+<div id="main">
+    <div class="order">
+        <div class="order_top">提 示</div>
+        <div class="order_bottom">
+            <p>需要订购“{{ package.productname }}“才能继续观看，立即订购？</p>
+            <button class="cancel">取消</button>
+            <button class="confirm">确认</button>
+        </div>
+    </div>
+</div>
+<div id="mains">
+    <div class="order">
+        <img src="../static/img/gou.png" alt=""/>
+        <p></p>
+    </div>
+</div>
 </body>
 </html>
 <script src="../static/js/cartoon_details.js"></script>
 <script src="../static/js/font.js"></script>
 <script>
+
+    $('.order_bottom .cancel').click(function () {
+        $('#main').hide()
+    });
+    $('.order_bottom .confirm').click(function () {
+        $('#main').hide();
+        var url = window.location.href;
+        {% if not session.phonenum %}
+            window.location.href = '/auth/login?next=' + url;
+        {% else %}
+            var id = url.substr(url.lastIndexOf('/') + 1);
+            console.log(id);
+            $.ajax({
+                type: "post",
+                url: "/api/v1.0/orders?action=subscribe",
+                data: {
+                    'spid': '{{ package.spid }}',
+                    'chargeid': '{{ package.chargeid }}',
+                    'secret': '{{ package.secret }}',
+                    'phonenum': '{{ session.phonenum }}',
+                    'productid': '{{ package.productid }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('#mains p').text(data.message);
+                    $('#mains').show();
+                    setTimeout(function () {
+                        $('#mains').hide();
+                    }, 1000);
+                }
+            });
+        {% endif %}
+
+    });
+
     var cur = {{ cur }};
     var sum = {{ len }};
     var ulNode = document.getElementById('chapter');
@@ -51,7 +103,7 @@
     {% for i in range(len) %}
         var liNode = document.createElement('li');
         var aNode = document.createElement('a');
-        var textNode = document.createTextNode('第' + {{ i+1 }} + '话');
+        var textNode = document.createTextNode('第' + {{ i+1 }} +'话');
         //liNode.style.color = '#a29e86';
         aNode.appendChild(textNode);
         aNode.href = '#';
@@ -61,7 +113,7 @@
                 url: "/comic/" + bookid,
                 contentType: "application/json",
                 data: {chapter: {{ i+1 }}, type: 'json'},
-                dataType:'json',
+                dataType: 'json',
                 success: function (data, status) {
                     console.log(data);
                     if (data.code == '0') {
@@ -84,8 +136,8 @@
                 type: "get",
                 url: "/comic/" + bookid,
                 contentType: "application/json",
-                data: {chapter: (cur+1).toString(), type: 'json'},
-                dataType:'json',
+                data: {chapter: (cur + 1).toString(), type: 'json'},
+                dataType: 'json',
                 success: function (data, status) {
                     console.log(data);
                     if (data.code == '0') {
