@@ -54,7 +54,7 @@
         var textNode = document.createTextNode('第' + {{ i+1 }} + '话');
         {% if cur-1 == {{ i }} %}
             liNode.style.color = '#a29e86';
-        {% endfor %}
+        {% endif %}
         aNode.appendChild(textNode);
         aNode.href = '#';
         aNode.onclick = function () {
