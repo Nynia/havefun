@@ -52,9 +52,7 @@
         var liNode = document.createElement('li');
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + {{ i+1 }} + '话');
-        {% if cur-1 == {{ i }} %}
-            liNode.style.color = '#a29e86';
-        {% endif %}
+        //liNode.style.color = '#a29e86';
         aNode.appendChild(textNode);
         aNode.href = '#';
         aNode.onclick = function () {
