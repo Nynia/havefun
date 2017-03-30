@@ -15,7 +15,7 @@
 </head>
 <body class="logins" style="padding-bottom: 2.56rem;">
 <div id="login">
-    <a href="/my"><img src="../static/img/cha.png" alt="叉号"/></a>
+    <a href="#"><img src="../static/img/cha.png" alt="叉号"/></a>
     <span class="account">注册账号</span>
 </div>
 <div class="show">
@@ -45,6 +45,9 @@
 <script src="../static/js/font.js"></script>
 <script src="../static/libs/jquery-3.1.0.js"></script>
 <script>
+
+
+
     $('.codes a').click(function () {
 
         $.ajax({
@@ -69,25 +72,27 @@
         })
     });
     // 短信验证码计时器
-    var seconds = 60;
-    var obj = $('.codes a');
-    console.log(obj);
-    function show(){
-    	run(seconds, obj);
+    var seconds = 120;
+    var obj = $('.codes .showsss');
+    function show() {
+        run(seconds, obj);
     }
-	function run(seconds, obj){
-		clearInterval(seconds);
-			obj.html("重新获取(" + seconds + "s)");
-			setInterval(function() {
-				if (seconds <= 0) {
-					return;
-				}
-				seconds--;
-				obj.html("重新获取(" + seconds + "s)");
-				if (seconds <= 0) {
-					clearInterval(seconds);
-					obj.html( "重新获取");
-				}
-			}, 1000);
-	}
+    function run(seconds, obj) {
+        obj.val("重新获取(" + seconds + "s)");
+        obj.css('color', '#eae9e9')
+        var setTime = setInterval(function () {
+            if (seconds <= 0) {
+                clearInterval(setTime);
+                obj.val("重新获取");
+                obj.attr('disabled', false);
+                obj.css('color', '#007AFF')
+                return
+            } else {
+                seconds--;
+                obj.val("重新获取(" + seconds + "s)");
+                obj.attr('disabled', true);
+            }
+
+        }, 1000);
+    }
 </script>

@@ -138,7 +138,8 @@ def comicbrowse(id):
             })
     else:
         if chapter == None:
-            return render_template('cartoon_description.html', comic=comic)
+            package = Package.query.get(comic.packageid)
+            return render_template('cartoon_description.html', comic=comic,package=package)
         else:
             if not current_user.is_anonymous:
                 uid = session.get('user_id')
@@ -217,3 +218,8 @@ def my():
 @main.route('/index', methods=['GET'])
 def index():
     return redirect(url_for('main.comic'))
+
+
+@main.route('/subscribe',methods=['POST'])
+def subscribe():
+    pass

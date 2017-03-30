@@ -441,6 +441,7 @@ main{
 	left: calc(50% - 0.75rem);
 	position: absolute;
 	font-size: 0.828rem;
+	color: #000;
 	}
 .show{
 	font-size: 1rem;
@@ -536,11 +537,12 @@ main{
 .registers a{
 	display: inline-block;
 	}
-.codes a{
+.codes .showsss{
 	position: absolute;
 	right: 1.03rem;
 	color: #30afe2;
-	line-height: 2.3672rem;
+	width: 5rem!important;
+	padding: 0.5rem 0;
 	}
 #codes{
 	position: absolute;
@@ -551,6 +553,9 @@ main{
 	top: 0.4213rem;
 	padding: 0 0.5rem;
 	}
+input:disabled{
+	background: #fff!important;
+}
 .codes{
 	width: 18.4rem;
 	height: 2.3672rem;
@@ -1107,7 +1112,6 @@ dd a{
 	height: 25px;
 	font-size: 0.746rem;
 	}
-
 .directory ul li img{
 	padding: 0 5px;
 	}
@@ -1514,6 +1518,25 @@ table tr td:nth-child(2) img{
 	right: 0;
 	top: 0;
 	width: 33px;
+}
+.shopping_list{
+	margin-top: 1.3526rem;
+	padding-left:0.8211rem;
+	border-bottom: 1px solid #aeaeae;
+}
+.shopping_list h3{
+	margin: 0;
+	color: #5d5d5d;
+	/*font-size: 0.8266rem;*/
+}
+.shopping_list p{
+	padding-top: 0.72464rem;
+	padding-bottom: 1.4493rem;
+	color: #30afe2;
+	font-size: 0.64rem;
+}
+.shopping_list:nth-last-child(1){
+	border-bottom: none;
 }
 input{
 	-webkit-appearance: none;
