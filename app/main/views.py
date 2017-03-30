@@ -1,6 +1,6 @@
 # -*-coding=utf-8-*-
 from . import main
-from flask import render_template, session, redirect, url_for
+from flask import render_template, session, redirect, url_for,jsonify
 from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
@@ -127,9 +127,15 @@ def comicbrowse(id):
     chapter = request.args.get('chapter')
     if request.args.get('type') == 'json':
         if session.get(comic.packageid) or int(chapter) <= comic.freechapter:
-            return 'success'
+            return jsonify({
+                'code':'0',
+                'msg':chapter
+            })
         else:
-            return 'noauthority'
+            return jsonify({
+                'code': '1',
+                'msg': chapter
+            })
     else:
         if chapter == None:
             return render_template('cartoon_description.html', comic=comic)

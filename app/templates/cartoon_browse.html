@@ -61,12 +61,12 @@
             $.ajax({
                 type: "get",
                 url: "/comic/" + bookid,
-                async:true,
                 contentType: "application/json",
                 data: {chapter: (cur + 1).toString(), type: 'json'},
+                dataType:'json',
                 success: function (data, status) {
-                    if (data == 'success') {
-                        window.location.href = '/comic/' + bookid + '?chapter=' + (i + 1).toString();
+                    if (data.code == '0') {
+                        window.location.href = '/comic/' + bookid + '?chapter=' + data.msg;
                     }
                     else {
                         alert('请先订购');
