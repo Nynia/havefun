@@ -78,7 +78,6 @@
         var id = url.substring(url.lastIndexOf('/') + 1, url.length);
         $('#back').attr('href', '/package?comicid=' + id);
 
-        s = [];
         {% for i in range(comic.curchapter) %}
             var liNode = document.createElement('li');
             var aNode = document.createElement('a');

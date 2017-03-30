@@ -65,7 +65,7 @@
                 data: {chapter: (cur + 1).toString(), type: 'json'},
                 success: function (data, status) {
                     if (data == 'success') {
-                        window.location.href = '/comic/' + bookid + '?chapter=' + (cur + 1).toString();
+                        window.location.href = '/comic/' + bookid + '?chapter=' + (i + 1).toString();
                     }
                     else {
                         alert('请先订购');
