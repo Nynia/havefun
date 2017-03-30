@@ -60,6 +60,7 @@
         aNode.onclick = function () {
             $.ajax({
                 type: "get",
+                async: false,
                 url: "/comic/" + bookid,
                 contentType: "application/json",
                 data: {chapter: (i + 1).toString(), type: 'json'},
