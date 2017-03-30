@@ -61,7 +61,7 @@
             $.ajax({
                 type: "get",
                 url: "/comic/" + bookid,
-                async:false,
+                async:true,
                 contentType: "application/json",
                 data: {chapter: (cur + 1).toString(), type: 'json'},
                 success: function (data, status) {
