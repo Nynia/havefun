@@ -1078,10 +1078,10 @@ dd a{
 	text-align:left;
 	position: absolute;
 	font-size: 0.746rem;
-	right: 5%;
+	right: 3%;
 	}
 .books ul{
-	width: 9.3237rem;
+	width: 10rem;
 	}
 .books ul li:nth-child(1){
 	margin-left: -0.4831rem;
@@ -1316,7 +1316,7 @@ table tr td:nth-child(2){
 	width: 0.82126rem;
 	height: 0.821265rem;
 	margin-left: 0.4831rem;
-	margin-top: -0.2rem;
+	margin-top: -0.3rem;
 	}
 /*已订购样式*/
 .super .ordered{
@@ -1448,7 +1448,7 @@ dd p{
 	display: block;
 	}
 .detail_right .button,.super .books .button{
-	width: 9.3237rem;
+	width: 10rem;
 	height: 1.353rem;
 	display: inline-block;
 	text-align: center;
