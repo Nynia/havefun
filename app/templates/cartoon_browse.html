@@ -48,7 +48,7 @@
     var bookid = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
     console.log(bookid);
 
-    {% for i in range(sum) %}
+    {% for i in range(len) %}
         var liNode = document.createElement('li');
         var aNode = document.createElement('a');
         var textNode = document.createTextNode('第' + (i + 1).toString() + '话');
