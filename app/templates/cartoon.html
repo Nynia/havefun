@@ -35,21 +35,13 @@
 <div class="slide-banner" id="slide-banner">
     <div class="bd">
         <ul class="banner">
-            <li>
-                <a href="javascript:;">
-                    <img src="../static/img/cartoon.png"/>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <img src="../static/img/cartoon.png"/>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <img src="../static/img/cartoon.png"/>
-                </a>
-            </li>
+            {% for p in packages %}
+                <li>
+                    <a href=package?id={{ p.productid }}">
+                        <img src="../static/img/cartoon.png"/>
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
     <div class="hd">
@@ -76,12 +68,11 @@
     <div class="clear"></div>
 </div>
 <div class="defeat">
-    <img src="../static/img/defeat.png" alt="" class="photos"/>
-    <div class="thumb"><span>1569</span><img src="../static/img/starts.png" alt=""/></div>
+    <a href="/comic/200103380"><img src="../static/img/defeat.png" alt="" class="photos"/></a>
     <div class="update">
-        <span>斗破苍穹</span>
-        <span>更新至193话</span>
-        <span><img src="../static/img/play.png" alt=""/>17万</span>
+        <span>神印王座</span>
+        <span>更新至7话</span>
+        <span><img src="../static/img/play.png" alt=""/>43万</span>
     </div>
 </div>
 <!-- footer-nav -->
