@@ -16,7 +16,7 @@
 </head>
 <body id="read" style="padding-bottom: 2.56rem;">
 <div class="bar_top">
-    <a id="back" href="javascript:history.go(-1)"><img src="../static/img/back.png" alt=""/></a>
+    <a id="back" href="/package?id={{ package.productid }}"><img src="../static/img/back.png" alt=""/></a>
 </div>
 <div class="super">
     <div class="super_left books_left">
@@ -90,10 +90,6 @@
         return null;
     }
     $(document).ready(function () {
-        refer = document.referrer;
-        if (refer.indexOf('auth') != -1) {
-            $('#back').attr('href',"/package?id={{ package.productid }}");
-        }
         $('.order_bottom .cancel').click(function () {
             $('#main').hide()
         });
