@@ -79,7 +79,24 @@
     {% endfor %}
     if (cur < sum) {
         var nexta = $('.foot a').eq(1);
-        nexta.attr('href', '/comic/' + bookid + '?chapter=' + (cur + 1).toString());
+        nexta.click(function () {
+            $.ajax({
+                type: "get",
+                url: "/comic/" + bookid,
+                contentType: "application/json",
+                data: {chapter: (cur+1).toString(), type: 'json'},
+                dataType:'json',
+                success: function (data, status) {
+                    console.log(data);
+                    if (data.code == '0') {
+                        window.location.href = '/comic/' + bookid + '?chapter=' + data.msg;
+                    }
+                    else {
+                        alert('请先订购');
+                    }
+                }
+            });
+        })
     }
 
     $('#back').attr('href', '/comic/' + bookid);
