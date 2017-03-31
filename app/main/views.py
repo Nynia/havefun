@@ -283,3 +283,7 @@ def subscribe():
             'message': err_msg,
             'data': None
         })
+
+@main.route('/vedio', methods=['GET'])
+def vedio():
+    return render_template('vedio.html')

@@ -52,4 +52,15 @@ def fun4():
     }
     r = requests.post(url,data=data)
     print r.text
-fun4()
+def fun5():
+    url = 'http://221.228.17.87/api/v1.0/orders?action=unsubscribe'
+    data = {
+        'spid': '35101252',
+        'chargeid': '1976',
+        'secret': 'cf0215781b605c90fc4e',
+        'phonenum': '18118999630',
+        'productid': '135000000000000243168'
+    }
+    r = requests.post(url,data=data)
+    print r.text
+fun5()
