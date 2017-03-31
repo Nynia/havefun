@@ -712,18 +712,8 @@ input:disabled{
 	}
 #game_package dd{
 	margin-top: 0.4831rem;
-	text-indent: 2em;
 	}
 /*详细收起*/
-/*#intro_short  p{
-	text-overflow: -o-ellipsis-lastline;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	margin-bottom: 0;
-	}*/
 dd a{
 	color: #F7D631;
 	font-size: 0.746rem;
@@ -844,7 +834,6 @@ dd a{
 	font-size: 0.5329rem;
 	float: left;
 	margin-left: 0.7246rem;
-	line-height: 1.9;
 	}
 .world ul li div span:nth-child(3) img{
 	margin-right: 0.1449rem;
@@ -1151,6 +1140,7 @@ table tr td:nth-child(2){
 	background: rgba(10,10,10,0.6);
 	display: none;
 	text-align: left;
+	z-index: 1;
 	}
 .order{
 	width: 14.493rem;
@@ -1452,7 +1442,7 @@ dd p{
 	display: block;
 	}
 .detail_right .button,.super .books .button{
-	width: 10rem;
+	width: 9.3237rem;
 	height: 1.353rem;
 	display: inline-block;
 	text-align: center;
@@ -1463,6 +1453,7 @@ dd p{
 	}
 .super .books .button{
 	margin-bottom: -0.7246rem;
+	width: 10rem;
 	}
 .monthly .button{
 	width: 18.696rem;
@@ -1540,4 +1531,4 @@ table tr td:nth-child(2) img{
 }
 input{
 	-webkit-appearance: none;
-}
+	}
