@@ -150,6 +150,7 @@
                         $('#mains').hide();
                     }, 1000);
                     $('.button').attr('href', '{{ game.url }}');
+                    $('.button').unbind("click");
                 }
             });
         {% endif %}
