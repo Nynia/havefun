@@ -164,7 +164,7 @@ def comicbrowse(id):
             filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
             filelist2 = []
             for i in range(len(filelist)):
-                if i<10:
+                if i< 10 and comic.packageid == '135000000000000242191':
                     filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + '0' + str(i + 1) + '.jpg')
                 else:
                     filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg')
