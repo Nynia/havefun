@@ -185,6 +185,7 @@ def readinginfo(bookid):
     chapters = Chapter.query.filter_by(bookid=bookid).order_by(Chapter.chapterid).all()
     reading = Reading.query.filter_by(bookid=bookid).first()
     chapter = request.args.get('chapter')
+    package = Package.query.get(reading.packageid)
     if request.args.get('type') == 'json':
         if session.get(reading.packageid) or int(chapter) <= reading.freechapter + 1:
             return 'success'
@@ -200,7 +201,7 @@ def readinginfo(bookid):
                 chaptername = chaptername[0][:2]
             ptaglist = re.findall(u'\<p\>[\s　]*(.*?)\<\/p\>', chapter.content)
             return render_template('read_browse.html', ptaglist=ptaglist, name=chaptername, cur=chapter,
-                                   len=len(chapters))
+                                   len=len(chapters),package=package)
         else:
             chapter_dict_list = []
             for c in chapters:
@@ -211,7 +212,7 @@ def readinginfo(bookid):
                 dict['b'] = chaptername[1] if len(chaptername) > 1 else u'前言'
                 dict['id'] = c.chapterid
                 chapter_dict_list.append(dict)
-            return render_template('read_description.html', book=reading, chapters=chapter_dict_list, flag=True)
+            return render_template('read_description.html', book=reading, chapters=chapter_dict_list, flag=True,package=package)
 
 
 @main.route('/my', methods=['GET'])
