@@ -124,22 +124,16 @@
 </html>
 <script src="../static/js/font.js"></script>
 <script>
-    {% if flag %}
-        $('.button').attr('href', '{{ game.url }}');
-    {% else %}
-        $('.button').click(function () {
-            {% if not session.phonenum %}
-                var url = window.location.href;
-                window.location.href = '/auth/login?next=' + url;
-            {% else %}
-                $('#main').show();
-            {% endif %}
-        });
-        $('.order_bottom .cancel').click(function () {
-            $('#main').hide()
-        });
-        $('.order_bottom .confirm').click(function () {
-            $('#main').hide();
+
+    $('.order_bottom .cancel').click(function () {
+        $('#main').hide()
+    });
+    $('.order_bottom .confirm').click(function () {
+        $('#main').hide();
+        var url = window.location.href;
+        {% if not session.phonenum %}
+            window.location.href = '/auth/login?next=' + url;
+        {% else %}
             $.ajax({
                 type: "post",
                 url: "/subscribe",
@@ -154,8 +148,17 @@
                     setTimeout(function () {
                         $('#mains').hide();
                     }, 1000);
+                    $('.button').attr('href', '{{ game.url }}');
                 }
             });
+        {% endif %}
+    });
+
+    {% if flag %}
+        $('.button').attr('href', '{{ game.url }}');
+    {% else %}
+        $('.button').click(function () {
+            $('#main').show();
         });
     {% endif %}
 </script>
