@@ -284,6 +284,6 @@ def subscribe():
             'data': None
         })
 
-@main.route('/vedio', methods=['GET'])
+@main.route('/video', methods=['GET'])
 def vedio():
-    return render_template('vedio.html')
+    return render_template('video.html')
