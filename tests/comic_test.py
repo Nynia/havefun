@@ -136,7 +136,7 @@ def update_comics(id_list):
                             print i, id, episode, seq
                             # download pics
                             # myftp.changewd('comic/20082903/123')
-                            myftp.uploadFiles(img_tag['src'], '/comics/' + id + '/' + episode, img_tag['id'][3:] + '.jpg')
+                            myftp.uploadFiles(img_tag['src'], '/comics/' + id + '/' + episode, seq + '.jpg')
                             # with open(target_path, 'wb') as handle:
                             #    response = requests.get(img_tag['src'], stream=True)
                             #    for block in response.iter_content(1024):

@@ -369,6 +369,11 @@ main{
 		margin: 0.5rem 0.9rem 0 0;
 		}
 }
+@media (min-width: 320px) and (max-width: 340px){
+	.watchs ul li div{
+		bottom: 1.25rem;
+	}
+}
 #play{
 	padding-left: 0;
 	margin-right: 0.725rem;
@@ -829,11 +834,13 @@ dd a{
 .world ul li div p{
 	font-size: 0.7464rem;
 	line-height: 1.449rem;
+	margin-bottom: 0.1rem;
 	}
 .world ul li div span:nth-child(3){
 	font-size: 0.5329rem;
 	float: left;
 	margin-left: 0.7246rem;
+	line-height: 1.6;
 	}
 .world ul li div span:nth-child(3) img{
 	margin-right: 0.1449rem;
@@ -841,7 +848,12 @@ dd a{
 .world ul li div span:nth-last-child(1){
 	float: right;
 	margin:0.0483rem 0.6rem 0 0;
-	line-height: 1rem;
+	line-height: 0.9rem;
+	background: url(../img/detail.png);
+	width: 2.8503rem;
+	height: 0.82126rem;
+	font-size: 0.5328rem;
+	color: #3f2517;
 	}
 .defeat{
 	position: relative;
@@ -900,6 +912,13 @@ dd a{
 		top: 5px;
 		}
 	}
+@media (min-width: 320px) and (max-width: 340px){
+	.world ul li div span:nth-last-child(1){
+		width: 3rem;
+		height: 0.9rem;
+		line-height: 0.9rem;
+	}
+}
 /*漫漫世界精品包*/
 #cartoon:before{
 	content: '';
