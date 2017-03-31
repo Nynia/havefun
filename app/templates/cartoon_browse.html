@@ -119,12 +119,7 @@
                         window.location.href = '/comic/' + bookid + '?chapter=' + data.msg;
                     }
                     else {
-                        {% if not session.phonenum %}
-                            var url = window.location.href;
-                            window.location.href = '/auth/login?next=' + url;
-                        {% else %}
-                            $('#main').show();
-                        {% endif %}
+                        $('#main').show();
                     }
                 }
             });
@@ -148,7 +143,7 @@
                         window.location.href = '/comic/' + bookid + '?chapter=' + data.msg;
                     }
                     else {
-                        alert('请先订购');
+                        $('#main').show();
                     }
                 }
             });
