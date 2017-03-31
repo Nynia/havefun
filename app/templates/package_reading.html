@@ -62,8 +62,8 @@
     });
     {% if flag %}
         $('.monthly .button').text('已订购');
-        $('.monthly .button').css('background','#fff');
-        $('.monthly .button').css('color','#626262');
+        $('.monthly .button').css('background', '#fff');
+        $('.monthly .button').css('color', '#626262');
     {% else %}
         $('.monthly .button').click(function () {
             {% if not session.phonenum %}
@@ -81,11 +81,8 @@
             $('#main').hide();
             $.ajax({
                 type: "post",
-                url: "/api/v1.0/orders?action=subscribe",
+                url: "/subscribe",
                 data: {
-                    'spid': '{{ package.spid }}',
-                    'chargeid': '{{ package.chargeid }}',
-                    'secret': '{{ package.secret }}',
                     'phonenum': '{{ session.phonenum }}',
                     'productid': '{{ package.productid }}'
                 },
@@ -93,12 +90,14 @@
                 success: function (data) {
                     $('#mains p').text(data.message);
                     $('#mains').show();
-                    setTimeout(function() { $('#mains').hide(); }, 1000);
+                    setTimeout(function () {
+                        $('#mains').hide();
+                    }, 1000);
                     if (data.code == "0") {
                         //success
-                                $('.monthly .button').text('已订购');
-                                $('.monthly .button').css('background','#fff');
-                                $('.monthly .button').css('color','#626262');
+                        $('.monthly .button').text('已订购');
+                        $('.monthly .button').css('background', '#fff');
+                        $('.monthly .button').css('color', '#626262');
                     }
                 }
             });

@@ -162,8 +162,14 @@ def comicbrowse(id):
                 db.session.commit()
 
             filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
-            filelist = ['/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg' for i in range(len(filelist))]
-            return render_template('cartoon_browse.html', imglist=filelist, cur=chapter, len=comic.curchapter,
+            filelist2 = []
+            for i in range(len(filelist)):
+                if i<10:
+                    filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + '0' + str(i + 1) + '.jpg')
+                else:
+                    filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg')
+            print filelist2
+            return render_template('cartoon_browse.html', imglist=filelist2, cur=chapter, len=comic.curchapter,
                                    package=package)
 
 

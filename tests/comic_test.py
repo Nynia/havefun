@@ -99,8 +99,8 @@ def update_comics(id_list):
     #print r.text
     myftp = MyFTP('192.168.114.138', 12345, 'jsgx', 'jsgx2017', '/')
     myftp.login()
-
-    for id in id_list:
+    for i in range(len(id_list)):
+        id = id_list[i]
         request_url = 'http://www.icartoons.cn/index.php?m=content&c=index&a=show&catid=25&id=%s' % id
         r = s.get(request_url)
         # check state
@@ -110,7 +110,9 @@ def update_comics(id_list):
             if state == u'已完结':
                 print id, state
                 # return
-
+        else:
+            print id
+            continue
         soup = BeautifulSoup(r.text, 'html.parser')
         for ss in soup.find_all(id=re.compile("positive_setinfo_*")):
             for a_tag in ss.find_all('a'):
@@ -121,16 +123,17 @@ def update_comics(id_list):
                     # print episode, provisionid
                     img_url = 'http://www.icartoons.cn/index.php?m=content&c=index&a=play_comic&id=%s&provisionid=%s' % (
                         id, provisionid)
-                    print img_url
                     r = s.get(img_url)
                     img_soup = BeautifulSoup(r.text, 'html.parser')
                     for img_tag in img_soup.find_all('img'):
                         if img_tag.has_attr('id'):
-                            print episode, img_tag['id'], img_tag['src']
+                            #print i,id,episode,img_tag['id']
                             if len(img_tag['src']) < 30:
                                 continue
-                            target_name = '_'.join((id, episode, img_tag['id'][3:])) + '.jpg'
-                            target_dir = id + os.sep + episode
+                            seq = img_tag['id'][3:]
+                            if len(seq) == 1:
+                                seq = '0'+seq
+                            print i, id, episode, seq
                             # download pics
                             # myftp.changewd('comic/20082903/123')
                             myftp.uploadFiles(img_tag['src'], '/comics/' + id + '/' + episode, img_tag['id'][3:] + '.jpg')
