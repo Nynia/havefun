@@ -118,25 +118,15 @@ body{
 	height: 0.6rem;
 	background: #eeeeee;
 	}
-.recommend_top  a:nth-child(1),.recommend_top  a:nth-child(2),.recommend_top  a:nth-child(3){
-	margin-right: 14%;
-	}
-.recommend_top{
-	font-size: 0;
-	}
-.recommend_top a{
-	display: inline-block;
+.recommend_top ul li a{
 	line-height: 1.9324rem;
-	width: 14.5%;
 	font-size: 0.6763rem;
 	}
-/*.recommend_top ul li:nth-child(1),.recommend_top ul li:nth-child(2),.recommend_top ul li:nth-child(3){
-	margin-right: 2%;
-	}*/
-.recommend_top ul li a{
-	/*width:25%;*/
-	font-size: 0.74686rem;
-	}
+.recommend_top ul li{
+	float: left;
+	width: 25%;
+	text-align: center;
+}
 .recommend_bottom,.recommend_bottom ul{
 	overflow: hidden;
 	}
@@ -470,8 +460,8 @@ main{
 	}
 .show input{
 	height: 2.3672rem;
-	/*line-height: 2.3672rem;*/
-	padding: 0.7246rem 0;
+	line-height: normal;
+	/*padding: 0.7246rem 0;*/
 	font-size: 0.7483rem;
 	width: 15.748rem;
 	outline: none;
@@ -547,7 +537,7 @@ main{
 	right: 1.03rem;
 	color: #30afe2;
 	width: 5rem!important;
-	padding: 0.5rem 0;
+	/*padding: 0.5rem 0;*/
 	}
 #codes{
 	position: absolute;
@@ -1551,3 +1541,5 @@ table tr td:nth-child(2) img{
 input{
 	-webkit-appearance: none;
 	}
+/*阻止旋转屏幕时自动调整字体大小*/
+html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {-webkit-text-size-adjust:none;}
