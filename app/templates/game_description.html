@@ -86,31 +86,76 @@
 
         if (w > h) {
             var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            slidesPerView: 1.2,
-            paginationClickable: true,
-            spaceBetween: 12
-        });
+                pagination: '.swiper-pagination',
+                slidesPerView: 1.2,
+                paginationClickable: true,
+                spaceBetween: 12
+            });
         }
         else {
             var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            slidesPerView: 1.8,
-            paginationClickable: true,
-            spaceBetween: 12
-        });
+                pagination: '.swiper-pagination',
+                slidesPerView: 1.8,
+                paginationClickable: true,
+                spaceBetween: 12
+            });
         }
     </script>
 </div>
+<!--弹出框-->
+<div id="main">
+    <div class="order">
+        <div class="order_top">提 示</div>
+        <div class="order_bottom">
+            <p>您将订购“{{ package.productname }}”</p>
+            <button class="cancel">取消</button>
+            <button class="confirm">确认</button>
+        </div>
+    </div>
+</div>
+<div id="mains">
+    <div class="order">
+        <img src="../static/img/gou.png" alt=""/>
+        <p></p>
+    </div>
+</div>
+
 </body>
 </html>
 <script src="../static/js/font.js"></script>
 <script>
     {% if flag %}
-        $('.button').attr('href','{{ game.url }}');
+        $('.button').attr('href', '{{ game.url }}');
     {% else %}
         $('.button').click(function () {
-            alert('请先订购游戏包');
+            {% if not session.phonenum %}
+                var url = window.location.href;
+                window.location.href = '/auth/login?next=' + url;
+            {% else %}
+                $('#main').show();
+            {% endif %}
+        });
+        $('.order_bottom .cancel').click(function () {
+            $('#main').hide()
+        });
+        $('.order_bottom .confirm').click(function () {
+            $('#main').hide();
+            $.ajax({
+                type: "post",
+                url: "/subscribe",
+                data: {
+                    'phonenum': '{{ session.phonenum }}',
+                    'productid': '{{ package.productid }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('#mains p').text(data.message);
+                    $('#mains').show();
+                    setTimeout(function () {
+                        $('#mains').hide();
+                    }, 1000);
+                }
+            });
         });
     {% endif %}
 </script>

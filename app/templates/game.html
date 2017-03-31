@@ -24,10 +24,10 @@
         <img src="../static/img/logo.png" alt="">
     </div>
     <div class="header-menu-container">
-        <a href="comic">动漫</a>
+        <a href="/comic">动漫</a>
         <a href="javascript:;">视频</a>
-        <a href="game" class="current">游戏</a>
-        <a href="reading">阅读</a>
+        <a href="/game" class="current">游戏</a>
+        <a href="/reading">阅读</a>
         <a href="javascript:;">音乐</a>
     </div>
 </header>
@@ -36,21 +36,13 @@
 <div class="slide-banner" id="slide-banner">
     <div class="bd">
         <ul class="banner">
-            <li>
-                <a href="javascript:;">
-                    <img src="../static/img/banner.png"/>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <img src="../static/img/banner2.png"/>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <img src="../static/img/banner3.png"/>
-                </a>
-            </li>
+            {% for p in packages %}
+                <li>
+                    <a href="package?id={{ p.productid }}"><img src="{{ p.img }}">
+                        <img src="{{ p.bannerimg }}"/>
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
     <div class="hd">

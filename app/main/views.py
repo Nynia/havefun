@@ -111,7 +111,7 @@ def gamedetail(id):
     flag = False
     if session.get(package.productid):
         flag = True
-    return render_template('game_description.html', game=game, flag=flag)
+    return render_template('game_description.html', game=game, flag=flag,package=package)
 
 
 @main.route('/comic', methods=['GET'])
