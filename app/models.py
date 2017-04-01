@@ -18,7 +18,7 @@ class Package(db.Model):
     spid = db.Column(db.String(15))
     chargeid = db.Column(db.String(10))
     secret = db.Column(db.String(30))
-
+    img2 = db.Column(db.String(30))
 
     def to_json(self):
         json_post = {
@@ -33,7 +33,8 @@ class Package(db.Model):
             'bannerimg':self.bannerimg,
             'spid':self.spid,
             'chargeid':self.chargeid,
-            'secret':self.secret
+            'secret':self.secret,
+            'img2':self.img2
         }
         return json_post
 

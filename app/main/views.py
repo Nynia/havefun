@@ -230,6 +230,10 @@ def my():
 def index():
     return redirect(url_for('main.comic'))
 
+@main.route('/', methods=['GET'])
+def root():
+    return redirect(url_for('main.comic'))
+
 
 @main.route('/subscribe', methods=['POST'])
 def subscribe():

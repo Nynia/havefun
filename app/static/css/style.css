@@ -1040,6 +1040,9 @@ dd a{
 	line-height: 1.2;
 	margin-top: .9rem;
 	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 95%;
 	}
 @media (min-width:320px) and (max-width:375px){
 		.lists i{
