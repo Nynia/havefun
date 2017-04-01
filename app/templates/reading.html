@@ -52,7 +52,7 @@
                     <ul>
                 {% endif %}
             <li><a href="/reading/{{ b.bookid }}"><img src="{{ b.cover }}" alt="{{ b.name }}">
-                <p>《{{ b.name }}》</p></a></li>
+                <p>《<span></span>》</p></a></li>
             {% if loop.index0 % 6 == 5 %}
                 <div class="clear"></div>
                 </ul>
@@ -101,7 +101,7 @@
         {% endfor %}
     </div>
     <div id="book_bottom">
-        <a href="package?id={{ packages[0].productid }}"><span>更多人气小说<img src="../static/img/more.png" alt=""/></span></a>
+        <a href="/package?id={{ packages[0].productid }}"><span>更多人气小说<img src="../static/img/more.png" alt=""/></span></a>
         <a href="javascript:;"><span class="change">换一换<img src="../static/img/change.png" alt=""/></span></a>
     </div>
 </div>

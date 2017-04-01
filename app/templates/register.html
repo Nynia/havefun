@@ -15,7 +15,7 @@
 </head>
 <body class="logins" style="padding-bottom: 2.56rem;">
 <div id="login">
-    <a href="#"><img src="../static/img/cha.png" alt="叉号"/></a>
+    <a href="javascript:history.go(-1)"><img src="../static/img/cha.png" alt="叉号"/></a>
     <span class="account">注册账号</span>
 </div>
 <div class="show">
@@ -45,10 +45,7 @@
 <script src="../static/libs/jquery-3.1.0.js"></script>
 <script>
 
-
-
     $('.codes a').click(function () {
-
         $.ajax({
             url: '/auth/register',
             type: 'GET',
