@@ -154,4 +154,10 @@
         autoPlay: true,//自动播放
         autoPage: true //自动分页
     });
+    $('.mores').click(function(){
+	$('.recommend_top ul li a').css('color','#333')
+	$('.recommend_bottom .part').eq(2).show().siblings().hide();
+	$('.recommend_top ul li').eq(2).find('a').css('color','#eba241');
+})
+
 </script>
