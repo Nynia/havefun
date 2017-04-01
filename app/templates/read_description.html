@@ -151,6 +151,36 @@
 
             document.getElementsByTagName('table')[0].appendChild(trNode);
         {% endfor %}
+
+
+        var flag = 0;//升序
+        //var lilist = $('.chapter ul li');
+        var parent = $('table');
+        $('.descend').click(function () {
+            if (!flag) {
+                trlist = $('table tr').remove();
+                console.log(trlist);
+                for (var i = 0; i < trlist.length; i++) {
+                    parent.append(trlist[trlist.length-1-i]);
+                }
+                flag = 1;
+                $('.ascend').css('color', "#fff");
+                $('.descend').css('color', '#F7D631');
+            }
+        });
+        $('.ascend').click(function () {
+            if (flag) {
+                trlist = $('table tr').remove();
+                console.log(trlist);
+                for (var i = 0; i < trlist.length; i++) {
+                    parent.append(trlist[trlist.length-1-i]);
+                }
+                flag = 0;
+                $('.ascend').css('color', "#F7D631");
+                $('.descend').css('color', '#fff');
+            }
+        });
+    /*
         var b = $('tr').text();
         console.log(b)
         var a = $('tr:nth-child(1)').text();
@@ -192,5 +222,6 @@
                 temp.push(arr[i].innerHTML);
             }
         };
+        */
     });
 </script>

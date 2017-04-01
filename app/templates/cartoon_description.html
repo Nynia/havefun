@@ -154,70 +154,77 @@
             document.getElementsByClassName('session')[0].appendChild(liNode);
         {% endfor %}
 
-        /*
+
         var flag = 0;//升序
-        var lilist = $('.chapter ul li');
-        var parent = lilist.parent();
+        //var lilist = $('.chapter ul li');
+        var parent = $('.chapter ul li').parent();
         $('.descend').click(function () {
-            if (flag) {
-                lilist.reverse();
-                parent.remove()
+            if (!flag) {
+                lilist = $('.chapter ul li').remove();
+                console.log(lilist);
+                for (var i = 0; i < lilist.length; i++) {
+                    parent.append(lilist[lilist.length-1-i]);
+                }
                 flag = 1;
                 $('.ascend').css('color', "#fff");
                 $('.descend').css('color', '#F7D631');
             }
-        };
+        });
         $('.ascend').click(function () {
-            if (!flag) {
-                lilist.reverse();
+            if (flag) {
+                lilist = $('.chapter ul li').remove();
+                console.log(lilist);
+                for (var i = 0; i < lilist.length; i++) {
+                    parent.append(lilist[lilist.length-1-i]);
+                }
                 flag = 0;
                 $('.ascend').css('color', "#F7D631");
                 $('.descend').css('color', '#fff');
             }
-        };
-        */
-
-        var a = $('.chapter ul  li')[0].innerHTML;
-        var arr = $('.chapter ul  li');
-        temp = [];
-        //降序
-        $('.descend').click(function () {
-            var b = $('.chapter ul  li')[0].innerHTML;
-            if (b == a) {
-                show();
-                var temp2 = temp.reverse();
-                for (var j = 0; j < arr.length; j++) {
-                    arr[j].innerHTML = temp2[j];
-                }
-            }
-            $('.ascend').css('color', "#fff");
-            $('.descend').css('color', '#F7D631');
         });
-        //升序
-        $('.ascend').click(function () {
-            var c = $('.chapter ul  li')[0].innerHTML;
-            if (c == a) {
-                show();
-                for (var k = 0; k < arr.length; k++) {
-                    arr[k].innerHTML = temp[k];
-                }
+        /*
+         var a = $('.chapter ul  li')[0].innerHTML;
+         var arr = $('.chapter ul  li');
+         temp = [];
+         //降序
+         $('.descend').click(function () {
+         var b = $('.chapter ul  li')[0].innerHTML;
+         if (b == a) {
+         show();
+         var temp2 = temp.reverse();
+         for (var j = 0; j < arr.length; j++) {
+         arr[j].innerHTML = temp2[j];
+         }
+         }
+         $('.ascend').css('color', "#fff");
+         $('.descend').css('color', '#F7D631');
+         });
+         //升序
+         $('.ascend').click(function () {
+         var c = $('.chapter ul  li')[0].innerHTML;
+         if (c == a) {
+         show();
+         for (var k = 0; k < arr.length; k++) {
+         arr[k].innerHTML = temp[k];
+         }
 
-            } else {
-                show();
-                var temp3 = temp.reverse();
-                for (var k = 0; k < arr.length; k++) {
-                    arr[k].innerHTML = temp3[k];
-                }
-            }
-            $('.ascend').css('color', "#F7D631");
-            $('.descend').css('color', '#fff');
-        })
+         } else {
+         show();
+         var temp3 = temp.reverse();
+         for (var k = 0; k < arr.length; k++) {
+         arr[k].innerHTML = temp3[k];
+         }
+         }
+         $('.ascend').css('color', "#F7D631");
+         $('.descend').css('color', '#fff');
+         })
 
-        function show() {
-            for (var i = 0; i < arr.length; i++) {
-                temp.push(arr[i].innerHTML);
-            }
-        }
+         function show() {
+         for (var i = 0; i < arr.length; i++) {
+         temp.push(arr[i].innerHTML);
+         }
+         }
+         */
     });
 
 </script>
