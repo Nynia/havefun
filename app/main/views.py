@@ -61,7 +61,7 @@ def config():
 @main.route('/game', methods=['GET'])
 def game():
     packages = Package.query.filter_by(type=2).all()
-    h5 = Game.query.filter_by(type=2).limit(5).all()
+    h5 = Game.query.filter_by(type=2).limit(7).all()
     print h5
     return render_template('game.html', packages=packages, h5=h5)
 
