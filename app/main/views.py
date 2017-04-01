@@ -267,7 +267,7 @@ def subscribe():
         orderaction.phonenum = phonenum
         orderhistory.productid = productid
         orderhistory.phonenum = phonenum
-        orderaction.starttime = timestamp
+        orderaction.ordertime = timestamp
         orderaction.status = '1'
         orderhistory.action = '1'
         orderhistory.createtime = timestamp
@@ -324,7 +324,7 @@ def unsubscribe():
         orderhistory.productid = productid
         orderhistory.phonenum = phonenum
 
-        orderaction.endtime = timestamp
+        orderaction.canceltime = timestamp
         orderaction.status = '4'
         orderhistory.action = '0'
         orderhistory.createtime = timestamp
@@ -353,6 +353,9 @@ def unsubscribe():
 def vedio():
     return render_template('video.html')
 
+@main.route('/music', methods=['GET'])
+def vedio():
+    return render_template('music.html')
 
 @main.route('/myorder', methods=['GET'])
 def myorder():
