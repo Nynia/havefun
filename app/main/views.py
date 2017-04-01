@@ -109,6 +109,7 @@ def gamedetail(id):
     game = Game.query.get(int(id))
     package = Package.query.get(game.packageid)
     flag = False
+    print package.img2
     if session.get(package.productid):
         flag = True
     return render_template('game_description.html', game=game, flag=flag, package=package)
