@@ -87,47 +87,6 @@
         var id = url.substring(url.lastIndexOf('/') + 1, url.length);
         $('#back').attr('href', '/package?bookid=' + id);
 
-        var b = $('tr').text();
-        console.log(b)
-        var a = $('tr:nth-child(1)').text();
-        var arr = $('tr');
-        temp = [];
-        //   降序
-        $('.descend').click(function () {
-            var b = $('tr:nth-child(1)').text();
-            if (b == a) {
-                show();
-                var temp2 = temp.reverse();
-                for (var j = 0; j < arr.length; j++) {
-                    arr[j].innerHTML = temp2[j];
-                }
-            }
-            $('.ascend').css('color', "#fff");
-            $('.descend').css('color', '#F7D631');
-        })
-        //	升序
-        $('.ascend').click(function () {
-            var c = $('tr:nth-child(1)').text()
-            if (c == a) {
-                show();
-                for (var k = 0; k < arr.length; k++) {
-                    arr[k].innerHTML = temp[k];
-                }
-            } else {
-                show();
-                var temp3 = temp.reverse();
-                for (var k = 0; k < arr.length; k++) {
-                    arr[k].innerHTML = temp3[k];
-                }
-            }
-            $('.ascend').css('color', "#F7D631");
-            $('.descend').css('color', '#fff');
-        })
-        function show() {
-            for (var i = 0; i < arr.length; i++) {
-                temp.push(arr[i].innerHTML);
-            }
-        };
 
         $('.order_bottom .cancel').click(function () {
             $('#main').hide()
@@ -192,5 +151,46 @@
 
             document.getElementsByTagName('table')[0].appendChild(trNode);
         {% endfor %}
+        var b = $('tr').text();
+        console.log(b)
+        var a = $('tr:nth-child(1)').text();
+        var arr = $('tr');
+        temp = [];
+        //   降序
+        $('.descend').click(function () {
+            var b = $('tr:nth-child(1)').text();
+            if (b == a) {
+                show();
+                var temp2 = temp.reverse();
+                for (var j = 0; j < arr.length; j++) {
+                    arr[j].innerHTML = temp2[j];
+                }
+            }
+            $('.ascend').css('color', "#fff");
+            $('.descend').css('color', '#F7D631');
+        })
+        //	升序
+        $('.ascend').click(function () {
+            var c = $('tr:nth-child(1)').text()
+            if (c == a) {
+                show();
+                for (var k = 0; k < arr.length; k++) {
+                    arr[k].innerHTML = temp[k];
+                }
+            } else {
+                show();
+                var temp3 = temp.reverse();
+                for (var k = 0; k < arr.length; k++) {
+                    arr[k].innerHTML = temp3[k];
+                }
+            }
+            $('.ascend').css('color', "#F7D631");
+            $('.descend').css('color', '#fff');
+        })
+        function show() {
+            for (var i = 0; i < arr.length; i++) {
+                temp.push(arr[i].innerHTML);
+            }
+        };
     });
 </script>
