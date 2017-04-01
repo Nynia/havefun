@@ -52,7 +52,7 @@
                     <ul>
                 {% endif %}
             <li><a href="/reading/{{ b.bookid }}"><img src="{{ b.cover }}" alt="{{ b.name }}">
-                <p>《<span></span>》</p></a></li>
+                <p>《{{ b.name }}》</p></a></li>
             {% if loop.index0 % 6 == 5 %}
                 <div class="clear"></div>
                 </ul>
