@@ -154,7 +154,7 @@
             document.getElementsByClassName('session')[0].appendChild(liNode);
         {% endfor %}
 
-
+        /*
         var flag = 0;//升序
         var lilist = $('.chapter ul li');
         var parent = lilist.parent();
@@ -175,7 +175,8 @@
                 $('.descend').css('color', '#fff');
             }
         };
-        /*
+        */
+
         var a = $('.chapter ul  li')[0].innerHTML;
         var arr = $('.chapter ul  li');
         temp = [];
@@ -211,7 +212,7 @@
             $('.ascend').css('color', "#F7D631");
             $('.descend').css('color', '#fff');
         })
-        */
+
         function show() {
             for (var i = 0; i < arr.length; i++) {
                 temp.push(arr[i].innerHTML);
