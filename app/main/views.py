@@ -5,7 +5,7 @@ from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
 from werkzeug.utils import secure_filename
-import os, re, requests, json, hashlib
+import os, re, requests, json, hashlib,random
 from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
 import config
@@ -13,7 +13,7 @@ from app import db
 from app import myftp
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package, Comic, Reading, Chapter, History,OrderRelation,OrderHistroy
+from app.models import Package, Comic, Reading, Chapter, History, OrderRelation, OrderHistroy
 
 
 @main.route('/config', methods=['GET', 'POST'])
@@ -111,7 +111,7 @@ def gamedetail(id):
     flag = False
     if session.get(package.productid):
         flag = True
-    return render_template('game_description.html', game=game, flag=flag,package=package)
+    return render_template('game_description.html', game=game, flag=flag, package=package)
 
 
 @main.route('/comic', methods=['GET'])
@@ -164,7 +164,7 @@ def comicbrowse(id):
             filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
             filelist2 = []
             for i in range(len(filelist)):
-                if i< 10 and not comic.packageid == '135000000000000242191':
+                if i < 10 and not comic.packageid == '135000000000000242191':
                     filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + '0' + str(i + 1) + '.jpg')
                 else:
                     filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg')
@@ -177,7 +177,9 @@ def comicbrowse(id):
 def reading():
     packages = Package.query.filter_by(type=4).all()
     print packages
-    return render_template('reading.html', packages=packages)
+    readings = Reading.query.all()
+    random.shuffle(readings)
+    return render_template('reading.html', packages=packages,books=readings)
 
 
 @main.route('/reading/<bookid>', methods=['GET'])
@@ -201,7 +203,7 @@ def readinginfo(bookid):
                 chaptername = chaptername[0][:2]
             ptaglist = re.findall(u'\<p\>[\s　]*(.*?)\<\/p\>', chapter.content)
             return render_template('read_browse.html', ptaglist=ptaglist, name=chaptername, cur=chapter,
-                                   len=len(chapters),package=package)
+                                   len=len(chapters), package=package)
         else:
             chapter_dict_list = []
             for c in chapters:
@@ -212,7 +214,8 @@ def readinginfo(bookid):
                 dict['b'] = chaptername[1] if len(chaptername) > 1 else u'前言'
                 dict['id'] = c.chapterid
                 chapter_dict_list.append(dict)
-            return render_template('read_description.html', book=reading, chapters=chapter_dict_list, flag=True,package=package)
+            return render_template('read_description.html', book=reading, chapters=chapter_dict_list, flag=True,
+                                   package=package)
 
 
 @main.route('/my', methods=['GET'])
@@ -284,6 +287,80 @@ def subscribe():
             'data': None
         })
 
+@main.route('/unsubscribe', methods=['POST'])
+def unsubscribe():
+    productid = request.form.get('productid')
+    phonenum = request.form.get('phonenum')
+    package = Package.query.get(productid)
+    chargeid = package.chargeid
+    secret = package.secret
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    token = hashlib.sha1(chargeid + timestamp + secret).hexdigest()
+    data = {
+        'action': 'unsubscribe',
+        'spId': package.spid,
+        'chargeId': package.chargeid,
+        'phoneNum': phonenum,
+        'orderType': '1',
+        'timestamp': timestamp,
+        'accessToken': token
+    }
+    r = requests.post('http://61.160.185.51:9250/ismp/serviceOrder', data=data)
+    json_result = json.loads(r.text)
+    print json_result
+    err_code = json_result['errcode']
+    err_msg = json_result['errmsg']
+    if err_code == '0':
+        orderaction = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(productid=productid).first()
+        if not orderaction:
+            orderaction = OrderRelation()
+        orderhistory = OrderHistroy()
+        orderaction.productid = productid
+        orderaction.phonenum = phonenum
+        orderhistory.productid = productid
+        orderhistory.phonenum = phonenum
+
+        orderaction.endtime = timestamp
+        orderaction.status = '4'
+        orderhistory.action = '0'
+        orderhistory.createtime = timestamp
+
+        db.session.add(orderaction)
+        db.session.add(orderhistory)
+        db.session.commit()
+
+        session.pop(productid)
+
+        return jsonify({
+            'code': err_code,
+            'message': err_msg,
+            'data': None
+        })
+
+    else:
+        return jsonify({
+            'code': err_code,
+            'message': err_msg,
+            'data': None
+        })
+
+
 @main.route('/video', methods=['GET'])
 def vedio():
     return render_template('video.html')
+
+
+@main.route('/myorder', methods=['GET'])
+def myorder():
+    phonenum = session.get('phonenum')
+    data = []
+    relation = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(status='1').all()
+    for r in relation:
+        package = Package.query.get(r.productid)
+        dict = {}
+        dict['productname'] = package.productname
+        t = r.ordertime
+        dict['timestamp'] = t[:4]+'-'+t[4:6]+'-'+t[6:8]+' '+t[8:10]+':'+t[10:12]+':'+t[12:14]
+        dict['productid'] = package.productid
+        data.append(dict)
+    return render_template('myorder.html', data=data)

@@ -1,110 +1,131 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="google" value="notranslate">
-	    <meta name="robots" content="index,follow">
-	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
-	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-	    <meta name="msapplication-tap-highlight" content="no">
-		<title>阅读</title>
-		<meta name="keywords" content="">
-        <meta name="description" content="">
-		<link rel="stylesheet" href="../static/css/style.css" />
-		<link rel="stylesheet" href="../static/css/main.css" />
-		<link rel="stylesheet" href="../static/css/index.css" />
-		<link rel="stylesheet" href="../static/css/common.css" />
-		<script src="../static/libs/jquery-3.1.0.js"></script>
-	</head>
-	<body style="padding-bottom: 2.56rem;">
-		<!-- header -->
-	    <header id="header" class="">
-	        <div class="header-logo-container">
-	            <img src="../static/img/logo.png" alt="">
-	        </div>
-	        <div class="header-menu-container">
-	            <a href="/comic">动漫</a>
-	            <a href="/video">视频</a>
-	            <a href="/game">游戏</a>
-	            <a href="javascript:;" class="currents">阅读</a>
-	            <a href="javascript:;">音乐</a>
-	        </div>
-	    </header>
-       <!-- header end -->
-       <!-- slide-banner -->
-		<div class="banners slide">
-	    	<ul>
-				{% for p in packages %}
-			    <li><a href="package?id={{ p.productid }}"><img src="{{ p.img }}" alt="" /><div style="color: #fff;">了解详情></a></div></li>
-                {% endfor %}
-			</ul>
-	    </div>
-	    <!-- slide-banner end -->
-	    <div class="classify">
-		    <div id="book">
-		    	<ul>
-		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readb.png" alt=""><p>《浮夜决 公子裂月》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readc.png" alt=""><p>《赤轮与月》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/reade.png" alt=""><p>《总有刁民想害朕》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readf.png" alt=""><p>《嫌疑犯A》</p></a></li>
-		    		<div class="clear"></div>
-		    	</ul>
-		    	<ul>
-		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readb.png" alt=""><p>《浮夜决 公子裂月》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/reade.png" alt=""><p>《总有刁民想害朕》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
-		    		<div class="clear"></div>
-		    	</ul>
-		    	<ul>
-		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readb.png" alt=""><p>《浮夜决 公子裂月》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readc.png" alt=""><p>《赤轮与月》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/reade.png" alt=""><p>《总有刁民想害朕》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readf.png" alt=""><p>《嫌疑犯A》</p></a></li>
-		    		<div class="clear"></div>
-		    	</ul>
-		    	<ul>
-		    		<li><a href="javascript:;"><img src="../static/img/reada.png" alt=""><p>《五月潮汐》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readb.png" alt=""><p>《浮夜决 公子裂月》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readc.png" alt=""><p>《赤轮与月》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readd.png" alt=""><p>《阴阳师》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/reade.png" alt=""><p>《总有刁民想害朕》</p></a></li>
-		    		<li><a href="javascript:;"><img src="../static/img/readf.png" alt=""><p>《嫌疑犯A》</p></a></li>
-		    		<div class="clear"></div>
-		    	</ul>
-		    </div>
-		    <div id="book_bottom">
-		    	<a href="read_descriptions.html"><span>更多人气小说<img src="../static/img/more.png" alt="" /></span></a>
-		    	<a href="javascript:;"><span class="change">换一换<img src="../static/img/change.png" alt="" /></span></a>
-		    </div>
-	    </div>
-	    <!-- footer-nav -->
-        <nav class="footer-nav">
-            <ul>
-                <li><a href="/index" class="homepage">首页</a></li>
-                <li><a href="###" class="find">发现</a></li>
-                <li><a href="###" class="follow">关注</a></li>
-                <li><a href="/my" class="mine">我的</a></li>
-            </ul>
-        </nav>
-    <!-- footer-nav end -->
-	</body>
+<html lang="zh-cmn-Hans" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" value="notranslate">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>阅读</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
+    <link rel="stylesheet" href="../static/css/index.css"/>
+    <link rel="stylesheet" href="../static/css/common.css"/>
+    <script src="../static/libs/jquery-3.1.0.js"></script>
+</head>
+<body style="padding-bottom: 2.56rem;">
+<!-- header -->
+<header id="header" class="">
+    <div class="header-logo-container">
+        <img src="../static/img/logo.png" alt="">
+    </div>
+    <div class="header-menu-container">
+        <a href="/comic">动漫</a>
+        <a href="/video">视频</a>
+        <a href="/game">游戏</a>
+        <a href="javascript:;" class="currents">阅读</a>
+        <a href="javascript:;">音乐</a>
+    </div>
+</header>
+<!-- header end -->
+<!-- slide-banner -->
+<div class="banners slide">
+    <ul>
+        {% for p in packages %}
+            <li><a href="package?id={{ p.productid }}"><img src="{{ p.img }}" alt=""/>
+                <div style="color: #fff;">了解详情>
+                </div>
+            </a></li>
+        {% endfor %}
+    </ul>
+</div>
+<!-- slide-banner end -->
+<div class="classify">
+    <div id="book">
+        {% for b in books %}
+            {% if loop.index0 < 6 %}
+                {% if loop.index0 % 6 == 0 %}
+                    <ul>
+                {% endif %}
+            <li><a href="/reading/{{ b.bookid }}"><img src="{{ b.cover }}" alt="{{ b.name }}">
+                <p>《{{ b.name }}》</p></a></li>
+            {% if loop.index0 % 6 == 5 %}
+                <div class="clear"></div>
+                </ul>
+            {% endif %}
+            {% elif loop.index0 < 12 %}
+                {% if loop.index0 % 6 == 0 %}
+                    <ul>
+                {% endif %}
+            <li><a href=""><img src="{{ b.cover }}" alt="{{ b.name }}">
+                <p>《{{ b.name }}》</p></a></li>
+            {% if loop.index0 % 6 == 5 %}
+                <div class="clear"></div>
+                </ul>
+            {% endif %}
+            {% elif loop.index0 < 18 %}
+                {% if loop.index0 % 6 == 0 %}
+                    <ul>
+                {% endif %}
+            <li><a href=""><img src="{{ b.cover }}" alt="{{ b.name }}">
+                <p>《{{ b.name }}》</p></a></li>
+            {% if loop.index0 % 6 == 5 %}
+                <div class="clear"></div>
+                </ul>
+            {% endif %}
+            {% elif loop.index0 < 24 %}
+                {% if loop.index0 % 6 == 0 %}
+                    <ul>
+                {% endif %}
+            <li><a href=""><img src="{{ b.cover }}" alt="{{ b.name }}">
+                <p>《{{ b.name }}》</p></a></li>
+            {% if loop.index0 % 6 == 5 %}
+                <div class="clear"></div>
+                </ul>
+            {% endif %}
+            {% elif loop.index0 < 30 %}
+                {% if loop.index0 % 6 == 0 %}
+                    <ul>
+                {% endif %}
+            <li><a href=""><img src="{{ b.cover }}" alt="{{ b.name }}">
+                <p>《{{ b.name }}》</p></a></li>
+            {% if loop.index0 % 6 == 5 %}
+                <div class="clear"></div>
+                </ul>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="book_bottom">
+        <a href="package?id={{ p.productid }}"><span>更多人气小说<img src="../static/img/more.png" alt=""/></span></a>
+        <a href="javascript:;"><span class="change">换一换<img src="../static/img/change.png" alt=""/></span></a>
+    </div>
+</div>
+<!-- footer-nav -->
+<nav class="footer-nav">
+    <ul>
+        <li><a href="/index" class="homepage">首页</a></li>
+        <li><a href="###" class="find">发现</a></li>
+        <li><a href="###" class="follow">关注</a></li>
+        <li><a href="/my" class="mine">我的</a></li>
+    </ul>
+</nav>
+<!-- footer-nav end -->
+</body>
 </html>
 <script src="../static/js/read.js"></script>
 <script src="../static/js/font.js"></script>
 <script src="../static/js/index.js"></script>
 <script>
     var $change = 0
-	$('.change').click(function(){
-		$change++;
-		if($change<0) $change = 3;
-		if($change==4) $change=0
+    $('.change').click(function () {
+        $change++;
+        if ($change < 0) $change = 3;
+        if ($change == 4) $change = 0
         $('#book ul').eq($change).fadeIn(800).siblings().hide()
-	})
+    })
 </script>

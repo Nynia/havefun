@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" value="notranslate">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>订购</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
+</head>
+<body style="padding-bottom: 2.56rem;">
+<div id="login">
+    <a href="javascript:history.go(-1)"><img src="../static/img/rights.png" alt="叉号"
+                                             style="width: 0.4831rem;height: 0.8212rem;"/></a>
+    <span class="account">我的订购</span>
+</div>
+<div class="shopping_car">
+    {% for d in data %}
+        <div class="shopping_list">
+            <h3>{{ d.productname }}</h3>
+            <p>订购时间：{{ d.timestamp }}</p>
+            <p class="info" style="display:none;">{{ d.productid }}</p>
+            <div class="unsubscribe">退订</div>
+        </div>
+    {% endfor %}
+</div>
+<!--弹出层-->
+<div id="main">
+    <div class="order">
+        <div class="order_top">提 示</div>
+        <div class="order_bottom">
+            <p>您将退订“xxxx包”</p>
+            <p style="display:none;"></p>
+            <p style="display:none;"></p>
+            <button class="cancel">取消</button>
+            <button class="confirm">确认</button>
+        </div>
+    </div>
+</div>
+<div id="mains">
+    <div class="order">
+        <img src="../static/img/gou.png" alt=""/>
+        <p>退订成功</p>
+    </div>
+</div>
+</body>
+</html>
+<script src="../static/libs/jquery-3.1.0.js"></script>
+<script>
+    $('.unsubscribe').click(function () {
+        var productid = $(this).prev().text();
+        var productname = $(this).parent().children(":first").text()
+        $('#main p:eq(1)').text(productname);
+        $('#main p:eq(2)').text(productid);
+        $('#main p:first').text('您将退订'+'"'+productname+'"');
+        $('#main').show();
+    });
+    $('.order_bottom .cancel').click(function () {
+        $('#main').hide();
+    });
+    $('.order_bottom .confirm').click(function () {
+        $('#main').hide();
+        var productid = $('#main p:eq(2)').text();
+        var productname = $('#main p:eq(1)').text();
+
+        console.log(productid);
+        $.ajax({
+            type: "post",
+            url: "/unsubscribe",
+            data: {
+                'phonenum': '{{ session.phonenum }}',
+                'productid': productid,
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $('#mains p').text(data.message);
+                $('#mains').show();
+                setTimeout(function () {
+                    $('#mains').hide();
+                }, 1000);
+
+            }
+        });
+    });
+</script>

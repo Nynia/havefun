@@ -166,7 +166,7 @@
             var tdNode2 = document.createElement('td');
             var textNode2 = document.createTextNode('{{ c.get('b') }}');
             tdNode2.appendChild(textNode2);
-            {% if loop.index0 < book.freechapter %}
+            {% if loop.index0 < book.freechapter+1 %}
                 var imgNode = document.createElement('img');
                 imgNode.setAttribute('src', "../static/img/free.png");
                 tdNode2.appendChild(imgNode);

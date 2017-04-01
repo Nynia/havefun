@@ -1181,8 +1181,11 @@ table tr td:nth-child(2){
 	font-size: 0.694rem;
 	}
 .order_bottom p{
-	margin-bottom: 1.3527rem;
+	/*margin-bottom: 1.3527rem;*/
 	color: #373a3c;
+	width: 90%;
+	height: 2.4155rem;
+	margin: 0 auto;
 	}
 .order_bottom button{
 	width: 5.7971rem;
@@ -1523,6 +1526,8 @@ table tr td:nth-child(2) img{
 	margin-top: 1.3526rem;
 	padding-left:0.8211rem;
 	border-bottom: 1px solid #aeaeae;
+	min-height: 4.530434rem;
+	position: relative;
 }
 .shopping_list h3{
 	margin: 0;
@@ -1530,8 +1535,8 @@ table tr td:nth-child(2) img{
 	/*font-size: 0.8266rem;*/
 }
 .shopping_list p{
-	padding-top: 0.72464rem;
-	padding-bottom: 1.4493rem;
+	margin-top: 0.72464rem;
+	margin-bottom: 1.4493rem;
 	color: #30afe2;
 	font-size: 0.64rem;
 }
@@ -1541,5 +1546,15 @@ table tr td:nth-child(2) img{
 input{
 	-webkit-appearance: none;
 	}
-/*阻止旋转屏幕时自动调整字体大小*/
-html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {-webkit-text-size-adjust:none;}
+.shopping_list .unsubscribe{
+	position: absolute;
+	right: 1rem;
+	bottom: 1.4493rem;
+	width: 3.5266rem;
+	height: 1.4493rem;
+	border: 1px solid #aeaeae;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 1.4493rem;
+	font-size: 0.7464rem;
+}
