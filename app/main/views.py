@@ -269,6 +269,7 @@ def subscribe():
         orderhistory.phonenum = phonenum
         orderaction.ordertime = timestamp
         orderaction.status = '1'
+
         orderhistory.action = '1'
         orderhistory.createtime = timestamp
 
@@ -354,7 +355,7 @@ def vedio():
     return render_template('video.html')
 
 @main.route('/music', methods=['GET'])
-def vedio():
+def music():
     return render_template('music.html')
 
 @main.route('/myorder', methods=['GET'])

@@ -23,7 +23,7 @@
 <div class="shopping_car">
     {% if session.phonenum %}
         {% for d in data %}
-            <div class="shopping_list">
+            <div class="shopping_list" id="{{ d.productid }}">
                 <h3>{{ d.productname }}</h3>
                 <p>订购时间：{{ d.timestamp }}</p>
                 <p class="info" style="display:none;">{{ d.productid }}</p>
@@ -91,7 +91,8 @@
                 setTimeout(function () {
                     $('#mains').hide();
                 }, 1000);
-
+                var node = document.getElementById(productid)
+                node.parentNode.removeChild(node);
             }
         });
     });
