@@ -21,14 +21,18 @@
     <span class="account">我的订购</span>
 </div>
 <div class="shopping_car">
-    {% for d in data %}
-        <div class="shopping_list">
-            <h3>{{ d.productname }}</h3>
-            <p>订购时间：{{ d.timestamp }}</p>
-            <p class="info" style="display:none;">{{ d.productid }}</p>
-            <div class="unsubscribe">退订</div>
-        </div>
-    {% endfor %}
+    {% if session.phonenum %}
+        {% for d in data %}
+            <div class="shopping_list">
+                <h3>{{ d.productname }}</h3>
+                <p>订购时间：{{ d.timestamp }}</p>
+                <p class="info" style="display:none;">{{ d.productid }}</p>
+                <div class="unsubscribe">退订</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>登录后方可查看</p>
+    {% endif %}
 </div>
 <!--弹出层-->
 <div id="main">
@@ -58,7 +62,7 @@
         var productname = $(this).parent().children(":first").text()
         $('#main p:eq(1)').text(productname);
         $('#main p:eq(2)').text(productid);
-        $('#main p:first').text('您将退订'+'"'+productname+'"');
+        $('#main p:first').text('您将退订' + '"' + productname + '"');
         $('#main').show();
     });
     $('.order_bottom .cancel').click(function () {
