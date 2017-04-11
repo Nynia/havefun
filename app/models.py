@@ -124,13 +124,6 @@ class User(UserMixin,db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class Test(db.Model):
-    __tablename__ = 'test'
-    id = db.Column(db.Integer, primary_key=True)
-    column1 = db.Column(db.String(10))
-    column2 = db.Column(db.DateTime)
-
-
 class Game(db.Model):
     __tablename__ = 'game'
     id = db.Column(db.Integer, primary_key=True)
