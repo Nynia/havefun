@@ -23,6 +23,13 @@
     <span>登录</span>
 </div>
 <div class="show">
+    {% with messages = get_flashed_messages(category_filter=["login"]) %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message"><img src="../static/img/warn.png"> {{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <form class="show_top" method="post">
         {{ form.hidden_tag() }}
         <div class="user">

@@ -422,9 +422,9 @@ main{
 	position: relative;
 	}
 #login img{
-	float: left;
-	margin-top: 0.966rem;
-	margin-left: 0.8211rem;
+	position: absolute;
+	top: 0.966rem;
+	left: 0.8211rem;
 	width: 0.773rem;
 	height: 0.773rem;
 	}
@@ -487,9 +487,6 @@ main{
 	font-size: 0.7483rem;
 	border-radius: 10px;
 	}
-.show_top{
-	margin: 0.9662rem auto 0;
-	}
 .show_top img{
 	width: 0.8696rem;
 	height: 0.9662rem;
@@ -497,7 +494,9 @@ main{
 	margin-right: 0.6764rem;
 	margin-bottom: 0.4rem;
 	}
-
+.show{
+	margin: 1.449rem auto 0 ;
+}
 /*注册页面*/
 #login .account{
 	position: absolute;
@@ -534,7 +533,7 @@ main{
 	position: absolute;
 	right: 1.03rem;
 	color: #30afe2;
-	width: 5rem!important;
+	width: 5.5rem!important;
 	/*padding: 0.5rem 0;*/
 	}
 #codes{
@@ -656,7 +655,8 @@ input:disabled{
 	text-align: center;
 	}
 .bar_top a{
-	float: left;
+	position: absolute;
+	left: 0.82rem;
 	}
 .super{
 	width: 90%;
@@ -1181,6 +1181,7 @@ table tr td:nth-child(2){
 	margin-bottom: 0;
 	padding: 8% 0;
 	color: #373a3c;
+	font-size: 0.7rem;
 	}
 .order_bottom button{
 	margin: 4% 0;
@@ -1483,8 +1484,8 @@ dd p{
 	margin-bottom: 1.12rem;
 	}
 #book_bottom img{
-	width: 0.773rem;
-	height: 0.72464rem;
+	width: 0.9rem;
+	height: 0.9rem;
 	margin-left: 0.3rem;
 	margin-top: -0.2rem;
 	}
@@ -1556,4 +1557,16 @@ input{
 .mains{
 	text-align: center;
 	margin-top: 30%;
+}
+.message{
+	font-size: 0.7463rem;
+	color: #f16361;
+	height: 1rem;
+	margin-left: 1rem;
+	line-height: 1.2rem;
+	text-align: left;
+	margin-bottom: 0.7246rem;
+}
+.message img{
+	margin-right: 0.5rem;
 }
