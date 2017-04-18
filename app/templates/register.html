@@ -26,7 +26,7 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <div class="message2" style="display: none;"></div>
+    <div class="message" style="display: none;"></div>
     <form class="show_top registers" method="post">
         {{ form.hidden_tag() }}
         <div class="user">
@@ -98,7 +98,7 @@
         }
         if (phone_type == 1) {
             obj.val("重新获取(" + seconds + "s)");
-            obj.css('color', '#eae9e9');
+            obj.css('color', '#ccc');
             var setTime = setInterval(function () {
                 if (seconds <= 0) {
                     clearInterval(setTime);
@@ -114,6 +114,7 @@
             }, 1000);
         }
         else {
+            alert('else');
             if ($('.message').length >　1) {
                 $('.message:first').remove()
             }
