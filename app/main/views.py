@@ -13,7 +13,7 @@ from app import db
 from app import myftp
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package, Comic, Reading, Chapter, History, OrderRelation, OrderHistroy
+from app.models import Package, Comic, Reading, Chapter, History, OrderRelation, OrderHistroy,ComicChapterInfo
 
 
 @main.route('/config', methods=['GET', 'POST'])
@@ -161,9 +161,9 @@ def comicbrowse(id):
                 db.session.add(history)
                 db.session.commit()
 
-            filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
+            chapter = ComicChapterInfo.query.filter_by(bookid=id).filter_by(chapterid=chapter).first()
             filelist2 = []
-            for i in range(len(filelist)):
+            for i in range(chapter.quantity):
                 if i < 10:
                     filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + '0' + str(i + 1) + '.jpg')
                 else:
