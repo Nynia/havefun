@@ -10,7 +10,6 @@ from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
 import config
 from app import db
-from app import myftp
 from datetime import datetime
 from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, History, OrderRelation, OrderHistroy,ComicChapterInfo
