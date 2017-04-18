@@ -280,6 +280,7 @@ class Chapter(db.Model):
         return json_post
 
 class History(db.Model):
+    __tablename__ = 'history'
     id = db.Column(db.Integer,primary_key=True)
     type = db.Column(db.String(1))
     cid = db.Column(db.Integer)
@@ -303,8 +304,17 @@ class History(db.Model):
         }
         return json_post
 
+class ComicChapterInfo(db.Model):
+    __tablename__ = 'comicchapterinfo'
+    id = db.Column(db.Integer,primary_key=True)
+    bookid = db.Column(db.Integer)
+    chapterid = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
+    createtime = db.Column(db.String(14))
+    updatetime = db.Column(db.String(14))
 
-
+    def __repr__(self):
+        return '<ComicChapterInfo %r>' % self.id
 
 
 
