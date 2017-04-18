@@ -160,9 +160,9 @@ def comicbrowse(id):
                 db.session.add(history)
                 db.session.commit()
 
-            chapter = ComicChapterInfo.query.filter_by(bookid=id).filter_by(chapterid=chapter).first()
+            chapterinfo = ComicChapterInfo.query.filter_by(bookid=id).filter_by(chapterid=chapter).first()
             filelist2 = []
-            for i in range(chapter.quantity):
+            for i in range(chapterinfo.quantity):
                 if i < 10:
                     filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + '0' + str(i + 1) + '.jpg')
                 else:
