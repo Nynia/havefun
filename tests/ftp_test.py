@@ -2,9 +2,7 @@
 from app.models import Comic,ComicChapterInfo
 import datetime
 from app import db
-import ftplib
-import socket
-import re
+import re,requests,os,ftplib,socket,json
 
 class MyFTP:
     def __init__(self,hostaddr,port,username,passwd,remotedir):
@@ -86,19 +84,22 @@ id_list = ['200103359', '200103364', '200103379', '200103383', '200103388', '200
            '200103457', '200103377', '200103380', '200103382', '200103386', '200103391', '200103393', '200103394',
            '200103396', '200103398', '200103401', '200103403', '200103405']
 
+base_url = 'http://127.0.0.1:5000/api/v1.0/comics'
 for id in id_list:
+    url = base_url + '/' + id
+    r = requests.get(url)
+    print r.text
+    json_result = json.loads(r.text)
+    data = json_result['data']
+    curchapter = data['curchapter']
     comic = Comic.query.get(int(id))
-    for chapter in comic.curchapter:
-        filelist = myftp.listfiles('/comics' + '/' + id + '/' + chapter)
+    for chapter in range(int(curchapter)):
+        filelist = myftp.listfiles('/comics' + '/' + id + '/' + str(chapter+1))
         quantity = len(filelist)
-        chapterinfo = ComicChapterInfo()
-        chapterinfo.bookid = id
-        chapterinfo.chapterid = chapter
-        chapterinfo.quantity = quantity
-
-        chapterinfo.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
-        chapterinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
-
-
-        db.session.add(chapterinfo)
-        db.session.commit()
+        url = base_url + '/chapters/' + id
+        data = {
+            'chapterid':chapter+1,
+            'quantity':quantity
+        }
+        r = requests.post(url,data=data)
+        print r

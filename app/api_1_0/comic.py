@@ -1,7 +1,7 @@
 from . import api
 from app import db
 from flask import request,jsonify
-from app.models import Comic
+from app.models import Comic,ComicChapterInfo
 from datetime import datetime
 from decorators import jsonp
 
@@ -97,6 +97,21 @@ def delete_comic_by_id(id):
             'data':None
         })
 
-@api.route('/comics/chapters/<id>', methods=['GET'])
-def get_chapter_by_id(id):
-    pass
+@api.route('/comics/chapters/<id>', methods=['POST'])
+def add_chapter_by_id(id):
+    chapterinfo = ComicChapterInfo()
+    chapterinfo.bookid = id
+    chapterinfo.chapterid = request.form.get('chapterid')
+    chapterinfo.quantity = request.form.get('quantity')
+
+    chapterinfo.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+    chapterinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+
+    db.session.add(chapterinfo)
+    db.session.commit()
+
+    return jsonify({
+        'code':'0',
+        'message':'succss',
+        'data':chapterinfo
+    })
