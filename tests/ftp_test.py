@@ -89,6 +89,7 @@ for id in id_list:
     json_result = json.loads(r.text)
     data = json_result['data']
     curchapter = data['curchapter']
+    print curchapter
     for chapter in range(int(curchapter)):
         filelist = myftp.listfiles('/comics' + '/' + id + '/' + str(chapter+1))
         quantity = len(filelist)

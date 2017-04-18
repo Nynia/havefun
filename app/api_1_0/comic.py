@@ -113,5 +113,5 @@ def add_chapter_by_id(id):
     return jsonify({
         'code':'0',
         'message':'succss',
-        'data':chapterinfo
+        'data':chapterinfo.to_json()
     })
