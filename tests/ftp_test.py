@@ -1,7 +1,4 @@
 # -*-coding:utf-8-*-
-from app.models import Comic,ComicChapterInfo
-import datetime
-from app import db
 import re,requests,os,ftplib,socket,json
 
 class MyFTP:
@@ -92,7 +89,6 @@ for id in id_list:
     json_result = json.loads(r.text)
     data = json_result['data']
     curchapter = data['curchapter']
-    comic = Comic.query.get(int(id))
     for chapter in range(int(curchapter)):
         filelist = myftp.listfiles('/comics' + '/' + id + '/' + str(chapter+1))
         quantity = len(filelist)
