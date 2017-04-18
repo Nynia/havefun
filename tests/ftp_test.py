@@ -99,5 +99,6 @@ for id in id_list:
         chapterinfo.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
         chapterinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
 
+
         db.session.add(chapterinfo)
         db.session.commit()
