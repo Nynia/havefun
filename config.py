@@ -1,10 +1,6 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-FTP_ADDR = '192.168.114.138'
-FTP_PORT = 12345
-FTP_USER = 'jsgx'
-FTP_PWD = 'jsgx2017'
 STATIC_URL_PREFIX = 'http://221.228.17.87/res/'
 ORDER_REQUEST_URL = 'http://61.160.185.51:9250/ismp/serviceOrder'
 class Config:
@@ -39,5 +35,5 @@ config = {
     'testing': TestingConfig,
     'production': ProductionConfig,
 
-    'default':TestingConfig,
+    'default':ProductionConfig,
 }
