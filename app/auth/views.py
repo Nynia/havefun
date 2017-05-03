@@ -1,11 +1,10 @@
 # -*-coding:utf-8-*-
 from . import auth
 from flask_login import login_user, logout_user, login_required
-from flask import render_template, redirect, request, url_for, flash, session, request, jsonify, g
+from flask import render_template, redirect, request, url_for, flash, session, request, jsonify
 from ..models import User, OrderRelation
 from .forms import LoginForm, RegisterFrom
 from ..utils.func import generate_identifying_code
-import re
 
 cache = {}
 from app import db
@@ -19,6 +18,7 @@ def login():
             user = User.query.filter_by(phonenum=form.phonenum.data).first()
             if user is not None and user.verify_password(form.password.data):
                 login_user(user, True)
+
                 relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
                 for r in relation:
                     if r.status == '1':
@@ -103,3 +103,16 @@ def register():
         else:
             flash(u'验证码输入错误', 'register')
     return render_template('register.html', form=form)
+
+
+@auth.before_app_request
+def before_request():
+    if session.get('user_id') and not session.get('phonenum'):
+        user = User.query.get(int(session.get('user_id')))
+        print user.phonenum
+        login_user(user, True)
+        relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
+        for r in relation:
+            if r.status == '1':
+                session[r.productid] = 1
+        session['phonenum'] = user.phonenum

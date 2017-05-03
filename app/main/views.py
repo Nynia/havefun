@@ -14,7 +14,6 @@ from datetime import datetime
 from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, History, OrderRelation, OrderHistroy,ComicChapterInfo
 
-
 @main.route('/config', methods=['GET', 'POST'])
 def config():
     print request.method
@@ -56,14 +55,9 @@ def config():
         print game.to_json()
     return render_template('admin.html', form=form)
 
-
-@main.route('/game', methods=['GET'])
-def game():
-    packages = Package.query.filter_by(type=2).all()
-    h5 = Game.query.filter_by(type=2).limit(7).all()
-    print h5
-    return render_template('game.html', packages=packages, h5=h5)
-
+@main.route('/', methods=['GET'])
+def root():
+    return redirect(url_for('main.comic'))
 
 @main.route('/package', methods=['GET'])
 def package():
@@ -103,6 +97,13 @@ def package():
         return render_template('package_reading.html', package=package, books=books, flag=ordered)
 
 
+@main.route('/game', methods=['GET'])
+def game():
+    packages = Package.query.filter_by(type=2).all()
+    h5 = Game.query.filter_by(type=2).limit(7).all()
+    print h5
+    return render_template('game.html', packages=packages, h5=h5)
+
 @main.route('/game/<id>', methods=['GET'])
 def gamedetail(id):
     game = Game.query.get(int(id))
@@ -112,13 +113,11 @@ def gamedetail(id):
         flag = True
     return render_template('game_description.html', game=game, flag=flag, package=package)
 
-
 @main.route('/comic', methods=['GET'])
 def comic():
     packages = Package.query.filter_by(type=1).all()
     print packages
     return render_template('cartoon.html', packages=packages)
-
 
 @main.route('/comic/<id>', methods=['GET'])
 def comicbrowse(id):
@@ -171,7 +170,6 @@ def comicbrowse(id):
             return render_template('cartoon_browse.html', imglist=filelist2, cur=chapter, len=comic.curchapter,
                                    package=package)
 
-
 @main.route('/reading', methods=['GET'])
 def reading():
     packages = Package.query.filter_by(type=4).all()
@@ -179,7 +177,6 @@ def reading():
     readings = Reading.query.all()
     random.shuffle(readings)
     return render_template('reading.html', packages=packages,books=readings)
-
 
 @main.route('/reading/<bookid>', methods=['GET'])
 def readinginfo(bookid):
@@ -216,139 +213,6 @@ def readinginfo(bookid):
             return render_template('read_description.html', book=reading, chapters=chapter_dict_list, flag=True,
                                    package=package)
 
-
-@main.route('/my', methods=['GET'])
-def my():
-    if not current_user.is_anonymous:
-        return render_template('my_loggedin.html')
-    else:
-        return render_template('my.html')
-
-
-@main.route('/index', methods=['GET'])
-def index():
-    return redirect(url_for('main.comic'))
-
-@main.route('/', methods=['GET'])
-def root():
-    return redirect(url_for('main.comic'))
-
-
-@main.route('/subscribe', methods=['POST'])
-def subscribe():
-    productid = request.form.get('productid')
-    phonenum = request.form.get('phonenum')
-    package = Package.query.get(productid)
-    chargeid = package.chargeid
-    secret = package.secret
-    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-    token = hashlib.sha1(chargeid + timestamp + secret).hexdigest()
-    data = {
-        'action': 'subscribe',
-        'spId': package.spid,
-        'chargeId': package.chargeid,
-        'phoneNum': phonenum,
-        'orderType': '1',
-        'timestamp': timestamp,
-        'accessToken': token
-    }
-    r = requests.post('http://61.160.185.51:9250/ismp/serviceOrder', data=data)
-    json_result = json.loads(r.text)
-    print json_result
-    err_code = json_result['errcode']
-    err_msg = json_result['errmsg']
-    if err_code == '0':
-        orderaction = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(productid=productid).first()
-        if not orderaction:
-            orderaction = OrderRelation()
-        orderhistory = OrderHistroy()
-        orderaction.productid = productid
-        orderaction.phonenum = phonenum
-        orderhistory.productid = productid
-        orderhistory.phonenum = phonenum
-        orderaction.ordertime = timestamp
-        orderaction.status = '1'
-
-        orderhistory.action = '1'
-        orderhistory.createtime = timestamp
-
-        db.session.add(orderaction)
-        db.session.add(orderhistory)
-        db.session.commit()
-
-        session[productid] = 1
-
-        return jsonify({
-            'code': err_code,
-            'message': err_msg,
-            'data': None
-        })
-
-    else:
-        return jsonify({
-            'code': err_code,
-            'message': err_msg,
-            'data': None
-        })
-
-@main.route('/unsubscribe', methods=['POST'])
-def unsubscribe():
-    productid = request.form.get('productid')
-    phonenum = request.form.get('phonenum')
-    package = Package.query.get(productid)
-    chargeid = package.chargeid
-    secret = package.secret
-    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-    token = hashlib.sha1(chargeid + timestamp + secret).hexdigest()
-    data = {
-        'action': 'unsubscribe',
-        'spId': package.spid,
-        'chargeId': package.chargeid,
-        'phoneNum': phonenum,
-        'orderType': '1',
-        'timestamp': timestamp,
-        'accessToken': token
-    }
-    r = requests.post('http://61.160.185.51:9250/ismp/serviceOrder', data=data)
-    json_result = json.loads(r.text)
-    print json_result
-    err_code = json_result['errcode']
-    err_msg = json_result['errmsg']
-    if err_code == '0':
-        orderaction = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(productid=productid).first()
-        if not orderaction:
-            orderaction = OrderRelation()
-        orderhistory = OrderHistroy()
-        orderaction.productid = productid
-        orderaction.phonenum = phonenum
-        orderhistory.productid = productid
-        orderhistory.phonenum = phonenum
-
-        orderaction.canceltime = timestamp
-        orderaction.status = '4'
-        orderhistory.action = '0'
-        orderhistory.createtime = timestamp
-
-        db.session.add(orderaction)
-        db.session.add(orderhistory)
-        db.session.commit()
-
-        session.pop(productid)
-
-        return jsonify({
-            'code': err_code,
-            'message': err_msg,
-            'data': None
-        })
-
-    else:
-        return jsonify({
-            'code': err_code,
-            'message': err_msg,
-            'data': None
-        })
-
-
 @main.route('/video', methods=['GET'])
 def vedio():
     return render_template('video.html')
@@ -356,6 +220,13 @@ def vedio():
 @main.route('/music', methods=['GET'])
 def music():
     return render_template('music.html')
+
+@main.route('/my', methods=['GET'])
+def my():
+    if not current_user.is_anonymous:
+        return render_template('my_loggedin.html')
+    else:
+        return render_template('my.html')
 
 @main.route('/myorder', methods=['GET'])
 def myorder():
@@ -371,3 +242,8 @@ def myorder():
         dict['productid'] = package.productid
         data.append(dict)
     return render_template('myorder.html', data=data)
+
+@main.after_request
+def after_request(response):
+    url = request.url
+    return response

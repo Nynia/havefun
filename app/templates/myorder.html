@@ -78,7 +78,7 @@
         console.log(productid);
         $.ajax({
             type: "post",
-            url: "/unsubscribe",
+            url: "/api/v1.0/unsubscribe",
             data: {
                 'phonenum': '{{ session.phonenum }}',
                 'productid': productid,

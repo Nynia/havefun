@@ -1,6 +1,6 @@
 from . import api
-from flask import request, jsonify, session
-from app.models import OrderRelation,OrderHistroy
+from flask import request, jsonify
+from app.models import OrderHistroy
 
 @api.route('/records', methods=['GET'])
 def get_record():
@@ -9,7 +9,6 @@ def get_record():
     action = request.args.get('action')
     starttime = request.args.get('starttime')
     endtime = request.args.get('endtime')
-
 
     records = OrderHistroy.query
     if productid:
