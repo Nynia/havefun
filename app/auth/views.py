@@ -1,6 +1,6 @@
 # -*-coding:utf-8-*-
 from . import auth
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required,current_user
 from flask import render_template, redirect, request, url_for, flash, session, request, jsonify
 from ..models import User, OrderRelation
 from .forms import LoginForm, RegisterFrom
@@ -109,10 +109,13 @@ def register():
 def before_request():
     if session.get('user_id') and not session.get('phonenum'):
         user = User.query.get(int(session.get('user_id')))
-        print user.phonenum
-        login_user(user, True)
-        relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
-        for r in relation:
-            if r.status == '1':
-                session[r.productid] = 1
-        session['phonenum'] = user.phonenum
+        if user:
+            print user.phonenum
+            login_user(user, True)
+            relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
+            for r in relation:
+                if r.status == '1':
+                    session[r.productid] = 1
+            session['phonenum'] = user.phonenum
+    #else:
+    #   session['user_id'] = current_user.id

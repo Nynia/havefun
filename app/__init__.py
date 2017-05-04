@@ -3,7 +3,7 @@ from flask_apscheduler import APScheduler
 from flask_bootstrap import Bootstrap
 from config import config
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager,AnonymousUserMixin
 import requests
 from app.utils.ftp import MyFTP
 
@@ -16,7 +16,11 @@ login_manager.login_view = 'auth.login'
 
 #scheduler = APScheduler()
 
-#myftp = MyFTP('192.168.114.138', 12345, 'jsgx', 'jsgx2017', '/')
+class MyAnonymousUser(AnonymousUserMixin):
+    def __init__(self):
+        self.id = id(self)
+    def get_id(self):
+        return self.id
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -26,6 +30,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
+    #login_manager.anonymous_user = MyAnonymousUser
     #scheduler.init_app(app)
     #scheduler.start()
 

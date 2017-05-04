@@ -20,7 +20,7 @@
 </div>
 <div class="super">
     <div class="super_left books_left">
-        <img src="{{ comic.cover }}" alt=""/>
+        <img src="http://221.228.17.87/res/comics/covers/{{ comic.id }}.jpg" alt=""/>
     </div>
     <div class="super_right books tides">
         <ul>
@@ -29,7 +29,12 @@
             <li>状态：<span>更新至{{ comic.curchapter }}话</span></li>
             <li>题材：<span>{{ comic.category }}</span></li>
             <li>人气： <span>{{ comic.hits }}</span></li>
-            <li><a class="button" id="start" href="/comic/{{ comic.id }}?chapter=1">开始阅读</a></li>
+            {% if recentchapter %}
+                <li><a class="button" id="start" href="/comic/{{ comic.id }}?chapter={{ recentchapter }}">开始阅读</a></li>
+            {% else %}
+                <li><a class="button" id="start" href="/comic/{{ comic.id }}?chapter=1">开始阅读</a></li>
+            {% endif %}
+
         </ul>
     </div>
     <div class="clear"></div>
@@ -60,7 +65,7 @@
     <ul class="session">
     </ul>
 </div>
-<!--弹出框-->
+<!--订购弹出框开始-->
 <div id="main">
     <div class="order">
         <div class="order_top">提 示</div>
@@ -77,6 +82,25 @@
         <p></p>
     </div>
 </div>
+<!--订购弹出框结束-->
+<!--继续观看弹出框开始-->
+<div id="main">
+    <div class="order">
+        <!--<div class="order_top">提 示</div>-->
+        <div class="order_bottom">
+            <p>跳转至第124集，继续观看？</p>
+            <button class="cancel">取消</button>
+            <button class="confirm">确认</button>
+        </div>
+    </div>
+</div>
+<div id="mains">
+    <div class="order">
+        <img src="../static/img/gou.png" alt=""/>
+        <p></p>
+    </div>
+</div>
+<!--继续观看弹出框结束-->
 </body>
 </html>
 <script src="../static/js/cartoon_description.js"></script>
@@ -163,7 +187,7 @@
                 lilist = $('.chapter ul li').remove();
                 console.log(lilist);
                 for (var i = 0; i < lilist.length; i++) {
-                    parent.append(lilist[lilist.length-1-i]);
+                    parent.append(lilist[lilist.length - 1 - i]);
                 }
                 flag = 1;
                 $('.ascend').css('color', "#fff");
@@ -175,56 +199,21 @@
                 lilist = $('.chapter ul li').remove();
                 console.log(lilist);
                 for (var i = 0; i < lilist.length; i++) {
-                    parent.append(lilist[lilist.length-1-i]);
+                    parent.append(lilist[lilist.length - 1 - i]);
                 }
                 flag = 0;
                 $('.ascend').css('color', "#F7D631");
                 $('.descend').css('color', '#fff');
             }
         });
-        /*
-         var a = $('.chapter ul  li')[0].innerHTML;
-         var arr = $('.chapter ul  li');
-         temp = [];
-         //降序
-         $('.descend').click(function () {
-         var b = $('.chapter ul  li')[0].innerHTML;
-         if (b == a) {
-         show();
-         var temp2 = temp.reverse();
-         for (var j = 0; j < arr.length; j++) {
-         arr[j].innerHTML = temp2[j];
-         }
-         }
-         $('.ascend').css('color', "#fff");
-         $('.descend').css('color', '#F7D631');
-         });
-         //升序
-         $('.ascend').click(function () {
-         var c = $('.chapter ul  li')[0].innerHTML;
-         if (c == a) {
-         show();
-         for (var k = 0; k < arr.length; k++) {
-         arr[k].innerHTML = temp[k];
-         }
 
-         } else {
-         show();
-         var temp3 = temp.reverse();
-         for (var k = 0; k < arr.length; k++) {
-         arr[k].innerHTML = temp3[k];
-         }
-         }
-         $('.ascend').css('color', "#F7D631");
-         $('.descend').css('color', '#fff');
-         })
 
-         function show() {
-         for (var i = 0; i < arr.length; i++) {
-         temp.push(arr[i].innerHTML);
-         }
-         }
-         */
+        $('.super li:last a').click(function () {
+            var href = $(this).attr('href');
+            var chapter = href.substr(href.lastIndexOf('='));
+            alert(chapter);
+
+        })
     });
 
 </script>

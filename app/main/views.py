@@ -5,14 +5,14 @@ from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
 from werkzeug.utils import secure_filename
-import os, re, requests, json, hashlib,random
+import os,re,random
 from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
 import config
 from app import db
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package, Comic, Reading, Chapter, History, OrderRelation, OrderHistroy,ComicChapterInfo
+from app.models import Package, Comic, Reading, Chapter, ViewInfo, OrderRelation,AccessLog,ComicChapterInfo
 
 @main.route('/config', methods=['GET', 'POST'])
 def config():
@@ -137,26 +137,38 @@ def comicbrowse(id):
             })
     else:
         if chapter == None:
-            return render_template('cartoon_description.html', comic=comic, package=package)
+            if not current_user.is_anonymous:
+                uid = session.get('user_id')
+                cid = comic.id
+                viewinfo = ViewInfo.query.filter_by(userid=uid).filter_by(comicid=cid).first()
+                if viewinfo:
+                    recentchapter = viewinfo.recentchapter
+                    return render_template('cartoon_description.html', comic=comic, package=package, recentchapter=recentchapter)
+                else:
+                    return render_template('cartoon_description.html', comic=comic, package=package,
+                                           recentchapter=None)
+            else:
+                return render_template('cartoon_description.html', comic=comic, package=package,
+                                       recentchapter=None)
         else:
             if not current_user.is_anonymous:
                 uid = session.get('user_id')
                 cid = comic.id
                 chapter = chapter
                 type = '1'
-                history = History.query.filter_by(uid=uid).filter_by(cid=cid).first()
-                if history:
-                    history.chapter = chapter
-                    history.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+                viewinfo = ViewInfo.query.filter_by(userid=uid).filter_by(comicid=cid).first()
+                if viewinfo:
+                    viewinfo.recentchapter = chapter
+                    viewinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
                 else:
-                    history = History()
-                    history.uid = uid
-                    history.cid = cid
-                    history.chapter = chapter
-                    history.type = type
-                    history.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
-                    history.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
-                db.session.add(history)
+                    viewinfo = ViewInfo()
+                    viewinfo.userid = uid
+                    viewinfo.comicid = cid
+                    viewinfo.recentchapter = chapter
+                    viewinfo.type = type
+                    viewinfo.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+                    viewinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+                db.session.add(viewinfo)
                 db.session.commit()
 
             chapterinfo = ComicChapterInfo.query.filter_by(bookid=id).filter_by(chapterid=chapter).first()
@@ -243,7 +255,35 @@ def myorder():
         data.append(dict)
     return render_template('myorder.html', data=data)
 
+def _get_annymous_id():
+    address = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if address is not None:
+        address = address.encode('utf-8').split(b',')[0].strip()
+    user_agent = request.headers.get('User-Agent')
+    if user_agent is not None:
+        user_agent = user_agent.encode('utf-8')
+    base = '{0}|{1}'.format(address, user_agent)
+    import hashlib
+    m2 = hashlib.md5()
+    m2.update(base)
+    return m2.hexdigest()[:16]
+
 @main.after_request
 def after_request(response):
-    url = request.url
+    accesslog = AccessLog()
+    accesslog.addr = request.url
+    accesslog.remoteip = request.remote_addr
+    accesslog.useragent = request.user_agent.string
+    accesslog.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+
+    if current_user.is_anonymous:
+        accesslog.uid = _get_annymous_id()
+    else:
+        accesslog.uid = current_user.id
+        #处理积分
+
+
+    db.session.add(accesslog)
+    db.session.commit()
+
     return response

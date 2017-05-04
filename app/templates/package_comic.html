@@ -34,14 +34,16 @@
     <div class="list clearfloat">
         <ul>
             {% for c in comics %}
-                <li><a class="back" href="/comic/{{ c.id }}"><img src="{{ c.cover }}" alt="" class="big"/>
-                    <div><img src="../static/img/player.png" alt=""/>{{ c.hits }}<p>更新至{{ c.curchapter }}集</p></div>
+                <li><a class="back" href="/comic/{{ c.id }}"><img src="http://221.228.17.87/res/comics/covers/{{ c.id }}.jpg" alt="" class="big"/>
+                    <div><p>更新至{{ c.curchapter }}集</p></div>
                     <p class="summer">{{ c.comicname }}</p></a></li>
             {% endfor %}
             <div class="clear"></div>
         </ul>
     </div>
+
 </div>
+<div class="foot_m">由{{ package.copyright }}提供</div>
 <!--弹出框-->
 <div id="main">
     <div class="order">
@@ -66,8 +68,8 @@
 <script>
     {% if flag %}
         $('.detail_right .button').text('已订购');
-        $('.detail_right .button').css('background','#fff');
-        $('.detail_right .button').css('color','#626262');
+        $('.detail_right .button').css('background', '#fff');
+        $('.detail_right .button').css('color', '#626262');
     {% else %}
         $('.detail_right .button').click(function () {
             {% if not session.phonenum %}
@@ -93,12 +95,14 @@
                 success: function (data) {
                     $('#mains p').text(data.message);
                     $('#mains').show();
-                    setTimeout(function() { $('#mains').hide(); }, 1000);
+                    setTimeout(function () {
+                        $('#mains').hide();
+                    }, 1000);
                     if (data.code == "0" || data.code == "131") {
                         //success
                         $('.detail_right .button').text('已订购');
-                        $('.detail_right .button').css('background','#fff');
-                        $('.detail_right .button').css('color','#626262');
+                        $('.detail_right .button').css('background', '#fff');
+                        $('.detail_right .button').css('color', '#626262');
                     }
                 }
             });

@@ -21,7 +21,7 @@ class Package(db.Model):
     chargeid = db.Column(db.String(10))
     secret = db.Column(db.String(30))
     img2 = db.Column(db.String(30))
-
+    copyright = db.Column(db.String(255))
     def to_json(self):
         json_post = {
             'productid': self.productid,
@@ -36,7 +36,8 @@ class Package(db.Model):
             'spid': self.spid,
             'chargeid': self.chargeid,
             'secret': self.secret,
-            'img2': self.img2
+            'img2': self.img2,
+            'copyright':self.copyright
         }
         return json_post
 
@@ -290,13 +291,13 @@ class Chapter(db.Model):
         return json_post
 
 
-class History(db.Model):
-    __tablename__ = 'history'
+class ViewInfo(db.Model):
+    __tablename__ = 'viewinfo'
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(1))
-    cid = db.Column(db.Integer)
-    chapter = db.Column(db.Integer)
-    uid = db.Column(db.String(15))
+    comicid = db.Column(db.Integer)
+    recentchapter = db.Column(db.Integer)
+    userid = db.Column(db.String(15))
     createtime = db.Column(db.String(14))
     updatetime = db.Column(db.String(14))
 
@@ -307,9 +308,9 @@ class History(db.Model):
         json_post = {
             'id': self.id,
             'type': self.type,
-            'cid': self.cid,
-            'chapter': self.chapter,
-            'uid': self.uid,
+            'comicid': self.chapterid,
+            'recentchapter': self.recentchapter,
+            'userid': self.userid,
             'createtime': self.createtime,
             'updatetiem': self.updatetime
         }
@@ -336,5 +337,28 @@ class ComicChapterInfo(db.Model):
             'quantity':self.quantity,
             'createtime': self.createtime,
             'updatetiem': self.updatetime
+        }
+        return json_post
+
+class AccessLog(db.Model):
+    __tablename__ = 'access_log'
+    id = db.Column(db.Integer,primary_key=True)
+    uid = db.Column(db.String(20))
+    remoteip = db.Column(db.String(50))
+    useragent = db.Column(db.String(255))
+    addr = db.Column(db.String(255))
+    timestamp = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<AccessLog %r>' % self.url
+
+    def to_json(self):
+        json_post = {
+            'id': self.id,
+            'uid':self.uid,
+            'remoteip':self.remoteip,
+            'useragent':self.useragent,
+            'addr':self.addr,
+            'timestamp':self.timestamp
         }
         return json_post
