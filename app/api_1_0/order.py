@@ -148,7 +148,7 @@ def subscribe():
 
         user = User.query.filter_by(phonenum=phonenum).first()
         des = ''
-        record = IntegralRecord.query.filter_by(uid=user.id).filter_by(action=8).first()
+        record = IntegralRecord.query.filter_by(uid=user.id).filter_by(action=9).first()
         if not record:
             des = u'首次订购付费包'
         else:
@@ -170,7 +170,7 @@ def subscribe():
                 db.session.add(integral_record)
             else:
                 today = datetime.now().strftime('%Y%m%d')
-                record = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(action=9).all()
+                record = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(action=8).all()
                 history_integory_today = 0
                 if record:
                     history_integory_today = 400 + reduce(lambda x,y : x + y,[r.change for r in record])
