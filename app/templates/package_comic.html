@@ -102,7 +102,9 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-                    $('#mains p').text(data.message);
+                    if (data.code=='0')
+                        $('#mains p').text('订购成功');
+                    else $('#mains p').text(data.message);
                     $('#mains').show();
                     setTimeout(function () {
                         $('#mains').hide();
