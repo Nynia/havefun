@@ -119,9 +119,18 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-                    $('#mains p').text(data.message);
+                    if (data.code=='0')
+                        $('#mains p').text('订购成功');
+                    else $('#mains p').text(data.message);
                     $('#mains').show();
                     setTimeout(function() { $('#mains').hide(); }, 1000);
+                    if (data['data']['integral'] > 0) {
+                        $('#sign_m p').text('积分+' + data['data']['integral']);
+                        $('#sign_m').show();
+                        setTimeout(function () {
+                            $('#sign_m').hide();
+                        }, 2000);
+                    }
                     if (data.code == "0") {
                         //success
                         $('.super .button').text('已订购');
