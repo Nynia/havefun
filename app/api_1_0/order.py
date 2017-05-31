@@ -183,7 +183,7 @@ def subscribe():
                     integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
                     db.session.add(user)
                     db.session.add(integral_record)
-        db.session.add(orderaction)
+        db.session.add(orderrelation)
         db.session.add(orderhistory)
         db.session.commit()
 
