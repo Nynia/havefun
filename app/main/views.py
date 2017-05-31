@@ -100,7 +100,7 @@ def package():
 @main.route('/game', methods=['GET'])
 def game():
     packages = Package.query.filter_by(type=2).all()
-    h5 = Game.query.filter_by(type=2).limit(7).all()
+    h5 = Game.query.filter_by(type=2).limit(11).all()
     print h5
     return render_template('game.html', packages=packages, h5=h5)
 
@@ -312,7 +312,9 @@ def myorder():
 def mall():
     return render_template('mall.html')
 
-
+@main.route('/mysign', methods=['GET'])
+def sign():
+    return render_template('sign.html')
 
 def _get_annymous_id():
     address = request.headers.get('X-Forwarded-For', request.remote_addr)

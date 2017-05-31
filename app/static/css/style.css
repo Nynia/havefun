@@ -1835,3 +1835,67 @@ body{
 #reset .repassword{
 	padding-left: 0.8rem;
 }
+/*签到天数*/
+.sign_d{
+	margin-top: 1.8rem;
+	text-align: center;
+	overflow: hidden;
+}
+.sign_d p{
+	font-size: 0.7869565rem;
+	color: #000;
+	font-weight: bold;
+	font-family: "微软雅黑";
+}
+/*进度条*/
+.circleRun {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    /*width: 6.9082rem;*/
+    height: 6.66667rem;
+}
+.surePass{
+	margin-top:2em;
+	position:relative;
+	width:50%;
+	float:left;
+	height: 6.9082rem;
+	}
+.anyield{
+	width:100%;
+	position:absolute;
+	text-align:center;
+	left:0;top:50%;
+	font-size:1em;
+	z-index: 3;
+	 }
+.anyield p:first-child{
+	 color:#D3D3D3;
+	 padding-bottom: 0.5em;
+	  }
+.anyield p{
+	font-size:0.774396rem;
+	color:#D3D3D3;
+	}
+@media (max-width: 767px) {
+  .surePass{width:100%;}
+}
+/*积分规则*/
+.rule{
+	margin-top: 1.9rem;
+	padding: 0 0.8211rem;
+}
+.rule>p{
+	font-size: 0.7478261rem;
+	color: #000;
+	font-weight: bold;
+	font-family: "微软雅黑";
+}
+.rule_m p{
+	font-size: 13.27px;
+	color: #969696;
+}
+.rule_n{
+	margin-top: 1rem;
+}

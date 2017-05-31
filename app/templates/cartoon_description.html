@@ -235,7 +235,7 @@
                 url: "/api/v1.0/favors/favor",
                 contentType: "application/json",
                 data: {
-                    'uid':{{ current_user.id }},
+                    'uid':{{ current_user.id if not current_user.is_anonymous else 0}},
                     'cid':{{ comic.id }},
                     'type': '1'
                 },
@@ -243,7 +243,7 @@
                     if (data.code == '0') {
                         console.log(data);
                         if (data['data']['integral'] > 0) {
-                            $('#sign_m p').text('积分+'+data['data']['integral']);
+                            $('#sign_m p').text('积分+' + data['data']['integral']);
                             $('#sign_m').show();
                             setTimeout(function () {
                                 $('#sign_m').hide();
@@ -265,7 +265,7 @@
                 url: "/api/v1.0/favors/unfavor",
                 contentType: "application/json",
                 data: {
-                    'uid':{{ current_user.id }},
+                    'uid':{{ current_user.id if not current_user.is_anonymous else 0}},
                     'cid':{{ comic.id }},
                     'type': '1'
                 },

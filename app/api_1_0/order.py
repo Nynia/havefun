@@ -1,10 +1,11 @@
+# -*-coding=utf-8-*-
 from . import api
 from app import db
 from flask import request, jsonify, session
 from datetime import datetime
 from config import ORDER_REQUEST_URL
 import hashlib, json
-from app.models import OrderRelation,OrderHistroy,Package
+from app.models import OrderRelation,OrderHistroy,Package,IntegralStrategy,IntegralRecord,User
 import requests
 
 @api.route('/orders', methods=['POST'])
@@ -128,21 +129,48 @@ def subscribe():
     print json_result
     err_code = json_result['errcode']
     err_msg = json_result['errmsg']
+    integral = 0
     if err_code == '0':
-        orderaction = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(productid=productid).first()
-        if not orderaction:
-            orderaction = OrderRelation()
+        orderrelation = OrderRelation.query.filter_by(phonenum=phonenum)
+        des = ''
+        if not orderrelation:
+            des = u'首次订购付费包'
+        else:
+            des = u'订购付费包'
+            orderrelation = orderrelation.filter_by(productid=productid).first()
+        if not orderrelation:
+            orderrelation = OrderRelation()
         orderhistory = OrderHistroy()
         orderaction.productid = productid
         orderaction.phonenum = phonenum
         orderhistory.productid = productid
         orderhistory.phonenum = phonenum
-        orderaction.ordertime = timestamp
-        orderaction.status = '1'
+        orderrelation.ordertime = timestamp
+        orderrelation.status = '1'
 
         orderhistory.action = '1'
         orderhistory.createtime = timestamp
 
+        #integral
+        integral_strategy = IntegralStrategy.query.filter_by(description=des).first()
+        if integral_strategy:
+            user = User.query.filter_by(phonenum=phonenum).first()
+            if user:
+                print db.session.execute('select SUM(change) from integral_record where action=7 or action=8').fetchone()
+                user.integral = user.integral + integral_strategy.value
+                integral_record = IntegralRecord()
+                integral_record.uid = user.id
+                integral_record.action = integral_strategy.id
+                integral_record.change = integral_strategy.value
+                integral_record.timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+                db.session.add(user)
+                db.session.add(integral_record)
+            else:
+                return jsonify({
+                    'code': '111',
+                    'message': 'user not exist',
+                    'data': None
+                })
         db.session.add(orderaction)
         db.session.add(orderhistory)
         db.session.commit()
@@ -152,14 +180,14 @@ def subscribe():
         return jsonify({
             'code': err_code,
             'message': err_msg,
-            'data': None
+            'data': {'integral':integral}
         })
 
     else:
         return jsonify({
             'code': err_code,
             'message': err_msg,
-            'data': None
+            'data': {'integral': integral}
         })
 
 @api.route('/unsubscribe', methods=['POST'])
