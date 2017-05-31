@@ -216,9 +216,9 @@ body{
 	}
 /*我的页面*/
 .header{
-	background: url(../img/yellow.png) no-repeat;
+	background: #fff;
 	width: 100%;
-	height: 7.488rem;
+	height: 5.7971014rem;
 	position: relative;
 	}
 .news{
@@ -253,7 +253,6 @@ body{
 	margin-right: 2.174rem;
 	}
 main{
-	padding: 0.4831rem 0.725rem 0;
 	background: #fff;
 	}
 .main{
@@ -262,15 +261,19 @@ main{
 .main a{
 	display: inline-block;
 	width: 100%;
-	margin: 0.3rem 0;
-	line-height: 30px;
+	height: 2.318841rem;
 	color: #c5c5c5;
+	padding-top: 0.72464rem;
+	border-bottom: 1px solid #eee;
+	padding-left: 0.725rem;
+	padding-right: 0.725rem;
+	line-height: 1.3;
 	}
 .main a div{
 	width: 0.8213rem;
 	height: 0.8213rem;
 	float: left;
-	margin: 0.3rem 0.9rem 0 0;
+	margin: 0 0.9rem 0 0;
 	}
 .main section{
 	float: right;
@@ -289,22 +292,26 @@ main{
 	background-size: contain;
 	}
 .main a:nth-child(2) div{
-	background: url(../img/collection.png);
+	background: url(../img/mall.png);
 	background-size: contain;
 	}
 .main a:nth-child(3) div{
-	background: url(../img/order.png);
+	background: url(../img/collection.png);
 	background-size: contain;
 	}
 .main a:nth-child(4) div{
-	background: url(../img/phone.png);
+	background: url(../img/order.png);
 	background-size: contain;
 	}
 .main a:nth-child(5) div{
-	background: url(../img/feedback.png);
+	background: url(../img/phone.png);
 	background-size: contain;
 	}
 .main a:nth-child(6) div{
+	background: url(../img/feedback.png);
+	background-size: contain;
+	}
+.main a:nth-child(7) div{
 	background: url(../img/help.png);
 	background-size: contain;
 	}
@@ -352,11 +359,6 @@ main{
 	text-align: left;
 	margin: 0 0 0.1rem 0.2rem;
 	}
-@media (min-width: 320px) and (max-width: 360px){
-	.main a div{
-		margin: 0.5rem 0.9rem 0 0;
-		}
-}
 @media (min-width: 320px) and (max-width: 340px){
 	.watchs ul li div{
 		bottom: 1.25rem;
@@ -429,10 +431,6 @@ main{
 	height: 0.773rem;
 	}
 #login span{
-	left: 9.172rem;
-	left: -webkit-calc(50% - 0.75rem);
-	left: calc(50% - 0.75rem);
-	position: absolute;
 	font-size: 0.828rem;
 	color: #000;
 	}
@@ -459,7 +457,7 @@ main{
 .show input{
 	height: 2.3672rem;
 	line-height: normal;
-	/*padding: 0.7246rem 0;*/
+	border: none;
 	font-size: 0.7483rem;
 	width: 15.748rem;
 	outline: none;
@@ -534,7 +532,7 @@ main{
 	right: 1.03rem;
 	color: #30afe2;
 	width: 5.5rem!important;
-	/*padding: 0.5rem 0;*/
+	background: #fff;
 	}
 #codes{
 	position: absolute;
@@ -692,7 +690,7 @@ input:disabled{
 	height:1.4976rem!important;
 	}
 .summary{
-	margin: 1rem auto 0;
+	margin: 0.966184rem auto 0;
 	color: #fff;
 	width: 90%;
 	}
@@ -713,6 +711,7 @@ dd a{
 	}
 .summary p:nth-child(1){
 	font-size: 0.746rem;
+	margin-bottom: 0;
 	}
 .summary p:nth-child(2){
 	margin-top: 20px;
@@ -1062,7 +1061,7 @@ dd a{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background: url(../img/bga.png) center 0 no-repeat;
+	background: url(../img/cartoon_bg.png) center 0 no-repeat;
 	background-size: cover;
 }
 .super_right ul li:nth-child(2){
@@ -1102,12 +1101,11 @@ dd a{
 	}
 .directory{
 	width: 90%;
-	margin: 20px auto 0;
+	margin: 0.96618357rem auto 0;
 	}
 .directory ul li{
 	float: left;
 	text-align: center;
-	height: 25px;
 	font-size: 0.746rem;
 	}
 .directory ul li img{
@@ -1140,7 +1138,7 @@ table tr td:nth-child(2){
 	}
 
 /*订购*/
-#main,#mains{
+#main,#mains,#main_m,#mains_m{
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -1221,12 +1219,13 @@ table tr td:nth-child(2){
 	}
 .chapter{
 	color: #fff;
-	margin:5px auto;
+	margin:0 auto;
 	overflow: hidden;
 	width: 90%;
 	}
 .chapter ul{
 	overflow: hidden;
+	margin-top: -8px;
 	}
 .chapter ul li{
 	width: 23%;
@@ -1430,21 +1429,46 @@ dd p{
 /*登录成功*/
 #portrait{
 	background:#fff;
-	text-align: center;
-	}
-.head_logo img{
-	width: 4.155rem;
-	height: 4.155rem;
 	}
 .head_logo{
 	position: absolute;
-	top: 1.16rem;
-	top: -webkit-calc(50% - 2.585rem);
-	top: calc(50% - 2.585rem);
-	left: 7.923rem;
-	left: -webkit-calc(50% - 2.077rem);
-	left: calc(50% - 2.077rem);
+	top: 2.173913rem;
+	left: 1.497585rem;
 	}
+.head_logo>img{
+	width: 2.8985507rem;
+	height: 2.8985507rem;
+	float: left;
+	}
+.login_m{
+	float: left;
+	margin-left: 0.724638rem;
+}
+.login_m a{
+	color: #C5C5C5;
+	font-size: 0.74rem;
+}
+.login_m img{
+	margin-top: 0.724638rem;
+	width: 1.835749rem;
+	height: 0.917875rem;
+}
+.sign{
+	float: right;
+	margin-top: 2.898551rem;
+	border:1px solid #ff6e7b;
+	margin-right:-1.063rem;
+	padding: 1px 8px;
+	border-radius: 12px;
+	color: #ff6e7b;
+	font-size: 0.533333rem;
+}
+.sign img{
+	margin-right: 5px;
+	width: 0.5797101rem;
+	height: 0.5797101rem;
+	margin-top: -2px;
+}
 .success a>span,#recently,#watched ul li a>p{
 	color: #242424;
 	}
@@ -1463,6 +1487,7 @@ dd p{
 	border-radius: 5px;
 	font-size: 0.74686rem;
 	line-height: 1.353rem;
+	color: #000;
 	}
 .super .books .button{
 	margin-bottom: -0.7246rem;
@@ -1513,7 +1538,7 @@ dd p{
 	text-align: center;
 	line-height: 2.4155rem;
 	border-radius: 5px;
-	border: 1px solid #e77272;
+	border: 1px solid #f1df76;
 	color: #242424;
 	font-size: 0.774rem;
 }
@@ -1566,6 +1591,7 @@ table tr td:nth-child(2) img{
 }
 input{
 	-webkit-appearance: none;
+	background-color: #fff;
 	}
 .shopping_list .unsubscribe{
 	float: right;
@@ -1605,4 +1631,207 @@ input{
 }
 #cartoon{
 	padding-bottom: 0!important;
+}
+body{
+	padding-bottom:0!important;
+}
+/*签到积分弹框*/
+#sign_m{
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	text-align: left;
+	z-index: 1;
+	display: none;
+}
+.sign_n{
+	width: 36.956522%;
+	max-width: 500px;
+	text-align: center;
+	background: #3a3a3a;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1001;
+	overflow: hidden;
+	border-radius: 10px;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+}
+.sign_n img{
+	width: 1.304348rem;
+	height: 1.304348rem;
+	margin-top: 0.966184rem;
+}
+.sign_n p{
+	color: #fff;
+	margin-top: 0.7729469rem;
+	margin-bottom: 0.7729469rem;
+	font-size: 0.640097rem;
+}
+.header-menu-container:after{
+	display: none;
+
+}
+.header-menu-container a:nth-last-child(1){
+	position: absolute;
+	right: 0.55rem;
+	top: 0;
+	width: 1.352657rem;
+	height: 1.352657rem;
+}
+/*动漫详情页改版*/
+.cartoon_m{
+	background: url(../img/cartoon_banner.png);
+	background-size: cover;
+	height: 11.30435rem;
+	width: 100%;
+	position: relative;
+}
+.cartoon_m .title{
+	position: absolute;
+	bottom: 0.4831rem;
+}
+.title_m,.writer{
+	margin-bottom: 0;
+	line-height: 1.6rem;
+}
+.title_m{
+	font-size: 1rem;
+	margin-left: -0.5rem;
+}
+.writer{
+	font-size: 0.74638rem;
+}
+.title{
+	text-align: left;
+}
+.cartoon_m .favorite{
+	position: absolute;
+	right: 1.062802rem;
+	bottom: 0.96618rem;
+	border: 1px solid #f0645e;
+	background: #F0645E;
+	line-height: 1rem;
+	border-radius: 8px;
+	font-size: 0.53285rem;
+	padding: 0 4px;
+}
+.favorite img{
+	width: 0.8rem;
+    height: 0.727272rem;
+    margin-top: -0.175rem;
+}
+/*积分商城页*/
+.record,.record ul,.exchange_m,.exchange_m ul{
+	overflow: hidden;
+}
+.record ul li{
+	float: left;
+	width: 33.333%;
+	text-align: center;
+	border-right: 2px solid #e0e0e0;
+	border-bottom: 2px solid #e0e0e0;
+}
+.record ul li p:nth-child(1){
+	margin-top: 0.676328rem;
+	font-size: 0.640097rem;
+}
+.record ul li p:nth-child(2){
+	font-size: 0.533333rem;
+	color: #f3502f;
+	margin-bottom: 0.676328rem;
+}
+.record ul li:nth-last-child(1){
+	border-right: none;
+}
+.exchange_t{
+	padding: 0 0.724638rem;
+}
+.exchange_t img{
+	margin-right: 10px;
+	width: 0.9661835rem;
+	height: 0.9661835rem;
+}
+.exchange_m{
+	margin-top: 0.8695652rem;
+	padding-left: 0.24154rem;
+}
+.exchange_m ul{
+	margin-bottom: 0;
+}
+.exchange_m ul li{
+	float: left;
+	box-shadow: 7px 7px 5px #eee;
+	width: 9.5169082rem;
+	height: 3.71981rem;
+	margin-bottom: 0.966184rem;
+}
+.exchange_m img{
+	width: 100%;
+
+}
+.exchange_m ul li:nth-child(2n+1){
+	margin-right: 0.4831rem;
+}
+.instructions{
+	padding: 0 0.24154rem;
+	font-size: 0.53333rem;
+}
+.instructions>p{
+	color: #30afe2;
+	font-weight: bold;
+}
+.instructions_m p{
+	margin-bottom: 0.3rem;
+}
+/*Back To Top
+------------------------------------*/
+#toTop {
+    z-index: 100;
+    width: 1.8841rem;
+    height: 1.980676rem;
+    font-size: 0.96rem;
+    background-color: #fff;
+    position: relative;
+    right: 0.6763rem !important;
+    border-radius: 3px !important;
+    border: 1px solid #8f8f8f;
+    color: #8f8f8f;
+}
+
+#toTop:after {
+    font-size: 0.7729rem;
+    top: 0.3864rem;
+    left: 0.5314rem;
+    content: "\e113";
+    position: absolute;
+    text-align: center;
+    font-family: 'Glyphicons Halflings';
+    color: #8f8f8f;
+}
+/*重置密码*/
+.order_b a,.order_b span{
+	font-size: 0.773rem;
+	display: block;
+	height: 2.608696rem;
+	line-height: 2.608696rem;
+}
+.order_b a{
+	border-bottom: 1px solid #eee;
+	padding: 0;
+}
+.order_b span{
+	color: #F7D631;
+}
+#reset label{
+	width: 3.8rem;
+	font-size: 0.7483rem;
+}
+#reset input{
+	width: 14.558rem;
+}
+#reset .repassword{
+	padding-left: 0.8rem;
 }

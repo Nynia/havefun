@@ -36,11 +36,12 @@
             <label for="phonenum"><img src="../static/img/person.png"
                                        alt=""/></label>{{ form.phonenum(placeholder="请输入手机号码") }}
         </div>
-        <div class="password">
+        <div class="password codes">
             <label for="password"><img src="../static/img/password.png"
-                                       alt=""/></label>{{ form.password(placeholder="请输入密码") }}
-        </div>
+                                       alt=""/></label>{{ form.password(placeholder="请输入密码",class="tel") }}
+            <input class="showsss forget" type="button" value="忘记密码？">
 
+        </div>
         {{ form.submit(value="登   录",style="padding:0;") }}
          <a href="/auth/register" class="unregistered">未注册过？</a>
     </form>

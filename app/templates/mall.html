@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+	    <meta name="msapplication-tap-highlight" content="no">
+		<title>玩乐派-积分商城</title>
+		<meta name="keywords" content="">
+        <meta name="description" content="">
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<link rel="stylesheet" href="../static/css/main.css" />
+		<link rel="stylesheet" href="../static/css/index.css" />
+		<link rel="stylesheet" href="../static/css/common.css" />
+		<script src="../static/libs/jquery-3.1.0.js"></script>
+	</head>
+	<body>
+		<div id="login">
+		    <a href="javascript:history.go(-1)"><img src="../static/img/rights.png" alt="叉号" style="width: 0.4831rem;height: 0.8212rem;" /></a>
+		    <span>积分商城</span>
+		</div>
+		<!-- slide-banner -->
+		<div class="slide-banner" id="slide-banner">
+		    <div class="bd">
+		        <ul class="banner">
+		                <li>
+		                    <a href="javascript:;">
+		                        <img src="../static/img/banner_j.png"/>
+		                    </a>
+		                </li>
+		                <li>
+		                    <a href="javascript:;">
+		                        <img src="../static/img/banner_j.png"/>
+		                    </a>
+		                </li>
+		                <li>
+		                    <a href="javascript:;">
+		                        <img src="../static/img/banner_j.png"/>
+		                    </a>
+		                </li>
+		        </ul>
+		    </div>
+		    <div class="hd">
+		        <ul></ul>
+		    </div>
+		</div>
+        <!-- slide-banner end -->
+        <div class="line" style="height: 0.4831rem;"></div>
+        <!--兑换记录开始-->
+        <div class="record">
+        	<ul>
+        		<li><p>当前积分</p><p>{{ current_user.integral }}</p></li>
+        		<li><p>兑换记录</p><p>{{ current_user.phonenum[:4] }}****{{ current_user.phonenum[-4:] }}</p></li>
+        		<li><p>连续签到</p><p>{{ current_user.continus_checkin }}天</p></li>
+        	</ul>
+        	<div class="clear"></div>
+        </div>
+        <!--兑换记录结束-->
+        <!--积分兑换开始-->
+        <div class="exchange">
+        	<div class="exchange_t">
+        	   <img src="../static/img/exchange.png" alt="积分兑换" />
+        	   <span>积分兑换</span>
+        	</div>
+        	<div class="exchange_m">
+        		<ul>
+        			<li><a href="javascript:;"><img src="../static/img/ll_a.png" alt="流量劵" /></a></li>
+        			<li><a href="javascript:;"><img src="../static/img/ll_b.png" alt="流量劵" /></a></li>
+        			<li><a href="javascript:;"><img src="../static/img/ll_c.png" alt="流量劵" /></a></li>
+        			<li><a href="javascript:;"><img src="../static/img/ll_d.png" alt="流量劵" /></a></li>
+        			<li><a href="javascript:;"><img src="../static/img/ll_e.png" alt="流量劵" /></a></li>
+        			<li><a href="javascript:;"><img src="../static/img/ll_f.png" alt="流量劵" /></a></li>
+        			<li><a href="javascript:;"><img src="../static/img/ll_g.png" alt="流量劵" /></a></li>
+        			<li><a href="javascript:;"><img src="../static/img/ll_h.png" alt="流量劵" /></a></li>
+        		</ul>
+        	</div>
+        </div>
+        <!--积分兑换结束-->
+        <!--流量兑换说明-->
+        <div class="instructions">
+        	<p>流量兑换说明：</p>
+        	<div class="instructions_m">
+        	    <p>1.流量兑换对象：江苏电信用户；</p>
+        	    <p>2.天翼宽带套餐，时长计费用户，ifree卡用户、欠费停机或名下存在欠费产品用户，均不能购买；</p>
+        	    <p>3.该流量包当月一个用户同档5次，不同档次15次。</p>
+        	</div>
+        </div>
+        <!--流量兑换说明结束-->
+        <!--温馨提示-->
+        <div class="instructions">
+        	<p>温馨提示：</p>
+        	<div class="instructions_m">
+        	    <p>1.流量兑换成功后，立即生效，生效后流量包仅在生效当月内使用有效，不能延续、累计至次月使用；</p>
+        	    <p>2.套餐包含的流量为国内或省内2G/3G/4G（不含港澳台）；</p>
+        	    <p>3.成功兑换后，无法取消，到期自动失效；</p>
+        	    <p>4.如因用户登录错号码导致的误兑换，一经核实成功充值后无法撤销和退款，请用户在兑换前仔细核对将要兑换的号码；</p>
+        	    <p>5.玩乐派为用户自动充值，用户可拨打10000号或发送短信108到10001查询流量充值记录和使用情况。</p>
+        	</div>
+        </div>
+        <!--温馨提示结束-->
+        <!--弹框开始-->
+		<!--<div id="main">
+			<div class="order">
+				<div class="order_bottom">
+					<p>您消耗700积分兑换200M省内流量，兑换号码153****0000。</p>
+					<button class="cancel">取消</button>
+					<button class="confirm" >确认</button>
+				</div>
+			</div>
+		</div>-->
+		<!--弹框结束-->
+		<!--非天翼用户-->
+		<div id="main">
+			<div class="order">
+				<div class="order_bottom">
+					<p>抱歉，积分兑换功能只对江苏天翼用户开放。</p>
+					<button class="confirm" style="margin-right: 0;background: #F7D536;">确认</button>
+				</div>
+			</div>
+		</div>
+		<!--非天翼用户结束-->
+	</body>
+</html>
+<script src="../static/js/font.js"></script>
+<script src="../static/js/TouchSlide.1.1.js"></script>
+<script>
+    TouchSlide({
+        slideCell: "#slide-banner",
+        titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+        mainCell: ".bd ul",
+        effect: "leftLoop",
+        autoPlay: true,//自动播放
+        autoPage: true //自动分页
+    });
+</script>
+<!--积分兑换弹框-->
+<script>
+	$('.exchange_m ul li').click(function(){
+		$('#main').show()
+	});
+	$('.order_bottom .cancel').click(function () {
+            $('#main').hide()
+        });
+    $('.order_bottom .confirm').click(function(){
+    	$('#main').hide()
+    })
+</script>	

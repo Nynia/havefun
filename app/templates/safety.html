@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+	    <meta name="msapplication-tap-highlight" content="no">
+		<title>玩乐派-安全中心</title>
+		<meta name="keywords" content="">
+        <meta name="description" content="">
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<link rel="stylesheet" href="../static/css/main.css" />
+		<script src="../static/libs/jquery-3.1.0.js"></script>
+		<script src="../static/js/vue.min.js"></script>
+	</head>
+	<body class="logins">
+		<div id="login">
+		    <a href="javascript:history.go(-1)"><img src="../static/img/cha.png" alt="叉号"/></a>
+		    <span>安全中心</span>
+		</div>
+		<div class="show">
+			<div class="message" style="display: none;"></div>
+		    <form class="show_top" method="" id="reset">
+		        <input id="csrf_token" name="csrf_token" type="hidden" value="1490241852##a48c7944fe429fda405f1d34ffeeecce36312971">
+		        <div class="user codes">
+			        <label for="phonenum">新密码</label><input id="phonenum" name="phonenum" class="repassword" placeholder="6-16位字母、数字" type="password" value="">
+		        </div>
+		        <div class="user codes">
+			        <label for="phonenum" style="padding-left: 0.6rem;">确认密码</label><input id="phonenum" class="repassword" name="phonenum" placeholder="再次输入密码" type="password" value="">
+		        </div>
+		        <input id="submit" class="nexts" name="submit" type="submit" value="下一步" style="padding: 0;">	      		   
+		    </form>
+		</div>
+		<!--重置成功弹框开始-->
+		<div id="mains">
+			<div class="order" style="width: 72.95%;">
+				<img src="../static/img/gou.png" alt="" />
+				<p>重置成功</p>
+			</div>
+		</div>
+		<!--重置成功弹框结束-->
+     </body>
+</html>
+<script src="../static/js/font.js"></script>
+<script>
+	$('#submit').click(function(){
+		$('#mains').show()
+	})
+</script>

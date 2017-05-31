@@ -1,10 +1,11 @@
 # -*-coding:utf-8-*-
 from . import auth
-from flask_login import login_user, logout_user, login_required,current_user
-from flask import render_template, redirect, request, url_for, flash, session, request, jsonify
-from ..models import User, OrderRelation
+from flask_login import login_user, logout_user, login_required, current_user
+from flask import render_template, redirect, url_for, flash, session, request, jsonify
+from ..models import User, OrderRelation, CheckinRecord,IntegralStrategy,IntegralRecord
 from .forms import LoginForm, RegisterFrom
 from ..utils.func import generate_identifying_code
+import datetime
 
 cache = {}
 from app import db
@@ -73,7 +74,7 @@ def register():
         phonenum = form.phonenum.data
         vercode = form.vercode.data
         password = form.password.data
-        print cache
+        print password
         if vercode == cache.get(phonenum):
             phonenum = request.form.get('phonenum')
             user = User.query.filter_by(phonenum=phonenum).first()
@@ -82,7 +83,8 @@ def register():
                 user = User()
                 user.phonenum = phonenum
                 user.password = password
-                user.integral = 0
+                integral_strategy = IntegralStrategy.query.filter_by(description=u'注册帐号').first()
+                user.integral = integral_strategy.value
                 user.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
                 db.session.add(user)
                 db.session.commit()
@@ -105,6 +107,59 @@ def register():
     return render_template('register.html', form=form)
 
 
+@auth.route('/checkin', methods=['GET'])
+def checkin():
+    uid = request.args.get('uid')
+    user = User.query.get(int(uid))
+    if user:
+        lastcheckin = user.lastcheckin
+
+        now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+        yestoday = (datetime.date.today() - datetime.timedelta(days=1)).strftime('%Y%m%d')
+        print yestoday
+        checkinrecord = CheckinRecord()
+        checkinrecord.uid = uid
+        checkinrecord.timestamp = now
+        user.lastcheckin = now
+
+        if lastcheckin and lastcheckin.startswith(yestoday):
+            user.continus_checkin += 1
+        else:
+            user.continus_checkin = 1
+
+        #增加积分
+        if user.continus_checkin > 7:
+            des = u'连续签到7天'
+        else:
+            des = u'连续签到%d天' % user.continus_checkin
+        integral_strategy = IntegralStrategy.query.filter_by(description=des).first()
+        if integral_strategy:
+            user.integral = user.integral + integral_strategy.value
+            integral_record = IntegralRecord()
+            integral_record.uid = uid
+            integral_record.action = integral_strategy.id
+            integral_record.change = integral_strategy.value
+            integral_record.timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+
+        db.session.add(user)
+        db.session.add(checkinrecord)
+        db.session.commit()
+        return jsonify({
+            'code': '0',
+            'message': 'success',
+            'data':user.to_json()
+        })
+    else:
+        return jsonify({
+            'code': '105',
+            'message': 'user not exist',
+            'data':None
+        })
+
+@auth.route('/reset', methods=['GET'])
+def reset_password():
+    pass
+
 @auth.before_app_request
 def before_request():
     if session.get('user_id') and not session.get('phonenum'):
@@ -117,5 +172,3 @@ def before_request():
                 if r.status == '1':
                     session[r.productid] = 1
             session['phonenum'] = user.phonenum
-    #else:
-    #   session['user_id'] = current_user.id

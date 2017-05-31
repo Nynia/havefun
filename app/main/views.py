@@ -12,7 +12,7 @@ import config
 from app import db
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package, Comic, Reading, Chapter, ViewInfo, OrderRelation,AccessLog,ComicChapterInfo
+from app.models import Package, Comic, Reading, Chapter, ViewInfo, OrderRelation,AccessLog,ComicChapterInfo,FavorInfo,IntegralRecord,IntegralStrategy,User
 
 @main.route('/config', methods=['GET', 'POST'])
 def config():
@@ -124,6 +124,7 @@ def comicbrowse(id):
     comic = Comic.query.get(int(id))
     chapter = request.args.get('chapter')
     package = Package.query.get(comic.packageid)
+    integral = 0
     if request.args.get('type') == 'json':
         if session.get(comic.packageid) or int(chapter) <= comic.freechapter:
             return jsonify({
@@ -140,13 +141,16 @@ def comicbrowse(id):
             if not current_user.is_anonymous:
                 uid = session.get('user_id')
                 cid = comic.id
+                favorinfo = FavorInfo.query.filter_by(uid=uid).filter_by(type='1').filter_by(cid=cid).first()
+                favor = True if favorinfo and favorinfo.state=='1' else False
+                print 'favor:' + str(favor)
                 viewinfo = ViewInfo.query.filter_by(userid=uid).filter_by(comicid=cid).first()
                 if viewinfo:
                     recentchapter = viewinfo.recentchapter
-                    return render_template('cartoon_description.html', comic=comic, package=package, recentchapter=recentchapter)
+                    return render_template('cartoon_description.html', comic=comic, package=package, recentchapter=recentchapter,favor=favor)
                 else:
                     return render_template('cartoon_description.html', comic=comic, package=package,
-                                           recentchapter=None)
+                                           recentchapter=None,favor=favor)
             else:
                 return render_template('cartoon_description.html', comic=comic, package=package,
                                        recentchapter=None)
@@ -156,11 +160,46 @@ def comicbrowse(id):
                 cid = comic.id
                 chapter = chapter
                 type = '1'
+
                 viewinfo = ViewInfo.query.filter_by(userid=uid).filter_by(comicid=cid).first()
                 if viewinfo:
+                    #integral
+                    lastviewtime = viewinfo.updatetime
+                    today = datetime.now().strftime('%Y%m%d')
+                    if not lastviewtime.startswith(today):
+                        integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
+                        integral = integral_strategy.value
+                        user = User.query.get(int(uid))
+                        if user:
+                            user.integral = user.integral + integral_strategy.value
+                            db.session.add(user)
+
+                        integral_record = IntegralRecord()
+                        integral_record.uid = uid
+                        integral_record.action = integral_strategy.id
+                        integral_record.change = integral_strategy.value
+                        integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+
+                        db.session.add(integral_record)
                     viewinfo.recentchapter = chapter
                     viewinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+
                 else:
+                    #integral
+                    integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
+                    integral = integral_strategy.value
+                    user = User.query.get(int(uid))
+                    if user:
+                        user.integral = user.integral + integral_strategy.value
+                        db.session.add(user)
+
+                    integral_record = IntegralRecord()
+                    integral_record.uid = uid
+                    integral_record.action = integral_strategy.id
+                    integral_record.change = integral_strategy.value
+                    integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+
+                    db.session.add(integral_record)
                     viewinfo = ViewInfo()
                     viewinfo.userid = uid
                     viewinfo.comicid = cid
@@ -168,6 +207,7 @@ def comicbrowse(id):
                     viewinfo.type = type
                     viewinfo.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
                     viewinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+
                 db.session.add(viewinfo)
                 db.session.commit()
 
@@ -180,7 +220,7 @@ def comicbrowse(id):
                     filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg')
             print filelist2
             return render_template('cartoon_browse.html', imglist=filelist2, cur=chapter, len=comic.curchapter,
-                                   package=package)
+                                   package=package,integral=integral)
 
 @main.route('/reading', methods=['GET'])
 def reading():
@@ -236,7 +276,20 @@ def music():
 @main.route('/my', methods=['GET'])
 def my():
     if not current_user.is_anonymous:
-        return render_template('my_loggedin.html')
+        import datetime
+        yestoday = (datetime.date.today() - datetime.timedelta(days=1)).strftime('%Y%m%d')
+        today = datetime.date.today().strftime('%Y%m%d')
+        lastcheckin = current_user.lastcheckin
+        if lastcheckin and (lastcheckin.startswith(yestoday) or lastcheckin.startswith(today)):
+            checkindays = current_user.continus_checkin
+        else:
+            checkindays = 0
+        if lastcheckin.startswith(today):
+            checkinstatus = True
+        else:
+            checkinstatus = False
+        print checkinstatus
+        return render_template('my_loggedin.html',checkinstatus=checkinstatus, checkindays=checkindays)
     else:
         return render_template('my.html')
 
@@ -254,6 +307,12 @@ def myorder():
         dict['productid'] = package.productid
         data.append(dict)
     return render_template('myorder.html', data=data)
+
+@main.route('/mall', methods=['GET'])
+def mall():
+    return render_template('mall.html')
+
+
 
 def _get_annymous_id():
     address = request.headers.get('X-Forwarded-For', request.remote_addr)
@@ -280,7 +339,7 @@ def after_request(response):
         accesslog.uid = _get_annymous_id()
     else:
         accesslog.uid = current_user.id
-        #处理积分
+        #处理登录用户的积分
 
 
     db.session.add(accesslog)

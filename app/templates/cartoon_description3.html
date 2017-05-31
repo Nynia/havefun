@@ -15,25 +15,30 @@
     <script src="../static/libs/jquery-3.1.0.js"></script>
 </head>
 <body id="read" style="padding-bottom: 2.56rem;">
-<div class="bar_top cartoon_m" style="">
-    <a href="javascript:history.go(-1)"><img src="../static/img/back.png" alt=""/></a>
-    <div class="title">
-        <p class="title_m">《{{ comic.comicname }}》</p>
-        <p class="writer">作者：{{ comic.author }}</p>
+<div class="bar_top">
+    <a id="back" href="/package?id={{ package.productid }}"><img src="../static/img/back.png" alt=""/></a>
+</div>
+<div class="super">
+    <div class="super_left books_left">
+        <img src="http://221.228.17.87/res/comics/covers/{{ comic.id }}.jpg" alt=""/>
     </div>
-    {% if favor %}
-        <div class="favorite" style="color:#F0645E;border:1px solid #fff;background: #fff;padding: 0 0.4rem">
-            <span>已收藏</span>
-        </div>
-    {% else %}
-        <div class="favorite">
-            <img src="../static/img/star.png" alt="收藏"/>
-            <span>收藏</span>
-        </div>
-    {% endif %}
-</div>
-</div>
+    <div class="super_right books tides">
+        <ul>
+            <li>《{{ comic.comicname }}》</li>
+            <li>作者：<span>{{ comic.author }}</span></li>
+            <li>状态：<span>更新至{{ comic.curchapter }}话</span></li>
+            <li>题材：<span>{{ comic.category }}</span></li>
+            <li>人气： <span>{{ comic.hits }}</span></li>
+            {% if recentchapter %}
+                <li><a class="button" id="start" href="/comic/{{ comic.id }}?chapter={{ recentchapter }}">开始阅读</a></li>
+            {% else %}
+                <li><a class="button" id="start" href="/comic/{{ comic.id }}?chapter=1">开始阅读</a></li>
+            {% endif %}
 
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
 <div class="summary">
     <p>内容概括：</p>
     <dd id="intro_short">
@@ -95,14 +100,6 @@
     </div>
 </div>
 <!--继续观看弹出框结束-->
-<!--签到积分弹框-->
-<div id="sign_m">
-    <div class="sign_n">
-        <img src="../static/img/sign_m.png" alt="积分"/>
-        <p>积分+20</p>
-    </div>
-</div>
-<!--签到积分弹框end-->
 </body>
 </html>
 <script src="../static/js/cartoon_description.js"></script>
@@ -210,7 +207,7 @@
         });
 
         $('.cancel:last').click(function () {
-            $('.super li:last a').attr('href', "/comic/{{ comic.id }}?chapter=1");
+            $('.super li:last a').attr('href',"/comic/{{ comic.id }}?chapter=1");
             $('#main_m').hide()
         });
         $('.confirm:last').click(function () {
@@ -225,63 +222,5 @@
             }
         })
     });
-    <!--加入收藏-->
-    $('.favorite').click(function () {
 
-        text = $('.favorite span').text();
-        if (text == '收藏') {
-            $.ajax({
-                type: "get",
-                url: "/api/v1.0/favors/favor",
-                contentType: "application/json",
-                data: {
-                    'uid':{{ current_user.id }},
-                    'cid':{{ comic.id }},
-                    'type': '1'
-                },
-                success: function (data, status) {
-                    if (data.code == '0') {
-                        console.log(data);
-                        if (data['data']['integral'] > 0) {
-                            $('#sign_m p').text('积分+'+data['data']['integral']);
-                            $('#sign_m').show();
-                            setTimeout(function () {
-                                $('#sign_m').hide();
-                            }, 2000);
-                        }
-                        $('.favorite span').text('已收藏');
-                        $('.favorite').css('color', '#F0645E');
-                        $('.favorite').css('border', '1px solid #fff');
-                        $('.favorite').css('background-color', '#fff');
-                        $('.favorite').css('padding', '0 0.4rem');
-                        $('.favorite img').hide()
-                    }
-                }
-            });
-        }
-        else {
-            $.ajax({
-                type: "get",
-                url: "/api/v1.0/favors/unfavor",
-                contentType: "application/json",
-                data: {
-                    'uid':{{ current_user.id }},
-                    'cid':{{ comic.id }},
-                    'type': '1'
-                },
-                success: function (data, status) {
-                    if (data.code == '0') {
-                        console.log(data);
-                        $('.favorite span').text('收藏');
-                        $('.favorite').css('background-color', '#f0645e');
-                        $('.favorite').css('color', '#fff');
-                        $('.favorite').css('border', '1px solid #f0645e');
-                        $('.favorite').css('padding', '0 4px');
-                        $('.favorite img').show()
-
-                    }
-                }
-            });
-        }
-    })
 </script>

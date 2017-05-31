@@ -3,10 +3,8 @@ from flask import request, jsonify
 from app.models import User
 from app import db
 from datetime import datetime
-from decorators import jsonp
 
 @api.route('/users/<id>', methods=['GET'])
-@jsonp
 def get_user_by_id(id):
     user = User.query.get(id)
     return jsonify({
@@ -16,7 +14,6 @@ def get_user_by_id(id):
     })
 
 @api.route('/users', methods=['GET'])
-@jsonp
 def get_users_by_page():
     limit = request.args.get('limit', type=int)
     offset = request.args.get('offset', type=int)
@@ -32,7 +29,6 @@ def get_users_by_page():
     })
 
 @api.route('/users', methods=['POST'])
-@jsonp
 def add_user():
     phonenum = request.form.get('phonenum')
     user = User.query.filter_by(phonenum=phonenum).first()
@@ -58,7 +54,6 @@ def add_user():
         })
 
 @api.route('/users/<id>', methods=['PUT'])
-@jsonp
 def update_user_by_id(id):
     user = User.query.get(id)
     if user:
@@ -80,7 +75,6 @@ def update_user_by_id(id):
         })
 
 @api.route('/users/<id>', methods=['DELETE'])
-@jsonp
 def delete_user_by_id(id):
     user = User.query.get(id)
     if user:

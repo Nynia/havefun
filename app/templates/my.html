@@ -17,18 +17,25 @@
 	<body style="padding-bottom: 2.56rem;">
 		<div class="header">
 			<div class="news">
-				<img src="../static/img/消息.png" alt="消息" />
+				<img src="../static/img/news.png" alt="消息" />
 			</div>
-			<section>
-				<a href="/auth/register" class="register">注册</a>
-				<a href="/auth/login" class="login">登录</a>
-			</section>
+			<div class="head_logo">
+				<img src="../static/img/dog_logo.png" alt="个人头像" />
+				<div class="login_m">
+					<a	href="/auth/login">点击登录</a><br />
+				    <img src="../static/img/level.png" alt="等级" />
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
 		</div>
+		<div class="line" style="height: 0.4831rem;"></div>
 		<main>
 			<div class="main">
+                <a href="#"><div></div><span>签到</span><section><span>已签到0天</span><img src="../static/img/right_arrow.png" alt="右箭头" /></section></a>
                 <a href="#"><div></div><span>积分商城</span><section><span>积分换好礼</span><img src="../static/img/right_arrow.png" alt="右箭头" /></section></a>
                 <a href="#"><div></div><span>我的收藏</span><section><img src="../static/img/right_arrow.png" alt="" /></section></a>
-                <a href="/myorder"><div></div><span>订购</span><section><img src="../static/img/right_arrow.png" alt="" /></section></a>
+                <a href="#"><div></div><span>订购</span><section><img src="../static/img/right_arrow.png" alt="" /></section></a>
                 <a href="http://flow.jsinfo.net"><div></div><span>我的流量</span><section><span>一键查询、办理流量套餐</span><img src="../static/img/right_arrow.png" alt="" /></section></a>
                 <a href="#"><div></div><span>反馈</span><section><img src="../static/img/right_arrow.png" alt="" /></section></a>
                 <a href="#"><div></div><span>帮助</span><section><img src="../static/img/right_arrow.png" alt="" /></section></a>
@@ -36,7 +43,7 @@
 		</main>
 	    <div class="line"></div>
 		<div class="play" id="watch">
-	    	<div class="play_top">
+	    	<div class="play_top" id="play">
 	    		<img src="../static/img/watchs.png" alt="最近观看" />
 	    		<span>最近观看</span>
 	    	</div>
@@ -50,27 +57,7 @@
 	    		<div class="clear"></div>
 	    	</div>
 	    </div>
-	   <!-- footer-nav -->
-        <nav class="footer-nav">
-            <ul>
-                <li><a href="/" class="sy">首页</a></li>
-                <li><a href="###" class="find">发现</a></li>
-                <li><a href="###" class="follow">关注</a></li>
-                <li><a href="/my" class="mine my">我的</a></li>
-            </ul>
-        </nav>
-    <!-- footer-nav end -->
 	</body>
 </html>
+<script src="../static/libs/jquery-3.1.0.js"></script>
 <script src="../static/js/font.js"></script>
-<script src="../static/js/TouchSlide.1.1.js"></script>
-    <script>
-        TouchSlide({
-          slideCell:"#slide-banner",
-          titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-          mainCell:".bd ul",
-          effect:"leftLoop",
-          autoPlay:true,//自动播放
-          autoPage:true //自动分页
-        });
-    </script>

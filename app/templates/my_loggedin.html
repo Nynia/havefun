@@ -23,12 +23,32 @@
     </div>
     <div class="head_logo">
         <img src="../static/img/dog_logo.png" alt="个人头像"/>
-        <p id="tel">{{ session.phonenum }}</p>
+        <div class="login_m">
+            <p id="tel">{{ session.phonenum }}</p>
+            <img src="../static/img/level.png" alt="等级"/>
+        </div>
+        <div class="clear"></div>
     </div>
+    {% if checkinstatus %}
+        <div class="sign" style="color:#aeaeae;border:1px solid #aeaeae">
+            <span>已签到</span>
+        </div>
+    {% else %}
+        <div class="sign">
+            <img src="../static/img/sign.png" alt=""/><span>签到</span>
+        </div>
+    {% endif %}
+    <div class="clear"></div>
 </div>
+<div class="line" style="height: 0.4831rem;"></div>
 <main>
     <div class="main success">
         <a href="#">
+            <div></div>
+            <span>签到</span>
+            <section><span>已连续签到{{ checkindays }}天</span><img src="../static/img/right_arrow.png" alt="右箭头"/></section>
+        </a>
+        <a href="/mall">
             <div></div>
             <span>积分商城</span>
             <section><span>积分换好礼</span><img src="../static/img/right_arrow.png" alt="右箭头"/></section>
@@ -83,7 +103,7 @@
                     <p>已看完</p></div>
             </a></li>
             <li><a href=""><img src="../static/img/girl.png" alt=""/>
-                <p><span>叫姐姐</span><span>55集<span></p>
+                <p><span>叫姐姐</span><span>55集</span></p>
                 <div><img src="../static/img/plays.png" alt=""/>
                     <p>89%</p></div>
             </a></li>
@@ -109,39 +129,58 @@
         <p>订购成功</p>
     </div>
 </div>
-<!-- footer-nav -->
-<nav class="footer-nav">
-    <ul>
-        <li><a href="/" class="sy">首页</a></li>
-        <li><a href="###" class="find">发现</a></li>
-        <li><a href="###" class="follow">关注</a></li>
-        <li><a href="/my" class="mine my">我的</a></li>
-    </ul>
-</nav>
-<!-- footer-nav end -->
+<!--签到积分弹框-->
+<div id="sign_m">
+    <div class="sign_n">
+        <img src="../static/img/sign_m.png" alt="积分"/>
+        <p>积分+20</p>
+    </div>
+</div>
+<!--签到积分弹框end-->
 </body>
 </html>
 <script src="../static/libs/jquery-3.1.0.js"></script>
 <script src="../static/js/font.js"></script>
-<script src="../static/js/TouchSlide.1.1.js"></script>
-<script>
-    TouchSlide({
-        slideCell: "#slide-banner",
-        titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-        mainCell: ".bd ul",
-        effect: "leftLoop",
-        autoPlay: true,//自动播放
-        autoPage: true //自动分页
-    });
-</script>
 <script>
     $(function () {
         var tel = $('#tel').html();
         var mtel = tel.substr(0, 3) + '****' + tel.substr(7);
         $('#tel').text(mtel);
     });
+    <!--签到-->
+    $('.sign').click(function () {
+        console.log($.trim($(this).text()));
+        if ($.trim($(this).text()) == '签到') {
+            $.ajax({
+                type: "get",
+                url: "/auth/checkin",
+                contentType: "application/json",
+                data: {'uid':{{current_user.id}}},
+                success: function (data, status) {
+                    console.log(data.code);
+                    if (data.code == 0) {
+
+                        $('#sign_m').show();
+                        setTimeout(function () {
+                            $('#sign_m').hide();
+                        }, 2000);
+                        $('.sign span').text('已签到');
+                        $('.sign').css('color', '#aeaeae');
+                        $('.sign').css('border', '1px solid #aeaeae');
+                        $('.sign img').hide();
+                        $('section:first').text('已连续签到' + data['data']['continus_checkin'] + '天')
+                    }
+                }
+            });
+        }
+    });
+    $(function () {
+        var tel = $('#tel').html();
+        var mtel = tel.substr(0, 3) + '****' + tel.substr(7);
+        $('#tel').text(mtel);
+    });
     $('.exit').click(function () {
-        console.log(1)
+        console.log(1);
         $('#main').show();
     });
     $('.order_bottom .cancel').click(function () {
