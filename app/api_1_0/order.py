@@ -165,12 +165,14 @@ def subscribe():
                 integral_record.action = integral_strategy.id
                 integral_record.change = integral_strategy.value
                 integral_record.timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+                db.session.add(user)
+                db.session.add(integral_record)
             else:
                 today = datetime.datetime.now().strftime('%Y%m%d')
                 record = IntegralRecord.query.filter_by(timestamp.startswith(today)).filter_by(action=8).all()
                 history_integory_today = 0
                 if record:
-                    history_integory_today = 400 + reduce(lambda x,y : x + y,[r.change for i in record])
+                    history_integory_today = 400 + reduce(lambda x,y : x + y,[r.change for r in record])
                     print history_integory_today
                 if history_integory_today < 600:
                     user.integral = user.integral + integral_strategy.value
@@ -179,8 +181,8 @@ def subscribe():
                     integral_record.action = integral_strategy.id
                     integral_record.change = integral_strategy.value
                     integral_record.timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-            db.session.add(user)
-            db.session.add(integral_record)
+                    db.session.add(user)
+                    db.session.add(integral_record)
         db.session.add(orderaction)
         db.session.add(orderhistory)
         db.session.commit()
