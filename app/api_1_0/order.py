@@ -131,15 +131,10 @@ def subscribe():
     err_msg = json_result['errmsg']
     integral = 0
     if err_code == '0':
-        orderrelation = OrderRelation.query.filter_by(phonenum=phonenum)
-        des = ''
-        if not orderrelation:
-            des = u'首次订购付费包'
-        else:
-            des = u'订购付费包'
-            orderrelation = orderrelation.filter_by(productid=productid).first()
+        orderrelation = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(productid=productid).first()
         if not orderrelation:
             orderrelation = OrderRelation()
+
         orderhistory = OrderHistroy()
         orderaction.productid = productid
         orderaction.phonenum = phonenum
@@ -151,26 +146,41 @@ def subscribe():
         orderhistory.action = '1'
         orderhistory.createtime = timestamp
 
+        des = ''
+        record = IntegralRecord.query.filter(action=7).first()
+        if record:
+            des = u'首次订购付费包'
+        else:
+            des = u'订购付费包'
+
         #integral
         integral_strategy = IntegralStrategy.query.filter_by(description=des).first()
         if integral_strategy:
+            integral = integral_strategy.value
             user = User.query.filter_by(phonenum=phonenum).first()
-            if user:
-                print db.session.execute('select SUM(change) from integral_record where action=7 or action=8').fetchone()
+            if integral_strategy.id == 7:
                 user.integral = user.integral + integral_strategy.value
                 integral_record = IntegralRecord()
                 integral_record.uid = user.id
                 integral_record.action = integral_strategy.id
                 integral_record.change = integral_strategy.value
                 integral_record.timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-                db.session.add(user)
-                db.session.add(integral_record)
             else:
-                return jsonify({
-                    'code': '111',
-                    'message': 'user not exist',
-                    'data': None
-                })
+                today = datetime.datetime.now().strftime('%Y%m%d')
+                record = IntegralRecord.query.filter_by(timestamp.startswith(today)).filter_by(action=8).all()
+                history_integory_today = 0
+                if record:
+                    history_integory_today = 400 + reduce(lambda x,y : x + y,[r.change for i in record])
+                    print history_integory_today
+                if history_integory_today < 600:
+                    user.integral = user.integral + integral_strategy.value
+                    integral_record = IntegralRecord()
+                    integral_record.uid = user.id
+                    integral_record.action = integral_strategy.id
+                    integral_record.change = integral_strategy.value
+                    integral_record.timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+            db.session.add(user)
+            db.session.add(integral_record)
         db.session.add(orderaction)
         db.session.add(orderhistory)
         db.session.commit()
