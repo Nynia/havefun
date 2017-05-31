@@ -164,11 +164,11 @@ def subscribe():
                 integral_record.uid = user.id
                 integral_record.action = integral_strategy.id
                 integral_record.change = integral_strategy.value
-                integral_record.timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+                integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
                 db.session.add(user)
                 db.session.add(integral_record)
             else:
-                today = datetime.datetime.now().strftime('%Y%m%d')
+                today = datetime.now().strftime('%Y%m%d')
                 record = IntegralRecord.query.filter_by(timestamp.startswith(today)).filter_by(action=8).all()
                 history_integory_today = 0
                 if record:
@@ -180,7 +180,7 @@ def subscribe():
                     integral_record.uid = user.id
                     integral_record.action = integral_strategy.id
                     integral_record.change = integral_strategy.value
-                    integral_record.timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+                    integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
                     db.session.add(user)
                     db.session.add(integral_record)
         db.session.add(orderaction)
