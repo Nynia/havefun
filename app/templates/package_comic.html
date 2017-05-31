@@ -34,7 +34,8 @@
     <div class="list clearfloat">
         <ul>
             {% for c in comics %}
-                <li><a class="back" href="/comic/{{ c.id }}"><img src="http://221.228.17.87/res/comics/covers/{{ c.id }}.jpg" alt="" class="big"/>
+                <li><a class="back" href="/comic/{{ c.id }}"><img
+                        src="http://221.228.17.87/res/comics/covers/{{ c.id }}.jpg" alt="" class="big"/>
                     <div><p>更新至{{ c.curchapter }}集</p></div>
                     <p class="summer">{{ c.comicname }}</p></a></li>
             {% endfor %}
@@ -44,6 +45,14 @@
 
 </div>
 <div class="foot_m">由{{ package.copyright }}提供</div>
+<!--签到积分弹框-->
+<div id="sign_m">
+    <div class="sign_n">
+        <img src="../static/img/sign_m.png" alt="积分"/>
+        <p>积分+20</p>
+    </div>
+</div>
+<!--签到积分弹框end-->
 <!--弹出框-->
 <div id="main">
     <div class="order">
@@ -98,6 +107,13 @@
                     setTimeout(function () {
                         $('#mains').hide();
                     }, 1000);
+                    if (data['data']['integral'] > 0) {
+                        $('#sign_m p').text('积分+' + data['data']['integral']);
+                        $('#sign_m').show();
+                        setTimeout(function () {
+                            $('#sign_m').hide();
+                        }, 2000);
+                    }
                     if (data.code == "0" || data.code == "131") {
                         //success
                         $('.detail_right .button').text('已订购');
