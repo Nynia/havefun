@@ -146,9 +146,10 @@ def subscribe():
         orderhistory.action = '1'
         orderhistory.createtime = timestamp
 
+        user = User.query.filter_by(phonenum=phonenum).first()
         des = ''
-        record = IntegralRecord.query.filter_by(action=7).first()
-        if record:
+        record = IntegralRecord.query.filter_by(uid=user.id).filter_by(action=7).first()
+        if not record:
             des = u'首次订购付费包'
         else:
             des = u'订购付费包'
