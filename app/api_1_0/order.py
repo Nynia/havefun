@@ -169,7 +169,7 @@ def subscribe():
                 db.session.add(integral_record)
             else:
                 today = datetime.now().strftime('%Y%m%d')
-                record = IntegralRecord.query.filter_by(timestamp.startswith(today)).filter_by(action=8).all()
+                record = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(action=8).all()
                 history_integory_today = 0
                 if record:
                     history_integory_today = 400 + reduce(lambda x,y : x + y,[r.change for r in record])
