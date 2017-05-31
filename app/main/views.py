@@ -284,7 +284,7 @@ def my():
             checkindays = current_user.continus_checkin
         else:
             checkindays = 0
-        if lastcheckin.startswith(today):
+        if lastcheckin and lastcheckin.startswith(today):
             checkinstatus = True
         else:
             checkinstatus = False
