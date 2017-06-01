@@ -159,7 +159,7 @@
                 success: function (data, status) {
                     console.log(data.code);
                     if (data.code == 0) {
-
+                        $('#sign_m p').text('积分+' + data['data']['integral']);
                         $('#sign_m').show();
                         setTimeout(function () {
                             $('#sign_m').hide();

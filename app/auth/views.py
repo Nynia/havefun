@@ -112,6 +112,7 @@ def checkin():
     uid = request.args.get('uid')
     user = User.query.get(int(uid))
     if user:
+        integral = 0
         lastcheckin = user.lastcheckin
 
         now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
@@ -134,6 +135,7 @@ def checkin():
             des = u'连续签到%d天' % user.continus_checkin
         integral_strategy = IntegralStrategy.query.filter_by(description=des).first()
         if integral_strategy:
+            integral = integral_strategy.value
             user.integral = user.integral + integral_strategy.value
             integral_record = IntegralRecord()
             integral_record.uid = uid
@@ -147,7 +149,7 @@ def checkin():
         return jsonify({
             'code': '0',
             'message': 'success',
-            'data':user.to_json()
+            'data':{'integral':integral}
         })
     else:
         return jsonify({
