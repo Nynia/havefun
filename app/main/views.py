@@ -171,7 +171,7 @@ def comicbrowse(id):
 
                         user = User.query.get(int(uid))
 
-                        integral_history = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(action=integral_strategy.id).all()
+                        integral_history = IntegralRecord.query.filter_by(action=integral_strategy.id).filter(IntegralRecord.timestamp.startswith(today)).all()
                         history_integral_today = 0
                         if integral_history:
                             history_integory_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
@@ -197,7 +197,7 @@ def comicbrowse(id):
 
                     user = User.query.get(int(uid))
 
-                    integral_history = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(
+                    integral_history = IntegralRecord.query.filter(IntegralRecord.timestamp.startswith(today)).filter_by(
                         action=integral_strategy.id).all()
                     history_integral_today = 0
                     if integral_history:
