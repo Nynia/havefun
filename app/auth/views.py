@@ -149,7 +149,7 @@ def checkin():
         return jsonify({
             'code': '0',
             'message': 'success',
-            'data':{'integral':integral}
+            'data':{'integral':integral,'continus_checkin':user.continus_checkin}
         })
     else:
         return jsonify({

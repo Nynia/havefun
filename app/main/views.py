@@ -329,8 +329,19 @@ def mall():
 
 @main.route('/mysign', methods=['GET'])
 def sign():
-
     return render_template('sign.html')
+
+@main.route('/flow',methods = ['GET'])
+def flow():
+    if current_user.is_anonymous:
+        return redirect('http://flow.jsinfo.net')
+    else:
+        phonenum = current_user.phonenum
+        from app.utils.func import AES_encrypt
+        encrptyed = AES_encrypt(phonenum)
+        url = 'http://flow.jsinfo.net?phone=%s' % encrptyed
+        print url
+        return redirect(url)
 
 def _get_annymous_id():
     address = request.headers.get('X-Forwarded-For', request.remote_addr)
@@ -344,6 +355,7 @@ def _get_annymous_id():
     m2 = hashlib.md5()
     m2.update(base)
     return m2.hexdigest()[:16]
+
 
 @main.after_request
 def after_request(response):

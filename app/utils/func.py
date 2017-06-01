@@ -1,6 +1,6 @@
 import hashlib
 from datetime import datetime
-#from Crypto.Cipher import AES
+from Crypto.Cipher import AES
 import base64
 import json
 
@@ -20,10 +20,14 @@ def generate_identifying_code(len=4):
     verification_code = ''.join(myslice)
     return verification_code
 
-# def AES_encrypt(text, key, iv):
-#     pad = 16 - len(text) % 16
-#     text = text + pad * chr(pad)
-#     encryptor = AES.new(key, AES.MODE_CBC, iv)
-#     encrypt_text = encryptor.encrypt(text)
-#     encrypt_text = base64.b64encode(encrypt_text)
-#     return encrypt_text
+def AES_encrypt(text):
+    key = 'Hlkj@~_^&&123_78'
+    iv = '0201080306050704'
+    pad = 16 - len(text) % 16
+    text = text + pad * chr(pad)
+    encryptor = AES.new(key, AES.MODE_CBC, iv)
+    encrypt_text = encryptor.encrypt(text)
+    print repr(encrypt_text)
+    encrypt_text = base64.b64encode(encrypt_text)
+    return encrypt_text
+print AES_encrypt('18118999630')
