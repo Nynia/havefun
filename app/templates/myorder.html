@@ -24,30 +24,27 @@
     {% if session.phonenum %}
         {% for d in data %}
             <div class="shopping_list" id="{{ d.productid }}">
-				<div class="dt">
-					<img src="../static/img/ordera.png" alt="订购" />
-				</div>
-				<div class="dd">
-					<h3>{{ d.productname }}</h3>
-			        <p>{{ d.timestamp }}</p>
-				</div>
-			    <div class="unsubscribe">退订</div>
-			</div>
+                <div class="dt">
+                    <img src="../static/img/ordera.png" alt="订购"/>
+                </div>
+                <div class="dd">
+                    <h3>{{ d.productname }}</h3>
+                    <p>{{ d.timestamp }}</p>
+                </div>
+                <div class="unsubscribe">退订</div>
+            </div>
         {% endfor %}
     {% else %}
         <div class="mains">
-			<img src="../static/img/none.png" alt="暂无订购" />
-		</div>
+            <img src="../static/img/none.png" alt="暂无订购"/>
+        </div>
     {% endif %}
 </div>
 <!--弹出层-->
 <div id="main">
     <div class="order">
-        <div class="order_top">提 示</div>
         <div class="order_bottom">
             <p>您将退订“xxxx包”</p>
-            <p style="display:none;"></p>
-            <p style="display:none;"></p>
             <button class="cancel">取消</button>
             <button class="confirm">确认</button>
         </div>
