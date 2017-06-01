@@ -1,5 +1,8 @@
 import hashlib
 from datetime import datetime
+from Crypto.Cipher import AES
+import base64
+import json
 
 def generate_name(filename):
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
@@ -16,3 +19,11 @@ def generate_identifying_code(len=4):
     myslice = random.sample(code_list, len)
     verification_code = ''.join(myslice)
     return verification_code
+
+def AES_encrypt(text, key, iv):
+    pad = 16 - len(text) % 16
+    text = text + pad * chr(pad)
+    encryptor = AES.new(key, AES.MODE_CBC, iv)
+    encrypt_text = encryptor.encrypt(text)
+    encrypt_text = base64.b64encode(encrypt_text)
+    return encrypt_text

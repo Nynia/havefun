@@ -23,26 +23,31 @@
 <div class="show">
     <div class="message" style="display: none;"></div>
     <form class="show_top" method="post" id="reset">
-        {{ form.hidden_tag() }}
-        <div class="codes" style="display:none" href="">
-            <label for="phonenum" class="col"></label>{{ form.phonenum(value=phonenum) }}<br>
-        </div>
-        <div class="user codes">
-            <label for="phonenum">新密码</label>{{ form.password(placeholder="请输入密码") }}
-        </div>
-        <div class="user codes">
-            <label for="phonenum" style="padding-left: 0.6rem;">确认密码</label><input id="phonenum" class="repassword"
-                                                                                   name="phonenum" placeholder="再次输入密码"
-                                                                                   type="password" value="">
-        </div>
-        {{ form.submit(value="下一步",style="padding:0;") }}
+        <form class="show_top" method="post" id="reset">
+            <div class="codes" style="display: none">
+                <label for="phonenum" class="col"></label><input id="phonenum" name="phonenum" type="text"
+                                                                 value="{{ phonenum }}"><br>
+            </div>
+            <div class="user codes">
+                <label for="password">新密码</label><input id="password" name="password" class="repassword"
+                                                        placeholder="6-16位字母、数字" type="password" value="">
+            </div>
+            <div class="user codes">
+                <label for="repassword" style="padding-left: 0.6rem;">确认密码</label><input id="repassword"
+                                                                                         class="repassword"
+                                                                                         name="repassword"
+                                                                                         placeholder="再次输入密码"
+                                                                                         type="password" value="">
+            </div>
+            <input id="submit" class="nexts" name="submit" type="submit" value="下一步" style="padding: 0;">
+        </form>
     </form>
 </div>
 <!--重置成功弹框开始-->
 <div id="mains">
     <div class="order" style="width: 72.95%;">
         <img src="../static/img/gou.png" alt=""/>
-        <p>重置成功</p>
+        <p>重置成功,正在跳转到登录页面</p>
     </div>
 </div>
 <!--重置成功弹框结束-->
@@ -50,7 +55,33 @@
 </html>
 <script src="../static/js/font.js"></script>
 <script>
-    $('#submit').click(function () {
-        $('#mains').show()
+    $('#submit').click(function (event) {
+        event.preventDefault();
+        var formData = new FormData($('#reset')[0]);
+        $.ajax({
+            url: '/auth/reset?action=reset',
+            type: 'POST',
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                console.log("正在进行，请稍候");
+            },
+            success: function (data, status, request) {
+                console.log(data);
+                $('#mains').show();
+                setTimeout(function () {
+                    $('#mains').hide()
+                }, 2000);
+                setTimeout(function () {
+                    window.location='/auth/login'
+                }, 2000);
+            },
+            error: function () {
+                alert('Unexpected error');
+            }
+        });
+
     })
 </script>

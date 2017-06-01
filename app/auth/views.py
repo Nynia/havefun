@@ -7,10 +7,8 @@ from .forms import LoginForm, RegisterFrom,ResetForm,ResetSubmitForm
 from ..utils.func import generate_identifying_code
 import datetime
 
-#cache_register = {}
 cache = {}
 from app import db
-
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -161,7 +159,7 @@ def checkin():
 @auth.route('/reset', methods=['GET','POST'])
 def reset_password():
     resetform = ResetForm()
-    resetsubmitform = ResetSubmitForm()
+    #resetsubmitform = ResetSubmitForm()
     action = request.args.get('action')
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
@@ -183,14 +181,22 @@ def reset_password():
             'msg': msg
         })
     if request.method == 'POST':
-        if resetsubmitform.password.data:
-            phonenum = resetsubmitform.phonenum.data
-            print phonenum
+        if action == 'reset':
+            phonenum = request.form.get('phonenum')
+            password = request.form.get('password')
+            user = User.query.filter_by(phonenum=phonenum).first()
+            user.password = password
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({
+                'phonenum': phonenum,
+                'password':password
+            })
         else:
             phonenum = request.form.get('phonenum')
             vercode = request.form.get('vercode')
             if vercode == cache.get(phonenum):
-                return render_template('safety.html', form=resetsubmitform, phonenum=phonenum)
+                return render_template('safety.html',phonenum=phonenum)
             else:
                 flash(u'验证码输入错误', 'reset')
 
