@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="robots" content="index,follow">
-	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
-	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-	    <meta name="msapplication-tap-highlight" content="no">
-		<title>玩乐派-重置密码</title>
-		<meta name="keywords" content="">
-        <meta name="description" content="">
-		<link rel="stylesheet" href="../static/css/style.css" />
-		<link rel="stylesheet" href="../static/css/main.css" />
-		<script src="../static/libs/jquery-3.1.0.js"></script>
-		<script src="../static/js/vue.min.js"></script>
-	</head>
-	<body class="logins">
-		<div id="login">
-		    <a href="javascript:history.go(-1)"><img src="../static/img/rights.png" alt="叉号" style="width: 0.4831rem;height: 0.82126rem;"/></a>
-		    <span>重置登录密码</span>
-		</div>
-		<div class="show">
-			<div class="message" style="display: none;"></div>
-		    <form class="show_top" method="post" id="reset">
-		        <input id="csrf_token" name="csrf_token" type="hidden" value="1490241852##a48c7944fe429fda405f1d34ffeeecce36312971">
-		        <div class="user codes">
-			        <label for="phonenum">账户名</label><input id="phonenum" name="phonenum" placeholder="手机号码" type="text" value="">
-		        </div>
-		        <div class="code codes">
-                    <label for="password">验证码</label><input type="username" name="username" autocomplete="off" class="tel"><input class="showsss" type="button" value="获取验证码"><br>
-				</div>
-		        <input id="submit" name="submit" type="submit" value="下一步" style="padding: 0;">	      
-		    </form>
-		</div>
-     </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>玩乐派-重置密码</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
+    <script src="../static/libs/jquery-3.1.0.js"></script>
+    <script src="../static/js/vue.min.js"></script>
+</head>
+<body class="logins">
+<div id="login">
+    <a href="javascript:history.go(-1)"><img src="../static/img/rights.png" alt="叉号"
+                                             style="width: 0.4831rem;height: 0.82126rem;"/></a>
+    <span>重置登录密码</span>
+</div>
+<div class="show">
+    {% with messages = get_flashed_messages(category_filter=["reset"]) %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message"><img src="../static/img/warn.png"> {{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="message" style="display: none;"></div>
+    <form class="show_top" method="post" id="reset">
+        {{ form.hidden_tag() }}
+        <div class="user codes">
+            <label for="phonenum">账户名</label>{{ form.phonenum }}>
+        </div>
+        <div class="code codes">
+            <label for="password">验证码</label>{{ form.vercode(class='tel') }}<input class="showsss" type="button"
+                                                                                   value="获取验证码"><br>
+        </div>
+        {{ form.submit(value="下一步",style="padding:0;") }}
+    </form>
+</div>
+</body>
 </html>
 <script src="../static/js/font.js"></script>
 <script>
@@ -70,7 +80,7 @@
     var re = new RegExp(/\D/g);
     var reg = /^1[3|4|5|8][0-9]\d{8}$/;
     function run(seconds, obj) {
-        $('.message').css('display','none');
+        $('.message').css('display', 'none');
         var tel = $('#phonenum').val();
         if (tel == null || tel.length == 0) {
             phone_type = 2;
@@ -97,10 +107,10 @@
             }, 1000);
         }
         else {
-            if ($('.message').length >　1) {
+            if ($('.message').length > 1) {
                 $('.message:first').remove()
             }
-            $('.message').css('display','block');
+            $('.message').css('display', 'block');
             $('.message').html('<img src="../static/img/warn.png">请输入正确的手机号码');
         }
     }

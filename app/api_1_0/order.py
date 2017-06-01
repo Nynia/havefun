@@ -171,11 +171,11 @@ def subscribe():
             else:
                 today = datetime.now().strftime('%Y%m%d')
                 record = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(action=8).all()
-                history_integory_today = 0
+                history_integral_today = 0
                 if record:
-                    history_integory_today = 400 + reduce(lambda x,y : x + y,[r.change for r in record])
-                    print history_integory_today
-                if history_integory_today < 600:
+                    history_integral_today = 400 + reduce(lambda x,y : x + y,[r.change for r in record])
+                    print history_integral_today
+                if history_integral_today < 600:
                     user.integral = user.integral + integral_strategy.value
                     integral_record = IntegralRecord()
                     integral_record.uid = user.id

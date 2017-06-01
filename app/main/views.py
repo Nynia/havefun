@@ -162,17 +162,51 @@ def comicbrowse(id):
                 type = '1'
 
                 viewinfo = ViewInfo.query.filter_by(userid=uid).filter_by(comicid=cid).first()
+                today = datetime.now().strftime('%Y%m%d')
                 if viewinfo:
                     #integral
                     lastviewtime = viewinfo.updatetime
-                    today = datetime.now().strftime('%Y%m%d')
                     if not lastviewtime.startswith(today):
                         integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
-                        integral = integral_strategy.value
+
                         user = User.query.get(int(uid))
-                        if user:
+
+                        integral_history = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(action=integral_strategy.id).all()
+                        history_integral_today = 0
+                        if integral_history:
+                            history_integory_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
+                            print history_integory_today
+                        if history_integral_today < 80:
+                            integral = integral_strategy.value
                             user.integral = user.integral + integral_strategy.value
                             db.session.add(user)
+
+                            integral_record = IntegralRecord()
+                            integral_record.uid = uid
+                            integral_record.action = integral_strategy.id
+                            integral_record.change = integral_strategy.value
+                            integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+
+                            db.session.add(integral_record)
+                    viewinfo.recentchapter = chapter
+                    viewinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
+
+                else:
+                    #integral
+                    integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
+
+                    user = User.query.get(int(uid))
+
+                    integral_history = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(
+                        action=integral_strategy.id).all()
+                    history_integral_today = 0
+                    if integral_history:
+                        history_integory_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
+                        print history_integory_today
+                    if history_integral_today < 80:
+                        integral = integral_strategy.value
+                        user.integral = user.integral + integral_strategy.value
+                        db.session.add(user)
 
                         integral_record = IntegralRecord()
                         integral_record.uid = uid
@@ -181,25 +215,6 @@ def comicbrowse(id):
                         integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
 
                         db.session.add(integral_record)
-                    viewinfo.recentchapter = chapter
-                    viewinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
-
-                else:
-                    #integral
-                    integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
-                    integral = integral_strategy.value
-                    user = User.query.get(int(uid))
-                    if user:
-                        user.integral = user.integral + integral_strategy.value
-                        db.session.add(user)
-
-                    integral_record = IntegralRecord()
-                    integral_record.uid = uid
-                    integral_record.action = integral_strategy.id
-                    integral_record.change = integral_strategy.value
-                    integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-
-                    db.session.add(integral_record)
                     viewinfo = ViewInfo()
                     viewinfo.userid = uid
                     viewinfo.comicid = cid
@@ -314,6 +329,7 @@ def mall():
 
 @main.route('/mysign', methods=['GET'])
 def sign():
+
     return render_template('sign.html')
 
 def _get_annymous_id():

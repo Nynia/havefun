@@ -43,9 +43,19 @@
 
         </div>
         {{ form.submit(value="登   录",style="padding:0;") }}
-         <a href="/auth/register" class="unregistered">未注册过？</a>
+        <a href="/auth/register" class="unregistered">未注册过？</a>
     </form>
+    <!--忘记密码弹框开始-->
+    <div id="main">
+        <div class="order" style="border: none;width: 66.2%;">
+            <div class="order_bottom order_b">
+                <a href="/auth/reset">重置密码</a>
+                <span>取消</span>
+            </div>
+        </div>
+    </div>
 
+    <!--忘记密码弹框结束-->
 </div>
 </body>
 <script>
@@ -60,3 +70,11 @@
 </script>
 </html>
 <script src="../static/js/font.js"></script>
+<script>
+	$('.forget').click(function () {
+                $('#main').show();
+        });
+        $('.order_b span').click(function () {
+            $('#main').hide()
+        });
+</script>

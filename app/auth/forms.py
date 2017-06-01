@@ -13,3 +13,13 @@ class RegisterFrom(FlaskForm):
     password = PasswordField()
     vercode = StringField(validators=[DataRequired()])
     submit = SubmitField()
+
+class ResetForm(FlaskForm):
+    phonenum = StringField(validators=[Regexp('^1[3|5|7|8][0-9]{9}$', 0, 'phone error')])
+    vercode = StringField(validators=[DataRequired()])
+    submit = SubmitField()
+
+class ResetSubmitForm(FlaskForm):
+    phonenum = StringField()
+    password = PasswordField()
+    submit = SubmitField()

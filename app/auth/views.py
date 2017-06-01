@@ -3,10 +3,11 @@ from . import auth
 from flask_login import login_user, logout_user, login_required, current_user
 from flask import render_template, redirect, url_for, flash, session, request, jsonify
 from ..models import User, OrderRelation, CheckinRecord,IntegralStrategy,IntegralRecord
-from .forms import LoginForm, RegisterFrom
+from .forms import LoginForm, RegisterFrom,ResetForm,ResetSubmitForm
 from ..utils.func import generate_identifying_code
 import datetime
 
+#cache_register = {}
 cache = {}
 from app import db
 
@@ -75,6 +76,7 @@ def register():
         vercode = form.vercode.data
         password = form.password.data
         print password
+        print cache
         if vercode == cache.get(phonenum):
             phonenum = request.form.get('phonenum')
             user = User.query.filter_by(phonenum=phonenum).first()
@@ -156,9 +158,44 @@ def checkin():
             'data':None
         })
 
-@auth.route('/reset', methods=['GET'])
+@auth.route('/reset', methods=['GET','POST'])
 def reset_password():
-    pass
+    resetform = ResetForm()
+    resetsubmitform = ResetSubmitForm()
+    action = request.args.get('action')
+    if action == 'getIdentifingCode':
+        phonenum = request.args.get('phonenum')
+        print phonenum
+        code = generate_identifying_code()
+        msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
+        cache[phonenum] = code
+        print cache
+        import requests
+        url = 'http://221.228.17.88:8080/sendmsg/send'
+        params = {
+            'phonenum': phonenum,
+            'msg': msg
+        }
+        r = requests.get(url, params=params)
+        print r.text
+        return jsonify({
+            'phonenum': phonenum,
+            'msg': msg
+        })
+    if request.method == 'POST':
+        if resetsubmitform.password.data:
+            phonenum = resetsubmitform.phonenum.data
+            print phonenum
+        else:
+            phonenum = request.form.get('phonenum')
+            vercode = request.form.get('vercode')
+            if vercode == cache.get(phonenum):
+                return render_template('safety.html', form=resetsubmitform, phonenum=phonenum)
+            else:
+                flash(u'验证码输入错误', 'reset')
+
+        return render_template('reset.html', form=resetform)
+    return render_template('reset.html',form=resetform)
 
 @auth.before_app_request
 def before_request():
