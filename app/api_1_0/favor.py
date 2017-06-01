@@ -65,15 +65,23 @@ def favor():
 
         integral_strategy = IntegralStrategy.query.filter_by(description=u'收藏').first()
         if integral_strategy:
-            integral = integral_strategy.value
-            user.integral = user.integral + integral_strategy.value
-            integral_record = IntegralRecord()
-            integral_record.uid = uid
-            integral_record.action = integral_strategy.id
-            integral_record.change = integral_strategy.value
-            integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-            db.session.add(user)
-            db.session.add(integral_record)
+            today = datetime.now().strftime('%Y%m%d')
+            integral_history = IntegralRecord.query.filter(IntegralRecord.timestamp.startswith(today)).filter_by(
+                action=integral_strategy.id).all()
+            history_integral_today = 0
+            if integral_history:
+                history_integral_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
+                print history_integral_today
+            if history_integral_today < 80:
+                integral = integral_strategy.value
+                user.integral = user.integral + integral_strategy.value
+                integral_record = IntegralRecord()
+                integral_record.uid = uid
+                integral_record.action = integral_strategy.id
+                integral_record.change = integral_strategy.value
+                integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+                db.session.add(user)
+                db.session.add(integral_record)
     db.session.add(favorinfo)
     db.session.commit()
     return jsonify({
