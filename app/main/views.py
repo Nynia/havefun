@@ -177,6 +177,7 @@ def comicbrowse(id):
                             history_integory_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
                             print history_integory_today
                         if history_integral_today < 80:
+                            print history_integory_today
                             integral = integral_strategy.value
                             user.integral = user.integral + integral_strategy.value
                             db.session.add(user)
