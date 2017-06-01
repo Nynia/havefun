@@ -20,10 +20,10 @@ def generate_identifying_code(len=4):
     verification_code = ''.join(myslice)
     return verification_code
 
-def AES_encrypt(text, key, iv):
-    pad = 16 - len(text) % 16
-    text = text + pad * chr(pad)
-    encryptor = AES.new(key, AES.MODE_CBC, iv)
-    encrypt_text = encryptor.encrypt(text)
-    encrypt_text = base64.b64encode(encrypt_text)
-    return encrypt_text
+# def AES_encrypt(text, key, iv):
+#     pad = 16 - len(text) % 16
+#     text = text + pad * chr(pad)
+#     encryptor = AES.new(key, AES.MODE_CBC, iv)
+#     encrypt_text = encryptor.encrypt(text)
+#     encrypt_text = base64.b64encode(encrypt_text)
+#     return encrypt_text
