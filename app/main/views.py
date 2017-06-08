@@ -22,7 +22,7 @@ def config():
         game = Game()
         myftp = MyFTP('192.168.114.138', 12345, 'jsgx', 'jsgx2017', '/')
         myftp.login()
-        prefix = config.STATIC_URL_PREFIX
+        prefix = 'http://221.228.17.87/res/'
         for key, value in form.data.items():
             if hasattr(game, key):
                 setattr(game, key, value)
