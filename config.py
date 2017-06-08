@@ -3,6 +3,12 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 STATIC_URL_PREFIX = 'http://221.228.17.87/res/'
 ORDER_REQUEST_URL = 'http://61.160.185.51:9250/ismp/serviceOrder'
+
+FTP_ADDR = '192.168.114.138'
+FTP_PORT = 12345
+FTP_USER = 'jsgx'
+FTP_PWD = 'jsgx2017'
+
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'skks'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
