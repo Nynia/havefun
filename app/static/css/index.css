@@ -36,7 +36,6 @@ a:hover {
   height: 2.4rem;
   line-height: 2.4rem;
   background-color: #f7d631;
-  text-align: center;
 }
 
 .header-logo-container img {
@@ -103,13 +102,13 @@ a:hover {
   display: inline-block;
   *display: inline;
   *zoom: 1;
-  width: .4rem;
-  height: .4rem;
+  width: .4831rem;
+  height: .4831rem;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, .4);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#66000000", endColorstr="#66000000");
-  margin: 0 .25rem;
+  margin: 0 .4831rem;
   font-size: 0;
 }
 

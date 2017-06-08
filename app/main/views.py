@@ -57,7 +57,7 @@ def config():
 
 @main.route('/', methods=['GET'])
 def root():
-    return redirect(url_for('main.comic'))
+    return redirect(url_for('main.game'))
 
 @main.route('/package', methods=['GET'])
 def package():
@@ -103,6 +103,12 @@ def game():
     h5 = Game.query.filter_by(type=2).limit(7).all()
     print h5
     return render_template('game.html', packages=packages, h5=h5)
+
+@main.route('/h5game', methods=['GET'])
+def h5game():
+    next = request.args.get('next')
+    return render_template('game_h5.html',url=next)
+
 
 @main.route('/game/<id>', methods=['GET'])
 def gamedetail(id):
@@ -279,13 +285,7 @@ def readinginfo(bookid):
                 chapter_dict_list.append(dict)
             return render_template('read_description.html', book=reading, chapters=chapter_dict_list, flag=True,
                                    package=package)
-@main.route('/h5game', methods=['GET'])
-def h5game():
-    next = request.args.get('next')
-    if not current_user.is_anonymous:
-        pass
-    else:
-        return redirect(next)
+
 
 
 

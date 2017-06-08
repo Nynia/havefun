@@ -1182,7 +1182,7 @@ table tr td:nth-child(2){
 	margin-bottom: 0;
 	padding: 7% 8% 6%;
 	color: #000;
-	font-size: 0.7rem;
+	font-size: 0.8rem;
 	}
 .order_bottom button{
 	margin-bottom: 1.256039rem;
@@ -1672,14 +1672,12 @@ body{
 }
 .header-menu-container:after{
 	display: none;
-
 }
-.header-menu-container a:nth-last-child(1){
-	position: absolute;
-	right: 0.55rem;
-	top: 0;
-	width: 1.352657rem;
-	height: 1.352657rem;
+.header-menu-container a{
+	width:23%;
+	text-align: center;
+	display: inline-block;
+	margin: 0 0rem!important;
 }
 /*动漫详情页改版*/
 .cartoon_m{
@@ -1898,4 +1896,21 @@ body{
 }
 .rule_n{
 	margin-top: 1rem;
+}
+.my_n{
+	float: left;
+	margin-left: 0.725rem;
+	margin-top: 0.4831rem;
+}
+.header-logo-container .logo{
+	text-align: left;
+	margin-left: 1.256038rem;
+}
+.header-logo-container a img{
+	float: right;
+	line-height: 2.4rem;
+	margin-right: 1.256038rem;
+	margin-top: 0.52rem;
+	width: 1.4rem;
+	height: 1.4rem;
 }

@@ -17,6 +17,11 @@
 </head>
 <body style="padding-bottom: 2.56rem;background-color: #eee;">
 <div class="header" id="portrait">
+    <div class="my_n">
+        <a href="/"><img src="../static/img/rights.png" alt="叉号"
+                                                 style="width: 0.4831rem;height: 0.82126rem;"/></a>
+    </div>
+
     <div class="news">
         <img src="../static/img/news.png" alt="消息"/>
         <div class="clear"></div>
@@ -115,7 +120,6 @@
 <!--弹出框-->
 <div id="main">
     <div class="order">
-        <div class="order_top">提 示</div>
         <div class="order_bottom">
             <p>您将<i style="color: #f16664;font-style: normal;">退出登录</i>此账户</p>
             <button class="cancel">取消</button>
@@ -168,7 +172,7 @@
                         $('.sign').css('color', '#aeaeae');
                         $('.sign').css('border', '1px solid #aeaeae');
                         $('.sign img').hide();
-                        $('section:first').text('已连续签到' + data['data']['continus_checkin'] + '天')
+                        $('section:first span').text('已连续签到' + data['data']['continus_checkin'] + '天')
                     }
                 }
             });

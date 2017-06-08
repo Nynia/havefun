@@ -21,14 +21,14 @@
 <!-- header -->
 <header id="header" class="">
     <div class="header-logo-container">
-        <img src="../static/img/logo.png" alt="">
+        <img src="../static/img/logo.png" alt="" class="logo">
+        <a href="/my"><img src="../static/img/head.png" alt=""/></a>
     </div>
     <div class="header-menu-container">
+        <a href="javascript:;"class="current">游戏</a>
         <a href="/comic">动漫</a>
         <a href="/video">视频</a>
-        <a href="/game" class="current">游戏</a>
         <a href="/music">音乐</a>
-        <a href="/my"><img src="../static/img/head.png" alt="" /></a>
     </div>
 </header>
 <!-- header end -->
@@ -67,7 +67,7 @@
                     <li class="games">
                         <img src="{{ g.img_icon }}" alt="{{ g.name }}"/>
                         <p>{{ g.name }}</p>
-                        <a href="{{ g.url }}"><img src="../static/img/start_game.png" alt=""/></a>
+                        <a href="/h5game?next={{ g.url }}"><img src="../static/img/start_game.png" alt=""/></a>
                     </li>
                 {% endfor %}
                 <li class="index indexs">
