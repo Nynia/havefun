@@ -146,22 +146,23 @@ body{
 	position: relative;
 	line-height: 1.45;
 	}
-.recommend_bottom ul .games p{
+.recommend_bottom ul .games>a p{
 	font-size: 0.5604rem;
 	line-height: 2;
+	margin-bottom: 0;
 	}
-.index{
-	/*height: 6.52174rem;*/
-}
 #star img{
 	width: 0.4348rem;
 	height: 0.38648rem;
 	}
-.games>img{
+.games>a>img{
 	width:3.8164rem;
 	height:3.8164rem;
 	}
-.games a{
+.games>a p{
+	color: #333;
+}
+.games .star_m{
 	 width: 3.816rem;
 	 height: 1.546rem;
 	 line-height: 1.546rem;
@@ -187,6 +188,7 @@ body{
 .recommend_bottom .index p:nth-child(2),.recommend_bottom .index p:nth-child(4){
 	font-size: 0.561rem;
 	margin-top: 0.5rem;
+	margin-bottom: 0;
 	}
 .more{
 	position: absolute;
@@ -661,6 +663,9 @@ input:disabled{
 	margin: 2.4154rem auto 0;
 	position: relative;
 	}
+.supers{
+	margin: 1.2077rem auto 0;
+}
 .super_left{
 	float: left;
 	}
@@ -684,7 +689,13 @@ input:disabled{
 	border-radius: 5px;
 	line-height: 1.4976rem;
 	font-size: 0.73rem;
+	color: #000;
 	}
+.super .buttons{
+	border: 1px solid #08619c;
+	color: #08619C;
+	background: #fff;
+}
 .super .button img,.download img{
 	width:3.478rem!important;
 	height:1.4976rem!important;
@@ -773,7 +784,7 @@ dd a{
 	font-size:1.067rem;
 	margin-top: -0.2rem;
 	}
-.snows li:nth-child(2),.snows li:nth-child(3),.snows li:nth-child(4){
+.snows li:nth-child(2),.snows li:nth-child(3),.snows li:nth-child(4),.snows li:nth-child(5){
 	font-size: 0.7469rem;
 	line-height: 1.7;
 	}
@@ -1067,6 +1078,12 @@ dd a{
 .super_right ul li:nth-child(2){
 	margin-top: 0.483rem;
 	}
+.snows ul li span{
+	margin-left: 0.8695rem;
+}
+.snows ul li:nth-child(2) span{
+	margin-left: 0.3rem;
+}
 .super_right ul li:nth-child(5) img{
 	margin-bottom: 0.24154rem;
 	width: 0.7729rem;
@@ -1375,7 +1392,11 @@ table tr td:nth-child(2){
 dd p{
 	line-height: 20px;
 	margin-bottom: 0;
+	color: #5d5d5d;
 	}
+dd .fly{
+	color: #fff;
+}
 .ascend{
 	color: #F7D631;
 	}
@@ -1680,14 +1701,14 @@ body{
 	margin: 0 0rem!important;
 }
 /*动漫详情页改版*/
-.cartoon_m{
+.cartoon_m,.game_m{
 	background: url(../img/cartoon_banner.png);
 	background-size: cover;
 	height: 11.30435rem;
 	width: 100%;
 	position: relative;
 }
-.cartoon_m .title{
+.cartoon_m .title,.game_m .title{
 	position: absolute;
 	bottom: 0.4831rem;
 }
@@ -1705,7 +1726,7 @@ body{
 .title{
 	text-align: left;
 }
-.cartoon_m .favorite{
+.cartoon_m .favorite,.game_m .favorite{
 	position: absolute;
 	right: 1.062802rem;
 	bottom: 0.96618rem;

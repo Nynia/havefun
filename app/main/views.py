@@ -5,14 +5,15 @@ from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
 from werkzeug.utils import secure_filename
-import os,re,random
+import os, re, random
 from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
-import config
 from app import db
 from datetime import datetime
 from flask_login import current_user
-from app.models import Package, Comic, Reading, Chapter, ViewInfo, OrderRelation,AccessLog,ComicChapterInfo,FavorInfo,IntegralRecord,IntegralStrategy,User
+from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelation, AccessLog, ComicChapterInfo, \
+    FavorInfo, IntegralRecord, IntegralStrategy, User
+
 
 @main.route('/config', methods=['GET', 'POST'])
 def config():
@@ -55,9 +56,11 @@ def config():
         print game.to_json()
     return render_template('admin.html', form=form)
 
+
 @main.route('/', methods=['GET'])
 def root():
     return redirect(url_for('main.game'))
+
 
 @main.route('/package', methods=['GET'])
 def package():
@@ -104,10 +107,49 @@ def game():
     print h5
     return render_template('game.html', packages=packages, h5=h5)
 
+
 @main.route('/h5game', methods=['GET'])
 def h5game():
-    next = request.args.get('next')
-    return render_template('game_h5.html',url=next)
+    id = request.args.get('id')
+    game = Game.query.get(int(id))
+    integral = 0
+    if not current_user.is_anonymous:
+        uid = session.get('user_id')
+        today = datetime.now().strftime('%Y%m%d')
+        user = User.query.get(int(uid))
+        # 添加积分记录
+        viewrecords = ViewRecord.query.filter_by(user_id=uid).filter_by(target_type='2').filter_by(target_id=id).filter(
+            ViewRecord.createtime.startswith(today)).all()
+        if not viewrecords:
+            integral_strategy = IntegralStrategy.query.filter_by(description=u'玩H5游戏').first()
+            integral_history = IntegralRecord.query.filter_by(uid=uid).filter_by(action=integral_strategy.id).filter(
+                IntegralRecord.timestamp.startswith(today)).all()
+            history_integral_today = 0
+            if integral_history:
+                history_integral_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
+                print history_integral_today
+            # 当日游戏积分未超过80
+            if history_integral_today < 80:
+                integral = integral_strategy.value
+                user.integral = user.integral + integral_strategy.value
+                db.session.add(user)
+
+                integral_record = IntegralRecord()
+                integral_record.uid = uid
+                integral_record.action = integral_strategy.id
+                integral_record.change = integral_strategy.value
+                integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+
+                db.session.add(integral_record)
+        # 添加访问记录
+        viewrecord = ViewRecord()
+        viewrecord.target_type = '2'
+        viewrecord.user_id = uid
+        viewrecord.target_id = id
+        viewrecord.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+        db.session.add(viewrecord)
+        db.session.commit()
+    return render_template('game_h5.html', url=game.url, integral=integral)
 
 
 @main.route('/game/<id>', methods=['GET'])
@@ -119,11 +161,13 @@ def gamedetail(id):
         flag = True
     return render_template('game_description.html', game=game, flag=flag, package=package)
 
+
 @main.route('/comic', methods=['GET'])
 def comic():
     packages = Package.query.filter_by(type=1).all()
     print packages
     return render_template('cartoon.html', packages=packages)
+
 
 @main.route('/comic/<id>', methods=['GET'])
 def comicbrowse(id):
@@ -144,67 +188,31 @@ def comicbrowse(id):
             })
     else:
         if chapter == None:
+            favor = None
             if not current_user.is_anonymous:
                 uid = session.get('user_id')
                 cid = comic.id
                 favorinfo = FavorInfo.query.filter_by(uid=uid).filter_by(type='1').filter_by(cid=cid).first()
-                favor = True if favorinfo and favorinfo.state=='1' else False
+                favor = True if favorinfo and favorinfo.state == '1' else False
                 print 'favor:' + str(favor)
-                viewinfo = ViewInfo.query.filter_by(userid=uid).filter_by(comicid=cid).first()
-                if viewinfo:
-                    recentchapter = viewinfo.recentchapter
-                    return render_template('cartoon_description.html', comic=comic, package=package, recentchapter=recentchapter,favor=favor)
-                else:
-                    return render_template('cartoon_description.html', comic=comic, package=package,
-                                           recentchapter=None,favor=favor)
-            else:
-                return render_template('cartoon_description.html', comic=comic, package=package,
-                                       recentchapter=None)
+            return render_template('cartoon_description.html', comic=comic, package=package,
+                                   recentchapter=None, favor=favor)
         else:
             if not current_user.is_anonymous:
                 uid = session.get('user_id')
+                user = User.query.get(int(uid))
                 cid = comic.id
                 chapter = chapter
                 type = '1'
-
-                viewinfo = ViewInfo.query.filter_by(userid=uid).filter_by(comicid=cid).first()
                 today = datetime.now().strftime('%Y%m%d')
-                if viewinfo:
-                    #integral
-                    lastviewtime = viewinfo.updatetime
-                    if not lastviewtime.startswith(today):
-                        integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
-
-                        user = User.query.get(int(uid))
-
-                        integral_history = IntegralRecord.query.filter_by(action=integral_strategy.id).filter(IntegralRecord.timestamp.startswith(today)).all()
-                        history_integral_today = 0
-                        if integral_history:
-                            history_integral_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
-                            print history_integral_today
-                        if history_integral_today < 80:
-                            integral = integral_strategy.value
-                            user.integral = user.integral + integral_strategy.value
-                            db.session.add(user)
-
-                            integral_record = IntegralRecord()
-                            integral_record.uid = uid
-                            integral_record.action = integral_strategy.id
-                            integral_record.change = integral_strategy.value
-                            integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-
-                            db.session.add(integral_record)
-                    viewinfo.recentchapter = chapter
-                    viewinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
-
-                else:
-                    #integral
+                viewrecords = ViewRecord.query.filter_by(user_id=uid).filter_by(target_type='1').filter_by(
+                    target_id=cid).filter(ViewRecord.createtime.startswith(today)).all()
+                if not viewrecords:
+                    # integral
                     integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
-
-                    user = User.query.get(int(uid))
-
-                    integral_history = IntegralRecord.query.filter(IntegralRecord.timestamp.startswith(today)).filter_by(
-                        action=integral_strategy.id).all()
+                    integral_history = IntegralRecord.query.filter_by(uid=uid).filter_by(
+                        action=integral_strategy.id).filter(
+                        IntegralRecord.timestamp.startswith(today)).all()
                     history_integral_today = 0
                     if integral_history:
                         history_integral_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
@@ -219,17 +227,14 @@ def comicbrowse(id):
                         integral_record.action = integral_strategy.id
                         integral_record.change = integral_strategy.value
                         integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-
                         db.session.add(integral_record)
-                    viewinfo = ViewInfo()
-                    viewinfo.userid = uid
-                    viewinfo.comicid = cid
-                    viewinfo.recentchapter = chapter
-                    viewinfo.type = type
-                    viewinfo.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
-                    viewinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
-
-                db.session.add(viewinfo)
+                viewrecord = ViewRecord()
+                viewrecord.user_id = uid
+                viewrecord.target_id = cid
+                viewrecord.target_chapter = chapter
+                viewrecord.target_type = type
+                viewrecord.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+                db.session.add(viewrecord)
                 db.session.commit()
 
             chapterinfo = ComicChapterInfo.query.filter_by(bookid=id).filter_by(chapterid=chapter).first()
@@ -241,7 +246,8 @@ def comicbrowse(id):
                     filelist2.append('/comics' + '/' + id + '/' + chapter + '/' + str(i + 1) + '.jpg')
             print filelist2
             return render_template('cartoon_browse.html', imglist=filelist2, cur=chapter, len=comic.curchapter,
-                                   package=package,integral=integral)
+                                   package=package, integral=integral)
+
 
 @main.route('/reading', methods=['GET'])
 def reading():
@@ -249,7 +255,8 @@ def reading():
     print packages
     readings = Reading.query.all()
     random.shuffle(readings)
-    return render_template('reading.html', packages=packages,books=readings)
+    return render_template('reading.html', packages=packages, books=readings)
+
 
 @main.route('/reading/<bookid>', methods=['GET'])
 def readinginfo(bookid):
@@ -287,15 +294,15 @@ def readinginfo(bookid):
                                    package=package)
 
 
-
-
 @main.route('/video', methods=['GET'])
 def vedio():
     return render_template('video.html')
 
+
 @main.route('/music', methods=['GET'])
 def music():
     return render_template('music.html')
+
 
 @main.route('/my', methods=['GET'])
 def my():
@@ -313,9 +320,10 @@ def my():
         else:
             checkinstatus = False
         print checkinstatus
-        return render_template('my_loggedin.html',checkinstatus=checkinstatus, checkindays=checkindays)
+        return render_template('my_loggedin.html', checkinstatus=checkinstatus, checkindays=checkindays)
     else:
         return render_template('my.html')
+
 
 @main.route('/myorder', methods=['GET'])
 def myorder():
@@ -327,20 +335,23 @@ def myorder():
         dict = {}
         dict['productname'] = package.productname
         t = r.ordertime
-        dict['timestamp'] = t[:4]+'-'+t[4:6]+'-'+t[6:8]+' '+t[8:10]+':'+t[10:12]+':'+t[12:14]
+        dict['timestamp'] = t[:4] + '-' + t[4:6] + '-' + t[6:8] + ' ' + t[8:10] + ':' + t[10:12] + ':' + t[12:14]
         dict['productid'] = package.productid
         data.append(dict)
     return render_template('myorder.html', data=data)
+
 
 @main.route('/mall', methods=['GET'])
 def mall():
     return render_template('mall.html')
 
+
 @main.route('/mysign', methods=['GET'])
 def sign():
     return render_template('sign.html')
 
-@main.route('/flow',methods = ['GET'])
+
+@main.route('/flow', methods=['GET'])
 def flow():
     if current_user.is_anonymous:
         return redirect('http://flow.jsinfo.net')
@@ -351,6 +362,7 @@ def flow():
         url = 'http://flow.jsinfo.net?phone=%s' % encrptyed
         print url
         return redirect(url)
+
 
 def _get_annymous_id():
     address = request.headers.get('X-Forwarded-For', request.remote_addr)
@@ -378,8 +390,7 @@ def after_request(response):
         accesslog.uid = _get_annymous_id()
     else:
         accesslog.uid = current_user.id
-        #处理登录用户的积分
-
+        # 处理登录用户的积分
 
     db.session.add(accesslog)
     db.session.commit()

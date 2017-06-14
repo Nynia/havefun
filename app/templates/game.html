@@ -25,7 +25,7 @@
         <a href="/my"><img src="../static/img/head.png" alt=""/></a>
     </div>
     <div class="header-menu-container">
-        <a href="javascript:;"class="current">游戏</a>
+        <a href="javascript:;" class="current">游戏</a>
         <a href="/comic">动漫</a>
         <a href="/video">视频</a>
         <a href="/music">音乐</a>
@@ -65,9 +65,11 @@
             <ul>
                 {% for g in h5 %}
                     <li class="games">
-                        <img src="{{ g.img_icon }}" alt="{{ g.name }}"/>
-                        <p>{{ g.name }}</p>
-                        <a href="/h5game?next={{ g.url }}"><img src="../static/img/start_game.png" alt=""/></a>
+                        <a href="/h5game?id={{ g.id }}">
+                            <img src="{{ g.img_icon }}" alt="{{ g.name }}"/>
+                            <p>{{ g.name }}</p>
+                            <a href="/h5game?id={{ g.id }}" class="star_m">开始游戏</a>
+                        </a>
                     </li>
                 {% endfor %}
                 <li class="index indexs">
@@ -144,10 +146,17 @@
         autoPlay: true,//自动播放
         autoPage: true //自动分页
     });
-    $('.mores').click(function(){
-	$('.recommend_top ul li a').css('color','#333')
-	$('.recommend_bottom .part').eq(2).show().siblings().hide();
-	$('.recommend_top ul li').eq(2).find('a').css('color','#eba241');
-})
+    $('.mores').click(function () {
+        classfiy();
+    });
+    $('.indexs').click(function () {
+        classfiy();
+    });
+    function classfiy() {
+        $('.recommend_top ul li a').css('color', '#333');
+        $('.recommend_bottom .part').eq(2).show().siblings().hide();
+        $('.recommend_top ul li').eq(2).find('a').css('color', '#eba241');
+    };
+
 
 </script>

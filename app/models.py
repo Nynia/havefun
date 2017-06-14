@@ -152,6 +152,7 @@ class Game(db.Model):
     brief = db.Column(db.String(255))
     size = db.Column(db.String(20))
     createtime = db.Column(db.String(14))
+    updatetime = db.Column(db.String(14))
 
     img_screenshot_1 = db.Column(db.String(255))
     img_screenshot_2 = db.Column(db.String(255))
@@ -176,6 +177,7 @@ class Game(db.Model):
             'brief': self.brief,
             'size': self.size,
             'createtime': self.createtime,
+            'updatetime':self.updatetime,
             'img_screenshot_1': self.img_screenshot_1,
             'img_screenshot_2': self.img_screenshot_2,
             'img_screenshot_3': self.img_screenshot_3,
@@ -299,15 +301,14 @@ class Chapter(db.Model):
         return json_post
 
 
-class ViewInfo(db.Model):
-    __tablename__ = 'view_info'
+class ViewRecord(db.Model):
+    __tablename__ = 'view_record'
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(1))
-    comicid = db.Column(db.Integer)
-    recentchapter = db.Column(db.Integer)
-    userid = db.Column(db.String(15))
+    user_id = db.Column(db.Integer)
+    target_type = db.Column(db.String(1))
+    target_id = db.Column(db.Integer)
+    target_chapter = db.Column(db.Integer)
     createtime = db.Column(db.String(14))
-    updatetime = db.Column(db.String(14))
 
     def __repr__(self):
         return '<History %r>' % self.uid
@@ -315,12 +316,11 @@ class ViewInfo(db.Model):
     def to_json(self):
         json_post = {
             'id': self.id,
-            'type': self.type,
-            'comicid': self.chapterid,
-            'recentchapter': self.recentchapter,
-            'userid': self.userid,
-            'createtime': self.createtime,
-            'updatetiem': self.updatetime
+            'target_type': self.target_type,
+            'target_id': self.target_chapter,
+            'target_chapter': self.target_chapter,
+            'user_id': self.user_id,
+            'createtime': self.createtime
         }
         return json_post
 

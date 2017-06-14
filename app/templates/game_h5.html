@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google" value="notranslate">
     <meta name="robots" content="index,follow">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta id="viewport" name="viewport" content="width=580,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
     <meta name="msapplication-tap-highlight" content="no">
     <title>玩乐派-h5小游戏</title>
@@ -42,10 +41,13 @@
 <script src="../static/libs/jquery-3.1.0.js"></script>
 <script src="../static/js/font.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#sign_m').show();
-        setTimeout(function () {
-            $('#sign_m').hide();
-        }, 2000);
-    });
+    {% if integral > 0 %}
+        $(document).ready(function () {
+            $('#sign_m p').text('积分+' + '{{ integral }}');
+            $('#sign_m').show();
+            setTimeout(function () {
+                $('#sign_m').hide();
+            }, 2000);
+        });
+    {% endif %}
 </script>
