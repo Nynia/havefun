@@ -45,6 +45,8 @@
     <div class="order">
         <div class="order_bottom">
             <p>您将退订“xxxx包”</p>
+            <p style="display:none;"></p>
+            <p style="display:none;"></p>
             <button class="cancel">取消</button>
             <button class="confirm">确认</button>
         </div>
@@ -87,13 +89,14 @@
             },
             dataType: 'json',
             success: function (data) {
-                console.log(data);
-                //$('#mains p').text(data.message);
+                if (data.code == '0')
+                    $('#mains p').text('退订成功');
+                else $('#mains p').text(data.message);
                 $('#mains').show();
                 setTimeout(function () {
                     $('#mains').hide();
                 }, 1000);
-                var node = document.getElementById(productid)
+                var node = document.getElementById(productid);
                 node.parentNode.removeChild(node);
             }
         });
