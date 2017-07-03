@@ -169,8 +169,30 @@
                             $('#sign_m').hide();
                         }, 2000);
                     }
-                    $('.button').attr('href', '{{ game.url }}');
-                    $('.button').unbind("click");
+                    $('.button').click(function () {
+                        $.ajax({
+                            type: "get",
+                            url: "/game/download",
+                            data: {
+                                'id': '{{ game.id }}'
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data.code == '0') {
+                                    setTimeout(function () {
+                                        window.location.href = data['next']
+                                    }, 1000);
+                                    if (data['integral'] > 0) {
+                                        $('#sign_m p').text('积分+' + data['integral']);
+                                        $('#sign_m').show();
+                                        setTimeout(function () {
+                                            $('#sign_m').hide();
+                                        }, 1000);
+                                    }
+                                }
+                            }
+                        });
+                    });
                 }
             });
         {% endif %}
