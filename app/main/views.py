@@ -160,7 +160,8 @@ def gamedetail(id):
         flag = True
     return render_template('game_description.html', game=game, flag=flag, package=package)
 
-@main.route('/game/download',methods=['GET'])
+
+@main.route('/game/download', methods=['GET'])
 def downloadgame():
     id = request.args.get('id')
     game = Game.query.get(int(id))
@@ -172,7 +173,7 @@ def downloadgame():
         # 添加积分记录
         integral_strategy = IntegralStrategy.query.filter_by(description=u'下载游戏').first()
         integral_history = IntegralRecord.query.filter_by(uid=uid).filter_by(action=integral_strategy.id).filter(
-                IntegralRecord.timestamp.startswith(today)).all()
+            IntegralRecord.timestamp.startswith(today)).all()
         history_integral_today = 0
         if integral_history:
             history_integral_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
@@ -191,15 +192,16 @@ def downloadgame():
 
             db.session.add(integral_record)
         return jsonify({
-            'code':'0',
-            'integral':integral,
-            'next':game.url
+            'code': '0',
+            'integral': integral,
+            'next': game.url
         })
     else:
         return jsonify({
             'code': '109',
-            'msg':'game not exist'
+            'msg': 'game not exist'
         })
+
 
 @main.route('/comic', methods=['GET'])
 def comic():
@@ -279,7 +281,6 @@ def comicbrowse(id):
                     viewrecord.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
                 db.session.add(viewrecord)
                 db.session.commit()
-
 
             chapterinfo = ComicChapterInfo.query.filter_by(bookid=id).filter_by(chapterid=chapter).first()
             filelist2 = []
@@ -363,13 +364,19 @@ def my():
             checkinstatus = True
         else:
             checkinstatus = False
-        #history
+        # history
         view_records = ViewRecord.query.filter_by(user_id=current_user.id).filter_by(target_type='1').all()
         comic_records = []
         for item in view_records:
             comic_item = Comic.query.get(int(item.target_id))
-            comic_records.append({'name':comic_item.comicname,'cover':comic_item.cover,'updatetime':item.createtime,'chapter':item.target_chapter})
-        return render_template('my_loggedin.html', checkinstatus=checkinstatus, checkindays=checkindays, comicrecords=comic_records)
+            comic_records.append(
+                {'name': comic_item.comicname,
+                 'cover': comic_item.cover,
+                 'updatetime': item.createtime,
+                 'chapter': item.target_chapter
+                 })
+        return render_template('my_loggedin.html', checkinstatus=checkinstatus, checkindays=checkindays,
+                               comicrecords=comic_records)
     else:
         return render_template('my.html')
 
@@ -414,12 +421,14 @@ def flow():
         print url
         return redirect(url)
 
-@main.route('/history',methods=['GET'])
+
+@main.route('/history', methods=['GET'])
 def history():
     result = {}
     if not current_user.is_anonymous:
         uid = session.get('user_id')
-        record = db.session.execute(('select * from view_record where id in (select max(id) id from view_record where target_type=\'1\' and user_id=%s group by target_id);') % uid)
+        record = db.session.execute((
+                                    'select * from view_record where id in (select max(id) id from view_record where target_type=\'1\' and user_id=%s group by target_id);') % uid)
         for item in record.fetchall():
             print item
     return render_template('history.html')
