@@ -253,32 +253,33 @@ def comicbrowse(id):
                     viewrecord.target_chapter = chapter
                     viewrecord.target_type = type
                     viewrecord.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
+
+                    # integral
+                    integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
+                    integral_history = IntegralRecord.query.filter_by(uid=uid).filter_by(
+                        action=integral_strategy.id).filter(
+                        IntegralRecord.timestamp.startswith(today)).all()
+                    history_integral_today = 0
+                    if integral_history:
+                        history_integral_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
+                        print history_integral_today
+                    if history_integral_today < 80:
+                        integral = integral_strategy.value
+                        user.integral = user.integral + integral_strategy.value
+                        db.session.add(user)
+
+                        integral_record = IntegralRecord()
+                        integral_record.uid = uid
+                        integral_record.action = integral_strategy.id
+                        integral_record.change = integral_strategy.value
+                        integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+                        db.session.add(integral_record)
                 else:
                     viewrecord.target_chapter = chapter
                     viewrecord.createtime = datetime.now().strftime('%Y%m%d%H%M%S')
                 db.session.add(viewrecord)
                 db.session.commit()
 
-                #integral
-                integral_strategy = IntegralStrategy.query.filter_by(description=u'看动漫').first()
-                integral_history = IntegralRecord.query.filter_by(uid=uid).filter_by(
-                    action=integral_strategy.id).filter(
-                    IntegralRecord.timestamp.startswith(today)).all()
-                history_integral_today = 0
-                if integral_history:
-                    history_integral_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
-                    print history_integral_today
-                if history_integral_today < 80:
-                    integral = integral_strategy.value
-                    user.integral = user.integral + integral_strategy.value
-                    db.session.add(user)
-
-                    integral_record = IntegralRecord()
-                    integral_record.uid = uid
-                    integral_record.action = integral_strategy.id
-                    integral_record.change = integral_strategy.value
-                    integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-                    db.session.add(integral_record)
 
             chapterinfo = ComicChapterInfo.query.filter_by(bookid=id).filter_by(chapterid=chapter).first()
             filelist2 = []

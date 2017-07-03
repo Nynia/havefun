@@ -320,6 +320,8 @@ main{
 #watch{
 	margin: 0.4831rem auto;
 	background: #fff;
+	min-height: 6.95rem;
+	overflow: hidden;
 	}
 #watch .play_top>img{
 	width: 0.9662rem;
@@ -328,22 +330,15 @@ main{
 .watchs{
 	margin-top: 0.483rem;
 	margin-left: 0.725rem;
-	overflow: hidden;
 	}
 .watchs ul{
-	overflow: hidden;
 	position: relative;
 	box-sizing: border-box;
-	width: 100%;
-	right: 0;
 	}
 .watchs ul li{
-	float: left;
-	width:23.5%;
+	width:5.0242rem;
 	text-align: center;
-	margin-right: 2%;
 	position: relative;
-	overflow: hidden;
 	}
 .watchs ul li div{
 	position: absolute;
@@ -351,6 +346,7 @@ main{
 	color: #fff;
 	width: 100%;
 	height: 3.092rem;
+	top: 0;
 	}
 .watchs ul li div img{
 	margin-top: 1.3875rem;
@@ -360,10 +356,14 @@ main{
 .watchs ul li div p{
 	text-align: left;
 	margin: 0 0 0.1rem 0.2rem;
+	line-height: 1;
 	}
 @media (min-width: 320px) and (max-width: 340px){
 	.watchs ul li div{
 		bottom: 1.25rem;
+	}
+	#watch{
+		min-height: 7.5rem;
 	}
 }
 #play{
@@ -375,9 +375,6 @@ main{
 .watchs ul li a>img{
 	width: 5.0242rem;
 	height: 3.092rem;
-	}
-.watchs ul li:nth-child(4){
-	margin-right: 0;
 	}
 .watchs .column{
 	margin-top: 20px;
@@ -403,12 +400,8 @@ main{
 	color: #c6c6c6;
 	}
 .watchs ul li a p span:nth-child(1){
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 2.319rem;
-	display: inline-block;
-	float: left;
+	white-space: normal;
+	/*display: inline-block;*/
 	}
 .watchs ul li a p span:nth-child(2){
 	margin-left: 0.3rem;
@@ -2015,3 +2008,56 @@ body{
 	margin-right: 0;
 	margin-top: 0.4rem;
 }
+
+/*我的页面左滑*/
+.find_nav {
+    width: 100%;
+    display: -moz-box;
+    display: -webkit-box;
+    display: box;
+    min-height: 4.59rem;
+}
+.find_nav_left {
+    position: relative;
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    min-height: 4.59rem;
+}
+.watchs{
+	position: absolute;
+	left: 0;
+	max-height: 4.3478rem;
+}
+.watchs ul{
+	font-size: 0;
+}
+.watchs ul li{
+	float: left;
+	padding: 0;
+	margin-right: 0.4831rem;
+	min-height: 4.59rem;
+}
+.watchs ul li:nth-last-child(2){
+	margin-right: 0;
+}
+.watchs ul li:nth-last-child(1){
+	/*width: 0;*/
+}
+.watchs ul li a{
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.sideline {
+    display: block;
+    position: absolute;
+    border: 0;
+    height: 2px;
+    left: 0;
+    pointer-events: none;
+}
+ .watchs ul li a>p{
+ 	text-align: center;
+ }

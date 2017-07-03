@@ -93,31 +93,47 @@
             <img src="../static/img/right_arrow.png" alt="" class="watch_m"/>
         </a>
     </div>
-    <div class="watchs" id="watched">
-        <ul>
-            <li><a href=""><img src="../static/img/video.png" alt=""/>
-                <p><span>哑舍</span><span>71集</span></p>
-                <div><img src="../static/img/plays.png" alt=""/>
-                    <p>22%</p></div>
-            </a></li>
-            <li><a href=""><img src="../static/img/video.png" alt=""/>
-                <p><span>灼灼流</span><span>20集</span></p>
-                <div><img src="../static/img/plays.png" alt=""/>
-                    <p>3%</p></div>
-            </a></li>
-            <li><a href=""><img src="../static/img/video.png" alt=""/>
-                <p><span>砂与海之哈哈哈</span><span>47集</span></p>
-                <div><img src="../static/img/plays.png" alt=""/>
-                    <p>已看完</p></div>
-            </a></li>
-            <li><a href=""><img src="../static/img/girl.png" alt=""/>
-                <p><span>叫姐姐</span><span>55集</span></p>
-                <div><img src="../static/img/plays.png" alt=""/>
-                    <p>89%</p></div>
-            </a></li>
-        </ul>
-        <div class="clear"></div>
+    <div class="find_nav">
+        <div class="find_nav_left">
+            <div class="watchs find_nav_list" id="watched">
+                <ul>
+                    <li><a href=""><img src="../static/img/video.png" alt=""/>
+                        <p><span>哑舍</span><span>71集</span></p>
+                        <div><img src="../static/img/plays.png" alt=""/>
+                            <p>22%</p></div>
+                    </a></li>
+                    <li><a href=""><img src="../static/img/video.png" alt=""/>
+                        <p><span>灼灼流</span><span>20集</span></p>
+                        <div><img src="../static/img/plays.png" alt=""/>
+                            <p>3%</p></div>
+                    </a></li>
+                    <li><a href=""><img src="../static/img/video.png" alt=""/>
+                        <p><span>砂与海之哈哈哈哈歌</span><span>47集</span></p>
+                        <div><img src="../static/img/plays.png" alt=""/>
+                            <p>已看完</p></div>
+                    </a></li>
+                    <li><a href=""><img src="../static/img/video.png" alt=""/>
+                        <p><span>叫姐姐</span><span>55集</span></p>
+                        <div><img src="../static/img/plays.png" alt=""/>
+                            <p>89%</p></div>
+                    </a></li>
+                    <li><a href=""><img src="../static/img/video.png" alt=""/>
+                        <p><span>砂与海之歌</span><span>47集</span></p>
+                        <div><img src="../static/img/plays.png" alt=""/>
+                            <p>已看完</p></div>
+                    </a></li>
+                    <li><a href=""><img src="../static/img/video.png" alt=""/>
+                        <p><span>叫姐姐</span><span>55集</span></p>
+                        <div><img src="../static/img/plays.png" alt=""/>
+                            <p>89%</p></div>
+                    </a></li>
+                    <li class="sideline"></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
     </div>
+
 </div>
 <div class="exit">退出登录</div>
 <!--弹出框-->
@@ -208,4 +224,38 @@
             }
         });
     });
+    //左滑
+    var fcc = $(".find_nav_list ul li").width() * ($(".find_nav_list ul li").length);
+    $(".find_nav_list ul").css("width", fcc);
+    var fl_w = $(".find_nav_list").width();
+    var flb_w = $(".find_nav_left").width();
+
+    $(".find_nav_list").on('touchstart', function (e) {
+        var touch1 = e.originalEvent.targetTouches[0];
+        x1 = touch1.pageX;
+        console.log(x1);
+        y1 = touch1.pageY;
+        console.log(y1);
+        ty_left = parseInt($(this).css("left"));
+    });
+
+
+    $(".find_nav_list").on('touchmove', function (e) {
+        var touch2 = e.originalEvent.targetTouches[0];
+        var x2 = touch2.pageX;
+        var y2 = touch2.pageY;
+        if (ty_left + x2 - x1 >= 0) {
+            $(this).css("left", 0);
+        } else if (ty_left + x2 - x1 <= flb_w - fl_w) {
+            $(this).css("left", flb_w - fl_w);
+        } else {
+            $(this).css("left", ty_left + x2 - x1);
+        }
+        if (Math.abs(y2 - y1) > 0) {
+            e.preventDefault();
+        }
+    });
+    //左滑end
+
+
 </script>
