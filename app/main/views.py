@@ -363,8 +363,13 @@ def my():
             checkinstatus = True
         else:
             checkinstatus = False
-        print checkinstatus
-        return render_template('my_loggedin.html', checkinstatus=checkinstatus, checkindays=checkindays)
+        #history
+        view_records = ViewRecord.query.filter_by(user_id=current_user.id).filter_by(target_type='1').all()
+        comic_records = []
+        for item in view_records:
+            comic_item = Comic.query.get(int(item.target_id))
+            comic_records.append({'name':comic.comicname,'cover':comic_item.cover,'updatetime':item.createtime,'chapter':item.target_chapter})
+        return render_template('my_loggedin.html', checkinstatus=checkinstatus, checkindays=checkindays, comicrecords=comic_records)
     else:
         return render_template('my.html')
 

@@ -97,36 +97,11 @@
         <div class="find_nav_left">
             <div class="watchs find_nav_list" id="watched">
                 <ul>
-                    <li><a href=""><img src="../static/img/video.png" alt=""/>
-                        <p><span>哑舍</span><span>71集</span></p>
-                        <div><img src="../static/img/plays.png" alt=""/>
-                            <p>22%</p></div>
-                    </a></li>
-                    <li><a href=""><img src="../static/img/video.png" alt=""/>
-                        <p><span>灼灼流</span><span>20集</span></p>
-                        <div><img src="../static/img/plays.png" alt=""/>
-                            <p>3%</p></div>
-                    </a></li>
-                    <li><a href=""><img src="../static/img/video.png" alt=""/>
-                        <p><span>砂与海之哈哈哈哈歌</span><span>47集</span></p>
-                        <div><img src="../static/img/plays.png" alt=""/>
-                            <p>已看完</p></div>
-                    </a></li>
-                    <li><a href=""><img src="../static/img/video.png" alt=""/>
-                        <p><span>叫姐姐</span><span>55集</span></p>
-                        <div><img src="../static/img/plays.png" alt=""/>
-                            <p>89%</p></div>
-                    </a></li>
-                    <li><a href=""><img src="../static/img/video.png" alt=""/>
-                        <p><span>砂与海之歌</span><span>47集</span></p>
-                        <div><img src="../static/img/plays.png" alt=""/>
-                            <p>已看完</p></div>
-                    </a></li>
-                    <li><a href=""><img src="../static/img/video.png" alt=""/>
-                        <p><span>叫姐姐</span><span>55集</span></p>
-                        <div><img src="../static/img/plays.png" alt=""/>
-                            <p>89%</p></div>
-                    </a></li>
+                    {% for record in comicrecords %}
+                        <li><a href=""><img src="{{ record.cover }}" alt=""/>
+                            <p><span>{{ record.name }}</span><span>{{ record.chapter }}集</span></p>
+                        </a></li>
+                    {% endfor %}
                     <li class="sideline"></li>
                 </ul>
                 <div class="clear"></div>
