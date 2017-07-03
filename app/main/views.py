@@ -104,7 +104,6 @@ def package():
 def game():
     packages = Package.query.filter_by(type=2).all()
     h5 = Game.query.filter_by(type=2).limit(7).all()
-    print h5
     return render_template('game.html', packages=packages, h5=h5)
 
 
@@ -161,6 +160,46 @@ def gamedetail(id):
         flag = True
     return render_template('game_description.html', game=game, flag=flag, package=package)
 
+@main.route('/game/download',methods=['GET'])
+def downloadgame():
+    id = request.args.get('id')
+    game = Game.query.get(int(id))
+    if game:
+        uid = session.get('user_id')
+        today = datetime.now().strftime('%Y%m%d')
+        user = User.query.get(int(uid))
+        integral = 0
+        # 添加积分记录
+        integral_strategy = IntegralStrategy.query.filter_by(description=u'下载游戏').first()
+        integral_history = IntegralRecord.query.filter_by(uid=uid).filter_by(action=integral_strategy.id).filter(
+                IntegralRecord.timestamp.startswith(today)).all()
+        history_integral_today = 0
+        if integral_history:
+            history_integral_today = reduce(lambda x, y: x + y, [r.change for r in integral_history])
+            print history_integral_today
+        # 当日游戏积分未超过80
+        if history_integral_today < 80:
+            integral = integral_strategy.value
+            user.integral = user.integral + integral_strategy.value
+            db.session.add(user)
+
+            integral_record = IntegralRecord()
+            integral_record.uid = uid
+            integral_record.action = integral_strategy.id
+            integral_record.change = integral_strategy.value
+            integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+
+            db.session.add(integral_record)
+        return jsonify({
+            'code':'0',
+            'integral':integral,
+            'next':game.url
+        })
+    else:
+        return jsonify({
+            'code': '109',
+            'msg':'game not exist'
+        })
 
 @main.route('/comic', methods=['GET'])
 def comic():
@@ -327,17 +366,19 @@ def my():
 
 @main.route('/myorder', methods=['GET'])
 def myorder():
-    phonenum = session.get('phonenum')
     data = []
-    relation = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(status='1').all()
-    for r in relation:
-        package = Package.query.get(r.productid)
-        dict = {}
-        dict['productname'] = package.productname
-        t = r.ordertime
-        dict['timestamp'] = t[:4] + '-' + t[4:6] + '-' + t[6:8] + ' ' + t[8:10] + ':' + t[10:12] + ':' + t[12:14]
-        dict['productid'] = package.productid
-        data.append(dict)
+    if not current_user.is_anonymous:
+        phonenum = session.get('phonenum')
+        relation = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(status='1').all()
+        for r in relation:
+            package = Package.query.get(r.productid)
+            dict = {}
+            dict['productname'] = package.productname
+            t = r.ordertime
+            dict['timestamp'] = t[:4] + '-' + t[4:6] + '-' + t[6:8] + ' ' + t[8:10] + ':' + t[10:12] + ':' + t[12:14]
+            dict['productid'] = package.productid
+            data.append(dict)
+    print data
     return render_template('myorder.html', data=data)
 
 
@@ -362,6 +403,16 @@ def flow():
         url = 'http://flow.jsinfo.net?phone=%s' % encrptyed
         print url
         return redirect(url)
+
+@main.route('/history',methods=['GET'])
+def history():
+    result = {}
+    if not current_user.is_anonymous:
+        uid = session.get('user_id')
+        record = db.session.execute(('select * from view_record where id in (select max(id) id from view_record where target_type=\'1\' and user_id=%s group by target_id);') % uid)
+        for item in record.fetchall():
+            print item
+    return render_template('history.html')
 
 
 def _get_annymous_id():

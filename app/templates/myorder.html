@@ -21,7 +21,7 @@
     <span class="account">我的订购</span>
 </div>
 <div class="shopping_car">
-    {% if session.phonenum %}
+    {% if data|length > 0 %}
         {% for d in data %}
             <div class="shopping_list" id="{{ d.productid }}">
                 <div class="dt">

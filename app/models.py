@@ -145,6 +145,7 @@ class Game(db.Model):
     packageid = db.Column(db.String(21))
     name = db.Column(db.String(255))
     img_icon = db.Column(db.String(255))
+    img_banner = db.Column(db.String(255))
     type = db.Column(db.String(1))
     url = db.Column(db.String(255))
     category = db.Column(db.String(20))

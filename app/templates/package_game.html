@@ -33,7 +33,7 @@
                 <img src="../static/img/ysolid.png" alt=""/>
                 <img src="../static/img/ysolid.png" alt=""/>
                 <img src="../static/img/ysolid.png" alt=""/>
-                <img src="../static/img/yempty.png" alt=""/>
+                <img src="../static/img/ysolid.png" alt=""/>
             </li>
             <li>资费：{{ package.price }}元/月</li>
 
@@ -69,14 +69,8 @@
 </div>
 <div class="summary " id="game_package">
     <p>游戏包概括：</p>
-    <dd id="intro_short">
-        <p class="fly">{{ package.description }}</p>
-        <a href="javascript:void(0)" onclick="$('#intro_short').hide();$('#intro_long').show();return false;"
-           class="data_more">详细</a>
-    </dd>
-    <dd id="intro_long" style="display:none">
-        <p class="fly">{{ package.description }}<a href="javascript:void(0)"
-                                                   onclick="$('#intro_short').show();$('#intro_long').hide();return false;">收起</a>
+    <dd id="intro_long">
+        <p class="fly">{{ package.description }}
         </p>
     </dd>
 </div>
