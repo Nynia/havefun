@@ -37,7 +37,7 @@
                 {% for i in range(5-game.star) %}
                     <img src="../static/img/yempty.png" alt=""/>
                 {% endfor %}
-            <li style="margin-top: 0.483rem;">更新日期<span>{{ game.updatetime[:8] }}</span></li>
+            <li style="margin-top: 0.483rem;">更新日期<span>{{ game.updatetime[:4]+'-'+ game.updatetime[4:6] +'-' + game.updatetime[6:8]}}</span></li>
             <li>类&#x3000;&#x3000;型<span>{{ game.category }}</span></li>
             <li>大&#x3000;&#x3000;小<span>{{ game.size }}MB</span></li>
             <div class="clear"></div>
