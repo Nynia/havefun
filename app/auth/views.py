@@ -206,7 +206,7 @@ def reset_password():
 
 @auth.before_app_request
 def before_request():
-    print current_user.is_anonymous,current_user
+    print current_user.is_anonymous,current_user,session.get('user_id')
     if session.get('user_id') and not session.get('phonenum'):
         user = User.query.get(int(session.get('user_id')))
         if user:
