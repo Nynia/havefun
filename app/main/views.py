@@ -375,8 +375,30 @@ def my():
                  'updatetime': item.createtime,
                  'chapter': item.target_chapter
                  })
+        #integral
+        integral = current_user.integral
+        if integral < 400:
+            level = 1
+        elif integral < 600:
+            level = 2
+        elif integral < 1000:
+            level = 3
+        elif integral < 1600:
+            level = 4
+        elif integral < 2400:
+            level = 5
+        elif integral < 3400:
+            level = 6
+        elif integral < 3600:
+            level = 7
+        elif integral < 5000:
+            level = 8
+        elif integral < 6600:
+            level = 9
+        else:
+            level = 10
         return render_template('my_loggedin.html', checkinstatus=checkinstatus, checkindays=checkindays,
-                               comicrecords=comic_records)
+                               comicrecords=comic_records,level=level)
     else:
         return render_template('my.html')
 
