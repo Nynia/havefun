@@ -116,3 +116,26 @@ def unfavor():
         'message': 'success',
         'data': favorinfo.to_json()
     })
+
+@api.route('/favors',methods=['GET'])
+def is_favored():
+    cid = request.args.get('cid')
+    type = request.args.get('type')
+    uid = request.args.get('uid')
+
+    favored = FavorInfo.query.filter_by(uid=uid).filter_by(cid=cid).filter_by(type=type).first()
+    if favored and favored.state == '1':
+        favored = True
+    else:
+        favored = False
+    favor_count = FavorInfo.query.filter_by(cid=cid).filter_by(type=type).filter_by(state='1').count()
+
+    print favored,favor_count
+    return jsonify({
+        'code':'0',
+        'message':'success',
+        'data':{
+            'favored': favored,
+            'favor_count': 1500+favor_count
+        }
+    })

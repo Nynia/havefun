@@ -472,3 +472,26 @@ class FavorInfo(db.Model):
             'firstfavortime':self.firstfavortime
         }
         return json_post
+
+class RecommendH5(db.Model):
+    __tablename__ = 'recommend_h5'
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(255))
+    img_icon = db.Column(db.String(255))
+    url = db.Column(db.String(255))
+    createtime = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<CustomH5 %d>' % self.id
+
+class RecommendComic(db.Model):
+    __tablename__ = 'recommend_comic'
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(255))
+    curchapter = db.Column(db.Integer)
+    img = db.Column(db.String(255))
+    createtime = db.Column(db.String(255))
+
+    def __repr__(self):
+        return '<RecommendComic %d>' % self.id
+

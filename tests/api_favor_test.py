@@ -27,6 +27,17 @@ def test_3():
     url = base_url + '/28'
     r = requests.get(url)
     print r.text
-test_1()
+
+def test_4():
+    url = base_url
+    data = {
+        'cid':'200103382',
+        'uid':31,
+        'type':'1'
+    }
+    r = requests.get(url,params=data)
+    print r.text
+#test_1()
 #test_2()
 #test_3()
+test_4()

@@ -12,7 +12,7 @@ from app import db
 from datetime import datetime
 from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelation, AccessLog, ComicChapterInfo, \
-    FavorInfo, IntegralRecord, IntegralStrategy, User
+    FavorInfo, IntegralRecord, IntegralStrategy, User,RecommendH5,RecommendComic
 
 
 @main.route('/config', methods=['GET', 'POST'])
@@ -103,7 +103,7 @@ def package():
 @main.route('/game', methods=['GET'])
 def game():
     packages = Package.query.filter_by(type=2).all()
-    h5 = Game.query.filter_by(type=2).limit(7).all()
+    h5 = RecommendH5.query.all()
     return render_template('game.html', packages=packages, h5=h5)
 
 
@@ -206,8 +206,8 @@ def downloadgame():
 @main.route('/comic', methods=['GET'])
 def comic():
     packages = Package.query.filter_by(type=1).all()
-    print packages
-    return render_template('cartoon.html', packages=packages)
+    recommends = RecommendComic.query.all()
+    return render_template('cartoon.html', packages=packages,recommends=recommends)
 
 
 @main.route('/comic/<id>', methods=['GET'])

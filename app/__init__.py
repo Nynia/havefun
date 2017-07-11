@@ -1,3 +1,4 @@
+# -*-coding:utf-8-*-
 from flask import Flask
 from flask_apscheduler import APScheduler
 from flask_bootstrap import Bootstrap
@@ -11,6 +12,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 
 login_manager = LoginManager()
+#设置成strong将无法自动从cookies登录
 #login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 

@@ -882,7 +882,9 @@ dd a{
 .thumb img{
 	position: absolute;
 	right: 0.2rem;
-	top: 0.3rem;
+	top: 0.33rem;
+	width: 0.6763rem;
+	height: 0.57971rem;
 	}
 .defeat .update{
 	position: absolute;

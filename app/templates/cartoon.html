@@ -25,7 +25,7 @@
     </div>
     <div class="header-menu-container">
         <a href="/game">游戏</a>
-        <a href="javascript:;"class="current">动漫</a>
+        <a href="javascript:;" class="current">动漫</a>
         <a href="/video">视频</a>
         <a href="/music">音乐</a>
     </div>
@@ -66,15 +66,24 @@
     </ul>
     <div class="clear"></div>
 </div>
-<div class="defeat">
-    <a href="/comic/200103380"><img src="../static/img/sywz.jpg" alt="" class="photos"/></a>
-    <div class="thumb"><span>1569</span><img src="../static/img/starts.png" alt=""/></div>
-    <div class="update">
-        <span>神印王座</span>
-        <span>更新至7话</span>
-        <span><img src="../static/img/play.png" alt=""/>43万</span>
+{% for r in recommends %}
+    <div class="defeat" id="{{ r.id }}">
+        <a href="/comic/{{ r.id }}"><img src="../static/img/sywz.jpg" alt="" class="photos"/></a>
+        <div class="thumb"><span>1569</span><img src="../static/img/start_a.png" alt=""/></div>
+        <div class="update">
+            <span>{{ r.name }}</span>
+            <span>更新至{{ r.curchapter }}话</span>
+        </div>
+    </div>
+{% endfor %}
+<!--签到积分弹框-->
+<div id="sign_m">
+    <div class="sign_n">
+        <img src="../static/img/sign_m.png" alt="积分"/>
+        <p>积分+20</p>
     </div>
 </div>
+<!--签到积分弹框end-->
 </body>
 </html>
 <script src="../static/libs/jquery-3.1.0.js"></script>
@@ -89,4 +98,89 @@
         autoPlay: true,//自动播放
         autoPage: true //自动分页
     });
+    $(document).ready(function () {
+        {% if not current_user.is_anonymous %}
+            {% for rec in recommends %}
+                var cid = {{ rec.id }};
+                $.ajax({
+                    type: 'get',
+                    url: '/api/v1.0/favors',
+                    data: {
+                        uid:{{ current_user.id }},
+                        cid: cid,
+                        type: '1'
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                        console.log(res['data']);
+                        var count = res['data']['favor_count'];
+                        $('#{{ rec.id }} span:first').text(count);
+                        if (res['data']['favored'] == true) {
+                            $('#{{ rec.id }} img:eq(1)').attr('src', "../static/img/starts.png");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e)
+                    }
+                });
+
+                $('#{{ rec.id }} .thumb').click(function () {
+                    if ($('#{{ rec.id }} img:eq(1)').attr('src') == "../static/img/start_a.png") {
+                        $.ajax({
+                            type: "get",
+                            url: "/api/v1.0/favors/favor",
+                            dataType: 'json',
+                            data: {
+                                'uid':{{ current_user.id if not current_user.is_anonymous else 0}},
+                                'cid':{{ rec.id }},
+                                'type': '1'
+                            },
+                            success: function (data, status) {
+                                if (data.code == '0') {
+                                    console.log(data);
+                                    if (data['data']['integral'] > 0) {
+                                        $('#sign_m p').text('积分+' + data['data']['integral']);
+                                        $('#sign_m').show();
+                                        setTimeout(function () {
+                                            $('#sign_m').hide();
+                                        }, 2000);
+                                    }
+                                    $('#{{ rec.id }} img:eq(1)').attr('src', '../static/img/starts.png');
+                                    var count = $('#{{ rec.id }} span:first').text();
+                                    console.log('count:'+count);
+                                    count = parseInt(count) + 1;
+                                    $('#{{ rec.id }} span:first').text(count);
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $.ajax({
+                            type: "get",
+                            url: "/api/v1.0/favors/unfavor",
+                            dataType: 'json',
+                            data: {
+                                'uid':{{ current_user.id if not current_user.is_anonymous else 0}},
+                                'cid':{{ rec.id }},
+                                'type': '1'
+                            },
+                            success: function (data, status) {
+                                if (data.code == '0') {
+                                    console.log(data);
+                                    $('#{{ rec.id }} img:eq(1)').attr('src', '../static/img/start_a.png');
+                                    var count = $('#{{ rec.id }} span:first').text();
+                                    console.log('count:'+count);
+                                    count = parseInt(count) - 1;
+                                    $('#{{ rec.id }} span:first').text(count);
+                                }
+                            }
+                        });
+                    }
+                });
+            {% endfor %}
+        {% endif %}
+    });
+
+
 </script>
