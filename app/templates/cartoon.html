@@ -68,7 +68,7 @@
 </div>
 {% for r in recommends %}
     <div class="defeat" id="{{ r.id }}">
-        <a href="/comic/{{ r.id }}"><img src="../static/img/sywz.jpg" alt="" class="photos"/></a>
+        <a href="/comic/{{ r.id }}"><img src="{{ r.img }}" alt="" class="photos"/></a>
         <div class="thumb"><span>1569</span><img src="../static/img/start_a.png" alt=""/></div>
         <div class="update">
             <span>{{ r.name }}</span>
