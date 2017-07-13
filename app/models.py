@@ -60,6 +60,7 @@ class Comic(db.Model):
     hits = db.Column(db.String(10))
     state = db.Column(db.String(1))
     cover = db.Column(db.String(255))
+    banner = db.Column(db.String(255))
     curchapter = db.Column(db.Integer)
     freechapter = db.Column(db.Integer)
     createtime = db.Column(db.DateTime)
