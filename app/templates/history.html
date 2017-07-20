@@ -20,67 +20,41 @@
 		</div>
 		<div class="content">
 			<h3 style="margin: 0.8rem 0 0.5rem 0;">今天</h3>
-			<dl>
+            {% for r in today %}
+                <dl>
 				<a href="javascript:void(0)">
 					<dt>
-						<img src="../static/img/watches.png" alt="" />
-						<p>2017.06.17</p>
+						<img src="{{ r.banner }}" alt="" />
+						<p>{{ r.createtime }}</p>
 					</dt>
 				</a>
 				<dd>
 					<a href="javascript:void(0)">
-						<h3>哑舍</h3>
+						<h3>{{ r.name }}</h3>
 						<span>动漫</span>
-						<p>观看至11集</p>
+						<p>观看至{{ r.chapter }}集</p>
 					</a>
 				</dd>
 			</dl>
-			<dl>
-				<a href="javascript:void(0)">
-					<dt>
-						<img src="../static/img/watches.png" alt="" />
-						<p>2017.06.17</p>
-					</dt>
-				</a>
-				<dd>
-					<a href="javascript:void(0)">
-						<h3>哑舍</h3>
-						<span>动漫</span>
-						<p>观看至11集</p>
-					</a>
-				</dd>
-			</dl>
+            {% endfor %}
 			<h3 style="margin: 0.57971rem 0 0.5rem 0;">更早</h3>
-			<dl>
+            {% for r in earlier %}
+               <dl>
 				<a href="javascript:void(0)">
 					<dt>
-						<img src="../static/img/watches.png" alt="" />
-						<p>2017.06.17</p>
+						<img src="{{ r.banner }}" alt="" />
+						<p>{{ r.createtime }}</p>
 					</dt>
 				</a>
 				<dd>
 					<a href="javascript:void(0)">
-						<h3>哑舍</h3>
+						<h3>{{ r.name }}</h3>
 						<span>动漫</span>
-						<p>观看至11集</p>
+						<p>观看至{{ r.chapter }}集</p>
 					</a>
 				</dd>
 			</dl>
-			<dl>
-				<a href="javascript:void(0)">
-					<dt>
-						<img src="../static/img/watches.png" alt="" />
-						<p>2017.06.17</p>
-					</dt>
-				</a>
-				<dd>
-					<a href="javascript:void(0)">
-						<h3>哑舍</h3>
-						<span>动漫</span>
-						<p>观看至11集</p>
-					</a>
-				</dd>
-			</dl>
+            {% endfor %}
 		</div>
 	</body>
 </html>

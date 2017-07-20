@@ -448,13 +448,29 @@ def flow():
 
 @main.route('/history', methods=['GET'])
 def history():
-    result = {}
+    today = []
+    earlier = []
     if not current_user.is_anonymous:
         uid = session.get('user_id')
         record = db.session.execute(('select A.id,A.comicname,A.banner,B.target_chapter,B.createtime from comic as A,(select * from view_record where id in (select max(id) id from view_record where target_type=\'1\' and user_id=%s group by target_id)) as B where A.id=B.target_id;') % uid)
         for item in record.fetchall():
-            print item
-    return render_template('history.html')
+            if item[-1].startwith(datetime.now().strftime('%Y%m%d')):
+                today.append({
+                    'id':item[0],
+                    'name':item[1],
+                    'banner':item[2],
+                    'chapter':item[3],
+                    'createtime':item[4]
+                })
+            else:
+                earlier.append({
+                    'id':item[0],
+                    'name':item[1],
+                    'banner':item[2],
+                    'chapter':item[3],
+                    'createtime':item[4]
+                })
+    return render_template('history.html',today=today,earlier=earlier)
 
 
 def _get_annymous_id():
