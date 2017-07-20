@@ -371,7 +371,7 @@ def my():
             comic_item = Comic.query.get(int(item.target_id))
             comic_records.append(
                 {'name': comic_item.comicname,
-                 'cover': comic_item.cover,
+                 'banner': comic_item.banner,
                  'updatetime': item.createtime,
                  'chapter': item.target_chapter
                  })
