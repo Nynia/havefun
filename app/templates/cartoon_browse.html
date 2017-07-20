@@ -80,7 +80,7 @@
             console.log(id);
             $.ajax({
                 type: "post",
-                url: "/subscribe",
+                url: "/api/v1.0/subscribe",
                 data: {
                     'phonenum': '{{ session.phonenum }}',
                     'productid': '{{ package.productid }}'

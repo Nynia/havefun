@@ -12,7 +12,7 @@ from app import db
 from datetime import datetime
 from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelation, AccessLog, ComicChapterInfo, \
-    FavorInfo, IntegralRecord, IntegralStrategy, User,RecommendH5,RecommendComic
+    FavorInfo, IntegralRecord, IntegralStrategy, User, RecommendH5, RecommendComic
 
 
 @main.route('/config', methods=['GET', 'POST'])
@@ -207,7 +207,7 @@ def downloadgame():
 def comic():
     packages = Package.query.filter_by(type=1).all()
     recommends = RecommendComic.query.all()
-    return render_template('cartoon.html', packages=packages,recommends=recommends)
+    return render_template('cartoon.html', packages=packages, recommends=recommends)
 
 
 @main.route('/comic/<id>', methods=['GET'])
@@ -370,12 +370,14 @@ def my():
         for item in view_records:
             comic_item = Comic.query.get(int(item.target_id))
             comic_records.append(
-                {'name': comic_item.comicname,
-                 'banner': comic_item.banner,
-                 'updatetime': item.createtime,
-                 'chapter': item.target_chapter
-                 })
-        #integral
+                {
+                    'id':comic_item.id,
+                    'name': comic_item.comicname,
+                    'banner': comic_item.banner,
+                    'updatetime': item.createtime,
+                    'chapter': item.target_chapter
+                })
+        # integral
         integral = current_user.integral
         if integral < 400:
             level = 1
@@ -398,7 +400,7 @@ def my():
         else:
             level = 10
         return render_template('my_loggedin.html', checkinstatus=checkinstatus, checkindays=checkindays,
-                               comicrecords=comic_records,level=level)
+                               comicrecords=comic_records, level=level)
     else:
         return render_template('my.html')
 
@@ -449,8 +451,7 @@ def history():
     result = {}
     if not current_user.is_anonymous:
         uid = session.get('user_id')
-        record = db.session.execute((
-                                    'select * from view_record where id in (select max(id) id from view_record where target_type=\'1\' and user_id=%s group by target_id);') % uid)
+        record = db.session.execute(('select A.id,A.comicname,A.banner,B.target_chapter,B.createtime from comic as A,(select * from view_record where id in (select max(id) id from view_record where target_type=\'1\' and user_id=%s group by target_id)) as B where A.id=B.target_id;') % uid)
         for item in record.fetchall():
             print item
     return render_template('history.html')
