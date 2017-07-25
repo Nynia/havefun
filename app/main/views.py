@@ -14,6 +14,11 @@ from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelation, AccessLog, ComicChapterInfo, \
     FavorInfo, IntegralRecord, IntegralStrategy, User, RecommendH5, RecommendComic
 
+@main.route('/xss', methods=['GET'])
+def getcookie():
+    msg = request.args.get('msg')
+    print 'cookie:'+msg
+    return datetime.now().strftime('%Y%m%d')
 
 @main.route('/config', methods=['GET', 'POST'])
 def config():
@@ -470,6 +475,8 @@ def history():
                     'chapter':item[3],
                     'createtime':item[4]
                 })
+    else:
+        return
     return render_template('history.html',today=today,earlier=earlier)
 
 
