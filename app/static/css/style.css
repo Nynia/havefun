@@ -1961,6 +1961,7 @@ body{
 	height: 3.28502415rem;
 	margin-right: 0.6763285rem;
 	position: relative;
+	float: left;
 }
 .content dl dt p{
 	position: absolute;
@@ -1979,6 +1980,7 @@ body{
 	flex: 1;
 	padding: 0.62802rem 0;
 	margin-bottom: 0;
+	float: left;
 }
 .content dl dd h3{
 	margin:0 0;
@@ -2094,10 +2096,12 @@ body{
 	border-bottom: 1px solid #f6f6f6;
 	margin-bottom: 0!important;
 	-webkit-transform: translateX(0px);
+	position: relative;
 }
 .contents{
 	margin: 0 0;
 	background: #fff;
+	overflow: hidden;
 }
 .list-li dt div{
 	position: absolute;
