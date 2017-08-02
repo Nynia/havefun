@@ -24,7 +24,7 @@
     <div class="content contents">
         {% for d in data %}
             <dl class="list-li">
-                <a href="/comic/{{ d.id }}?chapter={{ r.recentchap }}">
+                <a href="/comic/{{ d.id }}?chapter={{ d.recentchap }}">
                     <dt>
                         <img src="{{ d.img }}" alt=""/>
                     </dt>
