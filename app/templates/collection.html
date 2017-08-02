@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>玩乐派-最近观看</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
+    <!--<script src="libs/jquery-3.1.0.js"></script>-->
+</head>
+<body style="background: #F4F4F4;">
+<div id="login">
+    <a href="javascript:history.go(-1)"><img src="../static/img/rights.png" alt="叉号"
+                                             style="width: 0.4831rem;height: 0.82126rem;"/></a>
+    <span>我的收藏</span>
+</div>
+<div class="content contents">
+    {% for d in data %}
+        <dl class="list-li">
+            <a href="javascript:void(0)">
+                <dt>
+                    <img src="{{ d.img }}" alt=""/>
+                </dt>
+            </a>
+            <dd>
+                <a href="javascript:void(0)">
+                    <h3>{{ d.name }}</h3>
+                    <span>动漫</span>
+                    <div class="clear"></div>
+                    <p>观看至{{ d.recentchap }}集</p>
+                </a>
+            </dd>
+            <div class="btn">删除</div>
+        </dl>
+    {% endfor %}
+    {#			<dl class="list-li">#}
+    {#				<a href="javascript:void(0)">#}
+    {#					<dt>#}
+    {#						<img src="../static/img/watches.png" alt="" />#}
+    {#						<div>#}
+    {#							<img src="../static/img/plays.png" alt="" />#}
+    {#						</div>#}
+    {#					</dt>#}
+    {#				</a>#}
+    {#				<dd>#}
+    {#					<a href="javascript:void(0)">#}
+    {#						<h3>砂与海之歌</h3>#}
+    {#						<span style="background: #bc48e8;">视频</span>#}
+    {#						<div class="clear"></div>#}
+    {#						<p>观看至11集</p>#}
+    {#					</a>#}
+    {#				</dd>#}
+    {#				<div class="btn">删除</div>#}
+    {#			</dl>#}
+    {#			<dl class="list-li" style="height: 5.942029rem;">#}
+    {#				<a href="javascript:void(0)">#}
+    {#					<dt style="height: 5.2173913rem;">#}
+    {#						<img src="../static/img/music.png" alt="" />#}
+    {#						<div style="height: 5.2173913rem;">#}
+    {#							<img src="../static/img/radio.png" alt="" style="width: 2.125604rem;height: 2.125604rem;margin-top: 1.545894rem;" />#}
+    {#						</div>#}
+    {#					</dt>#}
+    {#				</a>#}
+    {#				<dd style="padding: 1.6rem 0;">#}
+    {#					<a href="javascript:void(0)">#}
+    {#						<h3>日系小清新与你相遇不一样的夏天</h3>#}
+    {#						<span style="background: #81c43a;">音乐</span>#}
+    {#						<div class="clear"></div>#}
+    {#					</a>#}
+    {#				</dd>#}
+    {#				<div class="btn" style="line-height: 5.94203rem;">删除</div>#}
+    {#			</dl>#}
+</div>
+</body>
+</html>
+<script src="../static/js/font.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
+<script src="../static/js/zepto.touchwipe.js"></script>
+<script>
+    $(function () {
+        $('.list-li').touchWipe({itemDelete: '.btn'});
+    });
+
+</script>

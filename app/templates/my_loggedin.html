@@ -58,7 +58,7 @@
             <span>积分商城</span>
             <section><span>积分换好礼</span><img src="../static/img/right_arrow.png" alt="右箭头"/></section>
         </a>
-        <a href="#">
+        <a href="/collection">
             <div></div>
             <span>我的收藏</span>
             <section><img src="../static/img/right_arrow.png" alt=""/></section>
@@ -99,7 +99,7 @@
                 <ul>
                     {% for record in comicrecords %}
                         <li><a href="/comic/{{ record.id }}?chapter={{ record.chapter }}"><img src="{{ record.banner }}" alt=""/>
-                            <p><span>{{ record.name }}</span><span>{{ record.chapter }}集</span></p>
+                            <p><span>{{ record.name }}</span><span>第{{ record.chapter }}集</span></p>
                         </a></li>
                     {% endfor %}
                     <li class="sideline"></li>

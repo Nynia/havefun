@@ -1984,7 +1984,10 @@ body{
 	margin:0 0;
 	font-size: 0.7463768rem;
 	color: #242424;
-	display: inline;
+	display: inline-block;
+	max-width: 7.391304rem;
+	white-space: normal;
+	float: left;
 }
 .content dl dd p{
 	font-size: 0.6400966rem;
@@ -1998,6 +2001,7 @@ body{
 	color: #fff;
 	font-size: 0.53333rem;
 	margin-left: 0.72463768rem;
+	float: left;
 }
 @media(min-width: 320px) and (max-width: 360px){
 	.content dl dd{
@@ -2045,9 +2049,6 @@ body{
 .watchs ul li:nth-last-child(2){
 	margin-right: 0;
 }
-.watchs ul li:nth-last-child(1){
-	/*width: 0;*/
-}
 .watchs ul li a{
 	display: block;
 	width: 100%;
@@ -2065,6 +2066,59 @@ body{
  .watchs ul li a>p{
  	text-align: center;
  }
-.content dl dt img{
-	clip:rect(0 50px 0 50px) ;
+ /*登录后方可查看*/
+.logged_m{
+	margin-top: 8.2125604rem;
+	text-align: center;
+}
+.logged_m>img{
+	width: 3.816425rem;
+	height: 3.816425rem;
+}
+.logged_m p{
+	margin-top: 0.8rem;
+	margin-bottom: 0.9661835rem;
+	font-size: 0.58647rem;
+	color: #777;
+}
+.logged_m>a{
+	padding: 0.4831rem 0.772946rem;
+	background: #f7d731;
+	margin-top: 20px;
+	font-size: 0.693237rem;
+}
+/*我的收藏*/
+.list-li{
+	height: 3.9613527rem;
+	padding: 0.35rem 0.8211rem;
+	border-bottom: 1px solid #f6f6f6;
+	margin-bottom: 0!important;
+	-webkit-transform: translateX(0px);
+}
+.contents{
+	margin: 0 0;
+	background: #fff;
+}
+.list-li dt div{
+	position: absolute;
+	width: 100%;
+	height: 3.28502415rem;
+	top: 0;
+	text-align: center;
+}
+.list-li dt div img{
+	width: 1.1594203rem;
+	height: 1.1594203rem;
+	margin-top: 1.0628rem;
+}
+.btn{
+	position: absolute;
+	top: 0;
+	right: -3.864734rem;
+	text-align: center;
+	background: #fe3c2e;
+	color: #fff;
+	width: 3.864734rem;
+	line-height: 3.9613527rem;
+	font-size: 0.82657rem;
 }

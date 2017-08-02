@@ -20,10 +20,13 @@ def favor():
     uid = request.args.get('uid')
     cid = request.args.get('cid')
     type = request.args.get('type')
-
+    name = ''
+    img = ''
     integral = 0
     if type == '1':
         comic = Comic.query.get(int(cid))
+        name = comic.comicname
+        img = comic.banner
         if not comic:
             return jsonify({
                 'code': '108',
@@ -61,6 +64,9 @@ def favor():
         favorinfo.cid = cid
         favorinfo.type = type
         favorinfo.state = '1'
+        favorinfo.name = name
+        favorinfo.img = img
+        favorinfo.firstfavortime = datetime.now().strftime('%Y%m%d%H%M%S')
         favorinfo.updatetime = datetime.now().strftime('%Y%m%d%H%M%S')
 
         integral_strategy = IntegralStrategy.query.filter_by(description=u'收藏').first()
@@ -98,6 +104,7 @@ def unfavor():
     cid = request.args.get('cid')
     type = request.args.get('type')
 
+    #默认type=1
     favorinfo = FavorInfo.query.filter_by(uid=uid).filter_by(cid=cid).first()
     if favorinfo:
         favorinfo.state = '0'

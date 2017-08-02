@@ -459,8 +459,11 @@ class FavorInfo(db.Model):
     state = db.Column(db.String(1))
     updatetime = db.Column(db.String(14))
     firstfavortime = db.Column(db.String(14))
+
+    name = db.Column(db.String(255))
+    img = db.Column(db.String(255))
     def __repr__(self):
-        return '<FavorInfo %d %d>' %(self.uid, self.cid)
+        return '<FavorInfo %s %s>' %(self.name, self.img)
 
     def to_json(self):
         json_post = {
@@ -470,7 +473,9 @@ class FavorInfo(db.Model):
             'cid':self.cid,
             'state':self.state,
             'updatetime':self.updatetime,
-            'firstfavortime':self.firstfavortime
+            'firstfavortime':self.firstfavortime,
+            'name':self.name,
+            'img':self.img
         }
         return json_post
 

@@ -424,18 +424,49 @@ def myorder():
             dict['timestamp'] = t[:4] + '-' + t[4:6] + '-' + t[6:8] + ' ' + t[8:10] + ':' + t[10:12] + ':' + t[12:14]
             dict['productid'] = package.productid
             data.append(dict)
-    print data
-    return render_template('myorder.html', data=data)
+        print data
+        return render_template('myorder.html', data=data)
+    else:
+        return render_template("notlogged.html", title=u"我的订购")
+@main.route('/collection',methods=['GET'])
+def mycollection():
+    data = []
+    if not current_user.is_anonymous:
+        uid = current_user.id
+        faverinfos = FavorInfo.query.filter_by(uid=uid).filter_by(state='1').all()
+        #默认只有动漫 -type=1
+        for f in faverinfos:
+            cid = f.cid
+            viewrecord = ViewRecord.query.filter_by(user_id=uid).filter_by(target_id=cid).filter_by(target_type='1').first()
+            if viewrecord:
+                recentchap = viewrecord.target_chapter
+            else:
+                recentchap = 1
+            data.append({
+                'type':'1',
+                'id':cid,
+                'name':f.name,
+                'img':f.img,
+                'recentchap':recentchap
+            })
+        return render_template('collection.html',data=data)
 
+    else:
+        return render_template("notlogged.html", title=u"我的收藏")
 
 @main.route('/mall', methods=['GET'])
 def mall():
-    return render_template('mall.html')
-
+    if not current_user.is_anonymous:
+        return render_template('mall.html')
+    else:
+        return render_template("notlogged.html", title=u"商城")
 
 @main.route('/mysign', methods=['GET'])
 def sign():
-    return render_template('sign.html')
+    if not current_user.is_anonymous:
+        return render_template('sign.html')
+    else:
+        return render_template("notlogged.html", title=u"我的签到")
 
 
 @main.route('/flow', methods=['GET'])
@@ -476,7 +507,7 @@ def history():
                     'createtime':item[4]
                 })
     else:
-        return
+        return render_template("notlogged.html", title=u"观看历史")
     return render_template('history.html',today=today,earlier=earlier)
 
 
