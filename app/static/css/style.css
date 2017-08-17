@@ -493,10 +493,7 @@ main{
 }
 /*注册页面*/
 #login .account{
-	position: absolute;
-	left: 8.345rem;
-	left: -webkit-calc(50% - 1.654rem);
-	left: calc(50% - 1.654rem);
+	text-align: center;
 	}
 .registers .country{
 	width: 18.358rem;
@@ -1164,7 +1161,7 @@ table tr td:nth-child(2){
 	}
 
 /*订购*/
-#main,#mains,#main_m,#mains_m{
+#main,#mains,#main_m,#mains_m,.exchange_n{
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -2125,4 +2122,97 @@ body{
 	width: 3.864734rem;
 	line-height: 3.9613527rem;
 	font-size: 0.82657rem;
+}
+.content_n{
+	width: 90.5%;
+	max-width: 500px;
+	background: #fff;
+	position: absolute;
+	left: 50%;
+	top: 46%;
+	z-index: 1001;
+	overflow: hidden;
+	border-radius: 10px;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+}
+.content_t{
+	height: 3.8647343rem;
+	background: #edcf3a;
+	line-height: 3.8647343rem;
+	text-align: center;
+	color: #040000;
+	font-size: 1.1203rem;
+}
+#cd-timeline{
+	background: #fff;
+	padding:1.8841rem 0;
+	font-size: 0.58696rem;
+	position: relative;
+	margin-top: 1.0145rem ;
+	margin-bottom: 1.0145rem;
+}
+.cd-container{
+	width: 84.8%;
+	height: 22.271rem;
+	margin: 0 auto;
+}
+#cd-timeline:before{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 4.83rem;
+	height: 100%;
+	width: 0.05rem;
+	background: #bdbdbd;
+}
+.cd-timeline-block:first-child {
+	margin-top: 0;
+	color: #509fd7;
+}
+.cd-timeline-block {
+	position: relative;
+	margin: 2em 0;
+}
+.cd-timeline-img.cd-picture {
+	background: #509fd7;
+}
+.cd-timeline-img {
+	position: absolute;
+	top: 0;
+	left: 4.34783rem;
+	width: 1.063rem;
+	height: 1.063rem;
+	border-radius: 50%;
+}
+.cd-timeline-content {
+	position: relative;
+	margin-left: 6.2802rem;
+}
+.cd-timeline-content:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.cd-timeline-block:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.date{
+	display: inline-block;
+	float: left;
+}
+.date p{
+	margin: 0;
+}
+.close{
+	position: absolute;
+	left: 50%;
+	bottom: 2%;
+	z-index: 1001;
+	-webkit-transform: translateX(-50%) translateY(-50%)
+}
+.close img{
+	width: 2.1256rem;
+	height: 2.1256rem;
 }
