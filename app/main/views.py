@@ -510,6 +510,13 @@ def history():
         return render_template("notlogged.html", title=u"观看历史")
     return render_template('history.html',today=today,earlier=earlier)
 
+@main.route('/discovery',methods=['GET'])
+def discovery():
+    return render_template('discovery.html')
+
+@main.route('/follow',methods=['GET'])
+def follow():
+    return redirect('/collection')
 
 def _get_annymous_id():
     address = request.headers.get('X-Forwarded-For', request.remote_addr)
