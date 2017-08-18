@@ -1,10 +1,232 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>关注</title>
+    <meta name="robots" content="index,follow">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>我的关注</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
+    <!--<script src="libs/jquery-3.1.0.js"></script>-->
 </head>
-<body>
-<h1>建设中...</h1>
+<body style="background: #F4F4F4;">
+<div id="login">
+    <span>我的关注</span>
+</div>
+{% if data %}
+    <div class="content contents">
+        {% for d in data %}
+            <dl class="list-li">
+                <a href="/comic/{{ d.id }}?chapter={{ d.recentchap }}">
+                    <dt>
+                        <img src="{{ d.img }}" alt=""/>
+                    </dt>
+                    <dd>
+                        <h3>{{ d.name }}</h3>
+                        <span>动漫</span>
+                        <div class="clear"></div>
+                        <p>观看至{{ d.recentchap }}集</p>
+                    </dd>
+                    <div class="clear"></div>
+                </a>
+                <div class="btn" id="{{ d.id }}">取消收藏</div>
+            </dl>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="mains">
+        <img src="../static/img/no_collection.png" alt="暂无收藏" style="width: 4.3478rem;height: 6.086956rem;"/>
+    </div>
+{% endif %}
+{#			<dl class="list-li">#}
+{#				<a href="javascript:void(0)">#}
+{#					<dt>#}
+{#						<img src="../static/img/watches.png" alt="" />#}
+{#						<div>#}
+{#							<img src="../static/img/plays.png" alt="" />#}
+{#						</div>#}
+{#					</dt>#}
+{#				</a>#}
+{#				<dd>#}
+{#					<a href="javascript:void(0)">#}
+{#						<h3>砂与海之歌</h3>#}
+{#						<span style="background: #bc48e8;">视频</span>#}
+{#						<div class="clear"></div>#}
+{#						<p>观看至11集</p>#}
+{#					</a>#}
+{#				</dd>#}
+{#				<div class="btn">删除</div>#}
+{#			</dl>#}
+{#			<dl class="list-li" style="height: 5.942029rem;">#}
+{#				<a href="javascript:void(0)">#}
+{#					<dt style="height: 5.2173913rem;">#}
+{#						<img src="../static/img/music.png" alt="" />#}
+{#						<div style="height: 5.2173913rem;">#}
+{#							<img src="../static/img/radio.png" alt="" style="width: 2.125604rem;height: 2.125604rem;margin-top: 1.545894rem;" />#}
+{#						</div>#}
+{#					</dt>#}
+{#				</a>#}
+{#				<dd style="padding: 1.6rem 0;">#}
+{#					<a href="javascript:void(0)">#}
+{#						<h3>日系小清新与你相遇不一样的夏天</h3>#}
+{#						<span style="background: #81c43a;">音乐</span>#}
+{#						<div class="clear"></div>#}
+{#					</a>#}
+{#				</dd>#}
+{#				<div class="btn" style="line-height: 5.94203rem;">删除</div>#}
+{#			</dl>#}
+
 </body>
 </html>
+<script src="../static/js/font.js"></script>
+<script type="text/javascript" src="../static/js/zepto.min.js"></script>
+<script>
+    (function ($) {
+        $.fn.touchWipe = function (option) {
+            var defaults = {
+                itemDelete: '.item-delete' //删除元素
+            };
+            var opts = $.extend({}, defaults, option); //配置选项
+            var delWidth = $(opts.itemDelete).width();
+
+            var initX; //触摸位置X
+            var initY; //触摸位置Y
+            var moveX; //滑动时的位置X
+            var moveY; //滑动时的位置Y
+            var X = 0; //移动距离X
+            var Y = 0; //移动距离Y
+            var flagX = 0; //是否是左右滑动 0为初始，1为左右，2为上下，在move中设置，在end中归零
+            var objX = 0; //目标对象位置
+            console.log($(this));
+            $(this).on('touchstart', function (event) {
+                console.log('start..');
+                var obj = this;
+                initX = event.targetTouches[0].pageX;
+                initY = event.targetTouches[0].pageY;
+                console.log(initX + ':' + initY);
+                objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+                console.log(objX);
+                if (objX == 0) {
+                    $(this).on('touchmove', function (event) {
+
+                        // 判断滑动方向，X轴阻止默认事件，Y轴跳出使用浏览器默认
+                        if (flagX == 0) {
+                            setScrollX(event);
+                            return;
+                        } else if (flagX == 1) {
+                            event.preventDefault();
+                        } else {
+                            return;
+                        }
+
+                        var obj = this;
+                        moveX = event.targetTouches[0].pageX;
+                        X = moveX - initX;
+                        if (X >= 0) {
+                            obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+                        } else if (X < 0) {
+                            var l = Math.abs(X);
+                            obj.style.WebkitTransform = "translateX(" + -l + "px)";
+                            if (l > delWidth) {
+                                l = delWidth;
+                                obj.style.WebkitTransform = "translateX(" + -l + "px)";
+                            }
+                        }
+                    });
+                } else if (objX < 0) {
+                    $(this).on('touchmove', function (event) {
+
+                        // 判断滑动方向，X轴阻止默认事件，Y轴跳出使用浏览器默认
+                        if (flagX == 0) {
+                            setScrollX(event);
+                            return;
+                        } else if (flagX == 1) {
+                            event.preventDefault();
+                        } else {
+                            return;
+                        }
+
+                        var obj = this;
+                        moveX = event.targetTouches[0].pageX;
+                        X = moveX - initX;
+                        if (X >= 0) {
+                            var r = -delWidth + Math.abs(X);
+                            obj.style.WebkitTransform = "translateX(" + r + "px)";
+                            if (r > 0) {
+                                r = 0;
+                                obj.style.WebkitTransform = "translateX(" + r + "px)";
+                            }
+                        } else { //向左滑动
+                            obj.style.WebkitTransform = "translateX(" + -delWidth + "px)";
+                        }
+                    });
+                }
+            });
+
+            //结束时判断，并自动滑动到底或返回
+            $(this).on('touchend', function (event) {
+                var obj = this;
+                objX = (obj.style.WebkitTransform.replace(/translateX\(/g, "").replace(/px\)/g, "")) * 1;
+                if (objX > -delWidth / 2) {
+                    obj.style.transition = "all 0.2s";
+                    obj.style.WebkitTransform = "translateX(" + 0 + "px)";
+                    obj.style.transition = "all 0";
+                    objX = 0;
+                } else {
+                    obj.style.transition = "all 0.2s";
+                    obj.style.WebkitTransform = "translateX(" + -delWidth + "px)";
+                    obj.style.transition = "all 0";
+                    objX = -delWidth;
+                }
+                flagX = 0;
+            });
+
+            //设置滑动方向
+            function setScrollX(event) {
+                moveX = event.targetTouches[0].pageX;
+                moveY = event.targetTouches[0].pageY;
+                X = moveX - initX;
+                Y = moveY - initY;
+
+                if (Math.abs(X) > Math.abs(Y)) {
+                    flagX = 1;
+                } else {
+                    flagX = 2;
+                }
+                return flagX;
+            }
+
+//   删除事件
+            $(this).children('.btn').click(function () {
+                $.ajax({
+                    type: "get",
+                    url: "/api/v1.0/favors/unfavor",
+                    contentType: "application/json",
+                    data: {
+                        'uid':{{ current_user.id if not current_user.is_anonymous else 0}},
+                        'cid': $(this).attr("id"),
+                        'type': '1'
+                    },
+                    success: function (data, status) {
+                        if (data.code == '0') {
+                            console.log(data);
+                        }
+                    }
+                });
+                $(this).parent().remove();
+
+            });
+            //链式返回
+            return this;
+        };
+
+    })(Zepto);
+    $(function () {
+        $('.list-li').touchWipe({itemDelete: '.btn'});
+    });
+</script>

@@ -536,7 +536,7 @@ def follow():
                 'img': f.img,
                 'recentchap': recentchap
             })
-        return render_template('collection.html', data=data)
+        return render_template('follow.html', data=data)
 
     else:
         return render_template("notlogged.html", title=u"我的收藏")
