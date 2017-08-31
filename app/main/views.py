@@ -541,6 +541,9 @@ def follow():
     else:
         return render_template("notlogged.html", title=u"我的收藏")
 
+@main.route('/download',methods=['GET'])
+def downloadpage():
+    return render_template('download.html')
 
 def _get_annymous_id():
     address = request.headers.get('X-Forwarded-For', request.remote_addr)
