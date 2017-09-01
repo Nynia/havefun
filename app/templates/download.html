@@ -17,6 +17,22 @@
 <div class="download">
     <a href="http://wanlepie.com/res/wlp_v1_0_release.apk"><img src="../static/img/download.png" alt=""/></a>
 </div>
+<!--弹框开始-->
+<div id="main">
+    <img src="../static/img/point.png" alt=""/>
+</div>
+<!--结束-->
 </body>
 </html>
+<script src="../static/libs/jquery-3.1.0.js"></script>
 <script src="../static/js/font.js"></script>
+<script>
+    if (navigator.userAgent.indexOf('MicroMessenger') != -1) {
+        $('.download').click(function () {
+            $('#main').show();
+        });
+        $('#main').click(function () {
+            $('#main').hide();
+        })
+    }
+</script>

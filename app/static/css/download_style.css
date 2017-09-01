@@ -23,3 +23,21 @@ body:before{
 	width: 6.2rem;
 	height: 2.2rem;
 }
+#main{
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(10,10,10,0.8);
+	display: none;
+	text-align: left;
+	z-index: 1;
+}
+#main img{
+	position: absolute;
+	top: 4.05rem;
+	right: 1.9rem;
+	width: 8.55rem;
+	height: 4.45rem;
+}
