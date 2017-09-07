@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
-<head>
-    <meta charset="UTF-8">
-    <meta name="google" value="notranslate">
-    <meta name="robots" content="index,follow">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
-    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <title>下载页面</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link rel="stylesheet" href="../static/css/download_style.css"/>
-</head>
-<body>
-<div class="download">
-    <a href="http://wanlepie.com/res/wlp_v1_0_release.apk"><img src="../static/img/download.png" alt=""/></a>
-</div>
-<!--弹框开始-->
-<div id="main">
-    <img src="../static/img/point.png" alt=""/>
-</div>
-<!--结束-->
-</body>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="google" value="notranslate">
+	    <meta name="robots" content="index,follow">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+	    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+	    <meta name="msapplication-tap-highlight" content="no">
+		<title>下载页面</title>
+		<meta name="keywords" content="">
+        <meta name="description" content="">
+		<link rel="stylesheet" href="../static/css/download_style.css" />
+	</head>
+	<body>
+		<div class="title">
+			<img src="../static/img/title.png" alt="" />
+		</div>
+		<div class="phone">
+			<img src="../static/img/phone.png" alt="" />
+		</div>
+	    <div class="download">
+			<img src="../static/img/download.png" alt="" />
+		</div>
+		<!--弹框开始-->
+		<div id="main">
+			<img src="../static/img/point.png" alt="" />
+		</div>
+		<!--结束-->
+	</body>
 </html>
-<script src="../static/libs/jquery-3.1.0.js"></script>
+<script src="../static/js/jquery-3.1.0.js"></script>
 <script src="../static/js/font.js"></script>
 <script>
-    if (navigator.userAgent.indexOf('MicroMessenger') != -1) {
-        $('.download').click(function () {
-            $('#main').show();
-        });
-        $('#main').click(function () {
-            $('#main').hide();
-        })
-    }
+	$('.download').click(function(){
+		$('#main').show();
+	})
+	$('#main').click(function(){
+		$('#main').hide();
+	})
 </script>

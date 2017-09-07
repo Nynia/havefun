@@ -11,17 +11,32 @@ body:before{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background: url(../img/bg_download.png) center 0 no-repeat;
+	background: url(../img/download_bg.png) center 0 no-repeat;
 	background-size: cover;
 }
+.title{
+	margin-top: 4.5rem;
+	margin-left: 2.2rem;
+}
+.title img{
+	width: 16.4rem;
+	height: 3.3rem;
+}
+.phone{
+	margin-top: 1.2rem;
+	margin-left: 1.5rem;
+}
+.phone img{
+	width: 17.9rem;
+	height: 13rem;
+}
 .download{
-	position: absolute;
-	bottom: 3.7rem;
-	left: 7.1rem;
+	margin-top: 3rem;
+	margin-left: 5.3rem;
 }
 .download img{
-	width: 6.2rem;
-	height: 2.2rem;
+	width: 10.2rem;
+	height: 3.15rem;
 }
 #main{
 	position: fixed;
