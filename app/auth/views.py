@@ -6,6 +6,7 @@ from ..models import User, OrderRelation, CheckinRecord,IntegralStrategy,Integra
 from .forms import LoginForm, RegisterFrom,ResetForm
 from ..utils.func import generate_identifying_code
 import datetime
+from ..utils.aes import aescrypt
 
 cache = {}
 from app import db
@@ -16,7 +17,9 @@ def login():
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User.query.filter_by(phonenum=form.phonenum.data).first()
-            if user is not None and user.verify_password(form.password.data):
+            #AES 解密
+            password_decipher = aescrypt('1234567812345678').decrypt(form.password.data)
+            if user is not None and user.verify_password(password_decipher):
                 login_user(user, True)
                 relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
                 for r in relation:

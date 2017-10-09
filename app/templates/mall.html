@@ -196,8 +196,16 @@
 <script>
 	$('.record ul li:nth-child(2)').click(function(){
 		$('.exchange_n').show();
+		var h = $(".cd-timeline-block:nth-child(3)").height()/2;
+		var h1 = $(".cd-timeline-block:last-child").height()/2;
+		$(".line_m").css("top",h);
+		$(".line_m").height($(".cd-container").height()-h1-h);
+        if($('.cd-timeline-block').length == 1){
+        	$('.line_n').hide();
+        }
 	})
 	$('.close').click(function(){
 		$('.exchange_n').hide()
 	})
 </script>
+
