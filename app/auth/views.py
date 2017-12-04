@@ -13,26 +13,30 @@ from app import db
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            user = User.query.filter_by(phonenum=form.phonenum.data).first()
-            #AES 解密
-            password_decipher = aescrypt('1234567812345678').decrypt(form.password.data)
-            if user is not None and user.verify_password(password_decipher):
-                login_user(user, True)
-                relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
-                for r in relation:
-                    if r.status == '1':
-                        session[r.productid] = 1
-                session['phonenum'] = user.phonenum
-                next = request.args.get('next')
-                print session.get('user_id')
-                return redirect(next or url_for('main.my'))
-            flash(u'用户名或密码错误', 'login')
-        else:
-            flash(u'请输入正确的手机号码', 'login')
-    return render_template('login.html', form=form)
+    ua = request.user_agent
+    if 'from App' in ua:
+        return render_template('freepasswd.html')
+    else:
+        form = LoginForm()
+        if request.method == 'POST':
+            if form.validate_on_submit():
+                user = User.query.filter_by(phonenum=form.phonenum.data).first()
+                #AES 解密
+                password_decipher = aescrypt('1234567812345678').decrypt(form.password.data)
+                if user is not None and user.verify_password(password_decipher):
+                    login_user(user, True)
+                    relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
+                    for r in relation:
+                        if r.status == '1':
+                            session[r.productid] = 1
+                    session['phonenum'] = user.phonenum
+                    next = request.args.get('next')
+                    print session.get('user_id')
+                    return redirect(next or url_for('main.my'))
+                flash(u'用户名或密码错误', 'login')
+            else:
+                flash(u'请输入正确的手机号码', 'login')
+        return render_template('login.html', form=form)
 
 
 @auth.route('/logout', methods=['GET'])
