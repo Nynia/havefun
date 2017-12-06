@@ -13,9 +13,11 @@ from app import db
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    ua = request.user_agent
-    if 'from App' in ua:
-        return render_template('freepasswd.html')
+    ua = request.user_agent.__str__()
+    next = request.args.next
+    print next,ua
+    if 'from App in' in ua:
+        return render_template('freepasswd.html', nextUrl=next)
     else:
         form = LoginForm()
         if request.method == 'POST':
@@ -30,14 +32,13 @@ def login():
                         if r.status == '1':
                             session[r.productid] = 1
                     session['phonenum'] = user.phonenum
-                    next = request.args.get('next')
+                    #next = request.args.get('next')
                     print session.get('user_id')
                     return redirect(next or url_for('main.my'))
                 flash(u'用户名或密码错误', 'login')
             else:
                 flash(u'请输入正确的手机号码', 'login')
         return render_template('login.html', form=form)
-
 
 @auth.route('/logout', methods=['GET'])
 @login_required
