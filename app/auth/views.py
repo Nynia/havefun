@@ -14,10 +14,17 @@ from app import db
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     ua = request.user_agent.__str__()
-    next = request.args.next
-    print next,ua
-    if 'from App in' in ua:
-        return render_template('freepasswd.html', nextUrl=next)
+    next = request.args.get('next')
+    print ua
+    if ua.find('appChannel') != -1:
+        channel = ua[ua.find('appChannel')+11:-1]
+    else:
+        channel = None
+    print channel
+
+    if channel != None:
+        print url_for('main.my')
+        return render_template('freepasswd.html', nextUrl=next or url_for('main.my'))
     else:
         form = LoginForm()
         if request.method == 'POST':

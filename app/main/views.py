@@ -356,6 +356,8 @@ def music():
 
 @main.route('/my', methods=['GET'])
 def my():
+    print session
+    print current_user
     if not current_user.is_anonymous:
         import datetime
         yestoday = (datetime.date.today() - datetime.timedelta(days=1)).strftime('%Y%m%d')

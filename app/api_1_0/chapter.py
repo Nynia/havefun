@@ -5,7 +5,7 @@ from app import db
 from datetime import datetime
 from decorators import jsonp
 
-@api.route('/chapters', methods=['POST'])
+@api.route('/chapters', methods=['GET','POST'])
 def add_chapter():
     chapterid = request.form.get('chapterid')
     chaptername = request.form.get('chaptername')
