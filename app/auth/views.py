@@ -8,7 +8,8 @@ from ..utils.func import generate_identifying_code
 import datetime
 from ..utils.aes import aescrypt
 
-cache = {}
+from werkzeug.contrib.cache import SimpleCache
+cache = SimpleCache()
 from app import db
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -69,7 +70,8 @@ def register():
         print phonenum
         code = generate_identifying_code()
         msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
-        cache[phonenum] = code
+        cache.set(phonenum, code)
+        #cache[phonenum] = code
         print cache
         import requests
         url = 'http://221.228.17.88:8080/sendmsg/send'
