@@ -85,7 +85,7 @@
     var phone_type = 1;
     /* 1是成功发送 2是电话号码错误  */
     var re = new RegExp(/\D/g);
-    var reg = /^1[3|4|5|8][0-9]\d{8}$/;
+    var reg = /^1\d{10}$/;
     function run(seconds, obj) {
         $('.message').css('display','none');
         var tel = $('#phonenum').val();

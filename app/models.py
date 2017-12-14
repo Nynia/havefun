@@ -359,15 +359,15 @@ class AccessLog(db.Model):
     timestamp = db.Column(db.String(14))
 
     def __repr__(self):
-        return '<AccessLog %r>' % self.url
+        return '<AccessLog %r>' % self.addr
+
 
     def to_json(self):
         json_post = {
-            'id': self.id,
             'uid':self.uid,
-            'remoteip':self.remoteip,
-            'useragent':self.useragent,
-            'addr':self.addr,
+            'ip':self.remoteip,
+            'user-agent':self.useragent,
+            'endpoint':self.addr,
             'timestamp':self.timestamp
         }
         return json_post
@@ -501,3 +501,13 @@ class RecommendComic(db.Model):
     def __repr__(self):
         return '<RecommendComic %d>' % self.id
 
+class Channel(db.Model):
+    __tablename__ = 'channel'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    token = db.Column(db.String(255))
+    status = db.Column(db.String(1))
+    createtime = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<Channel %s>' % self.name
