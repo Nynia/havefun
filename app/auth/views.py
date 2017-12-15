@@ -68,6 +68,7 @@ def logout():
 def register():
     print session
     print request.cookies
+    print cache
     form = RegisterFrom()
     action = request.args.get('action')
     if action == 'getIdentifingCode':
