@@ -25,6 +25,8 @@ def get_access_log():
                 'code': '102',
                 'message': 'params error'
             })
+        if start_date < '20171213':
+            start_date = '20171213'
         if end_date == None:
             end_date = datetime.now().strftime('%Y%m%d')
         if re.match('\d{8}', start_date) and re.match('\d{8}', end_date):
