@@ -22,6 +22,11 @@ def generate_identifying_code(len=4):
     verification_code = ''.join(myslice)
     return verification_code
 
+def generate_channel_token(name):
+    timestamp = datetime.now().strftime('%m%d%H%M%S')
+    m = hashlib.md5()
+    m.update(name+timestamp)
+    return m.hexdigest()[::2]
 
 def AES_encrypt(text):
     key = 'Hlkj@~_^&&123_78'
