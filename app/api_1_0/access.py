@@ -20,17 +20,17 @@ def get_access_log():
             'message': 'invalid token'
         })
     else:
-        if start_date == None:
+        if not start_date:
             return jsonify({
                 'code': '102',
                 'message': 'params error'
             })
         if start_date < '20171213':
             start_date = '20171213'
-        if end_date == None or end_date == '':
+        if not end_date or end_date == '':
             end_date = datetime.now().strftime('%Y%m%d')
-        if r start_date) and re.match('\d{8}', end_date):
-            print 'hello'e.match('\d{8}',
+        if re.match('\d{8}', start_date) and re.match('\d{8}', end_date):
+            print 'hello'
             accesslogs = AccessLog.query.filter(
                 AccessLog.timestamp > start_date + '000000').filter(AccessLog.timestamp < end_date + '235959').all()
             return jsonify({
