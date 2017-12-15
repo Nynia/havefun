@@ -27,10 +27,10 @@ def get_access_log():
             })
         if start_date < '20171213':
             start_date = '20171213'
-        if end_date == None:
+        if end_date == None or end_date == '':
             end_date = datetime.now().strftime('%Y%m%d')
-        if re.match('\d{8}', start_date) and re.match('\d{8}', end_date):
-            print 'hello'
+        if r start_date) and re.match('\d{8}', end_date):
+            print 'hello'e.match('\d{8}',
             accesslogs = AccessLog.query.filter(
                 AccessLog.timestamp > start_date + '000000').filter(AccessLog.timestamp < end_date + '235959').all()
             return jsonify({
