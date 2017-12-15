@@ -81,8 +81,6 @@ def package():
         id = request.args.get('id')
     package = Package.query.get(id)
     ordered = False
-    print current_user.is_anonymous
-    print session.get('phonenum')
     if not current_user.is_anonymous:
         if session.get(package.productid):
             print package.productid
