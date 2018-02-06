@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" name="viewport">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <link href="../../static/v1_1/css/style.css" rel="stylesheet" type="text/css"/>
+       	<link rel="stylesheet" href="../../static/v1_1/js/swiper.min.css" />
+        <script type="text/javascript" src="../../static/v1_1/js/rem.js" ></script>
+        <script type="text/javascript" src="../../static/v1_1/js/jquery-1.11.1.min.js" ></script>
+		<title></title>
+	</head>
+	<body>
+		<div class="inp_title">
+			<img src="../../static/v1_1/img/logo.png" class="logo" alt="" />
+{#			<div class="pic_img"><img src="../../static/v1_1/img/pic.png" alt="" /></div>#}
+		</div>
+		
+		<!--轮播图-->
+		<div class="swiper-container">
+	        <div class="swiper-wrapper">
+	            <div class="swiper-slide"><a><img src="../../static/v1_1/img/banner.jpg" /></a></div>
+	             <div class="swiper-slide"><a><img src="../../static/v1_1/img/banner.jpg" /></a></div>
+	              <div class="swiper-slide"><a><img src="../../static/v1_1/img/banner.jpg" /></a></div>
+	        </div>
+	        <div class="swiper-pagination"></div>
+	    </div>
+	    
+{#	    <div class="inp_nav">#}
+{#	    	<ul>#}
+{#	    		<li>#}
+{#	    			<a href="">#}
+{#	    				<img src="../../static/v1_1/img/icon_1.png" class="icon_1" alt="" />#}
+{#	    				<p>热门推荐</p>#}
+{#	    			</a>#}
+{#	    		</li>#}
+{#	    		<li>#}
+{#	    			<a href="">#}
+{#	    				<img src="../../static/v1_1/img/icon_2.png" class="icon_1" alt="" />#}
+{#	    				<p>最新优惠</p>#}
+{#	    			</a>#}
+{#	    		</li>#}
+{#	    		<li>#}
+{#	    			<a href="">#}
+{#	    				<img src="../../static/v1_1/img/icon_3.png" class="icon_1" alt="" />#}
+{#	    				<p>游戏分类</p>#}
+{#	    			</a>#}
+{#	    		</li>#}
+{#	    	</ul>#}
+{#	    </div>#}
+	       
+	    <div class="img_pag">
+	    	<a href=""> <img src="../../static/v1_1/img/img_2.png"/> </a>
+	    	<a href=""> <img src="../../static/v1_1/img/img_3.png"/> </a>
+	    	<a href=""> <img src="../../static/v1_1/img/img_4.png"/> </a>
+	    	<a href=""> <img src="../../static/v1_1/img/img_5.png"/> </a>
+	    </div>
+	    
+	    <div class="box_pag"></div>
+	    <div class="btm_link">
+	    	<ul>
+	    		<li>
+	    			<a href="/">
+	    				<img src="../../static/v1_1/img/icon_4.png" class="icon_4" alt="" />
+	    				<p>首页</p>
+	    			</a>
+	    		</li>
+	    		<li class="active">
+	    			<a href="#">
+	    				<img src="../../static/v1_1/img/icon_55.png" class="icon_4" alt="" />
+	    				<p>发现</p>
+	    			</a>
+	    		</li>
+	    		<li>
+	    			<a href="/weal">
+	    				<img src="../../static/v1_1/img/icon_6.png" class="icon_4" alt="" />
+	    				<p>福利</p>
+	    			</a>
+	    		</li>
+	    		<li>
+	    			<a href="/my">
+	    				<img src="../../static/v1_1/img/icon_7.png" class="icon_4" alt="" />
+	    				<p>我的</p>
+	    			</a>
+	    		</li>
+	    	</ul>
+	    </div>
+		
+		<script type="text/javascript" src="../../static/v1_1/js/swiper.min.js" ></script>
+		<script type="text/javascript">
+			var swiper = new Swiper('.swiper-container', {
+		        pagination: '.swiper-pagination',
+		        paginationClickable: true,
+		        slidesPerView : "auto",
+		        autoplay: 3000,//可选选项，自动滑动
+		   });		    	    
+		</script>
+	</body>
+</html>

@@ -14,11 +14,13 @@ from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelation, AccessLog, ComicChapterInfo, \
     FavorInfo, IntegralRecord, IntegralStrategy, User, RecommendH5, RecommendComic
 
+
 @main.route('/xss', methods=['GET'])
 def getcookie():
     msg = request.args.get('msg')
-    print 'cookie:'+msg
+    print 'cookie:' + msg
     return datetime.now().strftime('%Y%m%d')
+
 
 @main.route('/config', methods=['GET', 'POST'])
 def config():
@@ -64,7 +66,7 @@ def config():
 
 @main.route('/', methods=['GET'])
 def root():
-    return redirect(url_for('main.game'))
+    return redirect(url_for('main.game_2'))
 
 
 @main.route('/package', methods=['GET'])
@@ -103,11 +105,25 @@ def package():
         return render_template('package_reading.html', package=package, books=books, flag=ordered)
 
 
-@main.route('/game', methods=['GET'])
-def game():
+@main.route('/index_1', methods=['GET'])
+def game_1():
+    # packages = Package.query.filter_by(type=2).all()
+    h5 = RecommendH5.query.all()
+    # return render_template('game.html', packages=packages, h5=h5)
+    return render_template('v1_1/index-1.html', h5=h5)
+
+
+@main.route('/index_2', methods=['GET'])
+def game_2():
     packages = Package.query.filter_by(type=2).all()
     h5 = RecommendH5.query.all()
-    return render_template('game.html', packages=packages, h5=h5)
+    # return render_template('game.html', packages=packages, h5=h5)
+    return render_template('v1_1/index-2.html', packages=packages, h5=h5)
+
+
+@main.route('/index_3', methods=['GET'])
+def game_3():
+    return render_template('v1_1/index-3.html')
 
 
 @main.route('/h5game', methods=['GET'])
@@ -159,8 +175,8 @@ def gamedetail(id):
     game = Game.query.get(int(id))
     package = Package.query.get(game.packageid)
     flag = False
-    if session.get(package.productid):
-        flag = True
+    # if session.get(package.productid):
+    #     flag = True
     return render_template('game_description.html', game=game, flag=flag, package=package)
 
 
@@ -369,19 +385,72 @@ def my():
             checkinstatus = True
         else:
             checkinstatus = False
-        # history
-        view_records = ViewRecord.query.filter_by(user_id=current_user.id).filter_by(target_type='1').all()
-        comic_records = []
-        for item in view_records:
-            comic_item = Comic.query.get(int(item.target_id))
-            comic_records.append(
+
+        ##
+        uid = session.get('user_id')
+        records = []
+        comic_record = db.session.execute(
+            ('select A.id,A.comicname,A.banner,A.curchapter,B.target_chapter,B.createtime '
+             'from comic as A,(select * from view_record where id in (select max(id) id '
+             'from view_record where target_type=\'1\' and user_id=%s '
+             'group by target_id)) as B where A.id=B.target_id;') % uid)
+        game_record = db.session.execute(('select A.id,A.name,A.img_icon,A.url,B.createtime '
+                                          'from game as A,(select * from view_record where id in (select max(id) id '
+                                          'from view_record where target_type=\'2\' and user_id=%s '
+                                          'group by target_id)) as B where A.id=B.target_id order by createtime desc;') % uid)
+        for item in comic_record.fetchall():
+            records.append(
                 {
-                    'id':comic_item.id,
-                    'name': comic_item.comicname,
-                    'banner': comic_item.banner,
-                    'updatetime': item.createtime,
-                    'chapter': item.target_chapter
-                })
+                    'id': item[0],
+                    'name': item[1],
+                    'type': '1',
+                    'banner': item[2],
+                    'chapter': item[4],
+                    'updatetime': item[5],
+                    'progress': int(item[4] * 1.0 / item[3] * 100)
+                }
+            )
+        for item in game_record:
+            records.append(
+                {
+                    'id': item[0],
+                    'name': item[1],
+                    'type': '2',
+                    'banner': item[2],
+                    'url': item[3],
+                    'updatetime': item[4]
+                }
+            )
+        print records
+        # history
+        # view_records = ViewRecord.query.filter_by(user_id=current_user.id).all()
+        # comic_game_records = []
+        # for item in view_records:
+        #     if item.target_type == '1':
+        #         comic_item = Comic.query.get(int(item.target_id))
+        #         comic_game_records.append(
+        #             {
+        #                 'id': comic_item.id,
+        #                 'name': comic_item.comicname,
+        #                 'type': '1',
+        #                 'banner': comic_item.banner,
+        #                 'updatetime': item.createtime,
+        #                 'chapter': item.target_chapter,
+        #                 'progress': int(item.target_chapter * 1.0 / comic_item.curchapter * 100)
+        #             })
+        #     elif item.target_type == '2':
+        #         # game
+        #         game_item = Game.query.get(int(item.target_id))
+        #         comic_game_records.append(
+        #             {
+        #                 'id': game_item.id,
+        #                 'name': game_item.name,
+        #                 'type': '2',
+        #                 'banner': game_item.img_icon,
+        #                 'updatetime': item.createtime,
+        #                 'url': game_item.url
+        #             })
+
         # integral
         integral = current_user.integral
         if integral < 400:
@@ -404,10 +473,10 @@ def my():
             level = 9
         else:
             level = 10
-        return render_template('my_loggedin.html', checkinstatus=checkinstatus, checkindays=checkindays,
-                               comicrecords=comic_records, level=level)
+        return render_template('v1_1/my_logged.html', checkinstatus=checkinstatus, checkindays=checkindays,
+                               records=sorted(records, reverse=True, key=lambda x:x['updatetime']), level=level)
     else:
-        return render_template('my.html')
+        return render_template('v1_1/my.html')
 
 
 @main.route('/myorder', methods=['GET'])
@@ -428,31 +497,35 @@ def myorder():
         return render_template('myorder.html', data=data)
     else:
         return render_template("notlogged.html", title=u"我的订购")
-@main.route('/collection',methods=['GET'])
+
+
+@main.route('/collection', methods=['GET'])
 def mycollection():
     data = []
     if not current_user.is_anonymous:
         uid = current_user.id
         faverinfos = FavorInfo.query.filter_by(uid=uid).filter_by(state='1').all()
-        #默认只有动漫 -type=1
+        # 默认只有动漫 -type=1
         for f in faverinfos:
             cid = f.cid
-            viewrecord = ViewRecord.query.filter_by(user_id=uid).filter_by(target_id=cid).filter_by(target_type='1').first()
+            viewrecord = ViewRecord.query.filter_by(user_id=uid).filter_by(target_id=cid).filter_by(
+                target_type='1').first()
             if viewrecord:
                 recentchap = viewrecord.target_chapter
             else:
                 recentchap = 1
             data.append({
-                'type':'1',
-                'id':cid,
-                'name':f.name,
-                'img':f.img,
-                'recentchap':recentchap
+                'type': '1',
+                'id': cid,
+                'name': f.name,
+                'img': f.img,
+                'recentchap': recentchap
             })
-        return render_template('collection.html',data=data)
+        return render_template('collection.html', data=data)
 
     else:
         return render_template("notlogged.html", title=u"我的收藏")
+
 
 @main.route('/mall', methods=['GET'])
 def mall():
@@ -460,6 +533,7 @@ def mall():
         return render_template('mall.html')
     else:
         return render_template("notlogged.html", title=u"商城")
+
 
 @main.route('/mysign', methods=['GET'])
 def sign():
@@ -488,33 +562,43 @@ def history():
     earlier = []
     if not current_user.is_anonymous:
         uid = session.get('user_id')
-        record = db.session.execute(('select A.id,A.comicname,A.banner,B.target_chapter,B.createtime from comic as A,(select * from view_record where id in (select max(id) id from view_record where target_type=\'1\' and user_id=%s group by target_id)) as B where A.id=B.target_id;') % uid)
-        for item in record.fetchall():
+        comic_record = db.session.execute(('select A.id,A.comicname,A.banner,B.target_chapter,B.createtime '
+                                           'from comic as A,(select * from view_record where id in (select max(id) id '
+                                           'from view_record where target_type=\'1\' and user_id=%s '
+                                           'group by target_id)) as B where A.id=B.target_id;') % uid)
+        for item in comic_record.fetchall():
             if item[-1].startswith(datetime.now().strftime('%Y%m%d')):
                 today.append({
-                    'id':item[0],
-                    'name':item[1],
-                    'banner':item[2],
-                    'chapter':item[3],
-                    'createtime':item[4]
+                    'id': item[0],
+                    'name': item[1],
+                    'banner': item[2],
+                    'chapter': item[3],
+                    'createtime': item[4]
                 })
             else:
                 earlier.append({
-                    'id':item[0],
-                    'name':item[1],
-                    'banner':item[2],
-                    'chapter':item[3],
-                    'createtime':item[4]
+                    'id': item[0],
+                    'name': item[1],
+                    'banner': item[2],
+                    'chapter': item[3],
+                    'createtime': item[4]
                 })
     else:
         return render_template("notlogged.html", title=u"观看历史")
-    return render_template('history.html',today=today,earlier=earlier)
+    return render_template('history.html', today=today, earlier=earlier)
 
-@main.route('/discovery',methods=['GET'])
+
+@main.route('/find', methods=['GET'])
 def discovery():
-    return render_template('discovery.html')
+    return render_template('v1_1/find.html')
 
-@main.route('/follow',methods=['GET'])
+
+@main.route('/weal', methods=['GET'])
+def weal():
+    return render_template('v1_1/weal.html')
+
+
+@main.route('/follow', methods=['GET'])
 def follow():
     data = []
     if not current_user.is_anonymous:
@@ -541,9 +625,11 @@ def follow():
     else:
         return render_template("notlogged.html", title=u"我的收藏")
 
-@main.route('/download',methods=['GET'])
+
+@main.route('/download', methods=['GET'])
 def downloadpage():
     return render_template('download.html')
+
 
 def _get_annymous_id():
     address = request.headers.get('X-Forwarded-For', request.remote_addr)

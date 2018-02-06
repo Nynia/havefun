@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width"
+          name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link href="../../static/v1_1/css/style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../../static/v1_1/js/rem.js"></script>
+    <script type="text/javascript" src="../../static/v1_1/js/jquery-1.11.1.min.js"></script>
+    <title></title>
+</head>
+<body>
+<!--签到成功-->
+<div class="fade" id="tc_win">
+    <img src="../../static/v1_1/img/big_gold.png" class="big_gold" alt=""/>
+    <p>积分+20</p>
+</div>
+
+<div class="home_banner">
+    <p class="news_img">
+        <img src="../../static/v1_1/img/news_img.png" alt=""/>
+    </p>
+
+    <div class="home_pic">
+        <img src="../../static/v1_1/img/pic_img.png" alt=""/>
+    </div>
+    <div class="home_message">
+        <p>{{ session.phonenum }}</p>
+        <em>LV {{ level }}</em>
+    </div>
+    {% if checkinstatus %}
+        <a class="btn_sign active">已签到</a>
+    {% else %}
+        <a class="btn_sign">签到</a>
+    {% endif %}
+</div>
+
+<div class="home_list">
+    <a href="/mysign">
+        <img src="../../static/v1_1/img/icon_12.png" class="icon_12" alt=""/>
+        <p>签到</p>
+        <img src="../../static/v1_1/img/left_img.png" class="left_img" alt=""/>
+        <span>已连续签到{{ checkindays }}天</span>
+    </a>
+    <a href="/mall">
+        <img src="../../static/v1_1/img/icon_13.png" class="icon_12" alt=""/>
+        <p>积分商城</p>
+        <img src="../../static/v1_1/img/left_img.png" class="left_img" alt=""/>
+        <span>积分换好礼</span>
+    </a>
+    <a href="/collection">
+        <img src="../../static/v1_1/img/icon_14.png" class="icon_12" alt=""/>
+        <p>我的收藏</p>
+        <img src="../../static/v1_1/img/left_img.png" class="left_img" alt=""/>
+    </a>
+    <a href="/myorder">
+        <img src="../../static/v1_1/img/icon_15.png" class="icon_12" alt=""/>
+        <p>订购</p>
+        <img src="../../static/v1_1/img/left_img.png" class="left_img" alt=""/>
+    </a>
+    <a href="/flow">
+        <img src="../../static/v1_1/img/icon_16.png" class="icon_12" alt=""/>
+        <p>我的流量</p>
+        <img src="../../static/v1_1/img/left_img.png" class="left_img" alt=""/>
+        <span>一键查询、办理流量套餐</span>
+    </a>
+    <a href="#">
+        <img src="../../static/v1_1/img/icon_17.png" class="icon_12" alt=""/>
+        <p>反馈</p>
+        <img src="../../static/v1_1/img/left_img.png" class="left_img" alt=""/>
+    </a>
+    <a href="#">
+        <img src="../../static/v1_1/img/icon_18.png" class="icon_12" alt=""/>
+        <p>帮助</p>
+        <img src="../../static/v1_1/img/left_img.png" class="left_img" alt=""/>
+    </a>
+</div>
+
+<div class="history_pag">
+    <h5>历史记录</h5>
+    <div class="history_content">
+        <ul>
+            {% for r in records %}
+                {% if r.type=='1' %}
+                    <li class="video_history">
+                        <a href="/comic/{{ r.id }}?chapter={{ r.chapter }}">
+                            <div>
+                                <img src="{{ r.banner }}" class="video_pic" alt=""/>
+                                <span>{{ r.progress }}%</span>
+                            </div>
+                            <p><span>{{ r.name }}</span> <em>{{ r.chapter }}集</em></p>
+                        </a>
+                    </li>
+                {% elif r.type=='2' %}
+                    <li class="game_history">
+                        <a href="{{ r.url }}">
+                            <img src="{{ r.banner }}" alt=""/>
+                            <p>{{ r.name }}</p>
+                        </a>
+
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<a href="" class="btn_over">退出登录</a>
+
+<div class="box_pag"></div>
+<div class="btm_link">
+    <ul>
+        <li>
+            <a href="/">
+                <img src="../../static/v1_1/img/icon_4.png" class="icon_4" alt=""/>
+                <p>首页</p>
+            </a>
+        </li>
+        <li>
+            <a href="/find">
+                <img src="../../static/v1_1/img/icon_5.png" class="icon_4" alt=""/>
+                <p>发现</p>
+            </a>
+        </li>
+        <li>
+            <a href="/weal">
+                <img src="../../static/v1_1/img/icon_6.png" class="icon_4" alt=""/>
+                <p>福利</p>
+            </a>
+        </li>
+        <li class="active">
+            <a href="#">
+                <img src="../../static/v1_1/img/icon_77.png" class="icon_4" alt=""/>
+                <p>我的</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        var theNum = $(".game_history").length;
+        var theNum1 = $(".video_history").length;
+        var theWid = theNum * 1.62 - 0.18 + theNum1 * 2.54 + "rem";
+        $(".history_pag ul").css("width", theWid);
+
+        $(".btn_sign").click(function () {
+
+            $.ajax({
+                type: "get",
+                url: "/auth/checkin",
+                contentType: "application/json",
+                data: {'uid':{{current_user.id}}},
+                success: function (data, status) {
+                    console.log(data.code);
+                    if (data.code == 0) {
+                        $(".btn_sign").addClass("active");
+                        $(".btn_sign").text("已签到");
+                        $("#tc_win").show();
+                        setTimeout(function () {
+                            $("#tc_win").hide();
+                        }, 2000)
+                        $('span:first').text('已连续签到' + data['data']['continus_checkin'] + '天')
+                    }
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

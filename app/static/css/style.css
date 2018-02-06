@@ -1707,10 +1707,17 @@ body{
 	margin: 0 0rem!important;
 }
 /*动漫详情页改版*/
-.cartoon_m,.game_m{
+.cartoon_m{
 	background: url(../img/000.jpg);
 	background-size: cover;
 	height: 11.30435rem;
+	width: 100%;
+	position: relative;
+}
+.game_m{
+	background: url(../img/000.jpg);
+	background-size: cover;
+	height: 2.30435rem;
 	width: 100%;
 	position: relative;
 }

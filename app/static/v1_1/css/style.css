@@ -1,0 +1,171 @@
+*{ margin: 0; padding: 0;}
+html{height: 100%; width: 100%; font-size: 100px; outline: 0; -webkit-text-size-adjust:none;}
+body{ font-size: 0.22rem; height: 100%; -webkit-user-select: none; position: relative; font-family: "Microsoft YaHei"; margin: 0; padding: 0; background:#f6f5f5;}
+a{ text-decoration: none; color: #333;-webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; -webkit-user-select: none;}
+p,h1,h2,h3,h4,h5,h6{ padding: 0; margin: 0;}
+img{ border: none; display: block; margin: 0 auto;}
+ul,li{ list-style: none;}
+input[type="button"], input[type="submit"], input[type="reset"], input[type="text"] {-webkit-appearance: none; font-family: "Microsoft YaHei";}
+
+.inp_title{width: 100%; height: 0.86rem; background: #f7d631; position: relative;}
+.logo{width: 1.05rem; height: 0.51rem; position: absolute; top: 0.18rem; left: 0.4rem;}
+.pic_img{width: 0.51rem; height: 0.51rem; position: relative; overflow: hidden; border-radius: 100%; position: absolute; top: 0.18rem; right: 0.4rem;}
+.pic_img img{width: 100%; height: 100%;}
+
+.swiper-container { width: 100%;  height: 3.58rem; position: relative; }
+.swiper-slide { text-align: center; font-size: 18px; background: #fff; display: -webkit-box; display: -ms-flexbox; display: -webkit-flex; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; -webkit-justify-content: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; -webkit-align-items: center; align-items: center; }
+.swiper-slide img{ display: block; width: 100%;}
+.swiper-pagination-bullet{ background: #fff;opacity: .56;}
+.swiper-pagination-bullet-active{background: #0a98f3; opacity: 1;}
+.swiper-container-horizontal>.swiper-pagination-bullets{ font-size: 0;}
+
+.inp_nav{width: 100%; position: relative; background: #FFFFFF;}
+.inp_nav ul{width: 100%; position: relative; overflow: hidden;}
+.inp_nav li{width: 33.33%; float: left; position: relative;}
+.inp_nav li a{display: block; width: 100%; position: relative; box-sizing: border-box; padding: 0.25rem 0; text-align: center;}
+.icon_1{width: 0.65rem; height: 0.64rem;}
+.inp_nav li p{width: 100%; text-align: center; font-size: 0.28rem; line-height: 0.3rem; margin-top: 0.12rem;}
+.inp_nav li.active p{color: #333;}
+.color_1{color: #fa7d0a;}
+.color_2{color: #7DC428;}
+.color_3{color: #5fa4e7;}
+
+.game_link{width: 100%; position: relative; overflow: hidden; box-sizing: border-box; padding: 0.4rem 0.14rem 0.13rem; background: #FFFFFF; margin-top: 0.15rem;}
+.game_link ul{width: 100%; position: relative; overflow: hidden; margin: 0 auto;}
+.game_link li{width: 3.55rem; float: left; position: relative; margin-left: 0.12rem; margin-bottom: 0.12rem;}
+.game_link li:nth-child(2n+1){margin-left: 0;}
+.game_link li img{width: 3.55rem; border-radius: 0.1rem;}
+
+.game_content{width: 100%; position: relative; background: #FFFFFF; box-sizing: border-box; padding: 0 0.38rem;}
+.game_pag{width: 100%; box-sizing: border-box; padding: 0.32rem 0; border-bottom: 1px solid #ccc; position: relative; overflow: hidden;}
+.game_pag:last-child{border-bottom: 0;}
+.game_logo{width: 1.4rem; height: 1.4rem; float: left; border-radius: 0.12rem;}
+.game_message{width: 5.34rem; height: 1.4rem; float: left; box-sizing: border-box; padding-left: 0.46rem;}  
+.game_message h5{width: 100%; font-size: 0.3rem; color: #333; font-weight: normal; line-height: 0.34rem;}
+.game_type{width: 100%; font-size: 0.28rem; color: #2d6efc; line-height: 0.32rem; margin-top: 0.1rem;}
+.game_text{width: 100%; font-size: 0.24rem; text-indent: 2em; color: #5d5d5d; overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2; line-height: 0.32rem; }
+.btn_start{display: block; width: 1.4rem; height: 0.56rem; background: #2d6efc; position: absolute; top: 0.32rem; right: 0;border-radius: 0.15rem; text-align: center; line-height: 0.56rem; font-size: 0.22rem; color: #FFFFFF;}
+
+.btm_link{width: 100%; background: #FFFFFF; position: fixed; left: 0; bottom: 0; border-top: 1px solid #c4c4c4;}
+.btm_link ul{width: 100%; position: relative; overflow: hidden;}
+.btm_link li{width: 25%; float: left; position: relative;}
+.btm_link li a{display: block; width: 100%; height: 0.91rem; box-sizing: border-box; padding: 0.06rem 0;}
+.icon_4{width: 0.56rem; height: 0.47rem;}
+.btm_link p{width: 100%; text-align: center; font-size: 0.22rem; line-height: 0.22rem; color: #333; margin-top: 0.1rem;}
+.box_pag{width: 100%; height: 0.95rem;}
+.btm_link li.active p{color: #f7d631;}
+.m0{margin-top: 0.15rem;}
+
+.img_pag{width: 100%; position: relative; overflow: hidden; background: #FFFFFF; box-sizing: border-box; padding: 0 0.2rem 0.2rem; margin-top: 0.15rem;}
+.img_pag a{display: block; margin-top: 0.32rem;}
+.img_pag img{width: 100%;}
+
+.data_pag,.data_pag ul{width: 100%; position: relative; overflow: hidden; background: #FFFFFF;}
+.data_pag li{width: 33.33%; float: left; box-sizing: border-box; border-left: 1px solid #c4c4c4; position: relative; box-sizing: border-box; padding: 0.26rem 0; text-align: center;}
+.data_pag li:first-child{border-left: 0;}
+.data_pag h5{width: 100%; font-size: 0.24rem; color: #5c5d5d; text-align: center; line-height: 0.32rem; font-weight: normal;}
+.data_pag p{width: 100%; text-align: center; color: #e55030; font-size: 0.2rem; line-height: 0.32rem;}
+.weal_title{width: 7.1rem; margin-left: 0.2rem; margin-top: 0.3rem; box-sizing: border-box; padding-left: 0.4rem; background: url(../img/icon_8.png) 0 center no-repeat; background-size: 0.34rem 0.34rem; font-size: 0.36rem; line-height: 0.36rem; font-weight: normal;}
+
+.weal_pag{display: block; width: 6.75rem; height: 1.7rem; margin: 0.3rem auto 0; position: relative; overflow: hidden; box-shadow: 0 0 0.2rem #dddbdb; background: url(../img/icon_9.png) top left no-repeat #FFFFFF; background-size: 0.52rem 0.51rem;}
+.left_pag{float: left; margin-left: 0.52rem; width: 1.7rem; box-sizing: border-box; padding-left: 0.16rem; padding-top: 0.32rem;}
+.left_pag h5{width: 100%; font-size: 0.62rem; color: #fe113c; line-height: 0.7rem;}
+.left_pag p{width: 100%; font-size: 0.24rem; font-weight: bold; color: #fe113c; line-height: 0.36rem;}
+.right_pag{ float: left; width: 4.53rem; box-sizing: border-box; padding-left: 0.32rem;}
+.right_pag  h5{width: 100%; text-align: center; line-height: 0.6rem; font-size: 0.32rem; color: #333333; margin-top: 0.32rem;}
+.right_pag p{width: 100%; font-size: 0.2rem; color: #5c5d5d; line-height: 0.36rem; margin-top: 0.1rem;}
+
+.game_banner{width: 100%; position: relative; overflow: hidden; box-sizing: border-box; padding: 0.4rem 0.35rem 0;}
+.game_pic{width: 2.4rem; height: 2.44rem; float: left;}
+.game_ranking{width: 4.4rem; float: left; box-sizing: border-box; padding-left: 0.55rem; position: relative;}
+.game_ranking h5{width: 100%;font-size: 0.4rem; color: #333; font-weight: normal; line-height: 0.5rem;}
+.start_pag{width: 100%; height: 0.3rem; position: relative; overflow: hidden; margin-top: 0.15rem;}
+.start_pag img{width: 0.2rem; height: 0.18rem; float: left; margin-left: 0.05rem; margin-top: 0.05rem;}
+.start_pag p{float: left; margin-left: 0.1rem; line-height: 0.3rem; font-size: 0.18rem; color: #333;}
+.start_pag p span{font-size: 0.22rem; font-weight: bold;}
+.min_text{width: 100%; font-size: 0.2rem; color: #9d9d9d; line-height: 0.42rem;}
+.min_text.m0{margin-top: 0.26rem;}
+.btn_down{display: block; width: 1.3rem; height: 0.55rem; border: 1px solid #0c5f9f; font-size: 0.28rem; color: #0c5f9f; text-align: center; line-height: 0.55rem; border-radius: 0.08rem; position: absolute; right: 0; bottom: 0rem;}
+
+.game_rule{width: 100%; position: relative; box-sizing: border-box; margin-top: 0.7rem; padding: 0 0.35rem;}
+.game_rule h5,.pic_title{width: 100%; font-size: 0.31rem; color: #333333; font-weight: normal;}
+.game_rule p{width: 100%; font-size: 0.26rem; color: #5d5d5d; line-height: 0.4rem; margin-top: 0.15rem; text-indent: 2em;}
+
+.pic_pag{width: 6.8rem; margin: 0 auto; position: relative; margin-top: 0.15rem; overflow-x: scroll;}
+.pic_pag ul{width: 100%; position: relative; overflow: hidden;}
+.pic_pag ul li{width: 2.36rem; height: 3.94rem; box-sizing: border-box; padding-left: 0.12rem; float: left; overflow: hidden;}
+.pic_pag.max_width ul li{width: 6.71rem; height: 3.94rem;}
+/*.pic_pag ul li:first-child{padding-left: 0;}*/
+.pic_pag img{width: 100%;}
+
+.pic_title{margin-top: 0.5rem; box-sizing: border-box; padding: 0 0.35rem;}
+
+
+/*2018-1-30 添加*/
+.game_list{width: 100%; position: relative; overflow: hidden; margin-top: 0.15rem; background: #FFFFFF;}
+.game_list ul{width: 100%; position: relative; overflow: hidden; }
+.game_list li{width: 50%; float: left; box-sizing: border-box; padding: 0.22rem 0; overflow: hidden; text-align: center;}
+.type_text{display: inline-block; vertical-align: middle; width: 1.3rem; position: relative;}
+.type_text h5{font-size: 0.26rem; color: #333333; line-height: 0.3rem; font-weight: normal;}
+.type_text p{font-size: 0.21rem; color: #5d5d5d; line-height: 0.26rem; margin-top: 0.1rem;}
+.pic_1{display: inline-block; vertical-align: middle; width: 1.44rem; height: 1.44rem; border-radius: 0.1rem;}
+
+.home_banner{width: 100%; position: relative;  overflow: hidden; box-sizing: border-box; padding: 0.55rem 0.26rem 0.42rem; background: #FFFFFF;}
+.home_pic{width: 1.06rem; height: 1.06rem; border-radius: 100%; overflow: hidden; float: left;}
+.home_pic img{width: 100%; height: 100%;}
+.home_message{display: inline-block; height: 1.06rem; float: left; box-sizing: border-box; padding-top: 0.12rem; margin-left: 0.24rem;}
+.home_message p{font-size: 0.34rem; color: #333; line-height: 0.42rem;}
+.home_message em{display: block; width: 0.8rem; height: 0.32rem; border: 1px solid #d7d7d7; font-size: 0.24rem; color: #d7d7d7; text-align: center; line-height: 0.3rem; font-weight: bold; border-radius: 0.32rem; margin-top: 0.12rem;}
+.btn_sign{display: block; width: 1.2rem; height: 0.46rem; box-sizing: border-box; border: 1px solid #e2605e; font-size: 0.2rem; color: #e2605e; text-align: center; line-height: 0.44rem; border-radius: 0.46rem; position: absolute; top: 50%; margin-top: -0.18rem; right: 0.36rem; background: url(../img/gold_img.png) 0.16rem center no-repeat; background-size: 0.2rem 0.2rem; padding-left: 0.36rem;}
+
+.btn_sign.active{border-color: #979090; color: #979090; background: #FFFFFF; padding-left: 0;}
+
+.news_img{width: 0.39rem; height: 0.3rem; position: absolute; top: 0.1rem; right: 0.26rem;}
+.news_img img{width: 100%;}
+
+.fade{display: none; width: 2.74rem; position: fixed; top: 2.3rem; left: 50%; margin-left: -1.37rem; z-index: 9999; background: #393a3a; box-sizing: border-box; padding: 0.28rem 0 0.34rem; border-radius: 0.1rem; }
+.big_gold{width: 0.47rem; height: 0.47rem;}
+.fade p{width: 100%; text-align: center; font-size: 0.24rem; color: #FFFFFF; margin-top: 0.18rem;}
+#tc_win{animation: pag_xiao 2s ease-in forwards; -webkit-animation: pag_xiao 2s ease-in forwards; -moz-animation: pag_xiao 2s ease-in forwards;}
+
+@keyframes pag_xiao{
+	0%{opacity: 1;}
+	100%{opacity: 0; display: none;}
+}
+@-webkit-keyframes pag_xiao{
+	0%{opacity: 1;}
+	100%{opacity: 0; display: none;}
+}
+@-moz-keyframes pag_xiao{
+	0%{opacity: 1;}
+	100%{opacity: 0; display: none;}
+}
+
+.home_list{width: 100%; position: relative; margin-top: 0.15rem; background: #FFFFFF;}
+.home_list a{display: block; width: 100%; height: 0.82rem; border-bottom: 1px solid #f6f5f5; position: relative; overflow: hidden; box-sizing: border-box; padding: 0 0.26rem;}
+.icon_12{width: 0.36rem; height: 0.36rem; float: left; margin-top: 0.23rem;}
+.home_list p{display: inline-block; font-size: 0.29rem; float: left; margin-left: 0.2rem; line-height: 0.82rem;}
+.left_img{width: 0.1rem; height: 0.17rem; float: right; margin-top: 0.325rem;}
+.home_list span{float: right; margin-right: 0.36rem; font-size: 0.22rem; color: #c6c6c6; line-height: 0.82rem;}
+
+.history_pag{width: 100%; border-bottom: 1px solid #f6f5f5; position: relative; overflow: hidden; box-sizing: border-box; padding: 0.3rem 0.26rem 0.6rem; background: #FFFFFF; margin-top: 0.15rem;}
+.history_pag h5{width: 100%; background: url(../img/icon_19.png) no-repeat; background-size: 0.36rem 0.36rem; box-sizing: border-box; padding-left: 0.56rem; font-size: 0.29rem; line-height: 0.36rem; font-weight: normal;}
+
+.history_content{width: 100%; position: relative; margin-top: 0.3rem; overflow-x: scroll;}
+.history_pag ul{width: 100%; position: relative; overflow: hidden;}
+.game_history{width: 1.44rem; float: left; margin-left: 0.18rem; position: relative;}
+.game_history:first-child{margin-left: 0rem;}
+.game_history img{width: 1.44rem; height: 1.44rem;}
+.game_history p{width: 100%; text-align: center; font-size: 0.22rem; color: #333; margin-top: 0.05rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 0.32rem;}
+.video_history{width: 2.36rem; float: left; margin-left: 0.18rem; position: relative;}
+.video_history div{width: 2.36rem; height: 1.43rem; position: relative;}
+.video_pic{width: 100%; height: 100%;}
+.video_history p{width: 100%; height: 0.32rem; line-height: 0.32rem; font-size: 0.22rem; color: #333; margin-top: 0.05rem;}
+.video_btn{width: 0.46rem; height: 0.46rem; position: absolute; top: 50%; margin-top: -0.23rem; left: 50%; margin-left: -0.23rem;}
+.video_history p span{display: block; width: 1.3rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; float: left;}
+.video_history p em{font-style: normal; float: right;}
+.video_history div span{position: absolute; left: 0.1rem; bottom: 0.05rem; font-size: 0.22rem; color: #FFFFFF;}
+
+.btn_over{display: block; width: 5.4rem; height: 0.86rem; border: 1px solid #eed664; background: #FFFFFF; text-align: center;line-height: 0.86rem; font-size: 0.3rem; border-radius: 0.12rem; margin: 0.4rem auto;}
+
+.home_message a{font-size: 0.34rem; color: #d7d7d7;}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width"
+          name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link href="../../static/v1_1/css/style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../../static/v1_1/js/rem.js"></script>
+    <script type="text/javascript" src="../../static/v1_1/js/jquery-1.11.1.min.js"></script>
+    <title></title>
+</head>
+<body style="background: #FFFFFF;">
+<div class="game_banner">
+    <img src="{{ game.img_icon }}" class="game_pic" alt="{{ package.productname }}"/>
+    <div class="game_ranking">
+        <h5>{{ game.name }}</h5>
+        <div class="start_pag">
+            {% for i in range(game.star) %}
+                <img src="../../static/v1_1/img/icon_11.png" class="icon_10" alt=""/>
+            {% endfor %}
+            {% for i in range(5-game.star) %}
+                <img src="../../static/v1_1/img/icon_10.png" class="icon_10" alt=""/>
+            {% endfor %}
+            <p><span>7.9</span>分</p>
+        </div>
+        <p class="min_text m0">更新日期 {{ game.updatetime[:4]+'-'+ game.updatetime[4:6] +'-' + game.updatetime[6:8] }}</p>
+        <p class="min_text">类 型 {{ game.category }}</p>
+        <p class="min_text">大 小 {{ game.size }}MB</p>
+
+        <a class="btn_down">下载</a>
+    </div>
+</div>
+
+<div class="game_rule">
+    <h5>游戏概括：</h5>
+    <p>
+        {{ game.brief }}
+    </p>
+</div>
+
+<h5 class="pic_title">游戏截图：</h5>
+<div class="pic_pag ">
+    <ul>
+        <li class="first_pag"><img src="{{ game.img_screenshot_1 }}" alt=""/></li>
+        {% if game.img_screenshot_2 %}
+            <li><img src="{{ game.img_screenshot_2 }}" alt=""/></li>
+        {% endif %}
+        {% if game.img_screenshot_3 %}
+            <li><img src="../../static/v1_1/img/game_img_1.jpg" alt=""/></li>
+        {% endif %}
+        {% if game.img_screenshot_4 %}
+            <li><img src="{{ game.img_screenshot_4 }}" alt=""/></li>
+        {% endif %}
+        {% if game.img_screenshot_5 %}
+            <li><img src="{{ game.img_screenshot_5 }}" alt=""/></li>
+        {% endif %}
+        {% if game.img_screenshot_6 %}
+            <li><img src="{{ game.img_screenshot_6 }}" alt=""/></li>
+        {% endif %}
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.first_pag img').each(function () {
+            AutoResizeImage(this);
+        })
+    })
+
+    function AutoResizeImage(objImg) {
+        var img = new Image();
+        img.src = objImg.src;
+        img.onload = function () {
+            var imgWidth = this.width;
+            var imgHeight = this.height;
+            if (imgWidth > imgHeight) {
+                $(".pic_pag").addClass("max_width");
+            } else {
+                $(".pic_pag").removeClass("max_width");
+            }
+            var theWidth1 = $('.first_pag').outerWidth();
+            var theNum = $(".pic_pag ul li").length;
+            var theWid = theNum * theWidth1 + 5 + "px";
+            $(".pic_pag ul").css("width", theWid);
+        }
+
+    }
+</script>
+
+</body>
+</html>

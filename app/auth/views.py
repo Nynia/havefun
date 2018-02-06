@@ -33,7 +33,7 @@ def login():
         if request.method == 'POST':
             if form.validate_on_submit():
                 user = User.query.filter_by(phonenum=form.phonenum.data).first()
-                # AES 解密
+                # AES解密
                 password_decipher = aescrypt('1234567812345678').decrypt(form.password.data)
                 if user is not None and user.verify_password(password_decipher):
                     login_user(user, True)

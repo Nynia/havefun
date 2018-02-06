@@ -34,6 +34,7 @@ def getuserinfo():
     user = User.query.filter_by(phonenum=mobileName).first()
     if user is None:
         #register
+        print 'create user'
         from datetime import datetime
         user = User()
         user.phonenum = mobileName
@@ -44,9 +45,10 @@ def getuserinfo():
         db.session.add(user)
         db.session.commit()
     #login
-    print user
     login_user(user, True)
+    print 'current_user:'
     print current_user
+    print session,request.cookies
     relation = OrderRelation.query.filter_by(phonenum=user.phonenum).all()
     for r in relation:
         if r.status == '1':

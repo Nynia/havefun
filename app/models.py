@@ -365,7 +365,6 @@ class AccessLog(db.Model):
     def to_json(self):
         json_post = {
             'uid':self.uid,
-            'ip':self.remoteip,
             'user-agent':self.useragent,
             'endpoint':self.addr,
             'timestamp':self.timestamp
