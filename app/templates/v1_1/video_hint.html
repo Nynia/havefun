@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" name="viewport">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="js/rem.js" ></script>
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+		<title></title>
+	</head>
+	<body style="background: url(img/bg_1.jpg) no-repeat; background-size: 100% auto;">
+		<div class="video_top">
+			<img src="img/right_img.png" class="right_img" alt="" />
+		</div>
+		
+		<div class="video_banner">
+			<img src="img/video_banner.jpg" class="bimg" alt="" />
+			<em></em>
+			<h5>《星海镖师》</h5>
+			<p>作者：xxxxx</p>
+			<a>收藏</a>
+		</div>
+		
+		<div class="video_content">
+			<div class="set_video">
+				<h5>内容概括：</h5>
+				<p>大炎王朝天都郡炎城青阳镇，一个落魄的林氏子弟林动在山洞间偶然捡到一块神秘的石符而走上的逆袭之路。</p>
+			</div>
+			
+			<div class="catalog_video">
+				<span class="catalog_text">目录</span>
+				<ul>
+					<li class="the_active"><a>1-18</a></li>
+					<li><a>19-37</a></li>
+					<li><a>38-55</a></li>
+				</ul>
+				<a class="next_btn"><img src="img/next_btn.png"/></a>
+				<p><img src="img/top_img.png"/><span>升序</span></p>
+				<p><img src="img/btm_img.png"/><span>降序</span></p>
+			</div>
+			
+			<div class="sel_video">
+				<ul>
+					<li>
+						<a href="">第1章</a>
+						<img src="img/icon_21.png" class="icon_21" alt="" />
+					</li>
+					<li>
+						<a href="">第2章</a>
+						<img src="img/icon_21.png" class="icon_21" alt="" />
+					</li>
+					<li>
+						<a href="">第3章</a>
+						<img src="img/icon_21.png" class="icon_21" alt="" />
+					</li>
+					<li>
+						<a href="">第4章</a>
+						<img src="img/icon_21.png" class="icon_21" alt="" />
+					</li>
+					<li>
+						<a href="">第5章</a>
+						<img src="img/icon_21.png" class="icon_21" alt="" />
+					</li>
+					<li>
+						<a href="">第6章</a>
+					</li>
+					<li>
+						<a href="">第7章</a>
+					</li>
+					<li>
+						<a href="">第8章</a>
+					</li>
+					<li>
+						<a href="">第9章</a>
+					</li>
+					<li>
+						<a href="">第10章</a>
+					</li>
+					<li>
+						<a href="">第11章</a>
+					</li>
+					<li>
+						<a href="">第12章</a>
+					</li>
+					<li>
+						<a href="">第13章</a>
+					</li>
+					<li>
+						<a href="">第14章</a>
+					</li>
+					<li>
+						<a href="">第15章</a>
+					</li>
+					<li>
+						<a href="">第16章</a>
+					</li>
+					<li>
+						<a href="">第17章</a>
+					</li>
+					<li>
+						<a href="">第18章</a>
+					</li>
+					
+				</ul>
+			</div>
+			
+		</div>
+		
+		<script type="text/javascript">
+			$(function(){
+				$(".video_banner a").click(function(){
+					$(this).text("已收藏");
+					$(this).addClass("btn_shou");
+				});
+				$(".catalog_video li").click(function(){
+					$(this).addClass("the_active").siblings().removeClass("the_active");
+				});
+			})
+		</script>
+
+		
+	</body>
+</html>

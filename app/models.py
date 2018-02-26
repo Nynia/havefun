@@ -22,6 +22,7 @@ class Package(db.Model):
     secret = db.Column(db.String(30))
     img2 = db.Column(db.String(30))
     copyright = db.Column(db.String(255))
+
     def to_json(self):
         json_post = {
             'productid': self.productid,
@@ -37,7 +38,7 @@ class Package(db.Model):
             'chargeid': self.chargeid,
             'secret': self.secret,
             'img2': self.img2,
-            'copyright':self.copyright
+            'copyright': self.copyright
         }
         return json_post
 
@@ -110,10 +111,10 @@ class User(UserMixin, db.Model):
             'nickname': self.nickname,
             'createtime': self.createtime,
             'integral': self.integral,
-            'lastcheckin':self.lastcheckin,
-            'continus_checkin':self.continus_checkin,
-            'lastlogin':self.lastlogin,
-            'continus_login':self.continus_login
+            'lastcheckin': self.lastcheckin,
+            'continus_checkin': self.continus_checkin,
+            'lastlogin': self.lastlogin,
+            'continus_login': self.continus_login
         }
         return json_post
 
@@ -179,7 +180,7 @@ class Game(db.Model):
             'brief': self.brief,
             'size': self.size,
             'createtime': self.createtime,
-            'updatetime':self.updatetime,
+            'updatetime': self.updatetime,
             'img_screenshot_1': self.img_screenshot_1,
             'img_screenshot_2': self.img_screenshot_2,
             'img_screenshot_3': self.img_screenshot_3,
@@ -326,6 +327,7 @@ class ViewRecord(db.Model):
         }
         return json_post
 
+
 class ComicChapterInfo(db.Model):
     __tablename__ = 'comicchapterinfo'
     id = db.Column(db.Integer, primary_key=True)
@@ -341,17 +343,18 @@ class ComicChapterInfo(db.Model):
     def to_json(self):
         json_post = {
             'id': self.id,
-            'bookid':self.bookid,
-            'chapterid':self.chapterid,
-            'quantity':self.quantity,
+            'bookid': self.bookid,
+            'chapterid': self.chapterid,
+            'quantity': self.quantity,
             'createtime': self.createtime,
             'updatetiem': self.updatetime
         }
         return json_post
 
+
 class AccessLog(db.Model):
     __tablename__ = 'access_log'
-    id = db.Column(db.Integer,primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.String(20))
     remoteip = db.Column(db.String(50))
     useragent = db.Column(db.String(255))
@@ -361,19 +364,19 @@ class AccessLog(db.Model):
     def __repr__(self):
         return '<AccessLog %r>' % self.addr
 
-
     def to_json(self):
         json_post = {
-            'uid':self.uid,
-            'user-agent':self.useragent,
-            'endpoint':self.addr,
-            'timestamp':self.timestamp
+            'uid': self.uid,
+            'user-agent': self.useragent,
+            'endpoint': self.addr,
+            'timestamp': self.timestamp
         }
         return json_post
 
+
 class IntegralStrategy(db.Model):
     __tablename__ = 'integral_strategy'
-    id = db.Column(db.Integer,primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     value = db.Column(db.Integer)
     description = db.Column(db.String(255))
     createtime = db.Column(db.String(14))
@@ -384,17 +387,18 @@ class IntegralStrategy(db.Model):
 
     def to_json(self):
         json_post = {
-            'id':self.id,
-            'value':self.value,
-            'description':self.description,
-            'createtime':self.createtime,
-            'updatetime':self.updatetime
+            'id': self.id,
+            'value': self.value,
+            'description': self.description,
+            'createtime': self.createtime,
+            'updatetime': self.updatetime
         }
         return json_post
 
+
 class IntegralRecord(db.Model):
     __tablename__ = 'integral_record'
-    id = db.Column(db.Integer,primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer)
     action = db.Column(db.Integer)
     change = db.Column(db.Integer)
@@ -405,17 +409,18 @@ class IntegralRecord(db.Model):
 
     def to_json(self):
         json_post = {
-            'id':self.id,
-            'uid':self.uid,
-            'action':self.action,
-            'change':self.change,
-            'timestamp':self.timestamp
+            'id': self.id,
+            'uid': self.uid,
+            'action': self.action,
+            'change': self.change,
+            'timestamp': self.timestamp
         }
         return json_post
 
+
 class CheckinRecord(db.Model):
     __tablename__ = 'checkin_record'
-    id = db.Column(db.Integer,primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer)
     timestamp = db.Column(db.String(14))
 
@@ -424,11 +429,12 @@ class CheckinRecord(db.Model):
 
     def to_json(self):
         json_post = {
-            'id':self.id,
-            'uid':self.uid,
-            'timestamp':self.timestamp,
+            'id': self.id,
+            'uid': self.uid,
+            'timestamp': self.timestamp,
         }
         return json_post
+
 
 class LoginRecord(db.Model):
     __tablename__ = 'login_record'
@@ -449,9 +455,10 @@ class LoginRecord(db.Model):
         }
         return json_post
 
+
 class FavorInfo(db.Model):
     __tablename__ = 'favor_info'
-    id = db.Column(db.Integer,primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(1))
     uid = db.Column(db.Integer)
     cid = db.Column(db.Integer)
@@ -461,37 +468,54 @@ class FavorInfo(db.Model):
 
     name = db.Column(db.String(255))
     img = db.Column(db.String(255))
+
     def __repr__(self):
-        return '<FavorInfo %s %s>' %(self.name, self.img)
+        return '<FavorInfo %s %s>' % (self.name, self.img)
 
     def to_json(self):
         json_post = {
-            'id':self.id,
-            'type':self.type,
-            'uid':self.uid,
-            'cid':self.cid,
-            'state':self.state,
-            'updatetime':self.updatetime,
-            'firstfavortime':self.firstfavortime,
-            'name':self.name,
-            'img':self.img
+            'id': self.id,
+            'type': self.type,
+            'uid': self.uid,
+            'cid': self.cid,
+            'state': self.state,
+            'updatetime': self.updatetime,
+            'firstfavortime': self.firstfavortime,
+            'name': self.name,
+            'img': self.img
         }
         return json_post
 
+
 class RecommendH5(db.Model):
     __tablename__ = 'recommend_h5'
-    id = db.Column(db.Integer,primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     img_icon = db.Column(db.String(255))
     url = db.Column(db.String(255))
     createtime = db.Column(db.String(14))
 
     def __repr__(self):
-        return '<CustomH5 %d>' % self.id
+        return '<RecommendH5 %s>' % self.name
+
+
+class RecommendApkGame(db.Model):
+    __tablename__ = 'recommend_apk_game'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    img_icon = db.Column(db.String(255))
+    category = db.Column(db.String(255))
+    brief = db.Column(db.String(255))
+    url = db.Column(db.String(255))
+    createtime = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<RecommendApkGame %s>' % self.name
+
 
 class RecommendComic(db.Model):
     __tablename__ = 'recommend_comic'
-    id = db.Column(db.Integer,primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     curchapter = db.Column(db.Integer)
     img = db.Column(db.String(255))
@@ -499,6 +523,7 @@ class RecommendComic(db.Model):
 
     def __repr__(self):
         return '<RecommendComic %d>' % self.id
+
 
 class Channel(db.Model):
     __tablename__ = 'channel'

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width"
+          name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link href="../../static/v1_1/css/style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../../static/v1_1/js/rem.js"></script>
+    <script type="text/javascript" src="../../static/v1_1/js/jquery-1.11.1.min.js"></script>
+    <title></title>
+</head>
+<body style="background: #FFFFFF;">
+
+<!--2018-2-8添加   确认购买提示-->
+<div class="fadeBox" id="tc_buy">
+    <div class="tc_buy_content">
+        <h5>提示</h5>
+        <p>您将订购“{{ package.productname }}”</p>
+        <div>
+            <a onclick="tc_hide('tc_buy')">取消</a>
+            <a class="btn_affirm">确认</a>
+        </div>
+    </div>
+</div>
+<!--end-->
+
+<!--2018-2-8添加 订购成功提示-->
+<div class="fadeBox" id="tc_happy">
+    <div class="tc_happy_content">
+        <img src="../../static/v1_1/img/win_img.png" class="win_img" alt=""/>
+        <p>订购成功</p>
+    </div>
+</div>
+<!--end-->
+
+<!--2018-2-8签到成功-->
+<div class="fade">
+    <img src="../../static/v1_1/img/big_gold.png" class="big_gold" alt=""/>
+    <p>积分+20</p>
+</div>
+<!--end-->
+
+
+<div class="game_banner">
+
+    <!--2018-2-8添加返回-->
+    <img src="../../static/v1_1/img/btn_hui.png" class="btn_hui" alt=""/>
+    <!--end-->
+
+    <img src="{{ package.img2 }}" class="game_pic" alt="{{ package.productname }}"/>
+    <div class="game_ranking buy_game">
+        <h5>{{ package.productname }}</h5>
+        <div class="start_pag">
+            <img src="../../static/v1_1/img/icon_11.png" class="icon_10" alt=""/>
+            <img src="../../static/v1_1/img/icon_11.png" class="icon_10" alt=""/>
+            <img src="../../static/v1_1/img/icon_11.png" class="icon_10" alt=""/>
+            <img src="../../static/v1_1/img/icon_10.png" class="icon_10" alt=""/>
+            <img src="../../static/v1_1/img/icon_10.png" class="icon_10" alt=""/>
+            <p><span>7.9</span>分</p>
+        </div>
+        <p class="min_text m0">资费：{{ package.price }}/月</p>
+
+        <a class="btn_down">购买</a>
+    </div>
+</div>
+
+<div class="game_rule">
+    <h5>游戏简介：</h5>
+    <p>
+        {{ package.description }}
+    </p>
+</div>
+
+<h5 class="pic_title">12款游戏：</h5>
+<div class="more_game">
+    <ul>
+        {% for g in games %}
+            <li>
+                <a href="/game/{{ g.id }}">
+                    <img src="{{ g.img_icon }}" alt=""/>
+                    <p>{{ g.name }}</p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+<script type="text/javascript">
+
+    /*2018-2-8添加*/
+    function tc_hide(obj) {
+        document.getElementById(obj).style.display = "none";
+    }
+
+    function tc_show(obj) {
+        document.getElementById(obj).style.display = "block";
+    }
+
+    /*end*/
+
+    {% if flag %}
+        //$('.super .button').text('已订购');
+        $('.btn_down').text('已订购');
+        $('.btn_down').addClass("btn_buy");
+
+    {% else %}
+        $(".btn_down").click(function () {
+            {% if not session.phonenum %}
+                var url = window.location.href;
+                window.location.href = '/auth/login?next=' + url;
+            {% else %}
+                var phonenum = '{{ session.phonenum }}';
+                $("#tc_buy").show();
+            {% endif %}
+
+        });
+        $(".btn_affirm").click(function () {
+            $("#tc_buy").hide();
+            $.ajax({
+                type: "post",
+                url: "/api/v1.0/subscribe",
+                data: {
+                    'phonenum': '{{ session.phonenum }}',
+                    'productid': '{{ package.productid }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == '0')
+                        $('#tc_happy p').text('订购成功');
+                    else $('#tc_happy p').text(data.message);
+
+                    $("#tc_happy").show();
+                    setTimeout(function () {
+                        $("#tc_happy").fadeOut();
+                        if (data['data']['integral'] > 0) {
+                            $('.fade p').text('积分+' + data['data']['integral']);
+                            setTimeout(function () {
+                                $(".fade").fadeIn();
+                                setTimeout(function () {
+                                    $(".fade").fadeOut();
+                                }, 1500)
+                            }, 500)
+                        }
+
+                    }, 1500);
+                    if (data.code == "0") {
+                        //success
+                        $('.btn_down').text('已订购');
+                        $('.btn_down').addClass("btn_buy");
+                    }
+                }
+            });
+        });
+    {% endif %}
+</script>
+
+
+</body>
+</html>

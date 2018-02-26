@@ -75,7 +75,10 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="tex
 .right_pag  h5{width: 100%; text-align: center; line-height: 0.6rem; font-size: 0.32rem; color: #333333; margin-top: 0.32rem;}
 .right_pag p{width: 100%; font-size: 0.2rem; color: #5c5d5d; line-height: 0.36rem; margin-top: 0.1rem;}
 
-.game_banner{width: 100%; position: relative; overflow: hidden; box-sizing: border-box; padding: 0.4rem 0.35rem 0;}
+/*2018-2-8修改*/
+.game_banner{width: 100%; position: relative; overflow: hidden; box-sizing: border-box; padding: 0.9rem 0.35rem 0;}
+/*end*/
+
 .game_pic{width: 2.4rem; height: 2.44rem; float: left;}
 .game_ranking{width: 4.4rem; float: left; box-sizing: border-box; padding-left: 0.55rem; position: relative;}
 .game_ranking h5{width: 100%;font-size: 0.4rem; color: #333; font-weight: normal; line-height: 0.5rem;}
@@ -99,9 +102,6 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="tex
 .pic_pag img{width: 100%;}
 
 .pic_title{margin-top: 0.5rem; box-sizing: border-box; padding: 0 0.35rem;}
-
-
-/*2018-1-30 添加*/
 .game_list{width: 100%; position: relative; overflow: hidden; margin-top: 0.15rem; background: #FFFFFF;}
 .game_list ul{width: 100%; position: relative; overflow: hidden; }
 .game_list li{width: 50%; float: left; box-sizing: border-box; padding: 0.22rem 0; overflow: hidden; text-align: center;}
@@ -169,3 +169,89 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="tex
 .btn_over{display: block; width: 5.4rem; height: 0.86rem; border: 1px solid #eed664; background: #FFFFFF; text-align: center;line-height: 0.86rem; font-size: 0.3rem; border-radius: 0.12rem; margin: 0.4rem auto;}
 
 .home_message a{font-size: 0.34rem; color: #d7d7d7;}
+
+/*2018-2-1*/
+.game_ranking.buy_game{height: 2.44rem;}
+.btn_down.btn_buy{color: #a5a5a5; border-color: #A5A5A5;}
+.more_game{width: 100%; position: relative; margin-top: 0.24rem; box-sizing: border-box; padding: 0 0.35rem;}
+.more_game ul{width: 100%; position: relative; overflow: hidden;}
+.more_game ul li{float: left; position: relative; margin-left: 0.34rem; margin-bottom: 0.2rem;}
+.more_game ul li:nth-child(4n+1){margin-left: 0;}
+.more_game ul a{display: block; width: 1.44rem; position: relative;}
+.more_game ul img{width: 1.44rem; height: 1.44rem;}
+.more_game ul p{width: 100%; text-align: center; font-size: 0.22rem; margin-top: 0.1rem; line-height: 0.3rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+
+.video_top{width: 100%; height: 0.8rem; position: fixed; top: 0; left: 0; box-sizing: border-box; padding: 0 0.28rem; z-index: 3;}
+.right_img{display: inline-block; width: 0.16rem; height: 0.28rem; margin-top: 0.26rem; margin-left: 0.32rem;}
+.video_ge{width: 100%; height: 0.8rem; position: relative;}
+
+.video_pag{width: 6.9rem; background: #e8e8e9; position: relative; margin: 1.24rem auto 0; border-radius: 0.15rem; box-sizing: border-box; padding: 2.66rem 0.2rem 0;}
+.video_message{width: 6.5rem; position: absolute; top: -1.24rem; left: 0.2rem; overflow: hidden;}
+.video_img{width: 2.56rem; height: 3.42rem; float: left;}
+.video_message h5{width: 3.94rem; height: 1.24rem; text-align: center; line-height: 1.24rem; font-size: 0.4rem; font-weight: normal; float: right;}
+.video_message div{width: 3.94rem; height: 2.18rem; float: right; box-sizing: border-box; padding-left: 0.4rem;} 
+.video_message div p{width: 100%; font-size: 0.26rem; text-indent: 2em; margin-top: 0.1rem;overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:4; line-height: 0.36rem;}
+.video_message a{display: block; width: 3.4rem; height: 0.55rem; background: #f7d631; border-radius: 0.1rem; text-align: center; line-height: 0.55rem; font-size: 0.26rem; margin-top: 0.08rem;}
+.video_message a.btn_active{background: #c8c8c8;}
+
+.video_list{width: 100%; position: relative; overflow: hidden; }
+.video_list ul{width: 100%; position: relative; overflow: hidden;}
+.video_list ul li{float: left; position: relative; margin-bottom: 0.36rem; margin-left: 0.1rem;}
+.video_list ul li:nth-child(2n+1){margin-left: 0;}
+.video_list ul li a{display: block; width: 3.2rem; position: relative;}
+.video_img_pag{width: 3.2rem; height: 1.85rem; position: relative;}
+.video_img_pag img{width: 100%; height: 100%;}
+.video_img_pag em,.video_banner em{display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 2;}
+.video_img_pag h5{width: 100%; height: 0.26rem; line-height: 0.26rem; font-size: 0.2rem; color: #FFFFFF; font-weight: normal; background: url(../img/icon_20.png) 0.14rem center no-repeat; background-size: 0.23rem 0.17rem; position: absolute; left: 0; bottom: 0.38rem; z-index: 3; box-sizing: border-box; padding-left: 0.46rem;}
+.video_img_pag p{position: absolute; left: 0; bottom: 0.05rem; font-size: 0.2rem; color: #FFFFFF; box-sizing: border-box; padding-left: 0.14rem; line-height: 0.26rem; z-index: 3;}
+.video_name{width: 100%; margin-top: 0.1rem; font-size: 0.28rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+
+.video_banner{width: 100%; position: relative; overflow: hidden;}
+.bimg{width: 100%;}
+.video_banner h5{width: 100%; box-sizing: border-box; padding: 0 0.36rem; font-size: 0.4rem; color: #FFFFFF; font-weight: normal; position: absolute; left: 0; bottom: 0.6rem; z-index: 3;}
+.video_banner p{width: 100%; box-sizing: border-box; padding: 0 0.36rem; font-size: 0.28rem; color: #FFFFFF;position: absolute; left: 0; bottom: 0.15rem; z-index: 3;}
+.video_banner a{display: block; width: 0.85rem; height: 0.38rem; position: absolute; right: 0.36rem; bottom: 0.15rem; z-index: 3;  border-radius: 0.1rem;  background: url(../img/start_img.png) 0.08rem center no-repeat #f27270; background-size: 0.18rem 0.2rem; text-align: center; line-height: 0.38rem; box-sizing: border-box; color: #FFFFFF; padding-left: 0.24rem;}
+.video_banner a.btn_shou{background: #FFFFFF; color: #f16361; padding-left: 0;}
+
+
+.video_content{width: 100%; position: relative; box-sizing: border-box; padding: 0.3rem 0.36rem 0;}
+.set_video{width: 100%; position: relative;}
+.set_video h5{width: 100%; font-size: 0.28rem; color: #FFFFFF; font-weight: normal;}
+.set_video p{width: 100%; font-size: 0.22rem; text-indent: 2em; color: #FFFFFF; margin-top: 0.12rem; overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2;}
+
+.catalog_video{width: 100%;position: relative; overflow: hidden; margin-top: 0.36rem;}
+.catalog_video ul{display: inline-block; height: 0.3rem; float: left; position: relative; overflow: hidden;}
+.catalog_video ul li{float: left; position: relative;}
+.catalog_video ul a{display: block; width: 1.4rem; border-right: 1px solid #FFFFFF; text-align: center; color: #FFFFFF; font-size: 0.24rem; line-height: 0.3rem; }
+
+.catalog_video ul li.the_active a{color: #ffe000;}
+
+.catalog_video ul li:last-child a{border-right: 0;}
+.catalog_text{font-size: 0.24rem; line-height: 0.3rem; color: #FFFFFF; float: left;}
+.next_btn{float: left; height: 0.3rem; box-sizing: border-box; padding: 0.09rem 0.06rem;}
+.next_btn img{width: 0.08rem; height: 0.12rem;}
+.catalog_video p{float: left; height: 0.3rem; font-size: 0.24rem; color: #FFFFFF; overflow: hidden; position: relative; margin-left: 0.18rem;}
+.catalog_video p img{ width: 0.12rem; height: 0.26rem; float: left; margin-top: 0.02rem;}
+.catalog_video p span{height: 0.3rem; float: left; line-height: 0.3rem; margin-left: 0.08rem;}
+
+.sel_video{width: 6.8rem; position: relative; overflow: hidden; margin: 0.26rem auto 0;}
+.sel_video li{float: left; position: relative; margin-left: 1.0rem; margin-bottom: 0.36rem;}
+.sel_video li:nth-child(3n+1){margin-left: 0;}
+.sel_video li a{display: block; width: 1.6rem; height: 0.62rem; box-sizing: border-box; border: 1px solid #FFFFFF; font-size: 0.24rem; color: #FFFFFF; text-align: center; line-height: 0.6rem; position: relative; z-index: 2;}
+.icon_21{width: 0.45rem; height: 0.45rem; position: absolute; top: 0; right: 1px;}
+
+
+/*2018-2-8添加*/
+.btn_hui{width: 0.16rem; height: 0.28rem; position: fixed;top: 0.1rem; left: 0.26rem; z-index: 9;} 
+.fadeBox{display: none; width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.6); z-index: 9999;}
+.tc_buy_content,.tc_happy_content{width: 5.5rem; box-sizing: border-box; background: #FFFFFF; margin: 2.3rem auto 0; border-radius: 0.1rem;}
+.tc_happy_content{padding: 0.7rem 0 0.8rem;}
+.tc_buy_content{padding-bottom: 0.3rem;}
+.tc_buy_content h5{width: 100%; height: 0.75rem; text-align: center; line-height: 0.75rem; font-size: 0.32rem; font-weight: normal; border-bottom: 1px solid #f7d631;}
+.tc_buy_content p{width: 80%; margin-left: 10%; margin-top: 0.36rem; text-align: center; font-size: 0.26rem; color: #5d5d5d;}
+.tc_buy_content div{width: 100%; text-align: center; position: relative; margin-top: 0.36rem;}
+.tc_buy_content div a{display: inline-block; width: 2.1rem; height: 0.7rem; background: #ffe000; border-radius: 0.1rem; text-align: center; line-height: 0.7rem; font-size: 0.3rem; color: #333;}
+.tc_buy_content div a:last-child{margin-left: 0.3rem;}
+.win_img{width: 0.58rem; height: 0.58rem;}
+.tc_happy_content p{width: 100%; text-align: center; font-size: 0.36rem; margin-top: 0.2rem;}
+.btn_down.bg_color{color: #a5a5a5; border-color: #a5a5a5;}

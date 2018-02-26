@@ -12,7 +12,7 @@ from app import db
 from datetime import datetime
 from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelation, AccessLog, ComicChapterInfo, \
-    FavorInfo, IntegralRecord, IntegralStrategy, User, RecommendH5, RecommendComic
+    FavorInfo, IntegralRecord, IntegralStrategy, User, RecommendH5, RecommendComic, RecommendApkGame
 
 
 @main.route('/xss', methods=['GET'])
@@ -94,7 +94,7 @@ def package():
     elif package.type == '2':
         # game
         games = Game.query.filter_by(packageid=id).all()
-        return render_template('package_game.html', package=package, games=games, flag=ordered)
+        return render_template('v1_1/buy_game.html', package=package, games=games, flag=ordered)
     elif package.type == '3':
         # music
         pass
@@ -108,17 +108,24 @@ def package():
 @main.route('/index_1', methods=['GET'])
 def game_1():
     # packages = Package.query.filter_by(type=2).all()
-    h5 = RecommendH5.query.all()
+    # h5 = RecommendH5.query.all()
+    game_list = []
+    for item in RecommendH5.query.all():
+        game_list.append(Game.query.get(int(item.id)))
+    game_list.append(Game.query.filter_by(packageid='135000000000000000000').all())
+    # for item in RecommendApkGame.query.all():
+    #     game_list.append(Game.query.get(int(item.id)))
+    random.shuffle(game_list)
     # return render_template('game.html', packages=packages, h5=h5)
-    return render_template('v1_1/index-1.html', h5=h5)
+    return render_template('v1_1/index-1.html', game_list=game_list)
 
 
 @main.route('/index_2', methods=['GET'])
 def game_2():
     packages = Package.query.filter_by(type=2).all()
-    h5 = RecommendH5.query.all()
-    # return render_template('game.html', packages=packages, h5=h5)
-    return render_template('v1_1/index-2.html', packages=packages, h5=h5)
+    packages = [p for p in packages if p.productid != '135000000000000000000']
+    recommend_apk_game = RecommendApkGame.query.all()
+    return render_template('v1_1/index-2.html', packages=packages, game_list=recommend_apk_game)
 
 
 @main.route('/index_3', methods=['GET'])
@@ -175,9 +182,9 @@ def gamedetail(id):
     game = Game.query.get(int(id))
     package = Package.query.get(game.packageid)
     flag = False
-    # if session.get(package.productid):
-    #     flag = True
-    return render_template('game_description.html', game=game, flag=flag, package=package)
+    if session.get(package.productid) or game.packageid == '135000000000000000000':
+        flag = True
+    return render_template('v1_1/game_hint.html', game=game, flag=flag, package=package)
 
 
 @main.route('/game/download', methods=['GET'])
@@ -474,7 +481,7 @@ def my():
         else:
             level = 10
         return render_template('v1_1/my_logged.html', checkinstatus=checkinstatus, checkindays=checkindays,
-                               records=sorted(records, reverse=True, key=lambda x:x['updatetime']), level=level)
+                               records=sorted(records, reverse=True, key=lambda x: x['updatetime']), level=level)
     else:
         return render_template('v1_1/my.html')
 

@@ -15,8 +15,44 @@
     <title></title>
 </head>
 <body style="background: #FFFFFF;">
+
+<!--2018-2-8添加   确认购买提示-->
+<div class="fadeBox" id="tc_buy">
+    <div class="tc_buy_content">
+        <h5>提示</h5>
+        <p>您需要订购“{{ package.productname }}”({{ package.price }}元/月)方可下载,是否立即订购？</p>
+        <div>
+            <a onclick="tc_hide('tc_buy')">取消</a>
+            <a class="btn_affirm">确认</a>
+        </div>
+    </div>
+</div>
+<!--end-->
+
+<!--2018-2-8添加 下载成功提示-->
+<div class="fadeBox" id="tc_happy">
+    <div class="tc_happy_content">
+        <img src="../../static/v1_1/img/win_img.png" class="win_img" alt=""/>
+        <p>下载成功</p>
+    </div>
+</div>
+<!--end-->
+
+<!--2018-2-8积分-->
+<div class="fade">
+    <img src="../../static/v1_1/img/big_gold.png" class="big_gold" alt=""/>
+    <p>积分+20</p>
+</div>
+<!--end-->
+
+
 <div class="game_banner">
-    <img src="{{ game.img_icon }}" class="game_pic" alt="{{ package.productname }}"/>
+
+    <!--2018-2-7添加返回-->
+    <img src="../../static/v1_1/img/btn_hui.png" class="btn_hui" alt=""/>
+    <!--end-->
+
+    <img src="{{ game.img_icon }}" class="game_pic" alt=""/>
     <div class="game_ranking">
         <h5>{{ game.name }}</h5>
         <div class="start_pag">
@@ -28,9 +64,10 @@
             {% endfor %}
             <p><span>7.9</span>分</p>
         </div>
-        <p class="min_text m0">更新日期 {{ game.updatetime[:4]+'-'+ game.updatetime[4:6] +'-' + game.updatetime[6:8] }}</p>
-        <p class="min_text">类 型 {{ game.category }}</p>
-        <p class="min_text">大 小 {{ game.size }}MB</p>
+        <p class="min_text m0">
+            更新日期&#x3000;{{ game.updatetime[:4]+'-'+ game.updatetime[4:6] +'-' + game.updatetime[6:8] }}</p>
+        <p class="min_text">类&#x3000;&#x3000;型&#x3000; {{ game.category }}</p>
+        <p class="min_text">大&#x3000;&#x3000;小&#x3000; {{ game.size }}B</p>
 
         <a class="btn_down">下载</a>
     </div>
@@ -51,7 +88,7 @@
             <li><img src="{{ game.img_screenshot_2 }}" alt=""/></li>
         {% endif %}
         {% if game.img_screenshot_3 %}
-            <li><img src="../../static/v1_1/img/game_img_1.jpg" alt=""/></li>
+            <li><img src="{{ game.img_screenshot_3 }}" alt=""/></li>
         {% endif %}
         {% if game.img_screenshot_4 %}
             <li><img src="{{ game.img_screenshot_4 }}" alt=""/></li>
@@ -65,12 +102,122 @@
     </ul>
 </div>
 <script type="text/javascript">
+
+    /*2018-2-8添加*/
+    function tc_hide(obj) {
+        document.getElementById(obj).style.display = "none";
+    }
+
+    function tc_show(obj) {
+        document.getElementById(obj).style.display = "block";
+    }
+
+    /*end*/
+
     $(function () {
         $('.first_pag img').each(function () {
             AutoResizeImage(this);
-        })
-    })
+        });
+    /*end*/
 
+    $('.btn_affirm').click(function () {
+        $("#tc_buy").hide();
+        var url = window.location.href;
+        {% if not session.phonenum %}
+            window.location.href = '/auth/login?next=' + url;
+        {% else %}
+            $.ajax({
+                type: "post",
+                url: "/api/v1.0/subscribe",
+                data: {
+                    'phonenum': '{{ session.phonenum }}',
+                    'productid': '{{ package.productid }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == '0')
+                        $('#tc_happy p').text('订购成功');
+                    else $('#tc_happy p').text(data.message);
+                    $('#tc_happy').show();
+                    setTimeout(function () {
+                        $("#tc_happy").fadeOut();
+                        if (data['data']['integral'] > 0) {
+                            $('.fade p').text('积分+' + data['data']['integral']);
+                            setTimeout(function () {
+                                $(".fade").fadeIn();
+                                setTimeout(function () {
+                                    $(".fade").fadeOut();
+                                }, 1500)
+                            }, 500)
+                        }
+
+                    }, 1500);
+                    //增加页面刷新
+                    window.location.reload();
+                    $('.btn_down').click(function () {
+                        $.ajax({
+                            type: "get",
+                            url: "/game/download",
+                            data: {
+                                'id': '{{ game.id }}'
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data.code == '0') {
+                                    setTimeout(function () {
+                                        window.location.href = data['next']
+                                    }, 1000);
+                                    if (data['integral'] > 0) {
+                                        $('.fade p').text('积分+' + data['integral']);
+                                        setTimeout(function () {
+                                            $(".fade").fadeIn();
+                                            setTimeout(function () {
+                                                $(".fade").fadeOut();
+                                            }, 1500)
+                                        }, 500)
+                                    }
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        {% endif %}
+    });
+
+    {% if flag %}
+        $('.btn_down').click(function () {
+            $.ajax({
+                type: "get",
+                url: "/game/download",
+                data: {
+                    'id': '{{ game.id }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == '0') {
+                        setTimeout(function () {
+                            window.location.href = data['next']
+                        }, 1000);
+                        if (data['integral'] > 0) {
+                            $('.fade p').text('积分+' + data['integral']);
+                            setTimeout(function () {
+                                $(".fade").fadeIn();
+                                setTimeout(function () {
+                                    $(".fade").fadeOut();
+                                }, 1500)
+                            }, 500)
+                        }
+                    }
+                }
+            });
+        });
+    {% else %}
+        $('.btn_down').click(function () {
+            $("#tc_buy").show();
+        });
+    {% endif %}
+    })
     function AutoResizeImage(objImg) {
         var img = new Image();
         img.src = objImg.src;

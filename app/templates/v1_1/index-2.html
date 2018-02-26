@@ -67,14 +67,14 @@
 			    </div>
 			    <div class="game_content">
 			    	
-			    	{% for g in h5 %}
+			    	{% for g in game_list %}
                         <div class="game_pag">
 			    		<img src="{{ g.img_icon }}" class="game_logo" alt="" />
 			    		<div class="game_message">
 			    			<h5>{{ g.name }}</h5>
-			    			<p class="game_type">{{ g.type }}</p>
+			    			<p class="game_type">{{ g.category }}</p>
 			    			<p class="game_text">{{ g.brief }}</p>
-			    			<a href="/h5game?id={{ g.id }}" class="btn_start">开始游戏</a>
+			    			<a href="/game/{{ g.id }}" class="btn_start">开始游戏</a>
 			    		</div>
 			    	</div>
                     {% endfor %}
