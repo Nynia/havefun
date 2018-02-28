@@ -535,3 +535,15 @@ class Channel(db.Model):
 
     def __repr__(self):
         return '<Channel %s>' % self.name
+
+
+class RecommendBanner(db.Model):
+    __tablename__ = 'recommend_banner'
+    id = db.Column(db.Integer, primary_key=True)
+    img_1 = db.Column(db.String(255))
+    img_2 = db.Column(db.String(255))
+    url = db.Column(db.String(255))
+    createtime = db.Column(db.String(14))
+
+    def __repr__(self):
+        return '<RecommentBanner %s>' % self.url

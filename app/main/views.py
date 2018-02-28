@@ -122,8 +122,9 @@ def game_1():
 
 @main.route('/index_2', methods=['GET'])
 def game_2():
-    packages = Package.query.filter_by(type=2).all()
-    packages = [p for p in packages if p.productid != '135000000000000000000']
+    packages = Package.query.all()
+    packages = [p for p in packages if
+                (p.type == '2' and p.productid != '135000000000000000000') or (p.productid == '135000000000000242191')]
     recommend_apk_game = RecommendApkGame.query.all()
     return render_template('v1_1/index-2.html', packages=packages, game_list=recommend_apk_game)
 
@@ -164,7 +165,6 @@ def h5game():
                 integral_record.action = integral_strategy.id
                 integral_record.change = integral_strategy.value
                 integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-
                 db.session.add(integral_record)
         # 添加访问记录
         viewrecord = ViewRecord()
@@ -597,6 +597,7 @@ def history():
 
 @main.route('/find', methods=['GET'])
 def discovery():
+
     return render_template('v1_1/find.html')
 
 
