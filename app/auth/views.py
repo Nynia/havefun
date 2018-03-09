@@ -19,12 +19,13 @@ def login():
     ua = request.user_agent.__str__()
     next = request.args.get('next')
     print ua
-    if ua.find('appChannel') != -1:
-        channel = ua[ua.find('appChannel') + 11:-1]
-    else:
-        channel = None
-    print channel
-
+    # 暂时禁用免密登录
+    # if ua.find('appChannel') != -1:
+    #     channel = ua[ua.find('appChannel') + 11:-1]
+    # else:
+    #     channel = None
+    # print channel
+    channel = None
     if channel != None:
         print url_for('main.my')
         return render_template('freepasswd.html', nextUrl=next or url_for('main.my'))
