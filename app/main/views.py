@@ -66,7 +66,7 @@ def config():
 
 @main.route('/', methods=['GET'])
 def root():
-    return redirect(url_for('main.game_2'))
+    return redirect(url_for('main.index'))
 
 
 @main.route('/package', methods=['GET'])
@@ -103,6 +103,23 @@ def package():
         books = Reading.query.filter_by(packageid=id).all()
         print books
         return render_template('package_reading.html', package=package, books=books, flag=ordered)
+
+
+@main.route('/index', methods=['GET'])
+def index():
+    game_list = []
+    for item in RecommendH5.query.all():
+        game_list.append(Game.query.get(int(item.id)))
+    game_list.append(Game.query.filter_by(packageid='135000000000000000000').all())
+    # for item in RecommendApkGame.query.all():
+    #     game_list.append(Game.query.get(int(item.id)))
+    random.shuffle(game_list)
+
+    packages = Package.query.all()
+    packages = [p for p in packages if
+                (p.type == '2' and p.productid != '135000000000000000000') or (p.productid == '135000000000000242191')]
+    recommend_apk_game = RecommendApkGame.query.all()
+    return render_template('v1_1/index.html', game_list=game_list, game_list2=recommend_apk_game, packages=packages)
 
 
 @main.route('/index_1', methods=['GET'])
@@ -597,7 +614,6 @@ def history():
 
 @main.route('/find', methods=['GET'])
 def discovery():
-
     return render_template('v1_1/find.html')
 
 
