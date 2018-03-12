@@ -64,9 +64,9 @@ def config():
     return render_template('admin.html', form=form)
 
 
-@main.route('/', methods=['GET'])
-def root():
-    return redirect(url_for('main.index'))
+# @main.route('/', methods=['GET'])
+# def root():
+#     return redirect(url_for('main.index'))
 
 
 @main.route('/package', methods=['GET'])
@@ -105,7 +105,7 @@ def package():
         return render_template('package_reading.html', package=package, books=books, flag=ordered)
 
 
-@main.route('/index', methods=['GET'])
+@main.route('/', methods=['GET'])
 def index():
     game_list = []
     for item in RecommendH5.query.all():
