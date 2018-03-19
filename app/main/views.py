@@ -614,7 +614,7 @@ def history():
 
 @main.route('/find', methods=['GET'])
 def discovery():
-    return render_template('v1_1/find.html')
+    return render_template('v1_1/find2.html')
 
 
 @main.route('/weal', methods=['GET'])

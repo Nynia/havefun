@@ -17,11 +17,6 @@
     <title></title>
 </head>
 <body>
-{#		<div class="inp_title">#}
-{#			<img src="../../static/v1_1/img/logo.png" class="logo" alt="" />#}
-{#			<div class="pic_img"><img src="../../static/v1_1/img/pic.png" alt="" /></div>#}
-{#		</div>#}
-
 <!--轮播图-->
 <div class="swiper-container">
     <div class="swiper-wrapper">
@@ -32,7 +27,7 @@
     <div class="swiper-pagination"></div>
 </div>
 
-<div class="inp_nav">
+<div class="inp_nav" id="inp_nav">
     <ul>
         <li>
             <a>
@@ -95,7 +90,7 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="game_content">
+        <div class="game_content" style="margin-top: 0.15rem;">
             {% for g in game_list2 %}
                 <div class="game_pag">
                     <img src="{{ g.img_icon }}" class="game_logo" alt=""/>
@@ -244,7 +239,33 @@
 {#        </li>#}
 {#    </ul>#}
 {#</div>#}
+<!--
+        	作者：葛言成
+        	时间：2018-03-16
+        	描述：添加div到达顶部时自动固定
+        -->
+	     <script type="text/javascript">
+	    	$(function () {
+				var ie6 = document.all;
+				var dv = $('#inp_nav'), st;
+				dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离
+				$(window).scroll(function () {
+					st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
+					if (st > parseInt(dv.attr('otop'))) {
+						if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果
+							dv.css({ position: 'absolute', top: st });
+						}
+						else if (dv.css('position') != 'fixed') {
+							dv.css({ 'position': 'fixed','top': "0.86rem", 'z-index': "999" , 'border-bottom': '0.15rem solid #f6f5f5'});
+						};
+					} else if (dv.css('position') != 'static') {
+						dv.css({ 'position': 'static', 'border':'none' })
 
+					};
+				});
+			});
+	    </script>
+	    <!--end-->
 <script type="text/javascript" src="../../static/v1_1/js/swiper.min.js"></script>
 <script type="text/javascript" src="../../static/v1_1/js/dropload.min.js"></script>
 <script type="text/javascript">
