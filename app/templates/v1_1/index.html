@@ -26,32 +26,38 @@
     </div>
     <div class="swiper-pagination"></div>
 </div>
-
+<!--2018-3-16 添加一个id-->
 <div class="inp_nav" id="inp_nav">
     <ul>
+        <!--
+            作者：葛言成
+            时间：2018-03-16
+            描述：修改
+        -->
         <li>
             <a>
-                <img src="../../static/v1_1/img/icon_1.png" class="icon_1" alt=""/>
-                <p class="color_1">热门推荐</p>
+                <img src="../../static/v1_1/img/icon1.png" class="icon1" alt=""/>
+                <p class="color_text">热门推荐</p>
             </a>
         </li>
         <li class="active">
             <a>
                 <img src="../../static/v1_1/img/icon_2.png" class="icon_1" alt=""/>
-                <p class="color_2">最新优惠</p>
+                <p>最新优惠</p>
             </a>
         </li>
         <li>
             <a>
-                <img src="../../static/v1_1/img/icon_3.png" class="icon_1" alt=""/>
-                <p class="color_3">游戏分类</p>
+                <img src="../../static/v1_1/img/icon3.png" class="icon1" alt=""/>
+                <p class="color_text">游戏分类</p>
             </a>
         </li>
+        <!--end-->
     </ul>
+</div>
 </div>
 
 <div class="list_pag">
-
     <div class="auditionList" style="display: none;">
         <div class="game_content m0">
             {% for g in game_list %}
@@ -244,28 +250,33 @@
         	时间：2018-03-16
         	描述：添加div到达顶部时自动固定
         -->
-	     <script type="text/javascript">
-	    	$(function () {
-				var ie6 = document.all;
-				var dv = $('#inp_nav'), st;
-				dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离
-				$(window).scroll(function () {
-					st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
-					if (st > parseInt(dv.attr('otop'))) {
-						if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果
-							dv.css({ position: 'absolute', top: st });
-						}
-						else if (dv.css('position') != 'fixed') {
-							dv.css({ 'position': 'fixed','top': "0.86rem", 'z-index': "999" , 'border-bottom': '0.15rem solid #f6f5f5'});
-						};
-					} else if (dv.css('position') != 'static') {
-						dv.css({ 'position': 'static', 'border':'none' })
-
-					};
-				});
-			});
-	    </script>
-	    <!--end-->
+{#<script type="text/javascript">#}
+{#    $(function () {#}
+{#        var ie6 = document.all;#}
+{#        var dv = $('#inp_nav'), st;#}
+{#        dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离#}
+{#        $(window).scroll(function () {#}
+{#            st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);#}
+{#            if (st > parseInt(dv.attr('otop'))) {#}
+{#                if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果#}
+{#                    dv.css({position: 'absolute', top: st});#}
+{#                }#}
+{#                else if (dv.css('position') != 'fixed') {#}
+{#                    dv.css({#}
+{#                        'position': 'fixed',#}
+{#                        'top': "0.86rem",#}
+{#                        'z-index': "999",#}
+{#                        'border-bottom': '0.15rem solid #f6f5f5'#}
+{#                    });#}
+{#                }#}
+{#            } else if (dv.css('position') != 'static') {#}
+{#                dv.css({'position': 'static', 'border': 'none'})#}
+{##}
+{#            }#}
+{#        });#}
+{#    });#}
+{#</script>#}
+<!--end-->
 <script type="text/javascript" src="../../static/v1_1/js/swiper.min.js"></script>
 <script type="text/javascript" src="../../static/v1_1/js/dropload.min.js"></script>
 <script type="text/javascript">
@@ -283,7 +294,39 @@
         $(".inp_nav li").click(function () {
             var $this = $(this);
             $this.addClass("active").siblings().removeClass("active");
+            $this.children().find('p').removeClass('color_text');
+            $this.children().find('img').attr('class','icon_1');
+
             itemIndex = $this.index();
+            $lisector = $(".inp_nav li");
+            if (itemIndex == 0 ) {
+                $this.children().find('img').attr('src','../../static/v1_1/img/icon_1.png');
+                $lisector.eq(1).find('p').addClass('color_text');
+                $lisector.eq(1).find('img').attr('class','icon1');
+                $lisector.eq(1).find('img').attr('src','../../static/v1_1/img/icon2.png');
+                $lisector.eq(2).find('p').addClass('color_text');
+                $lisector.eq(2).find('img').attr('class','icon1');
+                $lisector.eq(2).find('img').attr('src','../../static/v1_1/img/icon3.png');
+            }
+            else if (itemIndex == 1 ) {
+                $this.children().find('img').attr('src','../../static/v1_1/img/icon_2.png');
+                $lisector.eq(0).find('p').addClass('color_text');
+                $lisector.eq(0).find('img').attr('class','icon1');
+                $lisector.eq(0).find('img').attr('src','../../static/v1_1/img/icon1.png');
+                $lisector.eq(2).find('p').addClass('color_text');
+                $lisector.eq(2).find('img').attr('class','icon1');
+                $lisector.eq(2).find('img').attr('src','../../static/v1_1/img/icon3.png');
+
+            }
+            else {
+                $this.children().find('img').attr('src','../../static/v1_1/img/icon_3.png');
+                $lisector.eq(0).find('p').addClass('color_text');
+                $lisector.eq(0).find('img').attr('class','icon1');
+                $lisector.eq(0).find('img').attr('src','../../static/v1_1/img/icon1.png');
+                $lisector.eq(1).find('p').addClass('color_text');
+                $lisector.eq(1).find('img').attr('class','icon1');
+                $lisector.eq(1).find('img').attr('src','../../static/v1_1/img/icon2.png');
+            }
             $('.auditionList').eq(itemIndex).show().siblings('.auditionList').hide();
         });
 
