@@ -262,3 +262,7 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="tex
 .icon1{width: 0.62rem; margin-top: 0.02rem;}
 .game_link p{width: 100%;font-size: 0.24rem; color: #333; margin-top: 0.05rem;}
 .bg_ge{width: 100%; height: 0.86rem;}
+
+/*201/8-3-20添加*/
+.btn_go{display: inline-block; margin-left: 0.26rem; height: 100%; background: url(../img/btn_hui.png) 0 center no-repeat; background-size: 0.16rem 0.28rem; font-size: 0.26rem; color: #333; line-height: 0.86rem; box-sizing: border-box; padding-left: 0.26rem; position: absolute; left: 0; top: 0;}
+.title_text{width: 100%; height: 100%; text-align: center; line-height: 0.86rem; font-size: 0.4rem; color: #333;}

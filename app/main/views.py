@@ -621,6 +621,14 @@ def discovery():
 def weal():
     return render_template('v1_1/weal.html')
 
+@main.route('/outgame1', methods=['GET'])
+def outgame1():
+    return render_template('v1_1/outgame1.html')
+
+@main.route('/outgame2', methods=['GET'])
+def outgame2():
+    return render_template('v1_1/outgame2.html')
+
 
 @main.route('/follow', methods=['GET'])
 def follow():
