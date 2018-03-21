@@ -49,8 +49,13 @@
 <div class="game_banner">
 
     <!--2018-2-7添加返回-->
-    <a href="/package?id={{ package.productid }}"><img src="../../static/v1_1/img/btn_hui.png" class="btn_hui" alt=""/></a>
-    <!--end-->
+    {% if package.productid == '135000000000000000000' %}
+        <a href="/"><img src="../../static/v1_1/img/btn_hui.png" class="btn_hui" alt=""/></a>
+    {% else %}
+        <a href="/package?id={{ package.productid }}"><img src="../../static/v1_1/img/btn_hui.png" class="btn_hui" alt=""/></a>
+
+    {% endif %}
+<!--end-->
 
     <img src="{{ game.img_icon }}" class="game_pic" alt=""/>
     <div class="game_ranking">
@@ -118,106 +123,107 @@
         $('.first_pag img').each(function () {
             AutoResizeImage(this);
         });
-    /*end*/
+        /*end*/
 
-    $('.btn_affirm').click(function () {
-        $("#tc_buy").hide();
-        var url = window.location.href;
-        {% if not session.phonenum %}
-            window.location.href = '/auth/login?next=' + url;
-        {% else %}
-            $.ajax({
-                type: "post",
-                url: "/api/v1.0/subscribe",
-                data: {
-                    'phonenum': '{{ session.phonenum }}',
-                    'productid': '{{ package.productid }}'
-                },
-                dataType: 'json',
-                success: function (data) {
-                    if (data.code == '0')
-                        $('#tc_happy p').text('订购成功');
-                    else $('#tc_happy p').text(data.message);
-                    $('#tc_happy').show();
-                    setTimeout(function () {
-                        $("#tc_happy").fadeOut();
-                        if (data['data']['integral'] > 0) {
-                            $('.fade p').text('积分+' + data['data']['integral']);
-                            setTimeout(function () {
-                                $(".fade").fadeIn();
+        $('.btn_affirm').click(function () {
+            $("#tc_buy").hide();
+            var url = window.location.href;
+            {% if not session.phonenum %}
+                window.location.href = '/auth/login?next=' + url;
+            {% else %}
+                $.ajax({
+                    type: "post",
+                    url: "/api/v1.0/subscribe",
+                    data: {
+                        'phonenum': '{{ session.phonenum }}',
+                        'productid': '{{ package.productid }}'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == '0')
+                            $('#tc_happy p').text('订购成功');
+                        else $('#tc_happy p').text(data.message);
+                        $('#tc_happy').show();
+                        setTimeout(function () {
+                            $("#tc_happy").fadeOut();
+                            if (data['data']['integral'] > 0) {
+                                $('.fade p').text('积分+' + data['data']['integral']);
                                 setTimeout(function () {
-                                    $(".fade").fadeOut();
-                                }, 1500)
-                            }, 500)
-                        }
-
-                    }, 1500);
-                    //增加页面刷新
-                    window.location.reload();
-                    $('.btn_down').click(function () {
-                        $.ajax({
-                            type: "get",
-                            url: "/game/download",
-                            data: {
-                                'id': '{{ game.id }}'
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-                                if (data.code == '0') {
+                                    $(".fade").fadeIn();
                                     setTimeout(function () {
-                                        window.location.href = data['next']
-                                    }, 1000);
-                                    if (data['integral'] > 0) {
-                                        $('.fade p').text('积分+' + data['integral']);
+                                        $(".fade").fadeOut();
+                                    }, 1500)
+                                }, 500)
+                            }
+
+                        }, 1500);
+                        //增加页面刷新
+                        window.location.reload();
+                        $('.btn_down').click(function () {
+                            $.ajax({
+                                type: "get",
+                                url: "/game/download",
+                                data: {
+                                    'id': '{{ game.id }}'
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.code == '0') {
                                         setTimeout(function () {
-                                            $(".fade").fadeIn();
+                                            window.location.href = data['next']
+                                        }, 1000);
+                                        if (data['integral'] > 0) {
+                                            $('.fade p').text('积分+' + data['integral']);
                                             setTimeout(function () {
-                                                $(".fade").fadeOut();
-                                            }, 1500)
-                                        }, 500)
+                                                $(".fade").fadeIn();
+                                                setTimeout(function () {
+                                                    $(".fade").fadeOut();
+                                                }, 1500)
+                                            }, 500)
+                                        }
                                     }
                                 }
-                            }
+                            });
                         });
-                    });
-                }
-            });
-        {% endif %}
-    });
+                    }
+                });
+            {% endif %}
+        });
 
-    {% if flag %}
-        $('.btn_down').click(function () {
-            $.ajax({
-                type: "get",
-                url: "/game/download",
-                data: {
-                    'id': '{{ game.id }}'
-                },
-                dataType: 'json',
-                success: function (data) {
-                    if (data.code == '0') {
-                        setTimeout(function () {
-                            window.location.href = data['next']
-                        }, 1000);
-                        if (data['integral'] > 0) {
-                            $('.fade p').text('积分+' + data['integral']);
+        {% if flag %}
+            $('.btn_down').click(function () {
+                $.ajax({
+                    type: "get",
+                    url: "/game/download",
+                    data: {
+                        'id': '{{ game.id }}'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == '0') {
                             setTimeout(function () {
-                                $(".fade").fadeIn();
+                                window.location.href = data['next']
+                            }, 1000);
+                            if (data['integral'] > 0) {
+                                $('.fade p').text('积分+' + data['integral']);
                                 setTimeout(function () {
-                                    $(".fade").fadeOut();
-                                }, 1500)
-                            }, 500)
+                                    $(".fade").fadeIn();
+                                    setTimeout(function () {
+                                        $(".fade").fadeOut();
+                                    }, 1500)
+                                }, 500)
+                            }
                         }
                     }
-                }
+                });
             });
-        });
-    {% else %}
-        $('.btn_down').click(function () {
-            $("#tc_buy").show();
-        });
-    {% endif %}
+        {% else %}
+            $('.btn_down').click(function () {
+                $("#tc_buy").show();
+            });
+        {% endif %}
     })
+
     function AutoResizeImage(objImg) {
         var img = new Image();
         img.src = objImg.src;
