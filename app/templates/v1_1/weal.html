@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" name="viewport">
-		<meta content="telephone=no" name="format-detection">
-		<meta content="email=no" name="format-detection">
-		<meta content="yes" name="apple-mobile-web-app-capable">
-		<meta content="black" name="apple-mobile-web-app-status-bar-style">
-        <link href="../../static/v1_1/css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="../../static/v1_1/css/dropload.css" />
-        <script type="text/javascript" src="../../static/v1_1/js/rem.js" ></script>
-        <script type="text/javascript" src="../../static/v1_1/js/jquery-1.11.1.min.js" ></script>
-		<title></title>
-	</head>
-	<body>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width"
+          name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link href="../../static/v1_1/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../../static/v1_1/css/dropload.css"/>
+    <script type="text/javascript" src="../../static/v1_1/js/rem.js"></script>
+    <script type="text/javascript" src="../../static/v1_1/js/jquery-1.11.1.min.js"></script>
+    <title></title>
+</head>
+<body>
 {#		<div class="inp_title">#}
 {#			<img src="../../static/v1_1/img/logo.png" class="logo" alt="" />#}
 {#			<div class="pic_img"><img src="../../static/v1_1/img/pic.png" alt="" /></div>#}
 {#		</div>#}
 {#	    <div style="width: 100%; height: 0.86rem;position: relative;"></div>#}
-	    <div class="data_pag">
-	    	<ul>
-	    		<li>
-	    			<h5>当前积分</h5>
-	    			<p>{{ current_user.integral }}</p>
-	    		</li>
-	    		<li>
-	    			<h5>兑换记录</h5>
-	    			<p>{{ current_user.phonenum[:4] }}****{{ current_user.phonenum[-4:] }}</p>
-	    		</li>
-	    		<li>
-	    			<h5>连续签到</h5>
-	    			<p>{{ current_user.continus_checkin }}天</p>
-	    		</li>
-	    	</ul>
-	    </div>
-	    
-	    <h5 class="weal_title">积分兑换</h5>
-	    <div class="weal_content">
-	    	<div class="weal_pag">
-	    		<div class="left_pag">
-	    			<h5>200</h5>
-	    			<p>积分兑换</p>
-	    		</div>
-	    		<div class="right_pag">
-	    			<h5>5元电信流量卡</h5>
-	    			<p>即时生效，兑换有效期至2018.01.31。</p>
-	    		</div>
-	    	</div>
-	    </div>
-        <p class="hua_pag"></p>
-	    
+{% if not session.phonenum %}
+    <div class="data_pag">
+        <ul>
+            <li>
+                <h5>当前积分</h5>
+                <p>{{ current_user.integral }}</p>
+            </li>
+            <li>
+                <h5>兑换记录</h5>
+                <p>{{ current_user.phonenum[:4] }}****{{ current_user.phonenum[-4:] }}</p>
+            </li>
+            <li>
+                <h5>连续签到</h5>
+                <p>{{ current_user.continus_checkin }}天</p>
+            </li>
+        </ul>
+    </div>
+{% endif %}
+
+
+<h5 class="weal_title">积分兑换</h5>
+<div class="weal_content">
+    <div class="weal_pag">
+        <div class="left_pag">
+            <h5>200</h5>
+            <p>积分兑换</p>
+        </div>
+        <div class="right_pag">
+            <h5>5元电信流量卡</h5>
+            <p>即时生效，兑换有效期至2018.01.31。</p>
+        </div>
+    </div>
+</div>
+<p class="hua_pag"></p>
+
 {#	    <div class="box_pag"></div>#}
 {#	    <div class="btm_link">#}
 {#	    	<ul>#}
@@ -81,7 +85,7 @@
 {#	    		</li>#}
 {#	    	</ul>#}
 {#	    </div>#}
-		<script type="text/javascript" src="../../static/v1_1/js/dropload.min.js" ></script>
+<script type="text/javascript" src="../../static/v1_1/js/dropload.min.js"></script>
 {#		<script type="text/javascript">#}
 {#			   $(function(){							#}
 {#				var counter = 0;#}
@@ -110,5 +114,5 @@
 {#			    });        #}
 {#		    });#}
 {#		</script>#}
-	</body>
+</body>
 </html>
