@@ -558,7 +558,6 @@ def mall():
     else:
         return render_template("notlogged.html", title=u"商城")
 
-
 @main.route('/mysign', methods=['GET'])
 def sign():
     if not current_user.is_anonymous:

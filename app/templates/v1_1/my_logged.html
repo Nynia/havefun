@@ -30,7 +30,7 @@
         <img src="../../static/v1_1/img/pic_img.png" alt=""/>
     </div>
     <div class="home_message">
-        <p>{{ session.phonenum }}</p>
+        <p>{{ current_user.phonenum[:4] }}****{{ current_user.phonenum[-4:] }}</p>
         <em>LV {{ level }}</em>
     </div>
     {% if checkinstatus %}

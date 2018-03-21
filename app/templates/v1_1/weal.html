@@ -24,15 +24,15 @@
 	    	<ul>
 	    		<li>
 	    			<h5>当前积分</h5>
-	    			<p>30</p>
+	    			<p>{{ current_user.integral }}</p>
 	    		</li>
 	    		<li>
 	    			<h5>兑换记录</h5>
-	    			<p>30</p>
+	    			<p>{{ current_user.phonenum[:4] }}****{{ current_user.phonenum[-4:] }}</p>
 	    		</li>
 	    		<li>
-	    			<h5>当前签到</h5>
-	    			<p>5</p>
+	    			<h5>连续签到</h5>
+	    			<p>{{ current_user.continus_checkin }}天</p>
 	    		</li>
 	    	</ul>
 	    </div>
