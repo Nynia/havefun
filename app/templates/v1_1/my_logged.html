@@ -20,7 +20,18 @@
     <img src="../../static/v1_1/img/big_gold.png" class="big_gold" alt=""/>
     <p>积分+20</p>
 </div>
-
+<!--2018-2-8添加   确认购买提示-->
+<div class="fadeBox" id="tc_buy">
+    <div class="tc_buy_content">
+        <h5>提示</h5>
+        <p>您将<i style="color: #f16664;font-style: normal;">退出登录</i>此账户</p>
+        <div>
+            <a class="btn_cancel">取消</a>
+            <a class="btn_affirm">确认</a>
+        </div>
+    </div>
+</div>
+<!--end-->
 <div class="home_banner">
     <p class="news_img">
         <img src="../../static/v1_1/img/news_img.png" alt=""/>
@@ -110,7 +121,7 @@
     </div>
 </div>
 
-<a href="" class="btn_over">退出登录</a>
+<div class="btn_over">退出登录</div>
 
 {#<div class="box_pag"></div>#}
 {#<div class="btm_link">#}
@@ -167,6 +178,28 @@
                             $("#tc_win").hide();
                         }, 2000)
                         $('span:first').text('已连续签到' + data['data']['continus_checkin'] + '天')
+                    }
+                }
+            });
+        });
+        $('.btn_over').click(function () {
+            console.log('hello');
+            $('#tc_buy').show();
+        });
+        $('.btn_cancel').click(function () {
+            $('#tc_buy').hide()
+        });
+        $('.btn_affirm').click(function () {
+            $('#tc_buy').hide();
+            $.ajax({
+                type: "get",
+                url: "/auth/logout",
+                success: function (data, status) {
+                    if (data == 'logout success') {
+                        window.location.href = '/my'
+                    }
+                    else {
+                        alert('错误');
                     }
                 }
             });
