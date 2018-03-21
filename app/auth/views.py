@@ -45,7 +45,7 @@ def login():
                     session['phonenum'] = user.phonenum
                     # next = request.args.get('next')
                     print session.get('user_id')
-                    if not next or 'index' in next or 'find' in next or 'my' in next or 'weal' in next:
+                    if not next:
                         return redirect(url_for('main.index'))
                     else:
                         return redirect(next)
