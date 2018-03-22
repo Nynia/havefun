@@ -113,6 +113,8 @@ def index():
     game_list.append(Game.query.filter_by(packageid='135000000000000000000').all())
     # for item in RecommendApkGame.query.all():
     #     game_list.append(Game.query.get(int(item.id)))
+    print game_list
+    print len(game_list)
     random.shuffle(game_list)
 
     packages = Package.query.all()

@@ -60,27 +60,28 @@
     <div class="auditionList" style="display: none;">
         <div class="game_content m0">
             {% for g in game_list %}
-                <div class="game_pag">
-                    <img src="{{ g.img_icon }}" class="game_logo" alt=""/>
-                    <div class="game_message">
-                        <h5>{{ g.name }}</h5>
-                        <p class="game_type">{{ g.category }}</p>
-                        <p class="game_text">{{ g.brief }}</p>
-                        <a href="/h5game?id={{ g.id }}" class="btn_start">开始游戏</a>
+                {% if g.type=='2' %}
+                    <div class="game_pag">
+                        <img src="{{ g.img_icon }}" class="game_logo" alt=""/>
+                        <div class="game_message">
+                            <h5>{{ g.name }}</h5>
+                            <p class="game_type">{{ g.category }}</p>
+                            <p class="game_text">{{ g.brief }}</p>
+                            <a href="/h5game?id={{ g.id }}" class="btn_start">开始游戏</a>
+                        </div>
                     </div>
-                </div>
+                {% elif g.type=='1' %}
+                    <div class="game_pag">
+                        <img src="{{ g.img_icon }}" class="game_logo" alt=""/>
+                        <div class="game_message">
+                            <h5>{{ g.name }}</h5>
+                            <p class="game_type">{{ g.category }}</p>
+                            <p class="game_text">{{ g.brief }}</p>
+                            <a href="/game/{{ g.id }}" class="btn_start">开始游戏</a>
+                        </div>
+                    </div>
+                {% endif %}
 
-            {% endfor %}
-            {% for g in game_list %}
-                <div class="game_pag">
-                    <img src="{{ g.img_icon }}" class="game_logo" alt=""/>
-                    <div class="game_message">
-                        <h5>{{ g.name }}</h5>
-                        <p class="game_type">{{ g.category }}</p>
-                        <p class="game_text">{{ g.brief }}</p>
-                        <a href="/game/{{ g.id }}" class="btn_start">开始游戏</a>
-                    </div>
-                </div>
             {% endfor %}
         </div>
     </div>
@@ -293,37 +294,37 @@
             var $this = $(this);
             $this.addClass("active").siblings().removeClass("active");
             $this.children().find('p').removeClass('color_text');
-            $this.children().find('img').attr('class', 'icon_1');
+            $this.children().find('img').attr('class','icon_1');
 
             itemIndex = $this.index();
             $lisector = $(".inp_nav li");
-            if (itemIndex == 0) {
-                $this.children().find('img').attr('src', '../../static/v1_1/img/icon_1.png');
+            if (itemIndex == 0 ) {
+                $this.children().find('img').attr('src','../../static/v1_1/img/icon_1.png');
                 $lisector.eq(1).find('p').addClass('color_text');
-                $lisector.eq(1).find('img').attr('class', 'icon1');
-                $lisector.eq(1).find('img').attr('src', '../../static/v1_1/img/icon2.png');
+                $lisector.eq(1).find('img').attr('class','icon1');
+                $lisector.eq(1).find('img').attr('src','../../static/v1_1/img/icon2.png');
                 $lisector.eq(2).find('p').addClass('color_text');
-                $lisector.eq(2).find('img').attr('class', 'icon1');
-                $lisector.eq(2).find('img').attr('src', '../../static/v1_1/img/icon3.png');
+                $lisector.eq(2).find('img').attr('class','icon1');
+                $lisector.eq(2).find('img').attr('src','../../static/v1_1/img/icon3.png');
             }
-            else if (itemIndex == 1) {
-                $this.children().find('img').attr('src', '../../static/v1_1/img/icon_2.png');
+            else if (itemIndex == 1 ) {
+                $this.children().find('img').attr('src','../../static/v1_1/img/icon_2.png');
                 $lisector.eq(0).find('p').addClass('color_text');
-                $lisector.eq(0).find('img').attr('class', 'icon1');
-                $lisector.eq(0).find('img').attr('src', '../../static/v1_1/img/icon1.png');
+                $lisector.eq(0).find('img').attr('class','icon1');
+                $lisector.eq(0).find('img').attr('src','../../static/v1_1/img/icon1.png');
                 $lisector.eq(2).find('p').addClass('color_text');
-                $lisector.eq(2).find('img').attr('class', 'icon1');
-                $lisector.eq(2).find('img').attr('src', '../../static/v1_1/img/icon3.png');
+                $lisector.eq(2).find('img').attr('class','icon1');
+                $lisector.eq(2).find('img').attr('src','../../static/v1_1/img/icon3.png');
 
             }
             else {
-                $this.children().find('img').attr('src', '../../static/v1_1/img/icon_3.png');
+                $this.children().find('img').attr('src','../../static/v1_1/img/icon_3.png');
                 $lisector.eq(0).find('p').addClass('color_text');
-                $lisector.eq(0).find('img').attr('class', 'icon1');
-                $lisector.eq(0).find('img').attr('src', '../../static/v1_1/img/icon1.png');
+                $lisector.eq(0).find('img').attr('class','icon1');
+                $lisector.eq(0).find('img').attr('src','../../static/v1_1/img/icon1.png');
                 $lisector.eq(1).find('p').addClass('color_text');
-                $lisector.eq(1).find('img').attr('class', 'icon1');
-                $lisector.eq(1).find('img').attr('src', '../../static/v1_1/img/icon2.png');
+                $lisector.eq(1).find('img').attr('class','icon1');
+                $lisector.eq(1).find('img').attr('src','../../static/v1_1/img/icon2.png');
             }
             $('.auditionList').eq(itemIndex).show().siblings('.auditionList').hide();
         });
