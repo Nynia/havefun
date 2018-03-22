@@ -47,6 +47,7 @@ def login():
                     print session.get('user_id')
                     if not next:
                         print 'lllassssssssssssss'
+                        print url_for('main.my')
                         return redirect(url_for('main.my'))
                     else:
                         return redirect(next)
