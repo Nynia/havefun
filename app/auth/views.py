@@ -43,7 +43,7 @@ def login():
                         if r.status == '1':
                             session[r.productid] = 1
                     session['phonenum'] = user.phonenum
-                    # next = request.args.get('next')
+                    next = request.args.get('next')
                     print session.get('user_id')
                     if not next:
                         return redirect(url_for('main.my'))
