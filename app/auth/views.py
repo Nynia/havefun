@@ -43,14 +43,8 @@ def login():
                         if r.status == '1':
                             session[r.productid] = 1
                     session['phonenum'] = user.phonenum
-                    next = request.args.get('next')
-                    print session.get('user_id')
-                    if not next:
-                        print 'lllassssssssssssss'
-                        print url_for('main.my')
-                        return redirect(url_for('main.my'))
-                    else:
-                        return redirect(next)
+                    print url_for('main.my')
+                    return redirect(request.args.get('next') or url_for('main.my'))
                 flash(u'用户名或密码错误', 'login')
             else:
                 flash(u'请输入正确的手机号码', 'login')
