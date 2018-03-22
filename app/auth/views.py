@@ -46,7 +46,7 @@ def login():
                     # next = request.args.get('next')
                     print session.get('user_id')
                     if not next:
-                        return redirect(url_for('main.index'))
+                        return redirect(url_for('main.my'))
                     else:
                         return redirect(next)
                 flash(u'用户名或密码错误', 'login')
