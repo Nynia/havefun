@@ -110,46 +110,18 @@ def index():
     game_list = []
     for item in RecommendH5.query.all():
         game_list.append(Game.query.get(int(item.id)))
-    random.shuffle(game_list)
-    game_list += Game.query.filter_by(packageid='135000000000000000000').all()
+    #random.shuffle(game_list)
+    #game_list += Game.query.filter_by(packageid='135000000000000000000').all()
     # for item in RecommendApkGame.query.all():
     #     game_list.append(Game.query.get(int(item.id)))
     random.shuffle(game_list)
+    game_list += Game.query.filter_by(packageid='135000000000000000000').all()
 
     packages = Package.query.all()
     packages = [p for p in packages if
                 (p.type == '2' and p.productid != '135000000000000000000') or (p.productid == '135000000000000242191')]
     recommend_apk_game = RecommendApkGame.query.all()
     return render_template('v1_1/index.html', game_list=game_list, game_list2=recommend_apk_game, packages=packages)
-
-
-@main.route('/index_1', methods=['GET'])
-def game_1():
-    # packages = Package.query.filter_by(type=2).all()
-    # h5 = RecommendH5.query.all()
-    game_list = []
-    for item in RecommendH5.query.all():
-        game_list.append(Game.query.get(int(item.id)))
-    game_list.append(Game.query.filter_by(packageid='135000000000000000000').all())
-    # for item in RecommendApkGame.query.all():
-    #     game_list.append(Game.query.get(int(item.id)))
-    random.shuffle(game_list)
-    # return render_template('game.html', packages=packages, h5=h5)
-    return render_template('v1_1/index-1.html', game_list=game_list)
-
-
-@main.route('/index_2', methods=['GET'])
-def game_2():
-    packages = Package.query.all()
-    packages = [p for p in packages if
-                (p.type == '2' and p.productid != '135000000000000000000') or (p.productid == '135000000000000242191')]
-    recommend_apk_game = RecommendApkGame.query.all()
-    return render_template('v1_1/index-2.html', packages=packages, game_list=recommend_apk_game)
-
-
-@main.route('/index_3', methods=['GET'])
-def game_3():
-    return render_template('v1_1/index-3.html')
 
 
 @main.route('/h5game', methods=['GET'])
