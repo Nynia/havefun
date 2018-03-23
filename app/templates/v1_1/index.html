@@ -37,14 +37,14 @@
         -->
         <li class="active">
             <a>
-                <img src="../../static/v1_1/img/icon1.png" class="icon1" alt=""/>
-                <p class="color_text">热门推荐</p>
+                <img src="../../static/v1_1/img/icon_1.png" class="icon_1" alt=""/>
+                <p>热门推荐</p>
             </a>
         </li>
         <li>
             <a>
-                <img src="../../static/v1_1/img/icon_2.png" class="icon_1" alt=""/>
-                <p>最新优惠</p>
+                <img src="../../static/v1_1/img/icon2.png" class="icon1" alt=""/>
+                <p class="color_text">最新优惠</p>
             </a>
         </li>
         <li>
@@ -58,7 +58,7 @@
 </div>
 
 <div class="list_pag">
-    <div class="auditionList" style="display: none;">
+    <div class="auditionList" >
         <div class="game_content m0">
             {% for g in game_list %}
                 {% if g.type=='2' %}
@@ -86,7 +86,7 @@
             {% endfor %}
         </div>
     </div>
-    <div class="auditionList">
+    <div class="auditionList" style="display: none;">
         <div class="game_link">
             <ul>
                 {% for p in packages %}
