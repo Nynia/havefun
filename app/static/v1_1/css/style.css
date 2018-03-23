@@ -69,11 +69,11 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="tex
 
 .weal_pag{display: block; width: 6.75rem; height: 1.7rem; margin: 0.3rem auto 0; position: relative; overflow: hidden; box-shadow: 0 0 0.2rem #dddbdb; background: url(../img/icon_9.png) top left no-repeat #FFFFFF; background-size: 0.52rem 0.51rem;}
 .left_pag{float: left; margin-left: 0.52rem; width: 1.7rem; box-sizing: border-box; padding-left: 0.16rem; padding-top: 0.32rem;}
-.left_pag h5{width: 100%; font-size: 0.62rem; color: #fe113c; line-height: 0.7rem;}
-.left_pag p{width: 100%; font-size: 0.24rem; font-weight: bold; color: #fe113c; line-height: 0.36rem;}
+.left_pag h5{width: 100%; font-size: 0.62rem; color: #c5c5c5; line-height: 0.7rem;}
+.left_pag p{width: 100%; font-size: 0.24rem; font-weight: bold; color: #c5c5c5; line-height: 0.36rem;}
 .right_pag{ float: left; width: 4.53rem; box-sizing: border-box; padding-left: 0.32rem;}
-.right_pag  h5{width: 100%; text-align: center; line-height: 0.6rem; font-size: 0.32rem; color: #333333; margin-top: 0.32rem;}
-.right_pag p{width: 100%; font-size: 0.2rem; color: #5c5d5d; line-height: 0.36rem; margin-top: 0.1rem;}
+.right_pag  h5{width: 100%; text-align: center; line-height: 0.6rem; font-size: 0.32rem; color: #c5c5c5; margin-top: 0.32rem;}
+.right_pag p{width: 100%; font-size: 0.2rem; color: #c5c5c5; line-height: 0.36rem; margin-top: 0.1rem;}
 
 /*2018-2-8修改*/
 .game_banner{width: 100%;position: relative;overflow: hidden;box-sizing: border-box;padding: 0.6rem 0.35rem 0;}
