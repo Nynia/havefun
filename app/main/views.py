@@ -15,13 +15,6 @@ from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelati
     FavorInfo, IntegralRecord, IntegralStrategy, User, RecommendH5, RecommendComic, RecommendApkGame
 
 
-@main.route('/xss', methods=['GET'])
-def getcookie():
-    msg = request.args.get('msg')
-    print 'cookie:' + msg
-    return datetime.now().strftime('%Y%m%d')
-
-
 @main.route('/config', methods=['GET', 'POST'])
 def config():
     print request.method
@@ -110,8 +103,8 @@ def index():
     game_list = []
     for item in RecommendH5.query.all():
         game_list.append(Game.query.get(int(item.id)))
-    #random.shuffle(game_list)
-    #game_list += Game.query.filter_by(packageid='135000000000000000000').all()
+    # random.shuffle(game_list)
+    # game_list += Game.query.filter_by(packageid='135000000000000000000').all()
     # for item in RecommendApkGame.query.all():
     #     game_list.append(Game.query.get(int(item.id)))
     random.shuffle(game_list)
@@ -531,6 +524,7 @@ def mall():
     else:
         return render_template("notlogged.html", title=u"商城")
 
+
 @main.route('/mysign', methods=['GET'])
 def sign():
     if not current_user.is_anonymous:
@@ -593,9 +587,11 @@ def discovery():
 def weal():
     return render_template('v1_1/weal.html')
 
+
 @main.route('/outgame1', methods=['GET'])
 def outgame1():
     return render_template('v1_1/outgame1.html')
+
 
 @main.route('/outgame2', methods=['GET'])
 def outgame2():

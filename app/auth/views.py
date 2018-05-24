@@ -11,8 +11,7 @@ from ..utils.aes import aescrypt
 from werkzeug.contrib.cache import SimpleCache
 
 cache = SimpleCache()
-from app import db
-
+from app import db, redis_cli
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -67,8 +66,7 @@ def logout():
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     print session
-    print request.cookies
-    print cache
+    #print cache
     form = RegisterFrom()
     action = request.args.get('action')
     if action == 'getIdentifingCode':
@@ -76,9 +74,11 @@ def register():
         print phonenum
         code = generate_identifying_code()
         msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
-        cache.set(phonenum, code)
+        #cache.set(phonenum, code)
+        redis_cli.set(phonenum, code)
         # cache[phonenum] = code
-        print cache
+        #print cache
+        #return send_sms(phonenum, msg)
         import requests
         url = 'http://221.228.17.88:8080/sendmsg/send'
         params = {
@@ -96,8 +96,7 @@ def register():
         vercode = form.vercode.data
         password = form.password.data
         print password
-        print cache
-        if vercode == cache.get(phonenum):
+        if vercode == redis_cli.get(phonenum):
             phonenum = request.form.get('phonenum')
             user = User.query.filter_by(phonenum=phonenum).first()
             from datetime import datetime
@@ -125,7 +124,11 @@ def register():
             else:
                 flash(u'用户已存在，不能重复注册', 'register')
         else:
-            flash(u'验证码输入错误', 'register')
+            print phonenum
+            if not redis_cli.get(phonenum):
+                flash(u'验证码已过期', 'register')
+            else:
+                flash(u'验证码输入错误', 'register')
     return render_template('register.html', form=form)
 
 
@@ -191,8 +194,8 @@ def reset_password():
         print phonenum
         code = generate_identifying_code()
         msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
-        cache[phonenum] = code
-        print cache
+        redis_cli.set(phonenum, code)
+        #return send_sms(phonenum, msg)
         import requests
         url = 'http://221.228.17.88:8080/sendmsg/send'
         params = {
@@ -220,7 +223,10 @@ def reset_password():
         else:
             phonenum = request.form.get('phonenum')
             vercode = request.form.get('vercode')
-            if vercode == cache.get(phonenum):
+            print redis_cli.get(phonenum)
+            if not redis_cli.get(phonenum):
+                flash(u'验证码已过期', 'reset')
+            elif vercode == redis_cli.get(phonenum):
                 return render_template('safety.html', phonenum=phonenum)
             else:
                 flash(u'验证码输入错误', 'reset')
