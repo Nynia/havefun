@@ -42,6 +42,7 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql://root:admin@192.168.114.139/havefun'
 
 
+
 config = {
     'testing': TestingConfig,
     'production': ProductionConfig,
