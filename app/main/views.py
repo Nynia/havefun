@@ -408,35 +408,6 @@ def my():
                 }
             )
         print records
-        # history
-        # view_records = ViewRecord.query.filter_by(user_id=current_user.id).all()
-        # comic_game_records = []
-        # for item in view_records:
-        #     if item.target_type == '1':
-        #         comic_item = Comic.query.get(int(item.target_id))
-        #         comic_game_records.append(
-        #             {
-        #                 'id': comic_item.id,
-        #                 'name': comic_item.comicname,
-        #                 'type': '1',
-        #                 'banner': comic_item.banner,
-        #                 'updatetime': item.createtime,
-        #                 'chapter': item.target_chapter,
-        #                 'progress': int(item.target_chapter * 1.0 / comic_item.curchapter * 100)
-        #             })
-        #     elif item.target_type == '2':
-        #         # game
-        #         game_item = Game.query.get(int(item.target_id))
-        #         comic_game_records.append(
-        #             {
-        #                 'id': game_item.id,
-        #                 'name': game_item.name,
-        #                 'type': '2',
-        #                 'banner': game_item.img_icon,
-        #                 'updatetime': item.createtime,
-        #                 'url': game_item.url
-        #             })
-
         # integral
         integral = current_user.integral
         if integral < 400:
