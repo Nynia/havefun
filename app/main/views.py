@@ -13,7 +13,7 @@ from datetime import datetime
 from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelation, AccessLog, ComicChapterInfo, \
     FavorInfo, IntegralRecord, IntegralStrategy, User, RecommendH5, RecommendComic, RecommendApkGame
-
+import time
 
 @main.route('/config', methods=['GET', 'POST'])
 def config():
@@ -371,8 +371,7 @@ def my():
             checkinstatus = True
         else:
             checkinstatus = False
-
-        ##
+        print (int(time.time()))
         uid = session.get('user_id')
         records = []
         comic_record = db.session.execute(
@@ -380,10 +379,12 @@ def my():
              'from comic as A,(select * from view_record where id in (select max(id) id '
              'from view_record where target_type=\'1\' and user_id=%s '
              'group by target_id)) as B where A.id=B.target_id;') % uid)
+        print (int(time.time()))
         game_record = db.session.execute(('select A.id,A.name,A.img_icon,A.url,B.createtime '
                                           'from game as A,(select * from view_record where id in (select max(id) id '
                                           'from view_record where target_type=\'2\' and user_id=%s '
                                           'group by target_id)) as B where A.id=B.target_id order by createtime desc;') % uid)
+        print (int(time.time()))
         for item in comic_record.fetchall():
             records.append(
                 {
@@ -408,6 +409,7 @@ def my():
                 }
             )
         print records
+        print (int(time.time()))
         # integral
         integral = current_user.integral
         if integral < 400:
@@ -430,6 +432,7 @@ def my():
             level = 9
         else:
             level = 10
+        print (int(time.time()))
         return render_template('v1_1/my_logged.html', checkinstatus=checkinstatus, checkindays=checkindays,
                                records=sorted(records, reverse=True, key=lambda x: x['updatetime']), level=level)
     else:
