@@ -88,10 +88,11 @@
     </div>
     <div class="auditionList" style="display: none;">
         <div class="game_link">
+            <a href="package?id={{ packages[0].productid }}"><img src="../../static/v1_1/img/kongj.png" style="width: 100%;height: 100%;margin: 10px auto;"></a>
             <ul>
-                {% for p in packages %}
+                {% for p in packages[1:] %}
                     <li>
-                        <a href="package?id={{ p.productid }}"><img src="{{ p.bannerimg }}" class="img_1" alt=""/></a>
+                        <a href="package?id={{ p.productid }}"><img src="{{ p.bannerimg }}" class="" alt=""/></a>
                     </li>
                 {% endfor %}
             </ul>

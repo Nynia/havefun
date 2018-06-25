@@ -103,16 +103,12 @@ def index():
     game_list = []
     for item in RecommendH5.query.all():
         game_list.append(Game.query.get(int(item.id)))
-    # random.shuffle(game_list)
-    # game_list += Game.query.filter_by(packageid='135000000000000000000').all()
-    # for item in RecommendApkGame.query.all():
-    #     game_list.append(Game.query.get(int(item.id)))
     random.shuffle(game_list)
     game_list += Game.query.filter_by(packageid='135000000000000000000').all()
 
-    packages = Package.query.all()
-    packages = [p for p in packages if
-                (p.type == '2' and p.productid != '135000000000000000000') or (p.productid == '135000000000000242191')]
+    packages = Package.query.order_by(Package.chargeid).all()
+    packages = [p for p in packages if p.type == '2' or p.productid == '135000000000000242191']
+    print [p.productid for p in packages]
     recommend_apk_game = RecommendApkGame.query.all()
     return render_template('v1_1/index.html', game_list=game_list, game_list2=recommend_apk_game, packages=packages)
 
