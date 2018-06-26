@@ -134,6 +134,11 @@
                 success: function (data) {
                     if (data.code == '0')
                         $('#tc_happy p').text('订购成功');
+                    else if (data.code == '200') {
+                        $('#mains p').text('调用控件接口');
+                        var price = data.data;
+                        window.android.tyZonePay('111',3, 10, '', '1076848', '27A2644F4DE71352E0530100007F61CD', '2FF3F8708D52495AE0530100007F61F9', 'http://baidu.com')
+                    }
                     else $('#tc_happy p').text(data.message);
 
                     $("#tc_happy").show();
