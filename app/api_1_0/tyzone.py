@@ -12,7 +12,7 @@ def func():
     sig2 = ''
     print request.form.to_dict()
     for key, value in request.form.to_dict().items():
-        if key != 'sig2':
+        if key != 'sig':
             params.append((key, value))
         else:
             sig2 = value
