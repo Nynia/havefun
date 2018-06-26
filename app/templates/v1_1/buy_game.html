@@ -128,7 +128,8 @@
                 url: "/api/v1.0/subscribe",
                 data: {
                     'phonenum': '{{ session.phonenum }}',
-                    'productid': '{{ package.productid }}'
+                    'productid': '{{ package.productid }}',
+                    'price': '{{ package.price }}'
                 },
                 dataType: 'json',
                 success: function (data) {
