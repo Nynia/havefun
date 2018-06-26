@@ -23,6 +23,7 @@ def func():
         if params[1] != '':
             key_str += params[0]
             key_str += params[1]
+    print key_str
     key_quoted = quote(key_str)
     print key_quoted
     print sig2, hashlib.sha1(key_quoted + apsecret).hexdigest()
