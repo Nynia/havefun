@@ -141,24 +141,27 @@
                         var csphone = data.data.csphone;
                         var chargeid = data.data.chargeid;
                         var apsecret = data.data.apsercet;
-                        window.android.tyZonePay(csphone, 2, price, '', '1076848', chargeid, apsecret, 'http://baidu.com')
+                        var callbackurl = window.location;
+                        window.android.tyZonePay(csphone, 2, price, '', '1076848', chargeid, apsecret, callbackurl)
                     }
-                    else $('#tc_happy p').text(data.message);
-
-                    $("#tc_happy").show();
-                    setTimeout(function () {
-                        $("#tc_happy").fadeOut();
-                        if (data['data']['integral'] > 0) {
-                            $('.fade p').text('积分+' + data['data']['integral']);
-                            setTimeout(function () {
-                                $(".fade").fadeIn();
+                    else {
+                        $('#tc_happy p').text(data.message);
+                        $("#tc_happy").show();
+                        setTimeout(function () {
+                            $("#tc_happy").fadeOut();
+                            if (data['data']['integral'] > 0) {
+                                $('.fade p').text('积分+' + data['data']['integral']);
                                 setTimeout(function () {
-                                    $(".fade").fadeOut();
-                                }, 1500)
-                            }, 500)
-                        }
+                                    $(".fade").fadeIn();
+                                    setTimeout(function () {
+                                        $(".fade").fadeOut();
+                                    }, 1500)
+                                }, 500)
+                            }
 
-                    }, 1500);
+                        }, 1500);
+                    }
+
                     if (data.code == "0") {
                         //success
                         $('.btn_down').text('已订购');
