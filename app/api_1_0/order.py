@@ -5,8 +5,9 @@ from flask import request, jsonify, session
 from datetime import datetime
 from config import ORDER_REQUEST_URL
 import hashlib, json
-from app.models import OrderRelation,OrderHistroy,Package,IntegralStrategy,IntegralRecord,User
+from app.models import OrderRelation, OrderHistroy, Package, IntegralStrategy, IntegralRecord, User
 import requests
+
 
 @api.route('/orders', methods=['POST'])
 def orderaction():
@@ -81,7 +82,7 @@ def orderaction():
         return jsonify({
             'code': '103',
             'message': 'params error',
-            'data':None
+            'data': None
         })
 
 
@@ -106,6 +107,7 @@ def checkstatus(phonenum):
             'data': None
         })
 
+
 @api.route('/subscribe', methods=['POST'])
 def subscribe():
     productid = request.form.get('productid')
@@ -113,6 +115,22 @@ def subscribe():
     package = Package.query.get(productid)
     chargeid = package.chargeid
     secret = package.secret
+    if len(chargeid) < 4:
+        price = request.form.get('price')
+        csphone = '40000000'
+        chargeid = '27A2644F4DE71352E0530100007F61CD'
+        return jsonify({
+            'code': '200',
+            'message': 'zone product',
+            'data': {
+                'price': price,
+                'chargeid': chargeid,
+                'apsercet': secret,
+                'csphone': csphone,
+                'callback': ''
+            }
+        })
+
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
     token = hashlib.sha1(chargeid + timestamp + secret).hexdigest()
     data = {
@@ -154,7 +172,7 @@ def subscribe():
         else:
             des = u'订购付费包'
 
-        #integral
+        # integral
         integral_strategy = IntegralStrategy.query.filter_by(description=des).first()
         if integral_strategy:
             integral = integral_strategy.value
@@ -173,7 +191,7 @@ def subscribe():
                 record = IntegralRecord.query.filter(timestamp.startswith(today)).filter_by(action=8).all()
                 history_integral_today = 0
                 if record:
-                    history_integral_today = 400 + reduce(lambda x,y : x + y,[r.change for r in record])
+                    history_integral_today = 400 + reduce(lambda x, y: x + y, [r.change for r in record])
                     print history_integral_today
                 if history_integral_today < 600:
                     user.integral = user.integral + integral_strategy.value
@@ -193,7 +211,7 @@ def subscribe():
         return jsonify({
             'code': err_code,
             'message': err_msg,
-            'data': {'integral':integral}
+            'data': {'integral': integral}
         })
 
     else:
@@ -202,6 +220,7 @@ def subscribe():
             'message': err_msg,
             'data': {'integral': integral}
         })
+
 
 @api.route('/unsubscribe', methods=['POST'])
 def unsubscribe():
@@ -259,4 +278,3 @@ def unsubscribe():
             'message': err_msg,
             'data': None
         })
-

@@ -93,8 +93,8 @@
     {% if flag %}
         //$('.super .button').text('已订购');
         $('.super .button').text('已订购');
-        $('.super .button').css('background','#fff');
-        $('.super .button').css('color','#626262');
+        $('.super .button').css('background', '#fff');
+        $('.super .button').css('color', '#626262');
 
     {% else %}
         $('.super .button').click(function () {
@@ -117,15 +117,26 @@
                 url: "/api/v1.0/subscribe",
                 data: {
                     'phonenum': '{{ session.phonenum }}',
-                    'productid': '{{ package.productid }}'
+                    'productid': '{{ package.productid }}',
+                    'price': '{{ package.price }}'
                 },
                 dataType: 'json',
                 success: function (data) {
-                    if (data.code=='0')
+                    if (data.code == '0')
                         $('#mains p').text('订购成功');
+                    else if (data.code == '200') {
+                        $('#mains p').text('调用控件接口');
+                        var price = data.data.price;
+                        var chargeid = data.data.chargeid;
+                        var apsecret = data.data.cpsecret;
+                        var csphone = data.data.csphone;
+                        window.android.tyZonePay(csphone, 3, 10, '', '1076848', '27A2644F4DE71352E0530100007F61CD', apsecret, 'http://baidu.com')
+                    }
                     else $('#mains p').text(data.message);
                     $('#mains').show();
-                    setTimeout(function() { $('#mains').hide(); }, 1000);
+                    setTimeout(function () {
+                        $('#mains').hide();
+                    }, 1000);
                     if (data['data']['integral'] > 0) {
                         $('#sign_m p').text('积分+' + data['data']['integral']);
                         $('#sign_m').show();
@@ -136,8 +147,8 @@
                     if (data.code == "0") {
                         //success
                         $('.super .button').text('已订购');
-                        $('.super .button').css('background','#fff');
-                        $('.super .button').css('color','#626262');
+                        $('.super .button').css('background', '#fff');
+                        $('.super .button').css('color', '#626262');
                     }
                 }
             });
