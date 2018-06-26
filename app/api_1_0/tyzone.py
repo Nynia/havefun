@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from . import api
 from flask import request, jsonify, session
-from app import redis_cli
+from app import redis_cli, db
 from urllib import quote
 import hashlib
 from app.models import OrderRelation, OrderHistroy, Package, IntegralStrategy, IntegralRecord, User
@@ -14,6 +14,7 @@ def clientcall():
     orderid = request.form.get('orderid')
     print phonenum, result_code, orderid
     redis_cli.set(orderid, phonenum)
+    return '0'
 
 
 @api.route('/tyzone/callback', methods=['POST', 'GET'])
@@ -39,8 +40,9 @@ def func():
     orderid = request.form.get('txId')
     paytime = request.form.get('payTime')
     type = request.form.get('chargeType')
+    chargeid = request.form.get('chargeId')
     result = request.form.get('chargeResult')
-    print orderid, paytime, type, result
+    print orderid, paytime, type, result, chargeid
     phonenum = redis_cli.get(orderid)
     print phonenum
     # key_quoted = quote(key_str)
