@@ -142,7 +142,8 @@
                         var chargeid = data.data.chargeid;
                         var apsecret = data.data.apsercet;
                         var callbackurl = window.location;
-                        window.android.tyZonePay(csphone, 2, price, '', '1076848', chargeid, apsecret, callbackurl)
+                        var phonenum = '{{ session.phonenum }}';
+                        window.android.tyZonePay(csphone, 2, price, '', '1076848', chargeid, apsecret, callbackurl, phonenum);
                     }
                     else {
                         $('#tc_happy p').text(data.message);

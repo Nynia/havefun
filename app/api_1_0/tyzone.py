@@ -1,14 +1,23 @@
 # -*- coding: UTF-8 -*-
 from . import api
 from flask import request, jsonify, session
+from app import redis_cli
 from urllib import quote
 import hashlib
 from app.models import OrderRelation, OrderHistroy, Package, IntegralStrategy, IntegralRecord, User
 
 
+@api.route('/tyzone/clientcall', methods=['POST'])
+def clientcall():
+    phonenum = request.form.get('phonenum')
+    result_code = request.form.get('code')
+    orderid = request.form.get('orderid')
+    print phonenum, result_code, orderid
+    redis_cli.set(orderid, phonenum)
+
+
 @api.route('/tyzone/callback', methods=['POST', 'GET'])
 def func():
-    print session.get('phonenum')
     apsecret = '2027e1d246f3aa52f1c6ea786cc4ef4e'
     params = []
     sig2 = ''
@@ -27,6 +36,13 @@ def func():
             key_str += params[1]
     print key_str
 
+    orderid = request.form.get('txId')
+    paytime = request.form.get('payTime')
+    type = request.form.get('chargeType')
+    result = request.form.get('chargeResult')
+    print orderid, paytime, type, result
+    phonenum = redis_cli.get(orderid)
+    print phonenum
     # key_quoted = quote(key_str)
     # print key_quoted
     # print sig2, hashlib.sha1(key_quoted + apsecret).hexdigest()
