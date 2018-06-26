@@ -124,32 +124,29 @@
                 success: function (data) {
                     if (data.code == '0')
                         $('#mains p').text('订购成功');
-                    else if (data.code == '200') {
+                    else {
                         $('#mains p').text('调用控件接口');
-                        var price = data.data.price;
-                        var chargeid = data.data.chargeid;
-                        var apsecret = data.data.cpsecret;
-                        var csphone = data.data.csphone;
-                        window.android.tyZonePay(csphone, 3, 10, '', '1076848', '27A2644F4DE71352E0530100007F61CD', apsecret, 'http://baidu.com')
+                        var price = data.data;
+                        window.android.tyZonePay('111',3, 10, '', '1076848', '27A2644F4DE71352E0530100007F61CD', '2FF3F8708D52495AE0530100007F61F9', 'http://baidu.com')
                     }
-                    else $('#mains p').text(data.message);
-                    $('#mains').show();
-                    setTimeout(function () {
-                        $('#mains').hide();
-                    }, 1000);
-                    if (data['data']['integral'] > 0) {
-                        $('#sign_m p').text('积分+' + data['data']['integral']);
-                        $('#sign_m').show();
-                        setTimeout(function () {
-                            $('#sign_m').hide();
-                        }, 2000);
-                    }
-                    if (data.code == "0") {
-                        //success
-                        $('.super .button').text('已订购');
-                        $('.super .button').css('background', '#fff');
-                        $('.super .button').css('color', '#626262');
-                    }
+                    {#else $('#mains p').text(data.message);#}
+                    {#$('#mains').show();#}
+                    {#setTimeout(function () {#}
+                    {#    $('#mains').hide();#}
+                    {#}, 1000);#}
+                    {#if (data['data']['integral'] > 0) {#}
+                    {#    $('#sign_m p').text('积分+' + data['data']['integral']);#}
+                    {#    $('#sign_m').show();#}
+                    {#    setTimeout(function () {#}
+                    {#        $('#sign_m').hide();#}
+                    {#    }, 2000);#}
+                    {#}#}
+                    {#if (data.code == "0") {#}
+                    {#    //success#}
+                    {#    $('.super .button').text('已订购');#}
+                    {#    $('.super .button').css('background', '#fff');#}
+                    {#    $('.super .button').css('color', '#626262');#}
+                    {#}#}
                 }
             });
         });
