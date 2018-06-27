@@ -254,37 +254,37 @@
         </li>
     </ul>
 </div>
-<!--
-        	作者：葛言成
-        	时间：2018-03-16
-        	描述：添加div到达顶部时自动固定
-        -->
-<script type="text/javascript">
-    $(function () {
-        var ie6 = document.all;
-        var dv = $('#inp_nav'), st;
-        dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离
-        $(window).scroll(function () {
-            st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
-            if (st > parseInt(dv.attr('otop'))) {
-                if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果
-                    dv.css({position: 'absolute', top: st});
-                }
-                else if (dv.css('position') != 'fixed') {
-                    dv.css({
-                        'position': 'fixed',
-                        'top': "0.86rem",
-                        'z-index': "999",
-                        'border-bottom': '0.15rem solid #f6f5f5'
-                    });
-                }
-            } else if (dv.css('position') != 'static') {
-                dv.css({'position': 'static', 'border': 'none'})
-
-            }
-        });
-    });
-</script>
+{#<!--#}
+{#        	作者：葛言成#}
+{#        	时间：2018-03-16#}
+{#        	描述：添加div到达顶部时自动固定#}
+{#        -->#}
+{#<script type="text/javascript">#}
+{#    $(function () {#}
+{#        var ie6 = document.all;#}
+{#        var dv = $('#inp_nav'), st;#}
+{#        dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离#}
+{#        $(window).scroll(function () {#}
+{#            st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);#}
+{#            if (st > parseInt(dv.attr('otop'))) {#}
+{#                if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果#}
+{#                    dv.css({position: 'absolute', top: st});#}
+{#                }#}
+{#                else if (dv.css('position') != 'fixed') {#}
+{#                    dv.css({#}
+{#                        'position': 'fixed',#}
+{#                        'top': "0.86rem",#}
+{#                        'z-index': "999",#}
+{#                        'border-bottom': '0.15rem solid #f6f5f5'#}
+{#                    });#}
+{#                }#}
+{#            } else if (dv.css('position') != 'static') {#}
+{#                dv.css({'position': 'static', 'border': 'none'})#}
+{##}
+{#            }#}
+{#        });#}
+{#    });#}
+{#</script>#}
 <!--end-->
 <script type="text/javascript" src="../../static/v1_1/js/swiper.min.js"></script>
 <script type="text/javascript" src="../../static/v1_1/js/dropload.min.js"></script>
