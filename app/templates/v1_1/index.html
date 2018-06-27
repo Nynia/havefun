@@ -17,10 +17,16 @@
     <title></title>
 </head>
 <body>
+<div class="inp_title">
+    <img src="../../static/v1_1/img/logo.png" class="logo" alt=""/>
+    <div class="pic_img"><img src="../../static/v1_1/img/pic.png" alt=""/></div>
+</div>
+{#<div style="width: 100%; height: 0.86rem;position: relative;"></div>#}
 <!--轮播图-->
 <div class="swiper-container">
     <div class="swiper-wrapper">
-        <div class="swiper-slide"><a href="http://deal.189store.com/threesquirrels/"><img src="../../static/v1_1/img/0.jpg"/></a></div>
+        <div class="swiper-slide"><a href="http://deal.189store.com/threesquirrels/"><img
+                src="../../static/v1_1/img/0.jpg"/></a></div>
         <div class="swiper-slide"><a href="/game/130"><img src="../../static/v1_1/img/1.jpg"/></a></div>
         <div class="swiper-slide"><a href="/game/120"><img src="../../static/v1_1/img/2.jpg"/></a></div>
         <div class="swiper-slide"><a href="/game/111"><img src="../../static/v1_1/img/3.jpg"/></a></div>
@@ -58,7 +64,7 @@
 </div>
 
 <div class="list_pag">
-    <div class="auditionList" >
+    <div class="auditionList">
         <div class="game_content m0">
             {% for g in game_list %}
                 {% if g.type=='2' %}
@@ -88,7 +94,8 @@
     </div>
     <div class="auditionList" style="display: none;">
         <div class="game_link">
-            <a href="package?id={{ packages[0].productid }}"><img src="../../static/v1_1/img/kongj.png" style="width: 100%;height: 100%;margin: 0 0 10px 0;"></a>
+            <a href="package?id={{ packages[0].productid }}"><img src="../../static/v1_1/img/kongj.png"
+                                                                  style="width: 100%;height: 100%;margin: 0 0 10px 0;"></a>
             <ul>
 
                 {% for p in packages[1:] %}
@@ -298,43 +305,40 @@
             var $this = $(this);
             $this.addClass("active").siblings().removeClass("active");
             $this.children().find('p').removeClass('color_text');
-            $this.children().find('img').attr('class','icon_1');
+            $this.children().find('img').attr('class', 'icon_1');
 
             itemIndex = $this.index();
             $lisector = $(".inp_nav li");
-            if (itemIndex == 0 ) {
-                $this.children().find('img').attr('src','../../static/v1_1/img/icon_1.png');
+            if (itemIndex == 0) {
+                $this.children().find('img').attr('src', '../../static/v1_1/img/icon_1.png');
                 $lisector.eq(1).find('p').addClass('color_text');
-                $lisector.eq(1).find('img').attr('class','icon1');
-                $lisector.eq(1).find('img').attr('src','../../static/v1_1/img/icon2.png');
+                $lisector.eq(1).find('img').attr('class', 'icon1');
+                $lisector.eq(1).find('img').attr('src', '../../static/v1_1/img/icon2.png');
                 $lisector.eq(2).find('p').addClass('color_text');
-                $lisector.eq(2).find('img').attr('class','icon1');
-                $lisector.eq(2).find('img').attr('src','../../static/v1_1/img/icon3.png');
+                $lisector.eq(2).find('img').attr('class', 'icon1');
+                $lisector.eq(2).find('img').attr('src', '../../static/v1_1/img/icon3.png');
             }
-            else if (itemIndex == 1 ) {
-                $this.children().find('img').attr('src','../../static/v1_1/img/icon_2.png');
+            else if (itemIndex == 1) {
+                $this.children().find('img').attr('src', '../../static/v1_1/img/icon_2.png');
                 $lisector.eq(0).find('p').addClass('color_text');
-                $lisector.eq(0).find('img').attr('class','icon1');
-                $lisector.eq(0).find('img').attr('src','../../static/v1_1/img/icon1.png');
+                $lisector.eq(0).find('img').attr('class', 'icon1');
+                $lisector.eq(0).find('img').attr('src', '../../static/v1_1/img/icon1.png');
                 $lisector.eq(2).find('p').addClass('color_text');
-                $lisector.eq(2).find('img').attr('class','icon1');
-                $lisector.eq(2).find('img').attr('src','../../static/v1_1/img/icon3.png');
+                $lisector.eq(2).find('img').attr('class', 'icon1');
+                $lisector.eq(2).find('img').attr('src', '../../static/v1_1/img/icon3.png');
 
             }
             else {
-                $this.children().find('img').attr('src','../../static/v1_1/img/icon_3.png');
+                $this.children().find('img').attr('src', '../../static/v1_1/img/icon_3.png');
                 $lisector.eq(0).find('p').addClass('color_text');
-                $lisector.eq(0).find('img').attr('class','icon1');
-                $lisector.eq(0).find('img').attr('src','../../static/v1_1/img/icon1.png');
+                $lisector.eq(0).find('img').attr('class', 'icon1');
+                $lisector.eq(0).find('img').attr('src', '../../static/v1_1/img/icon1.png');
                 $lisector.eq(1).find('p').addClass('color_text');
-                $lisector.eq(1).find('img').attr('class','icon1');
-                $lisector.eq(1).find('img').attr('src','../../static/v1_1/img/icon2.png');
+                $lisector.eq(1).find('img').attr('class', 'icon1');
+                $lisector.eq(1).find('img').attr('src', '../../static/v1_1/img/icon2.png');
             }
             $('.auditionList').eq(itemIndex).show().siblings('.auditionList').hide();
         });
-
-
-
 
 
     });
