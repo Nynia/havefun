@@ -106,7 +106,7 @@ def index():
     random.shuffle(game_list)
     game_list += Game.query.filter_by(packageid='135000000000000000000').all()
 
-    packages = Package.query.order_by(Package.chargeid).all()
+    packages = Package.query.order_by(Package.spid).all()
     packages = [p for p in packages if p.type == '2' or p.productid == '135000000000000242191']
     print [p.productid for p in packages]
     recommend_apk_game = RecommendApkGame.query.all()
