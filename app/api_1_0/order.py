@@ -115,10 +115,9 @@ def subscribe():
     package = Package.query.get(productid)
     chargeid = package.chargeid
     secret = package.secret
-    if len(chargeid) < 4:
+    if len(chargeid) > 4:
         price = int(request.form.get('price')) * 100
         csphone = '40000000'
-        chargeid = '27A2644F4DE71352E0530100007F61CD'
         return jsonify({
             'code': '200',
             'message': 'zone product',

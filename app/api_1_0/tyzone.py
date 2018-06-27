@@ -14,12 +14,12 @@ def clientcall():
     orderid = request.form.get('orderid')
     print phonenum, result_code, orderid
     redis_cli.set(orderid, phonenum)
-    return '0'
+    return phonenum
 
 
 @api.route('/tyzone/callback', methods=['POST', 'GET'])
 def func():
-    apsecret = '2027e1d246f3aa52f1c6ea786cc4ef4e'
+    apsecret = '2A74D517F5FB0858E0530100007F613C'
     params = []
     sig2 = ''
     print request.form.to_dict()
