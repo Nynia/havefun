@@ -228,6 +228,19 @@ def unsubscribe():
     package = Package.query.get(productid)
     chargeid = package.chargeid
     secret = package.secret
+    if len(chargeid) > 4:
+        csphone = '40000000'
+        return jsonify({
+            'code': '200',
+            'message': 'zone product',
+            'data': {
+                'chargeid': chargeid,
+                'apsercet': secret,
+                'csphone': csphone,
+                'callback': ''
+            }
+        })
+
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
     token = hashlib.sha1(chargeid + timestamp + secret).hexdigest()
     data = {

@@ -91,13 +91,25 @@
             success: function (data) {
                 if (data.code == '0')
                     $('#mains p').text('退订成功');
-                else $('#mains p').text(data.message);
-                $('#mains').show();
-                setTimeout(function () {
-                    $('#mains').hide();
-                }, 1000);
-                var node = document.getElementById(productid);
-                node.parentNode.removeChild(node);
+                else if (data.code == '200') {
+                    $('#mains p').text('调用控件接口');
+                    var csphone = data.data.csphone;
+                    var chargeid = data.data.chargeid;
+                    var apsecret = data.data.apsercet;
+                    var callbackurl = window.location;
+                    var phonenum = '{{ session.phonenum }}';
+                    window.android.tyZonePay(csphone, 3, 0, '', '1076848', chargeid, apsecret, callbackurl, phonenum);
+                }
+                else {
+                    $('#mains p').text(data.message);
+                    $('#mains').show();
+                    setTimeout(function () {
+                        $('#mains').hide();
+                    }, 1000);
+                    var node = document.getElementById(productid);
+                    node.parentNode.removeChild(node);
+                }
+
             }
         });
     });
