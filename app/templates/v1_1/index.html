@@ -225,66 +225,66 @@
 
 <p class="hua_pag"></p>
 
-{#<div class="box_pag"></div>#}
-{#<div class="btm_link">#}
-{#    <ul>#}
-{#        <li class="active">#}
-{#            <a href="index.html">#}
-{#                <img src="../../static/v1_1/img/icon_44.png" class="icon_4" alt=""/>#}
-{#                <p>首页</p>#}
-{#            </a>#}
-{#        </li>#}
-{#        <li>#}
-{#            <a href="find.html">#}
-{#                <img src="../../static/v1_1/img/icon_5.png" class="icon_4" alt=""/>#}
-{#                <p>发现</p>#}
-{#            </a>#}
-{#        </li>#}
-{#        <li>#}
-{#            <a href="weal.html">#}
-{#                <img src="../../static/v1_1/img/icon_6.png" class="icon_4" alt=""/>#}
-{#                <p>福利</p>#}
-{#            </a>#}
-{#        </li>#}
-{#        <li>#}
-{#            <a href="">#}
-{#                <img src="../../static/v1_1/img/icon_7.png" class="icon_4" alt=""/>#}
-{#                <p>我的</p>#}
-{#            </a>#}
-{#        </li>#}
-{#    </ul>#}
-{#</div>#}
+<div class="box_pag"></div>
+<div class="btm_link">
+    <ul>
+        <li class="active">
+            <a href="/">
+                <img src="../../static/v1_1/img/icon_44.png" class="icon_4" alt=""/>
+                <p>首页</p>
+            </a>
+        </li>
+        <li>
+            <a href="/find">
+                <img src="../../static/v1_1/img/icon_5.png" class="icon_4" alt=""/>
+                <p>发现</p>
+            </a>
+        </li>
+        <li>
+            <a href="/weal">
+                <img src="../../static/v1_1/img/icon_6.png" class="icon_4" alt=""/>
+                <p>福利</p>
+            </a>
+        </li>
+        <li>
+            <a href="/my">
+                <img src="../../static/v1_1/img/icon_7.png" class="icon_4" alt=""/>
+                <p>我的</p>
+            </a>
+        </li>
+    </ul>
+</div>
 <!--
         	作者：葛言成
         	时间：2018-03-16
         	描述：添加div到达顶部时自动固定
         -->
-{#<script type="text/javascript">#}
-{#    $(function () {#}
-{#        var ie6 = document.all;#}
-{#        var dv = $('#inp_nav'), st;#}
-{#        dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离#}
-{#        $(window).scroll(function () {#}
-{#            st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);#}
-{#            if (st > parseInt(dv.attr('otop'))) {#}
-{#                if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果#}
-{#                    dv.css({position: 'absolute', top: st});#}
-{#                }#}
-{#                else if (dv.css('position') != 'fixed') {#}
-{#                    dv.css({#}
-{#                        'position': 'fixed',#}
-{#                        'top': "0.86rem",#}
-{#                        'z-index': "999",#}
-{#                        'border-bottom': '0.15rem solid #f6f5f5'#}
-{#                    });#}
-{#                }#}
-{#            } else if (dv.css('position') != 'static') {#}
-{#                dv.css({'position': 'static', 'border': 'none'})#}
-{##}
-{#            }#}
-{#        });#}
-{#    });#}
-{#</script>#}
+<script type="text/javascript">
+    $(function () {
+        var ie6 = document.all;
+        var dv = $('#inp_nav'), st;
+        dv.attr('otop', dv.offset().top); //存储原来的距离顶部的距离
+        $(window).scroll(function () {
+            st = Math.max(document.body.scrollTop || document.documentElement.scrollTop);
+            if (st > parseInt(dv.attr('otop'))) {
+                if (ie6) {//IE6不支持fixed属性，所以只能靠设置position为absolute和top实现此效果
+                    dv.css({position: 'absolute', top: st});
+                }
+                else if (dv.css('position') != 'fixed') {
+                    dv.css({
+                        'position': 'fixed',
+                        'top': "0.86rem",
+                        'z-index': "999",
+                        'border-bottom': '0.15rem solid #f6f5f5'
+                    });
+                }
+            } else if (dv.css('position') != 'static') {
+                dv.css({'position': 'static', 'border': 'none'})
+
+            }
+        });
+    });
+</script>
 <!--end-->
 <script type="text/javascript" src="../../static/v1_1/js/swiper.min.js"></script>
 <script type="text/javascript" src="../../static/v1_1/js/dropload.min.js"></script>
