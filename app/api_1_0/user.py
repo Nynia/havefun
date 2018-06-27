@@ -4,6 +4,7 @@ from app.models import User
 from app import db
 from datetime import datetime
 
+
 @api.route('/users/<id>', methods=['GET'])
 def get_user_by_id(id):
     user = User.query.get(id)
@@ -12,6 +13,7 @@ def get_user_by_id(id):
         'message': 'success',
         'data': user.to_json() if user else user
     })
+
 
 @api.route('/users', methods=['GET'])
 def get_users_by_page():
@@ -27,6 +29,7 @@ def get_users_by_page():
         'messge': 'success',
         'data': [u.to_json() for u in users]
     })
+
 
 @api.route('/users', methods=['POST'])
 def add_user():
@@ -53,11 +56,12 @@ def add_user():
             'data': user.to_json()
         })
 
+
 @api.route('/users/<id>', methods=['PUT'])
 def update_user_by_id(id):
     user = User.query.get(id)
     if user:
-        for key,value in request.form.items():
+        for key, value in request.form.items():
             if hasattr(user, key):
                 setattr(user, key, value)
         db.session.add(user)
@@ -73,6 +77,7 @@ def update_user_by_id(id):
             'msssage': 'not exist',
             'data': None
         })
+
 
 @api.route('/users/<id>', methods=['DELETE'])
 def delete_user_by_id(id):

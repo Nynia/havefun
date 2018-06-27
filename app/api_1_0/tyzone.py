@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from . import api
-from flask import request, jsonify, session
+from flask import request, jsonify
 from app import redis_cli, db
 from urllib import quote_plus
 import hashlib
@@ -20,7 +20,6 @@ def clientcall():
 
 @api.route('/tyzone/callback', methods=['POST'])
 def zonecall():
-    apsecret = '2A74D517F5FB0858E0530100007F613C'
     params = []
     print request.form.to_dict()
     for key, value in request.form.to_dict().items():
@@ -44,6 +43,7 @@ def zonecall():
     package = Package.query.filter_by(chargeid=chargeid).first()
     if package:
         productid = package.productid
+        apsecret = package.secret
         phonenum = redis_cli.get(orderid)
         timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
         if result == '-99':
@@ -126,18 +126,18 @@ def zonecall():
                 db.session.commit()
     else:
         print 'error: package not found, chargeid: %s' % chargeid
+        return jsonify({
+            'resultCode': '0001',
+            'resultDesc': 'accept error'
+        })
 
     key_quoted = quote_plus(key_str.encode('utf8'))
     print key_quoted
     sig2 = request.form.get('sig2')
     print sig2, hashlib.sha1(key_quoted + apsecret).hexdigest()
     if sig2 == hashlib.sha1(key_quoted + apsecret).hexdigest():
+        print 'sig2 matched'
         return jsonify({
             'resultCode': '0000',
             'resultDesc': 'accepted'
-        })
-    else:
-        return jsonify({
-            'resultCode': '0001',
-            'resultDesc': 'accept error'
         })

@@ -26,7 +26,6 @@ def login():
     # print channel
     channel = None
     if channel != None:
-        print url_for('main.my')
         return render_template('freepasswd.html', nextUrl=next or url_for('main.my'))
     else:
         form = LoginForm()
