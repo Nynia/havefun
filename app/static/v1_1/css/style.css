@@ -7,7 +7,8 @@ img{ border: none; display: block; margin: 0 auto;}
 ul,li{ list-style: none;}
 input[type="button"], input[type="submit"], input[type="reset"], input[type="text"] {-webkit-appearance: none; font-family: "Microsoft YaHei";}
 
-.inp_title{width: 100%; height: 0.86rem; background: #f7d631; position: relative;}
+/*.inp_title{width: 100%; height: 0.86rem; background: #f7d631; position: relative;}*/
+.inp_title{width: 100%; height: 0.86rem; background: #f7d631; position: fixed;top:0;left:0}
 .logo{width: 1.05rem; height: 0.51rem; position: absolute; top: 0.18rem; left: 0.4rem;}
 .pic_img{width: 0.51rem; height: 0.51rem; position: relative; overflow: hidden; border-radius: 100%; position: absolute; top: 0.18rem; right: 0.4rem;}
 .pic_img img{width: 100%; height: 100%;}
@@ -40,7 +41,7 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="tex
 .game_pag{width: 100%; box-sizing: border-box; padding: 0.32rem 0; border-bottom: 1px solid #ccc; position: relative; overflow: hidden;}
 .game_pag:last-child{border-bottom: 0;}
 .game_logo{width: 1.4rem; height: 1.4rem; float: left; border-radius: 0.12rem;}
-.game_message{width: 5.34rem; height: 1.4rem; float: left; box-sizing: border-box; padding-left: 0.46rem;}  
+.game_message{width: 5.34rem; height: 1.4rem; float: left; box-sizing: border-box; padding-left: 0.46rem;}
 .game_message h5{width: 100%; font-size: 0.3rem; color: #333; font-weight: normal; line-height: 0.34rem;}
 .game_type{width: 100%; font-size: 0.28rem; color: #2d6efc; line-height: 0.32rem; margin-top: 0.1rem;}
 .game_text{width: 100%; font-size: 0.24rem; text-indent: 2em; color: #5d5d5d; overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2; line-height: 0.32rem; }
@@ -189,7 +190,7 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="tex
 .video_message{width: 6.5rem; position: absolute; top: -1.24rem; left: 0.2rem; overflow: hidden;}
 .video_img{width: 2.56rem; height: 3.42rem; float: left;}
 .video_message h5{width: 3.94rem; height: 1.24rem; text-align: center; line-height: 1.24rem; font-size: 0.4rem; font-weight: normal; float: right;}
-.video_message div{width: 3.94rem; height: 2.18rem; float: right; box-sizing: border-box; padding-left: 0.4rem;} 
+.video_message div{width: 3.94rem; height: 2.18rem; float: right; box-sizing: border-box; padding-left: 0.4rem;}
 .video_message div p{width: 100%; font-size: 0.26rem; text-indent: 2em; margin-top: 0.1rem;overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:4; line-height: 0.36rem;}
 .video_message a{display: block; width: 3.4rem; height: 0.55rem; background: #f7d631; border-radius: 0.1rem; text-align: center; line-height: 0.55rem; font-size: 0.26rem; margin-top: 0.08rem;}
 .video_message a.btn_active{background: #c8c8c8;}
@@ -242,7 +243,7 @@ input[type="button"], input[type="submit"], input[type="reset"], input[type="tex
 
 
 /*2018-2-8添加*/
-.btn_hui{width: 0.16rem; height: 0.28rem; position: fixed;top: 0.1rem; left: 0.26rem; z-index: 9;} 
+.btn_hui{width: 0.16rem; height: 0.28rem; position: fixed;top: 0.1rem; left: 0.26rem; z-index: 9;}
 .fadeBox{display: none; width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.6); z-index: 9999;}
 .tc_buy_content,.tc_happy_content{width: 5.5rem; box-sizing: border-box; background: #FFFFFF; margin: 2.3rem auto 0; border-radius: 0.1rem;}
 .tc_happy_content{padding: 0.7rem 0 0.8rem;}
