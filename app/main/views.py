@@ -146,7 +146,9 @@ def h5game():
                 integral_record.timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
                 db.session.add(integral_record)
         # 添加访问记录
-        viewrecord = ViewRecord()
+        viewrecord = ViewRecord.query.filter_by(user_id=uid).filter_by(target_type='2').filter_by(target_id=id).first()
+        if not viewrecord:
+            viewrecord = ViewRecord()
         viewrecord.target_type = '2'
         viewrecord.user_id = uid
         viewrecord.target_id = id
@@ -374,29 +376,28 @@ def my():
         print (int(time.time()))
         uid = session.get('user_id')
         records = []
-        comic_record = db.session.execute(
-            ('select A.id,A.comicname,A.banner,A.curchapter,B.target_chapter,B.createtime '
-             'from comic as A,(select * from view_record where id in (select max(id) id '
-             'from view_record where target_type=\'1\' and user_id=%s '
-             'group by target_id)) as B where A.id=B.target_id;') % uid)
+        # comic_record = db.session.execute(
+        #     ('select A.id,A.comicname,A.banner,A.curchapter,B.target_chapter,B.createtime '
+        #      'from comic as A,(select * from view_record where id in (select max(id) id '
+        #      'from view_record where target_type=\'1\' and user_id=%s '
+        #      'group by target_id)) as B where A.id=B.target_id;') % uid)
         print (int(time.time()))
         game_record = db.session.execute(('select A.id,A.name,A.img_icon,A.url,B.createtime '
-                                          'from game as A,(select * from view_record where id in (select max(id) id '
-                                          'from view_record where target_type=\'2\' and user_id=%s '
-                                          'group by target_id)) as B where A.id=B.target_id order by createtime desc;') % uid)
+                                          'from game as A,(select * from view_record '
+                                          'where user_id=%s and target_type=\'2\') as B where A.id=B.target_id order by createtime desc;') % uid)
         print (int(time.time()))
-        for item in comic_record.fetchall():
-            records.append(
-                {
-                    'id': item[0],
-                    'name': item[1],
-                    'type': '1',
-                    'banner': item[2],
-                    'chapter': item[4],
-                    'updatetime': item[5],
-                    'progress': int(item[4] * 1.0 / item[3] * 100)
-                }
-            )
+        # for item in comic_record.fetchall():
+        #         #     records.append(
+        #         #         {
+        #         #             'id': item[0],
+        #         #             'name': item[1],
+        #         #             'type': '1',
+        #         #             'banner': item[2],
+        #         #             'chapter': item[4],
+        #         #             'updatetime': item[5],
+        #         #             'progress': int(item[4] * 1.0 / item[3] * 100)
+        #         #         }
+        #         #     )
         for item in game_record:
             records.append(
                 {
