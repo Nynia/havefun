@@ -18,7 +18,7 @@ def clientcall():
     return phonenum
 
 
-@api.route('/tyzone/callback', methods=['POST'])
+@api.route('/tyzone/callback', methods=['POST', 'GET'])
 def zonecall():
     params = []
     print request.form.to_dict()
