@@ -10,8 +10,10 @@ from ..utils.aes import aescrypt
 
 from werkzeug.contrib.cache import SimpleCache
 
-cache = SimpleCache()
 from app import db, redis_cli
+"""
+"""
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -64,20 +66,16 @@ def logout():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
-    print session
-    #print cache
     form = RegisterFrom()
     action = request.args.get('action')
+    for k,v in session.items():
+        print k,v
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         print phonenum
         code = generate_identifying_code()
         msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
-        #cache.set(phonenum, code)
         redis_cli.set(phonenum, code)
-        # cache[phonenum] = code
-        #print cache
-        #return send_sms(phonenum, msg)
         import requests
         url = 'http://221.228.17.88:8080/sendmsg/send'
         params = {
@@ -87,8 +85,8 @@ def register():
         r = requests.get(url, params=params)
         print r.text
         return jsonify({
-            'phonenum': phonenum,
-            'msg': msg
+            'code': '0',
+            'msg': 'success'
         })
     if request.method == 'POST':
         phonenum = form.phonenum.data
@@ -194,7 +192,6 @@ def reset_password():
         code = generate_identifying_code()
         msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
         redis_cli.set(phonenum, code)
-        #return send_sms(phonenum, msg)
         import requests
         url = 'http://221.228.17.88:8080/sendmsg/send'
         params = {
@@ -204,8 +201,8 @@ def reset_password():
         r = requests.get(url, params=params)
         print r.text
         return jsonify({
-            'phonenum': phonenum,
-            'msg': msg
+            'code': '0',
+            'msg': 'success'
         })
     if request.method == 'POST':
         if action == 'reset':

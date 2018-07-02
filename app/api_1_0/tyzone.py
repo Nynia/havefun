@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from . import api
-from flask import request, jsonify
+from flask import request, jsonify, session
 from app import redis_cli, db
 from urllib import quote_plus
 import hashlib
@@ -10,6 +10,7 @@ from datetime import datetime
 
 @api.route('/tyzone/clientcall', methods=['POST'])
 def clientcall():
+    print session
     phonenum = request.form.get('phonenum')
     result_code = request.form.get('code')
     orderid = request.form.get('orderid')
