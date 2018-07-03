@@ -8,11 +8,7 @@ from ..utils.func import generate_identifying_code
 import datetime
 from ..utils.aes import aescrypt
 
-from werkzeug.contrib.cache import SimpleCache
-
 from app import db, redis_cli
-"""
-"""
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -42,6 +38,7 @@ def login():
                     for r in relation:
                         if r.status == '1':
                             session[r.productid] = 1
+                            #redis_cli.hset(user.phonenum, r.productid, '1')
                     session['phonenum'] = user.phonenum
                     print url_for('main.my')
                     return redirect(request.args.get('next') or url_for('main.my'))
@@ -61,6 +58,7 @@ def logout():
         for r in relation:
             if r.productid in session:
                 session.pop(r.productid)
+        #redis_cli.hdelall(phonenum)
     return 'logout success'
 
 
@@ -68,8 +66,8 @@ def logout():
 def register():
     form = RegisterFrom()
     action = request.args.get('action')
-    for k,v in session.items():
-        print k,v
+    for k, v in session.items():
+        print k, v
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         print phonenum
@@ -242,4 +240,5 @@ def before_request():
             for r in relation:
                 if r.status == '1':
                     session[r.productid] = 1
+                    #redis_cli.hset(user.phonenum, r.productid, '1')
             session['phonenum'] = user.phonenum

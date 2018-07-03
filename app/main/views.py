@@ -77,9 +77,13 @@ def package():
     package = Package.query.get(id)
     ordered = False
     if not current_user.is_anonymous:
-        if session.get(package.productid):
-            print package.productid
+        phonenum = session.get('phonenum')
+        relation = OrderRelation.query.filter_by(phonenum=phonenum).filter_by(productid=package.productid).first()
+        if relation and relation.status == '1':
             ordered = True
+        # if session.get(package.productid):
+        #     print package.productid
+        #     ordered = True
     if package.type == '1':
         # comic
         comics = Comic.query.filter_by(packageid=id).all()
@@ -163,7 +167,7 @@ def gamedetail(id):
     game = Game.query.get(int(id))
     package = Package.query.get(game.packageid)
     flag = False
-    if session.get(package.productid) or game.packageid == '135000000000000000000':
+    if session.get(package.productid):
         flag = True
     return render_template('v1_1/game_hint.html', game=game, flag=flag, package=package)
 

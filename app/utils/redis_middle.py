@@ -17,3 +17,15 @@ class RedisClient():
         # 从数据库根据键（key）获取值
         return self.conn.get(key_)
 
+    def hset(self, name_, key_, value_):
+        self.conn.hset(name_, key_, value_)
+
+    def hget(self, name_, key_):
+        self.conn.hget(name_, key_)
+
+    def hdelall(self, name_):
+        for key in self.conn.hkeys(name_):
+            self.conn.hdel(name_, key)
+
+
+

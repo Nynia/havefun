@@ -49,6 +49,7 @@ def zonecall():
         timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
         if result == '-99':
             # 订购成功
+            #redis_cli.hset(phonenum, productid, '1')
             orderhistory = OrderHistroy()
             orderhistory.productid = productid
             orderhistory.phonenum = phonenum
@@ -106,6 +107,7 @@ def zonecall():
                 db.session.commit()
         elif result == '-100':
             # 退订成功
+            #redis_cli.hset(phonenum, productid, '0')
             orderhistory = OrderHistroy()
             orderhistory.productid = productid
             orderhistory.phonenum = phonenum
