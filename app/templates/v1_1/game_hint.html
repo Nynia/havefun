@@ -52,10 +52,11 @@
     {% if package.productid == '135000000000000000000' %}
         <a href="/"><img src="../../static/v1_1/img/btn_hui.png" class="btn_hui" alt=""/></a>
     {% else %}
-        <a href="/package?id={{ package.productid }}"><img src="../../static/v1_1/img/btn_hui.png" class="btn_hui" alt=""/></a>
+        <a href="/package?id={{ package.productid }}"><img src="../../static/v1_1/img/btn_hui.png" class="btn_hui"
+                                                           alt=""/></a>
 
     {% endif %}
-<!--end-->
+    <!--end-->
 
     <img src="{{ game.img_icon }}" class="game_pic" alt=""/>
     <div class="game_ranking">
@@ -136,27 +137,47 @@
                     url: "/api/v1.0/subscribe",
                     data: {
                         'phonenum': '{{ session.phonenum }}',
-                        'productid': '{{ package.productid }}'
+                        'productid': '{{ package.productid }}',
+                        'price': '{{ package.price }}'
                     },
                     dataType: 'json',
                     success: function (data) {
                         if (data.code == '0')
                             $('#tc_happy p').text('订购成功');
-                        else $('#tc_happy p').text(data.message);
-                        $('#tc_happy').show();
-                        setTimeout(function () {
-                            $("#tc_happy").fadeOut();
-                            if (data['data']['integral'] > 0) {
-                                $('.fade p').text('积分+' + data['data']['integral']);
-                                setTimeout(function () {
-                                    $(".fade").fadeIn();
+                        else if (data.code == '200') {
+                            $('#mains p').text('调用控件接口');
+                            var price = data.data.price;
+                            var csphone = data.data.csphone;
+                            var chargeid = data.data.chargeid;
+                            var apsecret = data.data.apsercet;
+                            var callbackurl = window.location;
+                            var phonenum = '{{ session.phonenum }}';
+                            window.android.tyZonePay(csphone, 2, price, '', '1076848', chargeid, apsecret, callbackurl, phonenum);
+                        }
+                        else if (data.code == "108") {
+                            $('#tc_happy p').text("本产品仅限江苏用户订购");
+                            $("#tc_happy").show();
+                            setTimeout(function () {
+                                $("#tc_happy").fadeOut();
+                            }, 1500);
+                        }
+                        else {
+                            $('#tc_happy p').text(data.message);
+                            $("#tc_happy").show();
+                            setTimeout(function () {
+                                $("#tc_happy").fadeOut();
+                                if (data['data']['integral'] > 0) {
+                                    $('.fade p').text('积分+' + data['data']['integral']);
                                     setTimeout(function () {
-                                        $(".fade").fadeOut();
-                                    }, 1500)
-                                }, 500)
-                            }
+                                        $(".fade").fadeIn();
+                                        setTimeout(function () {
+                                            $(".fade").fadeOut();
+                                        }, 1500)
+                                    }, 500)
+                                }
 
-                        }, 1500);
+                            }, 1500);
+                        }
                         //增加页面刷新
                         window.location.reload();
                         $('.btn_down').click(function () {
