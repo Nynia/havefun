@@ -1,6 +1,6 @@
 # -*-coding=utf-8-*-
 from . import main
-from flask import render_template, session, redirect, url_for, jsonify
+from flask import render_template, session, redirect, jsonify
 from .forms import GameForm
 from flask import request
 from app.api_1_0.game import Game
@@ -8,12 +8,13 @@ from werkzeug.utils import secure_filename
 import os, re, random
 from app.utils.ftp import MyFTP
 from app.utils.func import generate_name
-from app import db
+from app import db, logger
 from datetime import datetime
 from flask_login import current_user
 from app.models import Package, Comic, Reading, Chapter, ViewRecord, OrderRelation, AccessLog, ComicChapterInfo, \
     FavorInfo, IntegralRecord, IntegralStrategy, User, RecommendH5, RecommendComic, RecommendApkGame
 import time
+
 
 @main.route('/config', methods=['GET', 'POST'])
 def config():

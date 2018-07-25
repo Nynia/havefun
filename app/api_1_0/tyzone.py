@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from . import api
 from flask import request, jsonify, session
-from app import redis_cli, db
+from app import redis_cli, db, logger
 from urllib import quote_plus
 import hashlib
 from app.models import OrderRelation, OrderHistroy, Package, IntegralStrategy, IntegralRecord, User
@@ -10,11 +10,10 @@ from datetime import datetime
 
 @api.route('/tyzone/clientcall', methods=['POST'])
 def clientcall():
-    print session
     phonenum = request.form.get('phonenum')
     result_code = request.form.get('code')
     orderid = request.form.get('orderid')
-    print phonenum, result_code, orderid
+    logger.debug('phonenum: %s, result: %s, orderid: %s' % (phonenum, result_code, orderid))
     redis_cli.set(orderid, phonenum)
     return phonenum
 
@@ -22,25 +21,23 @@ def clientcall():
 @api.route('/tyzone/callback', methods=['POST', 'GET'])
 def zonecall():
     params = []
-    print request.form.to_dict()
+    logger.debug(request.form.to_dict())
     for key, value in request.form.to_dict().items():
         if not key.startswith('sig'):
             params.append((key, value))
     sorted_params = sorted(params)
-    print sorted_params
     key_str = ''
     for params in sorted_params:
         if params[1] != '':
             key_str += params[0]
             key_str += params[1]
-    print key_str
+    logger.debug(key_str)
     orderid = request.form.get('txId')
     paytime = request.form.get('payTime')
     type = request.form.get('chargeType')
     chargeid = request.form.get('chargeId')
     result = request.form.get('chargeResult')
     md5fromnum = request.form.get('md5fromnum')
-    print orderid, paytime, type, result, chargeid
     package = Package.query.filter_by(chargeid=chargeid).first()
     if package:
         productid = package.productid
@@ -49,14 +46,13 @@ def zonecall():
         timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
         if result == '-99':
             # 订购成功
-            #redis_cli.hset(phonenum, productid, '1')
             orderhistory = OrderHistroy()
             orderhistory.productid = productid
-            orderhistory.phonenum = phonenum
+            orderhistory.phonenum = phonenum if phonenum else md5fromnum
             orderhistory.action = '1'
             orderhistory.createtime = timestamp
             if not phonenum or md5fromnum != hashlib.md5(phonenum).hexdigest().upper():
-                print 'phonenum md5 not matched'
+                logger.info('phonenum md5 not matched')
                 # 只记录订购历史
             else:
                 # 更新订购关系及积分
@@ -92,7 +88,6 @@ def zonecall():
                         history_integral_today = 0
                         if record:
                             history_integral_today = 400 + reduce(lambda x, y: x + y, [r.change for r in record])
-                            print history_integral_today
                         if history_integral_today < 600:
                             user.integral = user.integral + integral_strategy.value
                             integral_record = IntegralRecord()
@@ -107,14 +102,13 @@ def zonecall():
                 db.session.commit()
         elif result == '-100':
             # 退订成功
-            #redis_cli.hset(phonenum, productid, '0')
             orderhistory = OrderHistroy()
             orderhistory.productid = productid
-            orderhistory.phonenum = phonenum
+            orderhistory.phonenum = phonenum if phonenum else md5fromnum
             orderhistory.action = '0'
             orderhistory.createtime = timestamp
             if not phonenum or md5fromnum != hashlib.md5(phonenum).hexdigest().upper():
-                print 'phonenum md5 not matched'
+                logger.info('phonenum md5 not matched')
                 # 只记录订购历史
             else:
                 # 更新订购关系
@@ -128,7 +122,7 @@ def zonecall():
                 db.session.add(orderhistory)
                 db.session.commit()
     else:
-        print 'error: package not found, chargeid: %s' % chargeid
+        logger.error('package not found, chargeid: %s' % chargeid)
         return jsonify({
             'resultCode': '0001',
             'resultDesc': 'accept error'
@@ -143,4 +137,10 @@ def zonecall():
         return jsonify({
             'resultCode': '0000',
             'resultDesc': 'accepted'
+        })
+    else:
+        print 'sig2 not matched'
+        return jsonify({
+            'resultCode': '0001',
+            'resultDesc': 'accept error'
         })
