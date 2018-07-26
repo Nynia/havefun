@@ -98,8 +98,8 @@ def zonecall():
                             db.session.add(user)
                             db.session.add(integral_record)
                 db.session.add(orderrelation)
-                db.session.add(orderhistory)
-                db.session.commit()
+            db.session.add(orderhistory)
+            db.session.commit()
         elif result == '-100':
             # 退订成功
             orderhistory = OrderHistroy()
@@ -119,8 +119,8 @@ def zonecall():
                 orderrelation.status = '2'
 
                 db.session.add(orderrelation)
-                db.session.add(orderhistory)
-                db.session.commit()
+            db.session.add(orderhistory)
+            db.session.commit()
     else:
         logger.error('package not found, chargeid: %s' % chargeid)
         return jsonify({
@@ -133,13 +133,13 @@ def zonecall():
     sig2 = request.form.get('sig2')
     print sig2, hashlib.sha1(key_quoted + apsecret).hexdigest()
     if sig2 == hashlib.sha1(key_quoted + apsecret).hexdigest():
-        print 'sig2 matched'
+        logger.info('sig2 matched')
         return jsonify({
             'resultCode': '0000',
             'resultDesc': 'accepted'
         })
     else:
-        print 'sig2 not matched'
+        logger.info('sig2 not matched')
         return jsonify({
             'resultCode': '0001',
             'resultDesc': 'accept error'
