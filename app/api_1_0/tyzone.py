@@ -131,7 +131,7 @@ def zonecall():
     key_quoted = quote_plus(key_str.encode('utf8'))
     print key_quoted
     sig2 = request.form.get('sig2')
-    print sig2, hashlib.sha1(key_quoted + apsecret).hexdigest()
+    logger.info(hashlib.sha1(key_quoted + apsecret).hexdigest())
     if sig2 == hashlib.sha1(key_quoted + apsecret).hexdigest():
         logger.info('sig2 matched')
         return jsonify({
