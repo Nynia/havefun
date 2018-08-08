@@ -9,7 +9,7 @@ import datetime
 from ..utils.aes import aescrypt
 
 from app import db, redis_cli
-
+import re
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -71,21 +71,32 @@ def register():
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         print phonenum
-        code = generate_identifying_code()
-        msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
-        redis_cli.set(phonenum, code)
-        import requests
-        url = 'http://221.228.17.88:8080/sendmsg/send'
-        params = {
-            'phonenum': phonenum,
-            'msg': msg
-        }
-        r = requests.get(url, params=params)
-        print r.text
-        return jsonify({
-            'code': '0',
-            'msg': 'success'
-        })
+        if not phonenum or not re.match(r'1\d{10}', phonenum):
+            return jsonify({
+                'code': '-1',
+                'msg': u'参数错误'
+            })
+        if redis_cli.get(phonenum):
+            return jsonify({
+                'code': '-1',
+                'msg': u'验证码已发送，请不要重复请求'
+            })
+        else:
+            code = generate_identifying_code(6)
+            msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
+            redis_cli.set(phonenum, code)
+            import requests
+            url = 'http://221.228.17.88:8080/sendmsg/send'
+            params = {
+                'phonenum': phonenum,
+                'msg': msg
+            }
+            r = requests.get(url, params=params)
+            print r.text
+            return jsonify({
+                'code': '0',
+                'msg': 'success'
+            })
     if request.method == 'POST':
         phonenum = form.phonenum.data
         vercode = form.vercode.data
@@ -182,26 +193,36 @@ def checkin():
 @auth.route('/reset', methods=['GET', 'POST'])
 def reset_password():
     resetform = ResetForm()
-    # resetsubmitform = ResetSubmitForm()
     action = request.args.get('action')
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         print phonenum
-        code = generate_identifying_code()
-        msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
-        redis_cli.set(phonenum, code)
-        import requests
-        url = 'http://221.228.17.88:8080/sendmsg/send'
-        params = {
-            'phonenum': phonenum,
-            'msg': msg
-        }
-        r = requests.get(url, params=params)
-        print r.text
-        return jsonify({
-            'code': '0',
-            'msg': 'success'
-        })
+        if not phonenum or not re.match(r'1\d{10}', phonenum):
+            return jsonify({
+                'code': '-1',
+                'msg': u'参数错误'
+            })
+        if redis_cli.get(phonenum):
+            return jsonify({
+                'code': '-1',
+                'msg': u'验证码已发送，请不要重复请求' % redis_cli.get(phonenum)
+            })
+        else:
+            code = generate_identifying_code(6)
+            msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
+            redis_cli.set(phonenum, code)
+            import requests
+            url = 'http://221.228.17.88:8080/sendmsg/send'
+            params = {
+                'phonenum': phonenum,
+                'msg': msg
+            }
+            r = requests.get(url, params=params)
+            print r.text
+            return jsonify({
+                'code': '0',
+                'msg': 'success'
+            })
     if request.method == 'POST':
         if action == 'reset':
             phonenum = request.form.get('phonenum')
