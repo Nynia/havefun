@@ -227,7 +227,7 @@ def reset_password():
             })
     if request.method == 'POST':
         if action == 'reset':
-            token = request.args.get('token')
+            token = request.form.get('token')
             phonenum = redis_cli.get(token)
             if phonenum:
                 password = request.form.get('password')
@@ -249,7 +249,7 @@ def reset_password():
             elif vercode == redis_cli.get(phonenum):
                 token = generate_password_reset_token(phonenum)
                 redis_cli.set_expire(token, phonenum, 300)
-                return render_template('safety.html?token=%s' % token)
+                return render_template('safety.html', token=token)
             else:
                 flash(u'验证码输入错误', 'reset')
 
