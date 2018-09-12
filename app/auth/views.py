@@ -58,6 +58,7 @@ def logout():
         for r in relation:
             if r.productid in session:
                 session.pop(r.productid)
+
     return 'logout success'
 
 
