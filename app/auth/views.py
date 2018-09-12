@@ -66,7 +66,7 @@ def logout():
 def register():
     form = RegisterFrom()
     action = request.args.get('action')
-    real_ip = request.__getattribute__('X-Real-IP')
+    real_ip = request.headers.get('X-Real-Ip', request.remote_addr)
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         print phonenum
@@ -194,7 +194,7 @@ def checkin():
 def reset_password():
     resetform = ResetForm()
     action = request.args.get('action')
-    real_ip = request.__getattribute__('X-Real-IP')
+    real_ip = request.headers.get('X-Real-Ip', request.remote_addr)
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         print phonenum
