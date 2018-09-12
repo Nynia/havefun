@@ -58,7 +58,6 @@ def logout():
         for r in relation:
             if r.productid in session:
                 session.pop(r.productid)
-        #redis_cli.hdelall(phonenum)
     return 'logout success'
 
 
