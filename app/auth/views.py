@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from flask import render_template, redirect, url_for, flash, session, request, jsonify
 from ..models import User, OrderRelation, CheckinRecord, IntegralStrategy, IntegralRecord
 from .forms import LoginForm, RegisterFrom, ResetForm
-from ..utils.func import generate_identifying_code
+from ..utils.func import generate_identifying_code, generate_password_reset_token
 import datetime
 from ..utils.aes import aescrypt
 
@@ -66,8 +66,7 @@ def logout():
 def register():
     form = RegisterFrom()
     action = request.args.get('action')
-    for k, v in session.items():
-        print k, v
+    real_ip = request.__getattribute__('X-Real-IP')
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         print phonenum
@@ -76,15 +75,16 @@ def register():
                 'code': '-1',
                 'msg': u'参数错误'
             })
-        if redis_cli.get(phonenum):
+        if redis_cli.get(phonenum) or redis_cli.get(real_ip):
             return jsonify({
                 'code': '-1',
-                'msg': u'验证码已发送，请不要重复请求'
+                'msg': u'验证码已发送，请不要频繁请求'
             })
         else:
             code = generate_identifying_code(6)
             msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
-            redis_cli.set(phonenum, code)
+            redis_cli.set_expire(phonenum, code)
+            redis_cli.set_expire(real_ip, code)
             import requests
             url = 'http://221.228.17.88:8080/sendmsg/send'
             params = {
@@ -194,6 +194,7 @@ def checkin():
 def reset_password():
     resetform = ResetForm()
     action = request.args.get('action')
+    real_ip = request.__getattribute__('X-Real-IP')
     if action == 'getIdentifingCode':
         phonenum = request.args.get('phonenum')
         print phonenum
@@ -202,15 +203,16 @@ def reset_password():
                 'code': '-1',
                 'msg': u'参数错误'
             })
-        if redis_cli.get(phonenum):
+        if redis_cli.get(phonenum) or redis_cli.get(real_ip):
             return jsonify({
                 'code': '-1',
-                'msg': u'验证码已发送，请不要重复请求' % redis_cli.get(phonenum)
+                'msg': u'验证码已发送，请不要频繁请求'
             })
         else:
             code = generate_identifying_code(6)
             msg = u'【玩乐派】尊敬的用户：您的校验码为%s，有效时间2分钟，感谢使用' % code
-            redis_cli.set(phonenum, code)
+            redis_cli.set_expire(phonenum, code)
+            redis_cli.set_expire(real_ip, code)
             import requests
             url = 'http://221.228.17.88:8080/sendmsg/send'
             params = {
@@ -225,24 +227,29 @@ def reset_password():
             })
     if request.method == 'POST':
         if action == 'reset':
-            phonenum = request.form.get('phonenum')
-            password = request.form.get('password')
-            user = User.query.filter_by(phonenum=phonenum).first()
-            user.password = password
-            db.session.add(user)
-            db.session.commit()
-            return jsonify({
-                'phonenum': phonenum,
-                'password': password
-            })
+            token = request.args.get('token')
+            phonenum = redis_cli.get(token)
+            if phonenum:
+                password = request.form.get('password')
+                user = User.query.filter_by(phonenum=phonenum).first()
+                user.password = password
+                db.session.add(user)
+                db.session.commit()
+                return jsonify({
+                    'phonenum': phonenum,
+                    'password': password
+                })
+            else:
+                flash(u'链接已过期', 'reset')
         else:
             phonenum = request.form.get('phonenum')
             vercode = request.form.get('vercode')
-            print redis_cli.get(phonenum)
             if not redis_cli.get(phonenum):
                 flash(u'验证码已过期', 'reset')
             elif vercode == redis_cli.get(phonenum):
-                return render_template('safety.html', phonenum=phonenum)
+                token = generate_password_reset_token(phonenum)
+                redis_cli.set_expire(token, phonenum, 300)
+                return render_template('safety.html?token=%s' % token)
             else:
                 flash(u'验证码输入错误', 'reset')
 

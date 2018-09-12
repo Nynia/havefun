@@ -10,7 +10,10 @@ class RedisClient():
     # 存储
     def set(self, key_, value_):
         self.conn.set(key_, value_)
-        self.conn.expire(key_, 120)
+
+    def set_expire(self, key_, value_, expire=120):
+        self.conn.set(key_, value_)
+        self.conn.expire(key_, expire)
 
     # 读取
     def get(self, key_):

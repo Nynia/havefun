@@ -40,3 +40,9 @@ def AES_encrypt(text):
         encrppted += chr(((ord(ch) >> 4) & 0xF) + ord('a'))
         encrppted += chr((ord(ch) & 0xF) + ord('a'))
     return encrppted
+
+def generate_password_reset_token(phonenum):
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    m = hashlib.md5()
+    m.update(phonenum + timestamp)
+    return m.hexdigest()[::2]
